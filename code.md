@@ -94,11 +94,11 @@ Apple Inc.
 
 ```
 ###### 相关表单内容
-名称| 描述
----|---
-Organization Information|公司名称以及所在国家
-Headquarters Address| 所在详细地址，邮编，包含国家区号的电话
-Your Contact Information | 负责人信息（包含正确格式的名字，电话，邮箱）
+| 名称                       | 描述                     |
+| ------------------------ | ---------------------- |
+| Organization Information | 公司名称以及所在国家             |
+| Headquarters Address     | 所在详细地址，邮编，包含国家区号的电话    |
+| Your Contact Information | 负责人信息（包含正确格式的名字，电话，邮箱） |
 
 备注：以上为初步的填写信息，后续会有具体的邮件或电话沟通，提供更为详细的如企业法人，营业执照等，（具体信息要以沟通内容为准）以下是会出现的提供项建议
 
@@ -213,7 +213,6 @@ Website：www.huaxiadnb.com, www.dnbchina.com
 ```
 以下逐条对应回复：
 
-
 ---
 
 1、公司名称(中和英文后缀规范Co., Ltd.或者Inc.)必须填写
@@ -319,4 +318,4 @@ Room 43013, Area B Office, Wanda Square, No.589, Zhongshan Road, Kaifu District,
 
 
 
- 
+
