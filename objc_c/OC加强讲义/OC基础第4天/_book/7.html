@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>【掌握】使用NSURL读写字符串 | Foundation框架</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./10.html" />
+    
+    
+    <link rel="prev" href="./seciton1.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="0.2" data-basepath="." data-revision="Thu Oct 22 2015 22:55:50 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        19
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1" data-path="seciton1.html">
+            
+                
+                    <a href="./seciton1.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        【掌握】NSString介绍及基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="0.2" data-path="7.html">
+            
+                
+                    <a href="./7.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        【掌握】使用NSURL读写字符串
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.3" data-path="10.html">
+            
+                
+                    <a href="./10.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.3.</b>
+                        
+                        【理解】NSString字符串比较
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.4" data-path="11.html">
+            
+                
+                    <a href="./11.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.4.</b>
+                        
+                        【理解】NSString前后缀检查及搜索
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.5" data-path="seciton2.html">
+            
+                
+                    <a href="./seciton2.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.5.</b>
+                        
+                        【理解】NSRange使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.6" data-path="12.html">
+            
+                
+                    <a href="./12.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.6.</b>
+                        
+                        【理解】字符串的截取和替换
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.7" data-path="13.html">
+            
+                
+                    <a href="./13.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.7.</b>
+                        
+                        【理解】NSString的其他用法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.8" data-path="seciton3.html">
+            
+                
+                    <a href="./seciton3.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.8.</b>
+                        
+                        【理解】NSMutableString介绍和使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.9" data-path="14.html">
+            
+                
+                    <a href="./14.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.9.</b>
+                        
+                        【理解】NSMutableString常用方法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.10" data-path="seciton4.html">
+            
+                
+                    <a href="./seciton4.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.10.</b>
+                        
+                        【理解】NSArray的介绍和基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.11" data-path="15.html">
+            
+                
+                    <a href="./15.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.11.</b>
+                        
+                        【理解】NSArray的常见用法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.12" data-path="16.html">
+            
+                
+                    <a href="./16.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.12.</b>
+                        
+                        【理解】NSArray的遍历方法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.13" data-path="17.html">
+            
+                
+                    <a href="./17.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.13.</b>
+                        
+                        【理解】NSArray读写文件
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.14" data-path="18.html">
+            
+                
+                    <a href="./18.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.14.</b>
+                        
+                        【理解】NSArray与NSString
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.15" data-path="seciton5.html">
+            
+                
+                    <a href="./seciton5.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.15.</b>
+                        
+                        【理解】NSMutableArray及基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.16" data-path="seciton6.html">
+            
+                
+                    <a href="./seciton6.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.16.</b>
+                        
+                        【理解】NSDictionary的介绍及使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.17" data-path="19.html">
+            
+                
+                    <a href="./19.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.17.</b>
+                        
+                        【理解】NSDictionary的简写及文件操作
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.18" data-path="20.html">
+            
+                
+                    <a href="./20.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.18.</b>
+                        
+                        【理解】NSMutableDictionary介绍和使用
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >Foundation框架</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="2%E3%80%81%E3%80%90%E6%8E%8C%E6%8F%A1%E3%80%91%E4%BD%BF%E7%94%A8nsurl%E8%AF%BB%E5%86%99%E5%AD%97%E7%AC%A6%E4%B8%B2">2&#x3001;&#x3010;&#x638C;&#x63E1;&#x3011;&#x4F7F;&#x7528;NSURL&#x8BFB;&#x5199;&#x5B57;&#x7B26;&#x4E32;</h2>
+<ul>
+<li><p><strong>1&#x3001;NSURL&#x7B80;&#x4ECB;</strong></p>
+</li>
+<li><p><strong>&#x4EC0;&#x4E48;&#x662F;URL?</strong></p>
+<ul>
+<li>URL&#x7684;&#x5168;&#x79F0;&#x662F;Uniform Resource Locator(&#x7EDF;&#x4E00;&#x8D44;&#x6E90;&#x5B9A;&#x4F4D;&#x7B26;)&#x3002;</li>
+<li>URL&#x662F;&#x4E92;&#x8054;&#x7F51;&#x4E0A;&#x6807;&#x51C6;&#x8D44;&#x6E90;&#x7684;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x4E92;&#x8054;&#x7F51;&#x4E0A;&#x7684;&#x6BCF;&#x4E2A;&#x8D44;&#x6E90;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;URL,&#x5B83;&#x5305;&#x542B;&#x7684;&#x4FE1;&#x606F;&#x6307;&#x51FA;&#x8D44;&#x6E90;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x6839;&#x636E;&#x4E00;&#x4E2A;URL&#x5C31;&#x80FD;&#x627E;&#x5230;&#x552F;&#x4E00;&#x7684;&#x4E00;&#x4E2A;&#x8D44;&#x6E90;&#x3002;</li>
+</ul>
+</li>
+<li><p><strong>URL&#x7684;&#x683C;&#x5F0F;?</strong></p>
+<ul>
+<li>&#x57FA;&#x672C;URL&#x5305;&#x542B;&#x534F;&#x8BAE;&#x3001;&#x4E3B;&#x673A;&#x57DF;&#x540D;(&#x670D;&#x52A1;&#x5668;&#x540D;&#x79F0;\IP&#x5730;&#x5740;)&#x3001;&#x8DEF;&#x5F84;</li>
+<li>&#x4E3E;&#x4F8B;: <a href="http://ios.itcast.cn/ios/images/content_25.jpg" target="_blank">http://ios.itcast.cn/ios/images/content_25.jpg</a></li>
+<li>&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x8BA4;&#x4E3A;: URL == &#x534F;&#x8BAE;&#x5934;://&#x4E3B;&#x673A;&#x57DF;&#x540D;/&#x8DEF;&#x5F84;</li>
+</ul>
+</li>
+<li><p><strong>&#x5E38;&#x89C1;&#x7684;URL&#x534F;&#x8BAE;&#x5934;(URL&#x7C7B;&#x578B;)</strong></p>
+</li>
+<li><p>http\https:&#x8D85;&#x6587;&#x672C;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#x8D44;&#x6E90;, &#x7F51;&#x7EDC;&#x8D44;&#x6E90;</p>
+<ul>
+<li><p>&#x5728;URL&#x524D;&#x52A0;<a href="https://&#x524D;&#x7F00;&#x8868;&#x660E;&#x662F;&#x7528;SSL&#x52A0;&#x5BC6;&#x7684;&#x3002;&#x4F60;&#x7684;&#x7535;&#x8111;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x6536;&#x53D1;&#x7684;&#x4FE1;&#x606F;&#x4F20;&#x8F93;&#x5C06;&#x66F4;&#x52A0;&#x5B89;&#x5168;&#x3002;" target="_blank">https://&#x524D;&#x7F00;&#x8868;&#x660E;&#x662F;&#x7528;SSL&#x52A0;&#x5BC6;&#x7684;&#x3002;&#x4F60;&#x7684;&#x7535;&#x8111;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x6536;&#x53D1;&#x7684;&#x4FE1;&#x606F;&#x4F20;&#x8F93;&#x5C06;&#x66F4;&#x52A0;&#x5B89;&#x5168;&#x3002;</a></p>
+</li>
+<li><p>Web&#x670D;&#x52A1;&#x5668;&#x542F;&#x7528;SSL&#x9700;&#x8981;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x5E76;&#x5C06;&#x8BE5;&#x8BC1;&#x4E66;&#x4E0E;&#x8981;&#x4F7F;&#x7528;SSL&#x7684;&#x670D;&#x52A1;&#x5668;&#x7ED1;&#x5B9A;&#x3002;</p>
+</li>
+<li><p>http&#x548C;https&#x4F7F;&#x7528;&#x7684;&#x662F;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x7684;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;,&#x7528;&#x7684;&#x7AEF;&#x53E3;&#x4E5F;&#x4E0D;&#x4E00;&#x6837;,&#x524D;&#x8005;&#x662F;80,&#x540E;&#x8005;&#x662F;443&#x3002;http&#x7684;&#x8FDE;&#x63A5;&#x5F88;&#x7B80;&#x5355;,&#x662F;&#x65E0;&#x72B6;&#x6001;&#x7684;&#x3002;</p>
+</li>
+<li><p>https&#x534F;&#x8BAE;&#x662F;&#x7531;SSL+HTTP&#x534F;&#x8BAE;&#x6784;&#x5EFA;&#x7684;&#x53EF;&#x8FDB;&#x884C;&#x52A0;&#x5BC6;&#x4F20;&#x8F93;&#x3001;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x7684;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x8981;&#x6BD4;http&#x534F;&#x8BAE;&#x5B89;&#x5168;&#x3002;</p>
+</li>
+</ul>
+</li>
+<li><p><strong>ftp</strong> :&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x534F;&#x8BAE;&#x3002;</p>
+</li>
+<li><p><strong>file</strong>:&#x672C;&#x5730;&#x7535;&#x8111;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
+</li>
+<li><p><strong>2&#x3001;URL&#x521B;&#x5EFA;</strong></p>
+</li>
+<li>&#x901A;&#x8FC7;URL&#x8BFB;&#x53D6;&#x5B57;&#x7B26;&#x4E32;</li>
+</ul>
+<pre><code class="lang-objc">    <span class="hljs-comment">// &#x83B7;&#x53D6;URL</span>
+    <span class="hljs-built_in">NSURL</span> *url = [<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@&quot;file:///Users/sleepingsun/Desktop/writeFile.txt&quot;</span>];
+
+<span class="hljs-comment">//    NSURL *url = [NSURL URLWithString:@&quot;http://www.baidu.com&quot;];</span>
+
+   <span class="hljs-comment">// &#x4FDD;&#x5B58;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</span>
+    <span class="hljs-built_in">NSError</span> *error = <span class="hljs-literal">nil</span>;
+
+    <span class="hljs-comment">// &#x8BFB;&#x53D6;URL&#x4E2D;&#x7684;&#x5185;&#x5BB9;</span>
+    <span class="hljs-built_in">NSString</span> *str = [<span class="hljs-built_in">NSString</span> stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&amp;error];
+    <span class="hljs-keyword">if</span> (error != <span class="hljs-literal">nil</span>) {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x8BFB;&#x53D6;&#x5931;&#x8D25;&#xFF0C;&#x6253;&#x5370;&#x5931;&#x8D25;&#x4FE1;&#x606F;</span>
+        <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF1A;%@&quot;</span>,error<span class="hljs-variable">.localizedDescription</span>);
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-comment">// &#x5426;&#x5219;&#xFF0C;&#x8F93;&#x51FA;URL&#x5185;&#x5BB9;</span>
+        <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;%@&quot;</span>,str);
+    }
+</code></pre>
+<ul>
+<li>&#x901A;&#x8FC7;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x521B;&#x5EFA;URL(&#x9ED8;&#x8BA4;&#x5C31;&#x662F;file&#x534F;&#x8BAE;&#x7684;)</li>
+</ul>
+<pre><code class="lang-objc">    <span class="hljs-built_in">NSURL</span> *url = [<span class="hljs-built_in">NSURL</span> fileURLWithPath:<span class="hljs-string">@&quot;/Users/sleepingsun/Desktop/writeFile.txt&quot;</span>];
+    <span class="hljs-comment">// &#x8BFB;&#x53D6;URL&#x4E2D;&#x7684;&#x5185;&#x5BB9;</span>
+    <span class="hljs-built_in">NSString</span> *str = [<span class="hljs-built_in">NSString</span> stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:<span class="hljs-literal">nil</span>];
+
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;&#x6210;&#x529F;&#xFF1A;%@&quot;</span>,str);
+<span class="hljs-comment">// &#x6CE8;&#x610F;&#xFF1A;&#x9ED8;&#x8BA4;&#x662F;file&#x534F;&#x8BAE;&#xFF0C;&#x4E0D;&#x80FD;&#x624B;&#x52A8;&#x5199;&#x3002;&#x5426;&#x5219;&#x89E3;&#x6790;&#x4E0D;&#x51FA;&#x6765;&#x3002;</span>
+</code></pre>
+<h5 id="3%E3%80%81nsstring%E7%9A%84%E5%AD%98%E5%82%A8">3&#x3001;NSString&#x7684;&#x5B58;&#x50A8;</h5>
+<ul>
+<li>&#x53EF;&#x4EE5;&#x5C06;NSString&#x5B58;&#x50A8;&#x5230;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-built_in">NSString</span>  *str = <span class="hljs-string">@&quot;sayHi~&quot;</span>;
+<span class="hljs-comment">// &#x5B58;&#x50A8;&#x5230;&#x6587;&#x4EF6;&#x4E2D;</span>
+[str writeToFile:<span class="hljs-string">@&quot;/Users/sleeping/Desktop/str.txt&quot;</span> atomically:<span class="hljs-literal">YES</span> encoding:NSUTF8StringEncoding error:<span class="hljs-literal">nil</span>];
+
+<span class="hljs-comment">// &#x5B58;&#x50A8;&#x5230;URL&#x4E2D;</span>
+[str writeToURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@&quot;file:///Users/sleeping/Desktop/str.txt&quot;</span>] atomically:<span class="hljs-literal">YES</span> encoding:NSUTF8StringEncoding error:<span class="hljs-literal">nil</span>];
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./seciton1.html" class="navigation navigation-prev " aria-label="Previous page: 【掌握】NSString介绍及基本使用"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./10.html" class="navigation navigation-next " aria-label="Next page: 【理解】NSString字符串比较"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

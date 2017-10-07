@@ -1,0 +1,573 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>【掌握】多个对象内存管理 | 内存管理</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./12.html" />
+    
+    
+    <link rel="prev" href="./section3.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="0.8" data-basepath="." data-revision="Fri Oct 23 2015 21:23:04 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        OC基础第一天
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1" data-path="seciton1.html">
+            
+                
+                    <a href="./seciton1.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        【掌握】内存管理的基本概念及范围
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.2" data-path="7.html">
+            
+                
+                    <a href="./7.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        【理解】内管管理的原理及分类
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.3" data-path="section2.html">
+            
+                
+                    <a href="./section2.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.3.</b>
+                        
+                        【掌握】手动内存管理快速入门
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.4" data-path="8.html">
+            
+                
+                    <a href="./8.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.4.</b>
+                        
+                        【理解】内存管理的原则
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.5" data-path="9.html">
+            
+                
+                    <a href="./9.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.5.</b>
+                        
+                        【掌握】单个对象内存管理（野指针）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.6" data-path="10.html">
+            
+                
+                    <a href="./10.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.6.</b>
+                        
+                        【掌握】单个对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.7" data-path="section3.html">
+            
+                
+                    <a href="./section3.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.7.</b>
+                        
+                        【掌握】多个对象内存管理（野指针）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="0.8" data-path="11.html">
+            
+                
+                    <a href="./11.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.8.</b>
+                        
+                        【掌握】多个对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.9" data-path="12.html">
+            
+                
+                    <a href="./12.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.9.</b>
+                        
+                        【掌握】set方法内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.10" data-path="section4.html">
+            
+                
+                    <a href="./section4.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.10.</b>
+                        
+                        【掌握】@property参数（一）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.11" data-path="13.html">
+            
+                
+                    <a href="./13.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.11.</b>
+                        
+                        【掌握】@property参数（二）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.12" data-path="14.html">
+            
+                
+                    <a href="./14.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.12.</b>
+                        
+                        【理解】应用：电商App练习
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.13" data-path="section5.html">
+            
+                
+                    <a href="./section5.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.13.</b>
+                        
+                        【理解】@class的使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.14" data-path="15.html">
+            
+                
+                    <a href="./15.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.14.</b>
+                        
+                        【理解】循环retain问题
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.15" data-path="16.html">
+            
+                
+                    <a href="./16.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.15.</b>
+                        
+                        【了解】NSString类的内存管理问题
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.16" data-path="section6.html">
+            
+                
+                    <a href="./section6.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.16.</b>
+                        
+                        【掌握】autorelease基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.17" data-path="17.html">
+            
+                
+                    <a href="./17.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.17.</b>
+                        
+                        【了解】内容总结
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >内存管理</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="8%E3%80%81%E3%80%90%E6%8E%8C%E6%8F%A1%E3%80%91%E5%A4%9A%E4%B8%AA%E5%AF%B9%E8%B1%A1%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">8&#x3001;&#x3010;&#x638C;&#x63E1;&#x3011;&#x591A;&#x4E2A;&#x5BF9;&#x8C61;&#x5185;&#x5B58;&#x7BA1;&#x7406;</h2>
+<ul>
+<li>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x5728;&#x4F7F;&#x7528;&#x623F;&#x95F4;&#x65F6;&#xFF0C;&#x5BF9;&#x623F;&#x95F4;&#x8FDB;&#x884C;&#x4E00;&#x6B21;release&#x3002;</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-comment">// &#x58F0;&#x660E;&#x7C7B;</span>
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">Gamer</span> : <span class="hljs-title">NSObject</span></span>
+{
+    Room *_room;
+}
+- (<span class="hljs-keyword">void</span>)setRoom:(Room *)room;
+- (Room *)room;
+
+<span class="hljs-comment">// &#x5B9E;&#x73B0;&#x7C7B;</span>
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">Gamer</span></span>
+- (<span class="hljs-keyword">void</span>)setRoom:(Room *)room
+{
+
+    [room retain];
+    _room = room;
+}
+- (Room *)room{
+    <span class="hljs-keyword">return</span> _room;
+}
+- (<span class="hljs-keyword">void</span>)dealloc
+{
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;&#x73A9;&#x5BB6;&#x88AB;&#x91CA;&#x653E;&quot;</span>);
+    [<span class="hljs-keyword">super</span> dealloc];
+}
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-comment">// main&#x51FD;&#x6570;&#x5B9E;&#x73B0;</span>
+  <span class="hljs-comment">// 1&#x3001;&#x521B;&#x5EFA;&#x73A9;&#x5BB6;&#x5BF9;&#x8C61;</span>
+    Gamer *game = [[Gamer alloc] init];
+
+    <span class="hljs-comment">// 2&#x3001;&#x521B;&#x5EFA;&#x623F;&#x95F4;&#x5BF9;&#x8C61;</span>
+    Room *room = [[Room alloc] init];
+
+    <span class="hljs-comment">// 3&#x3001;&#x8BA9;&#x73A9;&#x5BB6;&#x8FDB;&#x5165;&#x623F;&#x95F4;</span>
+    game<span class="hljs-variable">.room</span> = room;
+
+    <span class="hljs-comment">// 4&#x3001;&#x91CA;&#x653E;&#x623F;&#x95F4;&#x5BF9;&#x8C61;</span>
+    [room release];
+
+    <span class="hljs-comment">// 5&#x3001;&#x8F93;&#x51FA;&#x73A9;&#x5BB6;&#x7684;&#x623F;&#x95F4;</span>
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;&#x73A9;&#x5BB6;&#x7684;&#x623F;&#x95F4;&#x662F;&#xFF1A;%@&quot;</span>,game<span class="hljs-variable">.room</span>);
+</code></pre>
+<ul>
+<li><p>&#x95EE;&#x9898;&#xFF1A;&#x623F;&#x95F4;&#x65E0;&#x6CD5;&#x88AB;&#x91CA;&#x653E;&#x4E86;&#x600E;&#x4E48;&#x529E;&#xFF1F;</p>
+</li>
+<li><p>&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ul>
+<li>&#x5728;&#x5BF9;&#x8C61;&#x88AB;&#x91CA;&#x653E;&#x65F6;&#xFF0C;&#x8981;&#x628A;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x5728;dealloc&#x5F53;&#x4E2D;&#x8FDB;&#x884C;&#x91CA;&#x653E;:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">Gamer</span></span>
+- (<span class="hljs-keyword">void</span>)dealloc
+{
+    [_room release];
+    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@&quot;&#x73A9;&#x5BB6;&#x88AB;&#x91CA;&#x653E;&quot;</span>);
+    [<span class="hljs-keyword">super</span> dealloc];
+}
+<span class="hljs-keyword">@end</span>
+</code></pre>
+<ul>
+<li>&#x9700;&#x6C42;&#xFF1A;&#x8BA9;&#x73A9;&#x5BB6;&#x53CD;&#x590D;&#x8FDB;&#x5165;&#x8FD9;&#x4E2A;&#x623F;&#x95F4;&#x3002;</li>
+</ul>
+<pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * argv[]) {
+    <span class="hljs-keyword">@autoreleasepool</span> {
+        Gamer *g = [Gamer new];
+
+        Room *r = [Room new];
+
+        g<span class="hljs-variable">.room</span> = r;
+        g<span class="hljs-variable">.room</span> = r;
+        g<span class="hljs-variable">.room</span> = r;
+
+        [g release];
+        [r release];
+
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<ul>
+<li><p>&#x95EE;&#x9898;&#xFF1A;&#x623F;&#x95F4;&#x5BF9;&#x8C61;&#x65E0;&#x6CD5;&#x88AB;&#x91CA;&#x653E;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;</p>
+</li>
+<li><p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x5224;&#x65AD;&#x65B0;&#x8FDB;&#x623F;&#x95F4;&#x4E0E;&#x4E4B;&#x524D;&#x662F;&#x5426;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x623F;&#x95F4;&#x3002;</p>
+</li>
+</ul>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">void</span>)setRoom:(Room *)room
+{
+    <span class="hljs-keyword">if</span> (_room != room) {
+        [room retain];
+        _room = room;
+
+    }
+}
+</code></pre>
+<ul>
+<li>&#x603B;&#x7684;&#x6765;&#x8BF4;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x70B9;&#x89C4;&#x5F8B;&#xFF1A;<ul>
+<li>1&#xFF09;&#x53EA;&#x8981;&#x8FD8;&#x6709;&#x4EBA;&#x4F7F;&#x7528;&#x67D0;&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5C31;&#x4E0D;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x3002;</li>
+<li>2&#xFF09;&#x53EA;&#x8981;&#x60F3;&#x8981;&#x4F7F;&#x7528;1&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8BA9;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;+1&#x3002;</li>
+<li>3&#xFF09;&#x5F53;&#x4E0D;&#x518D;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C31;&#x8BA9;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;-1&#x3002;</li>
+</ul>
+</li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./section3.html" class="navigation navigation-prev " aria-label="Previous page: 【掌握】多个对象内存管理（野指针）"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./12.html" class="navigation navigation-next " aria-label="Next page: 【掌握】set方法内存管理"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

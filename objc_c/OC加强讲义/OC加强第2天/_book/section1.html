@@ -1,0 +1,582 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>【理解】autorelease注意及错误用法 | 	内存管理的范围</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./9.html" />
+    
+    
+    <link rel="prev" href="./index.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="0.1" data-basepath="." data-revision="Sat Oct 24 2015 07:41:05 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        知识回顾
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="0.1" data-path="section1.html">
+            
+                
+                    <a href="./section1.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        【理解】autorelease注意及错误用法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.2" data-path="9.html">
+            
+                
+                    <a href="./9.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        【掌握】autorelease的应用场景
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.3" data-path="10.html">
+            
+                
+                    <a href="./10.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.3.</b>
+                        
+                        【理解】应用：创建1个学生类初始化年龄
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.4" data-path="section2.html">
+            
+                
+                    <a href="./section2.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.4.</b>
+                        
+                        【掌握】ARC概念及原理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.5" data-path="11.html">
+            
+                
+                    <a href="./11.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.5.</b>
+                        
+                        【理解】ARC快速入门
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.6" data-path="section3.html">
+            
+                
+                    <a href="./section3.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.6.</b>
+                        
+                        【掌握】ARC下单对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.7" data-path="12.html">
+            
+                
+                    <a href="./12.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.7.</b>
+                        
+                        【掌握】ARC下多对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.8" data-path="13.html">
+            
+                
+                    <a href="./13.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.8.</b>
+                        
+                        【掌握】ARC下循环引用问题
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.9" data-path="7.html">
+            
+                
+                    <a href="./7.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.9.</b>
+                        
+                        【了解】ARC使用特点及注意事项
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.10" data-path="14.html">
+            
+                
+                    <a href="./14.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.10.</b>
+                        
+                        【掌握】ARC的兼容和转换
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.11" data-path="section4.html">
+            
+                
+                    <a href="./section4.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.11.</b>
+                        
+                        【了解】分类（Category）概念及使用流程
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.12" data-path="15.html">
+            
+                
+                    <a href="./15.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.12.</b>
+                        
+                        【掌握】分类（Category）声明和实现
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.13" data-path="16.html">
+            
+                
+                    <a href="./16.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.13.</b>
+                        
+                        【掌握】分类（Catefory）使用注意事项
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.14" data-path="17.html">
+            
+                
+                    <a href="./17.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.14.</b>
+                        
+                        【理解】分类（Category）非正式协议
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.15" data-path="section5.html">
+            
+                
+                    <a href="./section5.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.15.</b>
+                        
+                        【掌握】分类（Catefory）延展
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.16" data-path="section6.html">
+            
+                
+                    <a href="./section6.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.16.</b>
+                        
+                        【掌握】block的概念及基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.17" data-path="8.html">
+            
+            <span><b>0.17.</b> 内容总结</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >	内存管理的范围</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="1%E3%80%81%E3%80%90%E7%90%86%E8%A7%A3%E3%80%91autorelease%E6%B3%A8%E6%84%8F%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">1&#x3001;&#x3010;&#x7406;&#x89E3;&#x3011;autorelease&#x6CE8;&#x610F;&#x53CA;&#x5E94;&#x7528;&#x573A;&#x666F;</h2>
+<h4 id="1%E3%80%81autorelease%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F">1&#x3001;autorelease&#x4F7F;&#x7528;&#x6CE8;&#x610F;</h4>
+<h5 id="1%EF%BC%89%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%94%BE%E5%88%B0%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0%E4%B8%AD%EF%BC%8C%E9%83%BD%E4%BC%9A%E8%87%AA%E5%8A%A8%E5%8A%A0%E5%85%A5%E5%88%B0%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0">1&#xFF09;&#x5E76;&#x4E0D;&#x662F;&#x653E;&#x5230;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#xFF0C;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x52A0;&#x5165;&#x5230;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;</h5>
+<ul>
+<li><p>1.1&#xFF09; &#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x8C03;&#x7528;autorelease&#x65B9;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x8C61;&#x6CA1;&#x6709;&#x52A0;&#x5165;&#x5230;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;.</p>
+<pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(){
+ <span class="hljs-keyword">@autoreleasepool</span>{
+  Student *s = [[Student alloc] init];
+  [s release]; <span class="hljs-comment">// &#x6B63;&#x5E38;&#x91CA;&#x653E;</span>
+ }
+<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+<li><p>1.2&#xFF09;&#x5728;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x7684;&#x5916;&#x90E8;&#x53D1;&#x9001;autorelease&#x4E0D;&#x4F1A;&#x88AB;&#x52A0;&#x5165;&#x5230;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#x3002;</p>
+<pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(){
+ <span class="hljs-keyword">@autoreleasepool</span>{
+
+ }
+ <span class="hljs-comment">// &#x53D1;&#x9001;autorelease&#x6D88;&#x606F;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x653E;&#x5230;&#x5236;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x5916;&#x90E8;</span>
+ <span class="hljs-comment">// &#x6B64;&#x65F6;&#x65E0;&#x6CD5;&#x88AB;&#x81EA;&#x52A8;&#x91CA;&#x653E;</span>
+Student *s = [[[Student alloc] init] autorelease];
+<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+<li>1.3&#xFF09;&#x4E0D;&#x7BA1;&#x5BF9;&#x8C61;&#x662F;&#x5728;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x91CC;&#x521B;&#x5EFA;&#xFF0C;&#x8FD8;&#x662F;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x5916;&#x521B;&#x5EFA;&#xFF0C;&#x53EA;&#x8981;&#x5728;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x5185;&#x5199;1&#x4E2A;[s autorelease];s&#x5C31;&#x4F1A;&#x88AB;&#x653E;&#x5230;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#xFF0C;&#x6CE8;&#x610F;&#xFF1A;autorelease&#x662F;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x4E14;&#x53EA;&#x6709;&#x5728;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#x4F7F;&#x7528;&#x624D;&#x6709;&#x6548;&#x3002;<pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(){
+   <span class="hljs-comment">// &#x4E0D;&#x7BA1;&#x5728;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x5185;&#x90E8;&#x8FD8;&#x662F;&#x5916;&#x90E8;&#x521B;&#x5EFA;</span>
+   Student *s = [[Student alloc] init];
+   <span class="hljs-keyword">@autoreleasepool</span>{
+       [s autorelease]; <span class="hljs-comment">// &#x6B64;&#x65F6;s&#x52A0;&#x5165;&#x5230;&#x91CA;&#x653E;&#x6C60;</span>
+ }
+ <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+<li>2&#xFF09;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x7684;&#x5D4C;&#x5957;&#x4F7F;&#x7528;<ul>
+<li>&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x662F;&#x6808;&#x7ED3;&#x6784;&#x3002;</li>
+<li>&#x6808;&#xFF1A;&#x5148;&#x8FDB;&#x540E;&#x51FA;&#x3002;&#x540E;&#x8FDB;&#x5148;&#x51FA;&#xFF0C;
+<img src="image2/01.png" alt=""><pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * argv[]) {
+<span class="hljs-keyword">@autoreleasepool</span> {
+           <span class="hljs-comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x6C60;&#x5B50;&#xFF0C;&#x91CC;&#x9762;&#x521B;&#x5EFA;no&#x7684;1&#x5B66;&#x751F;</span>
+            Student *s = [[[Student alloc] init] autorelease];
+            s<span class="hljs-variable">.no</span> = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">@autoreleasepool</span> {
+            <span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x6C60;&#x5B50;&#xFF0C;&#x91CC;&#x9762;&#x521B;&#x5EFA;no2&#x7684;&#x5B66;&#x751F;</span>
+               Student *s2 = [[[Student alloc] init] autorelease];
+               s2<span class="hljs-variable">.no</span> = <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">@autoreleasepool</span> {
+            <span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x6C60;&#x5B50;&#xFF0C;&#x91CC;&#x9762;&#x521B;&#x5EFA;no3&#x7684;&#x5B66;&#x751F;</span>
+                    Student *s3 = [[[Student alloc] init] autorelease];
+                    s3<span class="hljs-variable">.no</span> = <span class="hljs-number">3</span>;
+        }
+    }
+}
+<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+<li>&#x91CA;&#x653E;&#x987A;&#x5E8F;&#xFF1A;s3,s2,s1</li>
+</ul>
+</li>
+<li>3&#xFF09;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#x4E0D;&#x9002;&#x5408;&#x653E;&#x5360;&#x7528;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x8F83;&#x5927;&#x7684;&#x5BF9;&#x8C61;<ul>
+<li>1&gt; &#x5C3D;&#x91CF;&#x907F;&#x514D;&#x5BF9;&#x5927;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#xFF0C;&#x5BF9;&#x4E8E;&#x8FD9;&#x79CD;&#x5EF6;&#x8FDF;&#x91CA;&#x653E;&#x673A;&#x5236;&#xFF0C;&#x5C3D;&#x91CF;&#x5C11;&#x7528;</li>
+<li>2&gt; &#x4E0D;&#x8981;&#x628A;&#x5927;&#x91CF;&#x5FAA;&#x73AF;&#x64CD;&#x4F5C;&#x653E;&#x5230;&#x540C;1&#x4E2A;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x6C60;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x4F1A;&#x9020;&#x6210;&#x5185;&#x5B58;&#x5CF0;&#x503C;&#x7684;&#x4E0A;&#x5347;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h4 id="2%E3%80%81autorelease%E9%94%99%E8%AF%AF%E7%94%A8%E6%B3%95">2&#x3001;autorelease&#x9519;&#x8BEF;&#x7528;&#x6CD5;</h4>
+<ul>
+<li><p>1&#x3001;&#x8FDE;&#x7EED;&#x8C03;&#x7528;&#x591A;&#x6B21;autorelease&#x3002;</p>
+<pre><code class="lang-objc">  <span class="hljs-keyword">@autoreleasepool</span> {
+
+      Student *s = [[[Student alloc] autorelease] autorelease];<span class="hljs-comment">// &#x8C03;&#x7528;&#x4E86;&#x4E24;&#x6B21;autorelease&#xFF0C;&#x5BF9;&#x8C61;&#x8FC7;&#x5EA6;&#x91CA;&#x653E;&#x3002;</span>
+
+  }
+</code></pre>
+</li>
+<li><p>2&#x3001;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x5728;&#x91CA;&#x653E;&#x6C60;&#x5916;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x91CA;&#x653E;&#x6C60;&#x5185;&#x8FDB;&#x884C;autorelease&#x540E;&#xFF0C;&#x5728;&#x91CA;&#x653E;&#x6C60;&#x5916;&#xFF0C;&#x53C8;&#x8FDB;&#x884C;&#x4E86;release&#x3002;</p>
+</li>
+</ul>
+<pre><code class="lang-objc">   <span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * argv[]) {
+
+      Student *s = [[Student alloc] init];
+
+      <span class="hljs-keyword">@autoreleasepool</span> {
+
+         [s autorelease];<span class="hljs-comment">// &#x6B64;&#x65F6;&#x51FA;&#x6C60;&#x5B50;&#x540E;&#xFF0C;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x88AB;&#x91CA;&#x653E;</span>
+
+      }
+         [s release];<span class="hljs-comment">// &#x5BF9;&#x8C61;&#x88AB;&#x91CA;&#x653E;&#x540E;&#x518D;&#x6B21;&#x8C03;&#x7528;&#x91CA;&#x653E;&#xFF0C;&#x4F1A;&#x51FA;&#x9519;&#x3002;</span>
+
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+ }
+</code></pre>
+<ul>
+<li>3&#x3001;alloc&#x4E4B;&#x540E;&#x8C03;&#x7528;&#x4E86;autorelease&#xFF0C;&#x4E4B;&#x540E;&#x53C8;&#x8C03;&#x7528;release&#x3002;</li>
+</ul>
+<pre><code class="lang-objc">  <span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * argv[]) {
+
+     <span class="hljs-keyword">@autoreleasepool</span> {
+
+        Student *s = [[[Student alloc] init] autorelease];
+        [s release];
+     }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<ul>
+<li><p>4&#x3001;alloc&#x4E4B;&#x540E;&#x8C03;&#x7528;release&#x3002;</p>
+<pre><code class="lang-objc"><span class="hljs-keyword">int</span> main(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * argv[]) {
+
+   <span class="hljs-keyword">@autoreleasepool</span> {
+ <span class="hljs-comment">// &#x56E0;&#x4E3A;release&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x6837;&#x8C03;&#x7528;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;</span>
+      Student *s = [[[Student alloc] init] release];
+   }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./index.html" class="navigation navigation-prev " aria-label="Previous page: 知识回顾"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./9.html" class="navigation navigation-next " aria-label="Next page: 【掌握】autorelease的应用场景"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

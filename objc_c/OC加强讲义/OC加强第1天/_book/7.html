@@ -1,0 +1,561 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>【理解】内管管理的原理及分类 | 内存管理</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./section2.html" />
+    
+    
+    <link rel="prev" href="./seciton1.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="0.2" data-basepath="." data-revision="Fri Oct 23 2015 21:23:04 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        OC基础第一天
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1" data-path="seciton1.html">
+            
+                
+                    <a href="./seciton1.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        【掌握】内存管理的基本概念及范围
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="0.2" data-path="7.html">
+            
+                
+                    <a href="./7.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        【理解】内管管理的原理及分类
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.3" data-path="section2.html">
+            
+                
+                    <a href="./section2.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.3.</b>
+                        
+                        【掌握】手动内存管理快速入门
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.4" data-path="8.html">
+            
+                
+                    <a href="./8.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.4.</b>
+                        
+                        【理解】内存管理的原则
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.5" data-path="9.html">
+            
+                
+                    <a href="./9.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.5.</b>
+                        
+                        【掌握】单个对象内存管理（野指针）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.6" data-path="10.html">
+            
+                
+                    <a href="./10.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.6.</b>
+                        
+                        【掌握】单个对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.7" data-path="section3.html">
+            
+                
+                    <a href="./section3.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.7.</b>
+                        
+                        【掌握】多个对象内存管理（野指针）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.8" data-path="11.html">
+            
+                
+                    <a href="./11.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.8.</b>
+                        
+                        【掌握】多个对象内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.9" data-path="12.html">
+            
+                
+                    <a href="./12.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.9.</b>
+                        
+                        【掌握】set方法内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.10" data-path="section4.html">
+            
+                
+                    <a href="./section4.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.10.</b>
+                        
+                        【掌握】@property参数（一）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.11" data-path="13.html">
+            
+                
+                    <a href="./13.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.11.</b>
+                        
+                        【掌握】@property参数（二）
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.12" data-path="14.html">
+            
+                
+                    <a href="./14.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.12.</b>
+                        
+                        【理解】应用：电商App练习
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.13" data-path="section5.html">
+            
+                
+                    <a href="./section5.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.13.</b>
+                        
+                        【理解】@class的使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.14" data-path="15.html">
+            
+                
+                    <a href="./15.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.14.</b>
+                        
+                        【理解】循环retain问题
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.15" data-path="16.html">
+            
+                
+                    <a href="./16.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.15.</b>
+                        
+                        【了解】NSString类的内存管理问题
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.16" data-path="section6.html">
+            
+                
+                    <a href="./section6.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.16.</b>
+                        
+                        【掌握】autorelease基本使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.17" data-path="17.html">
+            
+                
+                    <a href="./17.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.17.</b>
+                        
+                        【了解】内容总结
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >内存管理</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="2-%E3%80%90%E7%90%86%E8%A7%A3%E3%80%91%E5%86%85%E7%AE%A1%E7%AE%A1%E7%90%86%E7%9A%84%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%86%E7%B1%BB">2.&#x3010;&#x7406;&#x89E3;&#x3011;&#x5185;&#x7BA1;&#x7BA1;&#x7406;&#x7684;&#x539F;&#x7406;&#x53CA;&#x5206;&#x7C7B;</h2>
+<h4 id="1%E3%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9A%84%E5%8E%9F%E7%90%86">1&#x3001;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x539F;&#x7406;</h4>
+<ul>
+<li><p>&#x7406;&#x89E3;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x539F;&#x7406;&#xFF0C;&#x8981;&#x6E05;&#x695A;&#x4E24;&#x4E2A;&#x6982;&#x5FF5;&#xFF1A;</p>
+<ul>
+<li>1&#xFF09;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x6743;</li>
+<li>2&#xFF09;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;</li>
+<li>1&#xFF09;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x6743;</li>
+<li>&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#x90FD;&#x53EF;&#x80FD;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x6240;&#x6709;&#x8005;&#x3002;&#x53EA;&#x8981;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x81F3;&#x5C11;&#x8FD8;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x6240;&#x6709;&#x8005;,&#x5B83;&#x5C31;&#x4F1A;&#x7EE7;&#x7EED;&#x5B58;&#x5728;&#x3002;</li>
+<li>&#x90A3;&#x4E48;&#x4EC0;&#x4E48;&#x53EB;&#x62E5;&#x6709;&#x8005;&#x5462;? &#x4E3E;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x6765;&#x770B;&#xFF1A;</li>
+<li>&#x5047;&#x8BBE;&#x6709;&#x4E00;&#x4E2A;&#x529E;&#x516C;&#x5BA4;, &#x7ED9;&#x5927;&#x5BB6;&#x529E;&#x516C;&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x679C;&#x529E;&#x516C;&#x5BA4;&#x91CC;&#x6CA1;&#x6709;&#x4EBA;, &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x6CA1;&#x6709;&#x4EBA;&#x5728;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x529E;&#x516C;&#x5BA4;, &#x5C31;&#x53EF;&#x4EE5;&#x5C06;&#x529E;&#x516C;&#x5BA4;&#x7684;&#x706F;&#x5173;&#x6389;&#x3002; &#x5982;&#x679C;&#x6709;&#x4EBA;, &#x624D;&#x4F1A;&#x5F00;&#x706F;&#x3002;&#x5982;&#x679C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x4EBA;&#x5728;,&#x90A3;&#x4E48;&#x5F53;&#x8FD9;&#x4E2A;&#x4EBA;&#x79BB;&#x5F00;&#x7684;&#x65F6;&#x5019;, &#x5C31;&#x8868;&#x793A;&#x9700;&#x8981;&#x5C06;&#x7B49;&#x5173;&#x6389;&#x3002;
+<img src="image1/1.3.png" alt=""></li>
+</ul>
+<p><code>&#x90A3;&#x4E48;&#x6B64;&#x65F6;&#x5C31;&#x8BF4;&#x660E;&#x8FD9;&#x4E2A;&#x4EBA;&#x662F;&#x8FD9;&#x95F4;&#x529E;&#x516C;&#x5BA4;&#x7684;&#x6240;&#x6709;&#x8005;.</code></p>
+<ul>
+<li>&#x540C;&#x65F6;, &#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5141;&#x8BB8;&#x6709;&#x591A;&#x4E2A;&#x6240;&#x6709;&#x8005;, &#x5C31;&#x597D;&#x6BD4;:</li>
+<li>&#x52B2;&#x821E;&#x56E2;
+<img src="image1/1.5.1.png" alt=""></li>
+<li>&#x8FD9;&#x91CC;&#x6709;&#x5F88;&#x591A;&#x4EBA;&#xFF0C;&#x5982;&#x679C;&#x5176;&#x4E2D;&#x67D0;&#x4E2A;&#x4EBA;&#x9000;&#x51FA;&#xFF0C;&#x6B64;&#x623F;&#x95F4;&#x662F;&#x4E0D;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD8;&#x6709;&#x5176;&#x4ED6;&#x4EBA;&#x5728;&#x4F7F;&#x7528;&#x8BE5;&#x623F;&#x95F4;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>LOL&#x7EC4;&#x961F;
+<img src="image1/1.5.2.png" alt=""></p>
+</li>
+<li><p>Cocoa&#x6240;&#x6709;&#x6743;&#x7B56;&#x7565;</p>
+<ul>
+<li>&#x4EFB;&#x4F55;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x7684;&#x5BF9;&#x8C61;&#x90FD;&#x5F52;&#x81EA;&#x5DF1;&#x6240;&#x6709;,&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x540D;&#x5B57;&#x4EE5;&#x201C;alloc&#x201D;&#x6216;&#x201C;new&#x201D;&#x5F00;&#x5934;&#x6216;&#x540D;&#x5B57;&#x4E2D;&#x5305;&#x542B;&#x201C;copy&#x201D;&#x7684;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;,&#x53EF;&#x4EE5;&#x4F7F;&#x7528;retain&#x6765;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x6743;&#x3002;</li>
+</ul>
+</li>
+<li><p>2&#xFF09;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;</p>
+</li>
+<li>&#x6BCF;&#x4E2A;OC&#x5BF9;&#x8C61;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;,&#x662F;&#x4E00;&#x4E2A;&#x6574;&#x6570;&#x8868;&#x793A;&#x5BF9;&#x8C61;&#x88AB;&#x5F15;&#x7528;&#x7684;&#x6B21;&#x6570;(&#x6709;&#x591A;&#x5C11;&#x4E2A;&#x6240;&#x6709;&#x8005;),&#x5373;&#x73B0;&#x5728;&#x6709;&#x591A;&#x5C11;&#x4E1C;&#x897F;&#x5728;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;&#x5BF9;&#x8C61;&#x521A;&#x88AB;&#x521B;&#x5EFA;&#x65F6;,&#x9ED8;&#x8BA4;&#x8BA1;&#x6570;&#x5668;&#x503C;&#x4E3A;1,&#x5F53;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x53D8;&#x4E3A;0&#x65F6;,&#x5219;&#x5BF9;&#x8C61;&#x9500;&#x6BC1;&#x3002;</li>
+<li><p>&#x5BF9;&#x8C61;&#x7684;&#x7ED3;&#x6784;:
+<img src="image1/1.5.4.png" alt=""></p>
+</li>
+<li><p>&#x5728;&#x6BCF;&#x4E2A;OC&#x5BF9;&#x8C61;&#x5185;&#x90E8;,&#x90FD;&#x4E13;&#x95E8;&#x6709;8&#x4E2A;&#x5B57;&#x8282;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x6765;&#x5B58;&#x50A8;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x3002;</p>
+</li>
+</ul>
+<p><img src="image1/1.5.3.png" alt=""></p>
+<ul>
+<li><p>3&#xFF09;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x4F5C;&#x7528;</p>
+<ul>
+<li>&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x662F;&#x5224;&#x65AD;&#x5BF9;&#x8C61;&#x8981;&#x4E0D;&#x8981;&#x56DE;&#x6536;&#x7684;&#x4F9D;&#x636E;(&#x5B58;&#x5728;&#x4E00;&#x79CD;&#x4F8B;&#x5916;:&#x5BF9;&#x8C61;&#x503C;&#x4E3A;nil&#x65F6;,&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x4E3A;0,&#x4F46;&#x4E0D;&#x56DE;&#x6536;&#x7A7A;&#x95F4;)&#x5C31;&#x662F;&#x8BA1;&#x6570;&#x5668;&#x662F;&#x5426;&#x4E3A;0,&#x82E5;&#x4E0D;&#x4E3A;0&#x5219;&#x5B58;&#x5728;&#x3002;
+<img src="image1/2.4.png" alt=""></li>
+</ul>
+</li>
+<li><p>4&#xFF09;&#x5BF9;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x64CD;&#x4F5C;</p>
+<ul>
+<li><p>&#x60F3;&#x8981;&#x7BA1;&#x7406;&#x5BF9;&#x8C61;&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x5C31;&#x8981;&#x5B66;&#x4F1A;&#x64CD;&#x4F5C;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x3002;</p>
+</li>
+<li><p>&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x5E38;&#x89C1;&#x64CD;&#x4F5C;</p>
+<ul>
+<li>retain&#x6D88;&#x606F;&#xFF1A;&#x4F7F;&#x8BA1;&#x6570;&#x5668; +1&#xFF08;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x672C;&#x8EAB;&#xFF09;</li>
+<li>release&#x6D88;&#x606F;&#xFF1A;&#x4F7F;&#x8BA1;&#x6570;&#x5668; -1&#xFF08;&#x4E0D;&#x4EE3;&#x8868;&#x91CA;&#x653E;&#x5BF9;&#x8C61;&#xFF09;</li>
+<li>retainCount&#xFF1A;&#x83B7;&#x5F97;&#x5BF9;&#x8C61;&#x5F53;&#x524D;&#x7684;&#x5E94;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x503C;&#xFF0C;&#x8F93;&#x51FA;&#xFF1A;%ld %lu</li>
+<li><code>&#x6CE8;&#x610F;&#xFF1A;release&#x4E0D;&#x4EE3;&#x8868;&#x9500;&#x6BC1;&#x5BF9;&#x8C61;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;-1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>5&#xFF09;&#x5BF9;&#x8C61;&#x7684;&#x9500;&#x6BC1;</p>
+<ul>
+<li>&#x5F53;1&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x5E94;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x4E3A;0&#x65F6;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C06;&#x88AB;&#x9500;&#x6BC1;&#xFF0C;&#x5176;&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#x88AB;&#x7CFB;&#x7EDF;&#x56DE;&#x6536;&#x3002;</li>
+<li>&#x5F53;&#x5BF9;&#x8C61;&#x88AB;&#x9500;&#x6BC1;&#x65F6;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x81EA;&#x52A8;&#x5411;&#x5BF9;&#x8C61;&#x53D1;&#x9001;&#x4E00;&#x6761;dealloc&#x6D88;&#x606F;&#x3002;&#x4E00;&#x822C;&#x4F1A;&#x91CD;&#x5199;dealloc&#x65B9;&#x6CD5;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x91CA;&#x653E;&#x76F8;&#x5173;&#x7684;&#x8D44;&#x6E90;&#xFF0C;dealloc&#x5C31;&#x50CF;&#x662F;&#x5BF9;&#x8C61;&#x7684;&#x201C;&#x4E34;&#x7EC8;&#x9057;&#x8A00;&#x201D;&#x3002;</li>
+<li>&#x4E00;&#x65E6;&#x91CD;&#x5199;&#x4E86;dealloc&#x65B9;&#x6CD5;&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x8C03;&#x7528;[super dealloc]&#xFF0C;&#x5E76;&#x4E14;&#x653E;&#x5728;&#x4EE3;&#x7801;&#x5757;&#x7684;&#x6700;&#x540E;&#x8C03;&#x7528;&#x3002;</li>
+<li><code>&#x6CE8;&#x610F;&#xFF1A;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x8C03;&#x7528;dealloc&#x65B9;&#x6CD5;</code>&#x3002;</li>
+<li>&#x4E00;&#x65E6;&#x5BF9;&#x8C61;&#x88AB;&#x56DE;&#x6536;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x4ED6;&#x6240;&#x5360;&#x7528;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x5C31;&#x4E0D;&#x518D;&#x53EF;&#x7528;&#xFF0C;&#x575A;&#x6301;&#x4F7F;&#x7528;&#x4F1A;&#x5BFC;&#x81F4;&#x7A0B;&#x5E8F;&#x5D29;&#x6E83;&#xFF08;&#x91CE;&#x6307;&#x9488;&#x9519;&#x8BEF;&#xFF09;</li>
+</ul>
+</li>
+<li><p>&#x6CE8;&#x610F;;</p>
+<ul>
+<li>1) &#x5982;&#x679C;&#x5BF9;&#x8C61;&#x7684;&#x8BA1;&#x6570;&#x5668;&#x4E0D;&#x4E3A;0,&#x90A3;&#x4E48;&#x5728;&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;,&#x5B83;&#x5360;&#x7528;&#x7684;&#x5185;&#x5B58;&#x5C31;&#x4E0D;&#x53EF;&#x80FD;&#x88AB;&#x56DE;&#x6536;(&#x9664; &#x975E;&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x5DF2;&#x7ECF;&#x9000;&#x51FA; )</li>
+<li>2)&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;,&#x521A;&#x751F;&#x4E0B;&#x6765;&#x7684;&#x65F6;&#x5019;,&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x90FD;&#x4E3A;1&#x3002;(&#x5BF9;&#x8C61;&#x4E00;&#x65E6;&#x521B;&#x5EFA;&#x597D;,&#x9ED8;&#x8BA4;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x5C31;&#x662F;1)&#x5F53;&#x4F7F;&#x7528;alloc&#x3001;new&#x6216;&#x8005;copy&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x65F6;,&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x9ED8;&#x8BA4;&#x5C31;&#x662F;1.</li>
+</ul>
+</li>
+</ul>
+<h4 id="2%E3%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9A%84%E5%88%86%E7%B1%BB">2&#x3001;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x5206;&#x7C7B;</h4>
+<ul>
+<li><p>Objective-C&#x63D0;&#x4F9B;&#x4E86;&#x4E09;&#x79CD;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x65B9;&#x5F0F;:</p>
+<ul>
+<li>1.MannulReference-Counting(MRC,&#x624B;&#x52A8;&#x7BA1;&#x7406;,&#x5728;&#x5F00;&#x53D1;iOS4.1&#x4E4B;&#x524D;&#x7684;&#x7248;&#x672C;&#x7684;&#x9879;&#x76EE;&#x65F6;&#x6211;&#x4EEC;&#x8981;&#x81EA;&#x5DF1;&#x8D1F;&#x8D23;&#x4F7F;&#x7528;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x6765;&#x7BA1;&#x7406;&#x5185;&#x5B58;,&#x6BD4;&#x5982;&#x8981;&#x624B;&#x52A8; retain&#x3001;release&#x3001;autorelease &#x7B49;,&#x800C;&#x5728;&#x5176;&#x540E; &#x7684;&#x7248;&#x672C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; ARC,&#x8BA9;&#x7CFB;&#x7EDF;&#x81EA;&#x5DF1;&#x7BA1;&#x7406;&#x5185;&#x5B58;&#x3002;)</li>
+<li>2.automatic reference-counting(ARC,&#x81EA;&#x52A8;&#x5F15;&#x7528;&#x8BA1;&#x6570;,iOS4.1&#x4E4B;&#x540E;&#x63A8;&#x51FA;&#x7684;)</li>
+<li><p>3.garbage collection(&#x5783;&#x573E;&#x56DE;&#x6536;)&#x3002;iOS&#x4E0D;&#x652F;&#x6301;&#x5783;&#x573E;&#x56DE;&#x6536;;</p>
+</li>
+<li><p>ARC&#x4F5C;&#x4E3A;&#x82F9;&#x679C;&#x65B0;&#x63D0;&#x4F9B;&#x7684;&#x6280;&#x672F;,&#x82F9;&#x679C;&#x63A8;&#x8350;&#x5F00;&#x53D1;&#x8005;&#x4F7F;&#x7528;ARC&#x6280;&#x672F;&#x6765;&#x7BA1;&#x7406;&#x5185;&#x5B58;;</p>
+</li>
+<li><p>&#x5F00;&#x53D1;&#x4E2D;&#x5982;&#x4F55;&#x4F7F;&#x7528;:&#x9700;&#x8981;&#x7406;&#x89E3;MRC,&#x4F46;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x65F6;&#x5C3D;&#x91CF;&#x7528;ARC&#x3002;</p>
+</li>
+<li>MRC&#x548C;ARC&#x7684;&#x533A;&#x522B;&#xFF1A;
+<img src="image1/2.5.png" alt=""></li>
+</ul>
+</li>
+</ul>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./seciton1.html" class="navigation navigation-prev " aria-label="Previous page: 【掌握】内存管理的基本概念及范围"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./section2.html" class="navigation navigation-next " aria-label="Next page: 【掌握】手动内存管理快速入门"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

@@ -1,0 +1,21 @@
+# Summary
+
+* [知识回顾](README.md)
+   * [【理解】autorelease注意及错误用法](section1.md)
+   * [【掌握】autorelease的应用场景](9.md)
+   * [【理解】应用：创建1个学生类初始化年龄](10.md)
+   * [【掌握】ARC概念及原理](section2.md)
+   * [【理解】ARC快速入门](11.md)
+   * [【掌握】ARC下单对象内存管理](section3.md)
+   * [【掌握】ARC下多对象内存管理](12.md)
+   * [【掌握】ARC下循环引用问题](13.md)
+   * [【了解】ARC使用特点及注意事项](7.md)
+   * [【掌握】ARC的兼容和转换](14.md)
+   * [【了解】分类（Category）概念及使用流程](section4.md)
+   * [【掌握】分类（Category）声明和实现](15.md)
+   * [【掌握】分类（Catefory）使用注意事项](16.md)
+   * [【理解】分类（Category）非正式协议](17.md)
+   * [【掌握】分类（Catefory）延展](section5.md)
+   * [【掌握】block的概念及基本使用](section6.md)
+   * [内容总结](8)
+

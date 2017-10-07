@@ -1,0 +1,508 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>【理解】为自定义的类实现copy操作 | </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.1.0">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./15.html" />
+    
+    
+    <link rel="prev" href="./section6.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book" data-level="0.14" data-basepath="." data-revision="Thu Oct 22 2015 22:56:09 GMT+0800 (CST)">
+    
+
+<div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Type to search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        
+        
+        
+
+        
+
+        
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                        <i class="fa fa-check"></i>
+                        
+                        知识回顾
+                    </a>
+                
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="0.1" data-path="section1.html">
+            
+                
+                    <a href="./section1.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.1.</b>
+                        
+                        【理解】NSFileManager介绍和用法
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.2" data-path="7.html">
+            
+                
+                    <a href="./7.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.2.</b>
+                        
+                        【理解】NSFileManager文件访问
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.3" data-path="section2.html">
+            
+                
+                    <a href="./section2.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.3.</b>
+                        
+                        【理解】NSFileManager的文件或文件夹操作
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.4" data-path="8.html">
+            
+                
+                    <a href="./8.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.4.</b>
+                        
+                        【理解】文件下载思路
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.5" data-path="9.html">
+            
+                
+                    <a href="./9.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.5.</b>
+                        
+                        【了解】iOS沙盒（sanbox）机制
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.6" data-path="section3.html">
+            
+                
+                    <a href="./section3.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.6.</b>
+                        
+                        【理解】常见结构体
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.7" data-path="10.html">
+            
+                
+                    <a href="./10.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.7.</b>
+                        
+                        【理解】NSNumber的使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.8" data-path="section4.html">
+            
+                
+                    <a href="./section4.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.8.</b>
+                        
+                        【理解】NSValue的介绍和使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.9" data-path="11.html">
+            
+                
+                    <a href="./11.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.9.</b>
+                        
+                        【理解】NSDate的介绍和使用
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.10" data-path="12.html">
+            
+                
+                    <a href="./12.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.10.</b>
+                        
+                        【掌握】集合对象的内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.11" data-path="section5.html">
+            
+                
+                    <a href="./section5.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.11.</b>
+                        
+                        【理解】copy概念及入门
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.12" data-path="13.html">
+            
+                
+                    <a href="./13.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.12.</b>
+                        
+                        【理解】copy与内存管理
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.13" data-path="section6.html">
+            
+                
+                    <a href="./section6.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.13.</b>
+                        
+                        【理解】@property中的copy的关键字
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="0.14" data-path="14.html">
+            
+                
+                    <a href="./14.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.14.</b>
+                        
+                        【理解】为自定义的类实现copy操作
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.15" data-path="15.html">
+            
+                
+                    <a href="./15.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.15.</b>
+                        
+                        【理解】简单的单例模式实现
+                    </a>
+                
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="0.16" data-path="16.html">
+            
+                
+                    <a href="./16.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>0.16.</b>
+                        
+                        知识总结
+                    </a>
+                
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+        
+        <li class="divider"></li>
+        <li>
+            <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                Published with GitBook
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header">
+    <!-- Actions Left -->
+    <a href="#" class="btn pull-left toggle-summary" aria-label="Table of Contents"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search" aria-label="Search"><i class="fa fa-search"></i></a>
+    
+    <div id="font-settings-wrapper" class="dropdown pull-left">
+        <a href="#" class="btn toggle-dropdown" aria-label="Font Settings"><i class="fa fa-font"></i>
+        </a>
+        <div class="dropdown-menu font-settings">
+    <div class="dropdown-caret">
+        <span class="caret-outer"></span>
+        <span class="caret-inner"></span>
+    </div>
+
+    <div class="buttons">
+        <button type="button" id="reduce-font-size" class="button size-2">A</button>
+        <button type="button" id="enlarge-font-size" class="button size-2">A</button>
+    </div>
+
+    <div class="buttons font-family-list">
+        <button type="button" data-font="0" class="button">Serif</button>
+        <button type="button" data-font="1" class="button">Sans</button>
+    </div>
+
+    <div class="buttons color-theme-list">
+        <button type="button" id="color-theme-preview-0" class="button size-3" data-theme="0">White</button>
+        <button type="button" id="color-theme-preview-1" class="button size-3" data-theme="1">Sepia</button>
+        <button type="button" id="color-theme-preview-2" class="button size-3" data-theme="2">Night</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Actions Right -->
+    
+    <div class="dropdown pull-right">
+        <a href="#" class="btn toggle-dropdown" aria-label="Share"><i class="fa fa-share-alt"></i>
+        </a>
+        <div class="dropdown-menu font-settings dropdown-left">
+            <div class="dropdown-caret">
+                <span class="caret-outer"></span>
+                <span class="caret-inner"></span>
+            </div>
+            <div class="buttons">
+                <button type="button" data-sharing="twitter" class="button">
+                    Share on Twitter
+                </button>
+                <button type="button" data-sharing="google-plus" class="button">
+                    Share on Google
+                </button>
+                <button type="button" data-sharing="facebook" class="button">
+                    Share on Facebook
+                </button>
+                <button type="button" data-sharing="weibo" class="button">
+                    Share on Weibo
+                </button>
+                <button type="button" data-sharing="instapaper" class="button">
+                    Share on Instapaper
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <a href="#" target="_blank" class="btn pull-right google-plus-sharing-link sharing-link" data-sharing="google-plus" aria-label="Google"><i class="fa fa-google-plus"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right facebook-sharing-link sharing-link" data-sharing="facebook" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+    
+    
+    <a href="#" target="_blank" class="btn pull-right twitter-sharing-link sharing-link" data-sharing="twitter" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+    
+    
+    
+
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" ></a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h2 id="14%E3%80%81%E3%80%90%E7%90%86%E8%A7%A3%E3%80%91%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E7%B1%BB%E5%AE%9E%E7%8E%B0copy%E6%93%8D%E4%BD%9C">14&#x3001;&#x3010;&#x7406;&#x89E3;&#x3011;&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7C7B;&#x5B9E;&#x73B0;copy&#x64CD;&#x4F5C;</h2>
+<h4 id="1-%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%AE%9E%E7%8E%B0copy%E6%93%8D%E4%BD%9C">1.&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x5B9E;&#x73B0;copy&#x64CD;&#x4F5C;</h4>
+<h5 id="%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AF%B9%E8%B1%A1copy%E6%AD%A5%E9%AA%A4">&#x81EA;&#x5B9A;&#x4E49;&#x5BF9;&#x8C61;copy&#x6B65;&#x9AA4;</h5>
+<ul>
+<li>&#x65B0;&#x5EFA;Person&#x7C7B;</li>
+<li><p>&#x4E3A;Person&#x7C7B;&#x5B9E;&#x73B0;copy&#x64CD;&#x4F5C;</p>
+<ul>
+<li>1.&#x8BA9;Person&#x7C7B;&#x9075;&#x5B88;NSCopying&#x534F;&#x8BAE;</li>
+<li>2.&#x5B9E;&#x73B0; copyWithZone:&#x65B9;&#x6CD5;,&#x5728;&#x8BE5;&#x65B9;&#x6CD5;&#x4E2D;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x526F;&#x672C;&#x5373;&#x53EF;&#x3002;</li>
+<li><ol>
+<li>&#x5728;copyWithZone&#x65B9;&#x6CD5;&#x4E2D;,&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;,&#x5E76;&#x8BBE;&#x7F6E;&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x6570;&#x636E;&#x4E0E;&#x73B0;&#x6709;&#x5BF9;&#x8C61;&#x4E00;&#x81F4;, &#x5E76;&#x8FD4;&#x56DE;&#x8BE5;&#x5BF9;&#x8C61;.</li>
+</ol>
+</li>
+<li><p>&#x521B;&#x5EFA;Person&#x5BF9;&#x8C61;, &#x8C03;&#x7528;copy&#x65B9;&#x6CD5;, &#x67E5;&#x770B;&#x5730;&#x5740;&#x3002;</p>
+</li>
+</ul>
+</li>
+<li><p>&#x7EC6;&#x8282;&#x4ECB;&#x7ECD;:</p>
+<ul>
+<li>1&#x3001; &#x8C03;&#x7528;copy&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x8C03;&#x7528;copyWithZone&#x65B9;&#x6CD5;,&#x6240;&#x4EE5;&#x8981;&#x5B9E;&#x73B0;copyWithZone&#x65B9;&#x6CD5;&#x3002;(&#x67E5;&#x770B;NSObject&#x534F;&#x8BAE;&#x4E2D;&#x7684;copy&#x65B9;&#x6CD5;&#x7684;&#x4ECB;&#x7ECD;)</li>
+<li>2&#x3001; copyWithZone&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x662F;id&#x7C7B;&#x578B;,&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x526F;&#x672C;&#x3002;</li>
+<li><p>3&#x3001; &#x5173;&#x4E8E;copyWithZone&#x7684;&#x53C2;&#x6570;zone&#x95EE;&#x9898;:</p>
+<ul>
+<li><p>zone: &#x8868;&#x793A;&#x7A7A;&#x95F4;,&#x5206;&#x914D;&#x5BF9;&#x8C61;&#x662F;&#x9700;&#x8981;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x7684;,&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;zone,&#x5C31;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x65B0;&#x5EFA;&#x5BF9;&#x8C61;&#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x3002;&#x4F46;&#x662F;:zone&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x53E4;&#x8001;&#x7684;&#x6280;&#x672F;,&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x5728;&#x5806;&#x4E2D;&#x51FA;&#x73B0;&#x5185;&#x5B58;&#x788E;&#x7247;&#x800C;&#x4F7F;&#x7528;&#x7684;&#x3002;&#x5728;&#x4ECA;&#x5929;&#x7684;&#x5F00;&#x53D1;&#x4E2D;,zone&#x51E0;&#x4E4E;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;</p>
+</li>
+<li><p>&#x67E5;&#x770B;NSCopying&#x534F;&#x8BAE;&#x4E2D;&#x7684;allocWithZone:&#x65B9;&#x6CD5;&#x4ECB;&#x7ECD;(zone&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x88AB;&#x5FFD;&#x7565;,&#x662F;&#x5386;&#x53F2; &#x539F;&#x56E0;)</p>
+</li>
+</ul>
+</li>
+<li><p>4&#x3001;&#x5982;&#x679C;&#x5BF9;&#x8C61;&#x6CA1;&#x6709; &#x53EF;&#x53D8;/&#x4E0D;&#x53EF;&#x53D8; &#x7684;&#x7248;&#x672C;&#x533A;&#x522B;,&#x53EA;&#x8981;&#x5B9E;&#x73B0; copyWithZone &#x65B9;&#x6CD5;&#x5373;&#x53EF;.</p>
+</li>
+<li><p>5&#x3001;copyWithZone:&#x65B9;&#x6CD5;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;:</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">id</span>)copyWithZone:(NSZone *)zone{
+<span class="hljs-comment">//&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span>
+Person *p1 = [[Person alloc] init]; <span class="hljs-comment">//&#x7528;&#x5F53;&#x524D;&#x5BF9;&#x8C61;&#x503C;&#x7ED9;&#x65B0;&#x5BF9;&#x8C61;&#x7684;&#x5B9E;&#x4F8B;&#x53D8;&#x91CF;&#x8D4B;&#x503C; p1.age = self.age;</span>
+<span class="hljs-comment">//&#x8FD4;&#x56DE;&#x65B0;&#x5BF9;&#x8C61;</span>
+<span class="hljs-keyword">return</span> p1;
+}
+</code></pre>
+<ul>
+<li>&#x4E3A;Person&#x7C7B;&#x5B9E;&#x73B0;mutableCopy&#x64CD;&#x4F5C;<ul>
+<li>1.&#x9075;&#x5B88;NSMutableCopying&#x534F;&#x8BAE;</li>
+<li>2.&#x5B9E;&#x73B0;&#x534F;&#x8BAE;&#x5BF9;&#x4F60;&#x7684;&#x65B9;&#x6CD5;</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-objc">- (<span class="hljs-keyword">id</span>)mutableCopyWithZone:(NSZone *)zone{
+<span class="hljs-comment">//&#x521B;&#x5EFA;&#x5BF9;&#x8C61;</span>
+Person *p1 = [[Person alloc] init]; <span class="hljs-comment">//&#x7528;&#x5F53;&#x524D;&#x5BF9;&#x8C61;&#x503C;&#x7ED9;&#x65B0;&#x5BF9;&#x8C61;&#x7684;&#x5B9E;&#x4F8B;&#x53D8;&#x91CF;&#x8D4B;&#x503C; p1.age = self.age;</span>
+<span class="hljs-comment">//&#x8FD4;&#x56DE;&#x65B0;&#x5BF9;&#x8C61;</span>
+<span class="hljs-keyword">return</span> p1;
+}
+</code></pre>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./section6.html" class="navigation navigation-prev " aria-label="Previous page: 【理解】@property中的copy的关键字"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./15.html" class="navigation navigation-next " aria-label="Next page: 【理解】简单的单例模式实现"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"fontSettings":{"theme":null,"family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
