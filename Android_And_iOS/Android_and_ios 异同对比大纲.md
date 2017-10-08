@@ -1,10 +1,14 @@
+[TOC]
+
+
+
 # 背景
 
 https://zh.wikipedia.org/wiki/Android
 
 https://zh.wikipedia.org/wiki/IOS
 
-以上维基百科链接
+以上维基百科的链接
 
 ------
 
@@ -30,7 +34,7 @@ https://zh.wikipedia.org/wiki/IOS
 
 > Android 是一种基于 Linux 的开放源代码软件栈，为广泛的设备和机型而创建。下图所示为 Android 平台的主要组件。
 
-![android_软件栈](url)
+![android_软件栈](https://github.com/zhouXiaoBing/something-about-zxb/blob/master/Android_And_iOS/android_%E8%BD%AF%E4%BB%B6%E6%A0%88.png)
 
 ### Linux 内核
 
