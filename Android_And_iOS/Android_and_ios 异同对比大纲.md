@@ -172,6 +172,10 @@ UIKit管理着应用与系统的交互并提供了相关类用于管理应用资
 
 Views 用于展示屏幕上的内容使用户的交互更加容易；View controllers 帮助管理 Views 和用户界面的结构。
 
+##### Views and Controls
+
+展示内容到屏幕，并且定义内容允许的交互
+
 
 
 #### Event Handling（事件处理）
