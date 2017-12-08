@@ -35,11 +35,25 @@ $(window).load(function(){
 })
 
 
-//JS执行window.webkit.messageHandlers.Share.postMessage(<messageBody>)
-  windows(obj) {
-    window.webkit.messageHandlers.Share.postMessage({title:'测试分享的标题',content:'测试分享的内容',url:obj});
-}
 
+//JS执行window.webkit.messageHandlers.Share.postMessage(<messageBody>)
+//不改变a标签里面的 window.android.startFunction 方法名  改这个方法 拿到 ID
+function startFunction(obj) {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    if(isAndroid){
+      if( window.android.startFunction && typeof(window.android.startFunction)=="function"){
+       window.android.startFunction(obj);
+      }
+    }
+    else {
+         window.webkit.messageHandlers.Share.postMessage({title:'测试分享的标题',content:'测试分享的内容',url:obj});
+    }
+}
+<!--function window.android.startFunction(obj)；-->
+                          
 //分享回调结果显示
 function shareResult(channel_id,share_channel,share_url) {
     var content = channel_id+","+share_channel+","+share_url;
@@ -83,7 +97,7 @@ function cameraResult(result) {
     </textarea>
 	
 	<!--1-->
-    <a class="sp_box" name = "1999"   onclick="windows('1999')"
+    <a class="sp_box" name = "1999"  id="1565" onclick="startFunction('1565');"
 	>
 		<p class="img_shell" ><img src="images/sp_01.jpg"/></p>
 		<div class="sp_txt_shell">
@@ -99,8 +113,11 @@ function cameraResult(result) {
 		</div>
 		<div class="clear"></div>
 	</a>
+    
+    
+    
 	<!--2-->
-	<a class="sp_box sp_box_even" href="#" id="1565" onclick="window.android.startFunction('1565')" >
+    <a class="sp_box sp_box_even" href="#" id="1565" onclick=" window.android.startFunction('1565')" >
 		<p class="img_shell" href="#"><img src="images/sp_02.jpg"/></p>
 		<div class="sp_txt_shell">
 			<p class="sp_name" href="#">vitalize儿童鱼油咀嚼软胶囊 60粒</p>
