@@ -49,28 +49,11 @@ function startFunction(obj) {
       }
     }
     else {
-         window.webkit.messageHandlers.Share.postMessage({title:'测试分享的标题',content:'测试分享的内容',url:obj});
+      window.webkit.messageHandlers.GetGoodsId.postMessage({goods_id:obj});
     }
 }
-<!--function window.android.startFunction(obj)；-->
+
                           
-//分享回调结果显示
-function shareResult(channel_id,share_channel,share_url) {
-    var content = channel_id+","+share_channel+","+share_url;
-    alert(content);
-    document.getElementById("returnValue").value = content;
-}
-
-//JS执行window.webkit.messageHandlers.Camera.postMessage(<messageBody>)
-function cameraClick() {
-    window.webkit.messageHandlers.Camera.postMessage(null);
-}
-
-//调用相册回调结果显示
-function cameraResult(result) {
-    alert(result);
-    document.getElementById("returnValue").value = result;
-}
 
 </script>
 </head>
@@ -91,10 +74,7 @@ function cameraResult(result) {
 <!--    <input type="button" value="分享" onclick="startFunction()" />-->
 <!--    <input type="button" value="相机" onclick="cameraClick()" />-->
 <!--    -->
-    <h1>回调展示区</h1>
-    <textarea id ="returnValue" type="value" rows="5" cols="40">
-        
-    </textarea>
+
 	
 	<!--1-->
     <a class="sp_box" name = "1999"  id="1565" onclick="startFunction('1565');"

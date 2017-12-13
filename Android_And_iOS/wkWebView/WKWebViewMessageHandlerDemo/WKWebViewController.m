@@ -17,6 +17,8 @@
     UIImagePickerController *imagePickerController;
 }
 @property(nonatomic, strong)WKWebView *webView;
+
+
 @end
 
 @implementation WKWebViewController
@@ -42,7 +44,7 @@
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *userContentController = [[WKUserContentController alloc] init];
     
-    [userContentController addScriptMessageHandler:self name:@"Share"];
+    [userContentController addScriptMessageHandler:self name:@"GetGoodsId"];
     [userContentController addScriptMessageHandler:self name:@"Camera"];
     
     configuration.userContentController = userContentController;
@@ -93,7 +95,7 @@
     //message.boby就是JS里传过来的参数
     NSLog(@"body:%@",message.body);
     
-    if ([message.name isEqualToString:@"Share"]) {
+    if ([message.name isEqualToString:@"GetGoodsId"]) {
         [self ShareWithInformation:message.body];
         
     } else if ([message.name isEqualToString:@"Camera"]) {
@@ -110,12 +112,12 @@
         return;
     }
     
-    NSString *title = [dic objectForKey:@"title"];
+    NSString *title = [dic objectForKey:@"goods_id"];
     NSString *content = [dic objectForKey:@"content"];
     NSString *url = [dic objectForKey:@"url"];
     
     //在这里写分享操作的代码
-    NSLog(@"要分享了哦😯");
+    NSLog(@"要分享了哦😯 goods_id %@",title);
     
     //OC反馈给JS分享结果
     NSString *JSResult = [NSString stringWithFormat:@"shareResult('%@','%@','%@')",title,content,url];
