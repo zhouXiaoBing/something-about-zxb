@@ -1,0 +1,20 @@
+2017-12-26 17:33:04.858867+0800 collectionIos[39045:4219705] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Application windows are expected to have a root view controller at the end of application launch'
+---------------
+解决：
+①创建一个类file - new file - object-c class，名字myViewController，继承于UIViewController
+②在testAppDelegate.h中添加属性viewController，代码如下：
+@property (strong, nonatomic) myViewController* viewController
+③在testAppDelegate.m中初始化viewController并赋值给rootViewController
+self.viewController = [[ViewController alloc] initWithNibName:@"myViewController" bundle:nil];
+self.window.rootViewController = self.viewController;
+--------------------------------------------------------------------
+
+IOS开发遇到的屏幕上下闪出黑边的解决方法:
+
+App Icon and Launch Images设置
+
+--------------------------------------------------------------------
+
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+
+--------------------------------------------------------------------

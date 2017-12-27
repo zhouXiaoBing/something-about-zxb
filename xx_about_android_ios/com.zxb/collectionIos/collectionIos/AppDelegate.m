@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -15,11 +16,35 @@
 @implementation AppDelegate
 
 
+
+- (void)setRootViewController{
+    
+    
+//    self.window.rootViewController = [MyRootViewController new];
+    
+}
+
+//应用new 和 init 的结果不一样 viewdidload 都会执行
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    if (@available(iOS 11, *)) {
+        //解决iOS11，仅实现heightForHeaderInSection，没有实现viewForHeaderInSection方法时,section间距大的问题
+        [UITableView appearance].estimatedRowHeight = 0;
+        [UITableView appearance].estimatedSectionHeaderHeight = 0;
+        [UITableView appearance].estimatedSectionFooterHeight = 0;
+        [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        [UICollectionView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor redColor];
+    
     [self.window makeKeyAndVisible];
+    
+    self.window.rootViewController = [MyRootViewController new];
+    
+//    self.window.rootViewController = [[MyRootViewController alloc]init];
+    
     return YES;
 }
 
