@@ -16,6 +16,11 @@
 		9382C8E11FF245BA0089BEDC /* collectionIosUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8E01FF245BA0089BEDC /* collectionIosUITests.m */; };
 		9382C8F11FF330420089BEDC /* Devlog in Resources */ = {isa = PBXBuildFile; fileRef = 9382C8F01FF330420089BEDC /* Devlog */; };
 		9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8F31FF3335D0089BEDC /* MyRootViewController.m */; };
+		9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8F91FF491190089BEDC /* OneRootVC.m */; };
+		9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8FC1FF4914F0089BEDC /* TwoRootVC.m */; };
+		9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8FF1FF491840089BEDC /* ThreeRootVC.m */; };
+		9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9021FF4C7260089BEDC /* BaseViewVC.m */; };
+		9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9051FF4DE410089BEDC /* BaseNavigationController.m */; };
 		A952C60B70FE5E87FB278490 /* libPods-collectionIos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34151A0B2D453BE2690D42CB /* libPods-collectionIos.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +62,16 @@
 		9382C8F21FF3333A0089BEDC /* MyRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRootViewController.h; sourceTree = "<group>"; };
 		9382C8F31FF3335D0089BEDC /* MyRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRootViewController.m; sourceTree = "<group>"; };
 		9382C8F51FF38D940089BEDC /* collectionIos_PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collectionIos_PrefixHeader.pch; sourceTree = "<group>"; };
+		9382C8F81FF4910A0089BEDC /* OneRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneRootVC.h; sourceTree = "<group>"; };
+		9382C8F91FF491190089BEDC /* OneRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneRootVC.m; sourceTree = "<group>"; };
+		9382C8FB1FF491330089BEDC /* TwoRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoRootVC.h; sourceTree = "<group>"; };
+		9382C8FC1FF4914F0089BEDC /* TwoRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoRootVC.m; sourceTree = "<group>"; };
+		9382C8FE1FF491720089BEDC /* ThreeRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeRootVC.h; sourceTree = "<group>"; };
+		9382C8FF1FF491840089BEDC /* ThreeRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeRootVC.m; sourceTree = "<group>"; };
+		9382C9011FF4C7120089BEDC /* BaseViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewVC.h; sourceTree = "<group>"; };
+		9382C9021FF4C7260089BEDC /* BaseViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewVC.m; sourceTree = "<group>"; };
+		9382C9041FF4DE270089BEDC /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		9382C9051FF4DE410089BEDC /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +127,7 @@
 		9382C8B81FF245BA0089BEDC /* collectionIos */ = {
 			isa = PBXGroup;
 			children = (
+				9382C8F71FF483740089BEDC /* RootControllers */,
 				9382C8F01FF330420089BEDC /* Devlog */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
 				9382C8BA1FF245BA0089BEDC /* AppDelegate.m */,
@@ -121,8 +137,6 @@
 				9382C8CA1FF245BA0089BEDC /* Info.plist */,
 				9382C8CB1FF245BA0089BEDC /* main.m */,
 				9382C8C21FF245BA0089BEDC /* collectionIos.xcdatamodeld */,
-				9382C8F21FF3333A0089BEDC /* MyRootViewController.h */,
-				9382C8F31FF3335D0089BEDC /* MyRootViewController.m */,
 				9382C8F51FF38D940089BEDC /* collectionIos_PrefixHeader.pch */,
 			);
 			path = collectionIos;
@@ -144,6 +158,25 @@
 				9382C8E21FF245BA0089BEDC /* Info.plist */,
 			);
 			path = collectionIosUITests;
+			sourceTree = "<group>";
+		};
+		9382C8F71FF483740089BEDC /* RootControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9382C8F21FF3333A0089BEDC /* MyRootViewController.h */,
+				9382C8F31FF3335D0089BEDC /* MyRootViewController.m */,
+				9382C8F81FF4910A0089BEDC /* OneRootVC.h */,
+				9382C8F91FF491190089BEDC /* OneRootVC.m */,
+				9382C8FB1FF491330089BEDC /* TwoRootVC.h */,
+				9382C8FC1FF4914F0089BEDC /* TwoRootVC.m */,
+				9382C8FE1FF491720089BEDC /* ThreeRootVC.h */,
+				9382C8FF1FF491840089BEDC /* ThreeRootVC.m */,
+				9382C9011FF4C7120089BEDC /* BaseViewVC.h */,
+				9382C9021FF4C7260089BEDC /* BaseViewVC.m */,
+				9382C9041FF4DE270089BEDC /* BaseNavigationController.h */,
+				9382C9051FF4DE410089BEDC /* BaseNavigationController.m */,
+			);
+			path = RootControllers;
 			sourceTree = "<group>";
 		};
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
@@ -353,10 +386,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */,
+				9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */,
+				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
+				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
 				9382C8CC1FF245BA0089BEDC /* main.m in Sources */,
+				9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */,
 				9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */,
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
+				9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +468,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -483,6 +522,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -504,8 +544,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3J42VADECF;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = collectionIos/collectionIos_PrefixHeader.pch;
 				INFOPLIST_FILE = collectionIos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxb.collectionIos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -520,8 +563,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3J42VADECF;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = collectionIos/collectionIos_PrefixHeader.pch;
 				INFOPLIST_FILE = collectionIos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxb.collectionIos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -17,4 +17,6 @@ App Icon and Launch Images设置
 
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 
+可能原因之一：采用Pods的项目，没有用pod是的 工程文件打开 xxx.xcworkspace
 --------------------------------------------------------------------
+从 github上面下来的项目，需要更改有些是上了 App Store 的 需要更改 bundle identifier

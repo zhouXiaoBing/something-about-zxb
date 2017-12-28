@@ -7,6 +7,7 @@
 //
 
 #import "MyRootViewController.h"
+#import "RDVTabBarItem.h"
 
 @interface MyRootViewController ()
 
@@ -23,15 +24,28 @@
 //    }
 //    return self;
 //}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"enter in MyRootViewController_viewDidLoad!!!");
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [self rootController];//调用初始化的方法
-    self.window.backgroundColor = [UIColor colorWithRed:92/255.0 green:107/255.0 blue:192/255.0 alpha:0.8];
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.rootViewController = [self rootController];//调用初始化的方法
+//    self.window.backgroundColor = [UIColor colorWithRed:92/255.0 green:107/255.0 blue:192/255.0 alpha:0.8];
+//    [self.window makeKeyAndVisible];
+    [self setupViewControllers];
+}
+
+#pragma mark 底部导航栏菜单的设置
+- (void)setupViewControllers {
     
+    
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 //-(void)initView{
@@ -42,6 +56,8 @@
 //    self.window.backgroundColor = [UIColor greenColor];
 //    [self.window makeKeyAndVisible];
 //}
+
+
 
 - (UITabBarController *)rootController {
     

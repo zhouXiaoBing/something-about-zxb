@@ -6,10 +6,8 @@
 //  Copyright © 2017年 Vitagou. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "RDVTabBarController.h"//from github
 
-@interface MyRootViewController : UIViewController
-
-@property (strong, nonatomic) UIWindow *window;
+@interface MyRootViewController : RDVTabBarController<RDVTabBarControllerDelegate>
 
 @end
