@@ -21,7 +21,7 @@
 		9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8FF1FF491840089BEDC /* ThreeRootVC.m */; };
 		9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9021FF4C7260089BEDC /* BaseViewVC.m */; };
 		9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9051FF4DE410089BEDC /* BaseNavigationController.m */; };
-		A952C60B70FE5E87FB278490 /* libPods-collectionIos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34151A0B2D453BE2690D42CB /* libPods-collectionIos.a */; };
+		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		34151A0B2D453BE2690D42CB /* libPods-collectionIos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-collectionIos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		72886A44299527F32A9757B0 /* Pods_collectionIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_collectionIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9382C8B61FF245BA0089BEDC /* collectionIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectionIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9382C8B91FF245BA0089BEDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9382C8BA1FF245BA0089BEDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A952C60B70FE5E87FB278490 /* libPods-collectionIos.a in Frameworks */,
+				DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +182,7 @@
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				34151A0B2D453BE2690D42CB /* libPods-collectionIos.a */,
+				72886A44299527F32A9757B0 /* Pods_collectionIos.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -369,9 +369,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

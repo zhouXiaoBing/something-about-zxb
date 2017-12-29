@@ -11,5 +11,7 @@ target 'collectionIos' do
  pod 'ActionSheetPicker-3.0', '~> 2.3.0'
  pod 'MJRefresh' 
  pod 'RDVTabBarController','~> 1.1.9'
+ pod 'ReactiveCocoa' ,'~> 2.3.1'
 
+ use_frameworks!
  end

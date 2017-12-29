@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Vitagou. All rights reserved.
 //
 
-#ifndef TwoRootVC_h
-#define TwoRootVC_h
+#import "BaseViewVC.h"
+@interface TwoRootVC : BaseViewVC
 
+@end
 
-#endif /* TwoRootVC_h */

@@ -6,8 +6,9 @@
 //  Copyright © 2017年 Vitagou. All rights reserved.
 //
 
-#ifndef ThreeRootVC_h
-#define ThreeRootVC_h
 
+#import "BaseViewVC.h"
+@interface ThreeRootVC : BaseViewVC
 
-#endif /* ThreeRootVC_h */
+@end
+

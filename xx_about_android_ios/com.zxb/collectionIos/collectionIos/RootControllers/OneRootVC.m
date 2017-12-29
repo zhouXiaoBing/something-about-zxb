@@ -17,7 +17,11 @@
 @implementation OneRootVC
 
 -(void)viewDidLoad{
+    [super viewDidLoad];
     
+    self.title = @"OneRootVC";
+    _testView = [[UIView alloc]initWithFrame:self.view.bounds];
+    _testView.backgroundColor = [UIColor greenColor];
 }
 
 @end
