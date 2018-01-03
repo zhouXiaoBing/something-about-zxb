@@ -8,6 +8,10 @@
 
 #import "MyRootViewController.h"
 #import "RDVTabBarItem.h"
+#import "OneRootVC.h"
+#import "TwoRootVC.h"
+#import "ThreeRootVC.h"
+
 
 @interface MyRootViewController ()
 
@@ -36,9 +40,49 @@
 
 }
 
-#pragma mark 底部导航栏菜单的ue'vi
+#pragma mark 底部导航栏菜单的设置
 - (void)setupViewControllers {
+    OneRootVC * one_vc = [[OneRootVC alloc]init];
+    UINavigationController *nav_one = [[BaseNavigationController alloc]initWithRootViewController:one_vc];
     
+    TwoRootVC * two_vc = [[TwoRootVC alloc]init];
+     UINavigationController *nav_two = [[BaseNavigationController alloc]initWithRootViewController:two_vc];
+    
+    ThreeRootVC * three_vc = [[ThreeRootVC alloc]init];
+    UINavigationController *nav_three = [[BaseNavigationController alloc]initWithRootViewController:three_vc];
+    
+    [self setViewControllers:@[nav_one,nav_two,nav_three]];
+}
+
+- (void)customizeTabBarForController {
+    
+    NSArray * tabBarItemImages = @[@"me",@"me",@"me"];
+    NSArray * tabBarItemTitles = @[@"ONE",@"TWO",@"THREE"];
+    NSInteger index = 0;
+    
+    for (RDVTabBarItem *item in [[self tabBar] items]) {
+        
+        item.titlePositionAdjustment = UIOffsetMake(0, 3);
+        // string connect by " %@ "
+        UIImage *selectedImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",[tabBarItemImages objectAtIndex:index]]];
+        
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
+                                                        [tabBarItemImages objectAtIndex:index]]];
+        [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedimage];
+        [item setTitle:[tabBarItemImages objectAtIndex:index]];
+        
+        if (kDevice_Is_iPhoneX) {
+            item.badgePositionAdjustment = UIOffsetMake(0, 18);
+        }
+        index++;
+    }
+    if (kDevice_Is_iPhoneX) {
+        [self.tabBar setHeight:83];
+        [self.tabBar setContentEdgeInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
+    }
+    
+    self.tabBar.backgroundView.backgroundColor = [UIColor colorWithHexString:@"0xFFFFFF" andAlpha:1.0];
+//    [self.tabBar addLineUp:YES andDown:NO andColor:[UIColor colorWithHexString:@"0xFFFFFF" andAlpha:1.0]];
     
 }
 
