@@ -81,7 +81,7 @@
         [self.tabBar setContentEdgeInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
     }
     
-    self.tabBar.backgroundView.backgroundColor = [UIColor colorWithHexString:@"0xFFFFFF" andAlpha:1.0];
+    self.tabBar.backgroundView.backgroundColor = [UIColor redColor];
 //    [self.tabBar addLineUp:YES andDown:NO andColor:[UIColor colorWithHexString:@"0xFFFFFF" andAlpha:1.0]];
     
 }

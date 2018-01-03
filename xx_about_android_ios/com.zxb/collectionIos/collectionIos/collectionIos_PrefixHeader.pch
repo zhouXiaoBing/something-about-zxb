@@ -22,8 +22,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "BaseNavigationController.h"
-#import "UIColor+expanded.h"
-#import "NSString+Common.h"
+
+
+
+
 
 #endif
 
@@ -50,8 +52,3 @@
 //统一字体大小 各种偏移量 背景色 定义色值名称 弱引用变量 后续考虑添加
 
 
-//coding-ios 原有部分
-//测试地址
-#define kBaseUrlStr_Test @"https://coding.net/"
-//手机版地址
-#define kBaseUrlStr_Phone @"https://m.coding.net/"

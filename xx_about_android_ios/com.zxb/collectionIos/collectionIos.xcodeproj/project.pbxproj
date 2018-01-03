@@ -21,15 +21,6 @@
 		9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8FF1FF491840089BEDC /* ThreeRootVC.m */; };
 		9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9021FF4C7260089BEDC /* BaseViewVC.m */; };
 		9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9051FF4DE410089BEDC /* BaseNavigationController.m */; };
-		9382C90B1FFB4DDA0089BEDC /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C90A1FFB4DDA0089BEDC /* UIColor+expanded.m */; };
-		9382C90E1FFB5D350089BEDC /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C90D1FFB5D350089BEDC /* UIView+Common.m */; };
-		9382C9131FFB77760089BEDC /* YLGIFImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9121FFB77760089BEDC /* YLGIFImage.m */; };
-		9382C9161FFB778D0089BEDC /* YLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9151FFB778D0089BEDC /* YLImageView.m */; };
-		9382C91A1FFB78400089BEDC /* UIBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9191FFB78400089BEDC /* UIBadgeView.m */; };
-		9382C91D1FFB78AC0089BEDC /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C91C1FFB78AC0089BEDC /* UIView+Frame.m */; };
-		9382C9201FFB7C360089BEDC /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C91F1FFB7C360089BEDC /* NSString+Common.m */; };
-		9382C9251FFB7FA60089BEDC /* NSString+Emojize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9241FFB7FA60089BEDC /* NSString+Emojize.m */; };
-		9382C9281FFC63600089BEDC /* NSObject+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9271FFC63600089BEDC /* NSObject+Common.m */; };
 		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,25 +72,6 @@
 		9382C9021FF4C7260089BEDC /* BaseViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewVC.m; sourceTree = "<group>"; };
 		9382C9041FF4DE270089BEDC /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		9382C9051FF4DE410089BEDC /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
-		9382C9091FFB4DB70089BEDC /* UIColor+expanded.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+expanded.h"; sourceTree = "<group>"; };
-		9382C90A1FFB4DDA0089BEDC /* UIColor+expanded.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+expanded.m"; sourceTree = "<group>"; };
-		9382C90C1FFB5D200089BEDC /* UIView+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
-		9382C90D1FFB5D350089BEDC /* UIView+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
-		9382C9111FFB776B0089BEDC /* YLGIFImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLGIFImage.h; sourceTree = "<group>"; };
-		9382C9121FFB77760089BEDC /* YLGIFImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLGIFImage.m; sourceTree = "<group>"; };
-		9382C9141FFB77850089BEDC /* YLImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLImageView.h; sourceTree = "<group>"; };
-		9382C9151FFB778D0089BEDC /* YLImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLImageView.m; sourceTree = "<group>"; };
-		9382C9181FFB78380089BEDC /* UIBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBadgeView.h; sourceTree = "<group>"; };
-		9382C9191FFB78400089BEDC /* UIBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBadgeView.m; sourceTree = "<group>"; };
-		9382C91B1FFB78A30089BEDC /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		9382C91C1FFB78AC0089BEDC /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		9382C91E1FFB7C2D0089BEDC /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
-		9382C91F1FFB7C360089BEDC /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
-		9382C9221FFB7F930089BEDC /* emojis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = emojis.h; sourceTree = "<group>"; };
-		9382C9231FFB7F9D0089BEDC /* NSString+Emojize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emojize.h"; sourceTree = "<group>"; };
-		9382C9241FFB7FA60089BEDC /* NSString+Emojize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emojize.m"; sourceTree = "<group>"; };
-		9382C9261FFC63390089BEDC /* NSObject+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Common.h"; sourceTree = "<group>"; };
-		9382C9271FFC63600089BEDC /* NSObject+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Common.m"; path = "/Users/Darin/Desktop/github/something-about-zxb/xx_about_android_ios/com.zxb/collectionIos/collectionIos/Util/OC_Expand/NSObject+Common.m"; sourceTree = "<absolute>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +127,7 @@
 		9382C8B81FF245BA0089BEDC /* collectionIos */ = {
 			isa = PBXGroup;
 			children = (
+				9382C9791FFC75850089BEDC /* Models */,
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
 				9382C9071FFB392F0089BEDC /* Util */,
@@ -213,6 +186,7 @@
 		9382C9071FFB392F0089BEDC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				9382C9331FFC6E940089BEDC /* Manager */,
 				9382C9081FFB399E0089BEDC /* OC_Expand */,
 			);
 			path = Util;
@@ -221,16 +195,6 @@
 		9382C9081FFB399E0089BEDC /* OC_Expand */ = {
 			isa = PBXGroup;
 			children = (
-				9382C91E1FFB7C2D0089BEDC /* NSString+Common.h */,
-				9382C91F1FFB7C360089BEDC /* NSString+Common.m */,
-				9382C9091FFB4DB70089BEDC /* UIColor+expanded.h */,
-				9382C90A1FFB4DDA0089BEDC /* UIColor+expanded.m */,
-				9382C90C1FFB5D200089BEDC /* UIView+Common.h */,
-				9382C90D1FFB5D350089BEDC /* UIView+Common.m */,
-				9382C91B1FFB78A30089BEDC /* UIView+Frame.h */,
-				9382C91C1FFB78AC0089BEDC /* UIView+Frame.m */,
-				9382C9261FFC63390089BEDC /* NSObject+Common.h */,
-				9382C9271FFC63600089BEDC /* NSObject+Common.m */,
 			);
 			path = OC_Expand;
 			sourceTree = "<group>";
@@ -238,40 +202,29 @@
 		9382C90F1FFB77340089BEDC /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				9382C9211FFB7F230089BEDC /* NSStringEmojize */,
-				9382C9101FFB77480089BEDC /* YLGIFImage */,
 			);
 			path = Vender;
-			sourceTree = "<group>";
-		};
-		9382C9101FFB77480089BEDC /* YLGIFImage */ = {
-			isa = PBXGroup;
-			children = (
-				9382C9111FFB776B0089BEDC /* YLGIFImage.h */,
-				9382C9121FFB77760089BEDC /* YLGIFImage.m */,
-				9382C9141FFB77850089BEDC /* YLImageView.h */,
-				9382C9151FFB778D0089BEDC /* YLImageView.m */,
-			);
-			path = YLGIFImage;
 			sourceTree = "<group>";
 		};
 		9382C9171FFB78160089BEDC /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				9382C9181FFB78380089BEDC /* UIBadgeView.h */,
-				9382C9191FFB78400089BEDC /* UIBadgeView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		9382C9211FFB7F230089BEDC /* NSStringEmojize */ = {
+		9382C9331FFC6E940089BEDC /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				9382C9221FFB7F930089BEDC /* emojis.h */,
-				9382C9231FFB7F9D0089BEDC /* NSString+Emojize.h */,
-				9382C9241FFB7FA60089BEDC /* NSString+Emojize.m */,
 			);
-			path = NSStringEmojize;
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		9382C9791FFC75850089BEDC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
@@ -471,9 +424,12 @@
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RBBAnimation/RBBAnimation.framework",
 				"${BUILT_PRODUCTS_DIR}/RDVTabBarController/RDVTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RegexKitLite-NoWarning/RegexKitLite_NoWarning.framework",
+				"${BUILT_PRODUCTS_DIR}/SDCAlertView/SDCAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDCAutoLayout/SDCAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 			);
@@ -485,9 +441,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RBBAnimation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RDVTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RegexKitLite_NoWarning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 			);
@@ -504,22 +463,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */,
-				9382C9281FFC63600089BEDC /* NSObject+Common.m in Sources */,
-				9382C9251FFB7FA60089BEDC /* NSString+Emojize.m in Sources */,
 				9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */,
 				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
 				9382C8CC1FF245BA0089BEDC /* main.m in Sources */,
 				9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */,
-				9382C9161FFB778D0089BEDC /* YLImageView.m in Sources */,
-				9382C9201FFB7C360089BEDC /* NSString+Common.m in Sources */,
-				9382C91D1FFB78AC0089BEDC /* UIView+Frame.m in Sources */,
-				9382C9131FFB77760089BEDC /* YLGIFImage.m in Sources */,
-				9382C90E1FFB5D350089BEDC /* UIView+Common.m in Sources */,
 				9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */,
-				9382C91A1FFB78400089BEDC /* UIBadgeView.m in Sources */,
-				9382C90B1FFB4DDA0089BEDC /* UIColor+expanded.m in Sources */,
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
 				9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */,
 			);

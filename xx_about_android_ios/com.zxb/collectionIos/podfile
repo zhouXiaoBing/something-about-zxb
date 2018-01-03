@@ -4,7 +4,7 @@ project 'collectionIos.xcodeproj'
 target 'collectionIos' do
 
  pod 'Masonry', '~> 1.1.0'
- pod 'AFNetworking', '~> 3.1.0'
+
  pod 'SDWebImage', '~> 4.2.2'
  pod 'MJExtension', '~> 3.0.13'
  pod 'MBProgressHUD', '~> 1.1.0'
@@ -14,5 +14,6 @@ target 'collectionIos' do
  pod 'ReactiveCocoa' ,'~> 2.3.1'
  pod 'TTTAttributedLabel', '1.10.1'
  pod 'RegexKitLite-NoWarning', '1.1.0'
+ pod 'SDCAlertView', '2.5.2'
  use_frameworks!
  end
