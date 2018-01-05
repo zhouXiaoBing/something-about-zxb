@@ -8,6 +8,7 @@
 //
 
 #import "BaseViewVC.h"
+#import "MyRootViewController.h"
 
 #pragma mark - UIViewController (Dismiss)
 @interface UIViewController (Dismiss)
@@ -26,78 +27,77 @@
 
 @implementation BaseViewVC
 
-//controller 出现的时候所有的Controller 都可以做的操作 比如友盟的统计
+
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     // bar 的风格
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-//
-    //横竖屏切换
-//    if (self.interfaceOrientation != UIInterfaceOrientationPortrait
-//        && !([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeLeft)) {
-//        [self forceChangeToOrientation:UIInterfaceOrientationPortrait];
-//    }
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+
 }
 
-//what the view disappear all controllers can do
+
 - (void)viewWillDisappear:(BOOL)animated
 {
+    
     [super viewWillDisappear:animated];
     
-//    [MobClick endLogPageView:[NSString stringWithUTF8String:object_getClassName(self)]];
+}
+
+-(void)viewDidLoad{
     
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor greenColor];
+
 }
 
-
-- (void)tabBarItemClicked{
-    DebugLog(@"\ntabBarItemClicked : %@", [self class]);
++ (UIViewController *)presentingVC{
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIViewController *result = window.rootViewController;
+    while (result.presentedViewController) {
+        result = result.presentedViewController;
+    }
+    if ([result isKindOfClass:[MyRootViewController class]]) {
+        result = [(MyRootViewController *)result selectedViewController];
+    }
+    if ([result isKindOfClass:[UINavigationController class]]) {
+        result = [(UINavigationController *)result topViewController];
+    }
+    return result;
 }
 
-#pragma mark - Orientations
-//- (BOOL)shouldAutorotate{
-//    return UIInterfaceOrientationIsLandscape(self.interfaceOrientation);
-//}
-//
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
-//
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-//
-//- (void)forceChangeToOrientation:(UIInterfaceOrientation)interfaceOrientation{
-//    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:interfaceOrientation] forKey:@"orientation"];
-//}
-
-#pragma mark Notification
-+ (void)handleNotificationInfo:(NSDictionary *)userInfo applicationState:(UIApplicationState)applicationState{
-//    if (applicationState == UIApplicationStateInactive) {
-//        //If the application state was inactive, this means the user pressed an action button from a notification.
-//        //标记为已读
-//        NSString *notification_id = [userInfo objectForKey:@"notification_id"];
-//        if (notification_id) {
-//            [[Coding_NetAPIManager sharedManager] request_markReadWithCodingTipIdStr:notification_id andBlock:^(id data, NSError *error) {
-//            }];
-//        }
-//        //弹出临时会话
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            DebugLog(@"handleNotificationInfo : %@", userInfo);
-//            NSString *param_url = [userInfo objectForKey:@"param_url"];
-//            [self presentLinkStr:param_url];
-//        });
-//    }else if (applicationState == UIApplicationStateActive){
-//        NSString *param_url = [userInfo objectForKey:@"param_url"];
-//        [self analyseVCFromLinkStr:param_url analyseMethod:AnalyseMethodTypeJustRefresh isNewVC:nil];//AnalyseMethodTypeJustRefresh
-//        //标记未读
-//        UIViewController *presentingVC = [BaseViewController presentingVC];
-//        if ([presentingVC isKindOfClass:[Message_RootViewController class]]) {
-//            [(Message_RootViewController *)presentingVC refresh];
-//        }
-//        [[UnReadManager shareManager] updateUnRead];
-//    }
++ (void)presentVC:(UIViewController *)viewController{
+    if (!viewController) {
+        return;
+    }
+    UINavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:viewController];
+    if (!viewController.navigationItem.leftBarButtonItem) {
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:viewController action:@selector(dismissModalVC)];
+    }
+    [[self presentingVC] presentViewController:nav animated:YES completion:nil];
 }
++ (void)goToVC:(UIViewController *)viewController{
+    if (!viewController) {
+        return;
+    }
+    UINavigationController *nav = [self presentingVC].navigationController;
+    if (nav) {
+        [nav pushViewController:viewController animated:YES];
+    }
+}
+
 
 
 @end

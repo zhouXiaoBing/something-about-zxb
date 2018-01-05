@@ -17,12 +17,6 @@
 
 
 
-- (void)setRootViewController{
-    
-    
-//    self.window.rootViewController = [MyRootViewController new];
-    
-}
 
 //应用new 和 init 的结果不一样 viewdidload 都会执行
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -36,16 +30,28 @@
         [UICollectionView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
     
-    // Override point for customization after application launch.
+ 
+    
+    [self setRootViewController];
+    
+    return YES;
+}
+
+- (void)setRootViewController{
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+     self.window.backgroundColor = [UIColor whiteColor];
+    
+    MyRootViewController * rootVc = [[MyRootViewController alloc]init];
+    
+    rootVc.tabBar.translucent = YES;
+    
+    [self.window setRootViewController:rootVc];
     
     [self.window makeKeyAndVisible];
     
-    self.window.rootViewController = [MyRootViewController new];
-    
-//    self.window.rootViewController = [[MyRootViewController alloc]init];
-    
-    return YES;
 }
 
 

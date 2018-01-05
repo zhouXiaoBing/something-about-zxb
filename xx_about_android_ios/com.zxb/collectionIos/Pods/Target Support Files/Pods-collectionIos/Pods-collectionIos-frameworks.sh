@@ -102,6 +102,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework"
@@ -117,6 +118,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework"

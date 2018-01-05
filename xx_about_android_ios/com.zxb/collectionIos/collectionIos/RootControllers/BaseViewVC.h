@@ -10,9 +10,9 @@
 
 @interface BaseViewVC : UIViewController
 
-- (void)tabBarItemClicked;//the "-" stands instance method
-
-+ (void)handleNotificationInfo:(NSDictionary *)userInfo applicationState:(UIApplicationState)applicationState;
++ (UIViewController *)presentingVC;
++ (void)presentVC:(UIViewController *)viewController;
++ (void)goToVC:(UIViewController *)viewController;
 
 @end
 

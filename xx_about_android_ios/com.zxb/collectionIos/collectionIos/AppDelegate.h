@@ -18,6 +18,8 @@
 
 @property (readonly, strong) MyRootViewController *myRootViewController;
 
+@property (strong, nonatomic) UIViewController *viewController;
+
 - (void)saveContext;
 
 - (void)setRootViewController;

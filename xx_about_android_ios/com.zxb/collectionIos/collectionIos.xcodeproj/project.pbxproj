@@ -21,6 +21,8 @@
 		9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8FF1FF491840089BEDC /* ThreeRootVC.m */; };
 		9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9021FF4C7260089BEDC /* BaseViewVC.m */; };
 		9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9051FF4DE410089BEDC /* BaseNavigationController.m */; };
+		9382C9A91FFC86900089BEDC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9382C9A81FFC86900089BEDC /* README.md */; };
+		9382C9AC1FFCD9360089BEDC /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9AB1FFCD9360089BEDC /* UIView+Common.m */; };
 		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,9 @@
 		9382C9021FF4C7260089BEDC /* BaseViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewVC.m; sourceTree = "<group>"; };
 		9382C9041FF4DE270089BEDC /* BaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		9382C9051FF4DE410089BEDC /* BaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		9382C9A81FFC86900089BEDC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9382C9AA1FFCD9290089BEDC /* UIView+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
+		9382C9AB1FFCD9360089BEDC /* UIView+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,12 +132,14 @@
 		9382C8B81FF245BA0089BEDC /* collectionIos */ = {
 			isa = PBXGroup;
 			children = (
+				9382C9AD1FFE0E530089BEDC /* JsonData */,
 				9382C9791FFC75850089BEDC /* Models */,
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
 				9382C9071FFB392F0089BEDC /* Util */,
 				9382C8F71FF483740089BEDC /* RootControllers */,
 				9382C8F01FF330420089BEDC /* Devlog */,
+				9382C9A81FFC86900089BEDC /* README.md */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
 				9382C8BA1FF245BA0089BEDC /* AppDelegate.m */,
 				9382C8BC1FF245BA0089BEDC /* ViewController.h */,
@@ -195,6 +202,8 @@
 		9382C9081FFB399E0089BEDC /* OC_Expand */ = {
 			isa = PBXGroup;
 			children = (
+				9382C9AA1FFCD9290089BEDC /* UIView+Common.h */,
+				9382C9AB1FFCD9360089BEDC /* UIView+Common.m */,
 			);
 			path = OC_Expand;
 			sourceTree = "<group>";
@@ -225,6 +234,13 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9382C9AD1FFE0E530089BEDC /* JsonData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JsonData;
 			sourceTree = "<group>";
 		};
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
@@ -353,6 +369,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9382C9A91FFC86900089BEDC /* README.md in Resources */,
 				9382C8C61FF245BA0089BEDC /* Assets.xcassets in Resources */,
 				9382C8F11FF330420089BEDC /* Devlog in Resources */,
 			);
@@ -470,6 +487,7 @@
 				9382C8CC1FF245BA0089BEDC /* main.m in Sources */,
 				9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */,
 				9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */,
+				9382C9AC1FFCD9360089BEDC /* UIView+Common.m in Sources */,
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
 				9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */,
 			);

@@ -25,10 +25,10 @@
     [super viewWillAppear:animated];
     //藏旧
     [self hideBorderInView:self.navigationBar];
-    //添新
+    //添新 这是一条线
     if (!_navLineV) {
         _navLineV = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreen_Width, 1.0/ [UIScreen mainScreen].scale)];
-        _navLineV.backgroundColor = [UIColor whiteColor];
+        _navLineV.backgroundColor = [UIColor blackColor];
         [self.navigationBar addSubview:_navLineV];
     }
 }

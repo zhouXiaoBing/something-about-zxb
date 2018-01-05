@@ -31,12 +31,13 @@
 
 - (void)viewDidLoad
 {
-//    [super viewDidLoad];
+    [super viewDidLoad];
     NSLog(@"enter in MyRootViewController_viewDidLoad!!!");
 //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //    self.window.rootViewController = [self rootController];//调用初始化的方法
 //    self.window.backgroundColor = [UIColor colorWithRed:92/255.0 green:107/255.0 blue:192/255.0 alpha:0.8];
 //    [self.window makeKeyAndVisible];
+    [self setupViewControllers];
 
 }
 
@@ -52,12 +53,14 @@
     UINavigationController *nav_three = [[BaseNavigationController alloc]initWithRootViewController:three_vc];
     
     [self setViewControllers:@[nav_one,nav_two,nav_three]];
+    
+    [self customizeTabBarForController];
 }
 
 - (void)customizeTabBarForController {
     
-    NSArray * tabBarItemImages = @[@"me",@"me",@"me"];
-    NSArray * tabBarItemTitles = @[@"ONE",@"TWO",@"THREE"];
+    NSArray * tabBarItemImages = @[@"tab",@"tab",@"tab"];
+    NSArray * tabBarItemTitles = @[@"壹",@"贰",@"叁"];
     NSInteger index = 0;
     
     for (RDVTabBarItem *item in [[self tabBar] items]) {
@@ -69,7 +72,7 @@
         UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
                                                         [tabBarItemImages objectAtIndex:index]]];
         [item setFinishedSelectedImage:selectedImage withFinishedUnselectedImage:unselectedimage];
-        [item setTitle:[tabBarItemImages objectAtIndex:index]];
+        [item setTitle:[tabBarItemTitles objectAtIndex:index]];
         
         if (kDevice_Is_iPhoneX) {
             item.badgePositionAdjustment = UIOffsetMake(0, 18);
@@ -81,8 +84,9 @@
         [self.tabBar setContentEdgeInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
     }
     
-    self.tabBar.backgroundView.backgroundColor = [UIColor redColor];
-//    [self.tabBar addLineUp:YES andDown:NO andColor:[UIColor colorWithHexString:@"0xFFFFFF" andAlpha:1.0]];
+    self.tabBar.backgroundView.backgroundColor = [UIColor whiteColor];
+    //tabBar 添加上划线
+    [self.tabBar addLineUp:YES andDown:NO andColor:[UIColor grayColor]];
     
 }
 
