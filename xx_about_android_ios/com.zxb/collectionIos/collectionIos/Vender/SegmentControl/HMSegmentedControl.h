@@ -65,6 +65,8 @@ typedef NS_ENUM(NSInteger, HMSegmentedControlImagePosition) {
 
 @interface HMSegmentedControl : UIControl
 
+//@property (nonatomic, readwrite) CGFloat segmentWidth;
+
 //指示器 标题
 @property (nonatomic, strong) NSArray<NSString *> *sectionTitles;
 

@@ -119,6 +119,15 @@
 			path = SegmentControl;
 			sourceTree = "<group>";
 		};
+		9332F44620049FDF0031DC83 /* 开发日志 */ = {
+			isa = PBXGroup;
+			children = (
+				9382C8F01FF330420089BEDC /* Devlog */,
+				9382C9A81FFC86900089BEDC /* README.md */,
+			);
+			path = "开发日志";
+			sourceTree = "<group>";
+		};
 		9382C8AD1FF245B90089BEDC = {
 			isa = PBXGroup;
 			children = (
@@ -144,14 +153,13 @@
 		9382C8B81FF245BA0089BEDC /* collectionIos */ = {
 			isa = PBXGroup;
 			children = (
+				9332F44620049FDF0031DC83 /* 开发日志 */,
 				9382C9AD1FFE0E530089BEDC /* JsonData */,
 				9382C9791FFC75850089BEDC /* Models */,
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
 				9382C9071FFB392F0089BEDC /* Util */,
 				9382C8F71FF483740089BEDC /* RootControllers */,
-				9382C8F01FF330420089BEDC /* Devlog */,
-				9382C9A81FFC86900089BEDC /* README.md */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
 				9382C8BA1FF245BA0089BEDC /* AppDelegate.m */,
 				9382C8BC1FF245BA0089BEDC /* ViewController.h */,

@@ -8,6 +8,7 @@ iOS
 | MarqueeLabel<br />跑马灯                    | https://github.com/cbpowell/MarqueeLabel |                                         |
 | **TYCyclePagerView**<br />轮播图            | https://github.com/12207480/TYCyclePagerView |                                         |
 | **HMSegmentedControl**<br />网易tab切换的效果   | https://github.com/HeshamMegid/HMSegmentedControl |                                         |
+| **PLMMPrjk**                             | https://github.com/NJHu/PLMMPrjk         | 综合各种常用功能的合计App 算是功能合集                   |
 
 Android
 
