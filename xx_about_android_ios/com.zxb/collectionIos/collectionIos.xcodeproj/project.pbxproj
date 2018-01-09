@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9332F4452003075B0031DC83 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F4442003075B0031DC83 /* HMSegmentedControl.m */; };
 		9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8BA1FF245BA0089BEDC /* AppDelegate.m */; };
 		9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8BD1FF245BA0089BEDC /* ViewController.m */; };
 		9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8C21FF245BA0089BEDC /* collectionIos.xcdatamodeld */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		72886A44299527F32A9757B0 /* Pods_collectionIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_collectionIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9332F4432003074E0031DC83 /* HMSegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		9332F4442003075B0031DC83 /* HMSegmentedControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		9382C8B61FF245BA0089BEDC /* collectionIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectionIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9382C8B91FF245BA0089BEDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9382C8BA1FF245BA0089BEDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -107,6 +110,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9332F442200306FD0031DC83 /* SegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				9332F4432003074E0031DC83 /* HMSegmentedControl.h */,
+				9332F4442003075B0031DC83 /* HMSegmentedControl.m */,
+			);
+			path = SegmentControl;
+			sourceTree = "<group>";
+		};
 		9382C8AD1FF245B90089BEDC = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +223,7 @@
 		9382C90F1FFB77340089BEDC /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				9332F442200306FD0031DC83 /* SegmentControl */,
 			);
 			path = Vender;
 			sourceTree = "<group>";
@@ -481,6 +494,7 @@
 			files = (
 				9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */,
 				9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */,
+				9332F4452003075B0031DC83 /* HMSegmentedControl.m in Sources */,
 				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,

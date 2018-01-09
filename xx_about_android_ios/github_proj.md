@@ -7,5 +7,11 @@ iOS
 | RDVTabBarController<br />底部导航栏           | https://github.com/robbdimitrov/RDVTabBarController | 一个TabBar组件，可以方便设置底部菜单的文字图片，点击效果，小红点提示等。 |
 | MarqueeLabel<br />跑马灯                    | https://github.com/cbpowell/MarqueeLabel |                                         |
 | **TYCyclePagerView**<br />轮播图            | https://github.com/12207480/TYCyclePagerView |                                         |
+| **HMSegmentedControl**<br />网易tab切换的效果   | https://github.com/HeshamMegid/HMSegmentedControl |                                         |
 
 Android
+
+
+
+
+
