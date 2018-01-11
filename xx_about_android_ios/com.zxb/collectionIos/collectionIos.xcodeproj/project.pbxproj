@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9332F4452003075B0031DC83 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F4442003075B0031DC83 /* HMSegmentedControl.m */; };
+		9332F44D2005A8BE0031DC83 /* AddressBookIndexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F44C2005A8BE0031DC83 /* AddressBookIndexController.m */; };
+		9332F45620070E2B0031DC83 /* AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F45520070E2B0031DC83 /* AddressBook.m */; };
+		9332F459200711DE0031DC83 /* AddressBookHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F458200711DE0031DC83 /* AddressBookHandle.m */; };
+		9332F45C2007120C0031DC83 /* ADPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9332F45B2007120C0031DC83 /* ADPersonModel.m */; };
 		9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8BA1FF245BA0089BEDC /* AppDelegate.m */; };
 		9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8BD1FF245BA0089BEDC /* ViewController.m */; };
 		9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9382C8C21FF245BA0089BEDC /* collectionIos.xcdatamodeld */; };
@@ -48,6 +52,15 @@
 		72886A44299527F32A9757B0 /* Pods_collectionIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_collectionIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9332F4432003074E0031DC83 /* HMSegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		9332F4442003075B0031DC83 /* HMSegmentedControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		9332F44B2005A8B20031DC83 /* AddressBookIndexController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookIndexController.h; sourceTree = "<group>"; };
+		9332F44C2005A8BE0031DC83 /* AddressBookIndexController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookIndexController.m; sourceTree = "<group>"; };
+		9332F453200709480031DC83 /* ABSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABSingleton.h; sourceTree = "<group>"; };
+		9332F45420070E1C0031DC83 /* AddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBook.h; sourceTree = "<group>"; };
+		9332F45520070E2B0031DC83 /* AddressBook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBook.m; sourceTree = "<group>"; };
+		9332F457200711D00031DC83 /* AddressBookHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookHandle.h; sourceTree = "<group>"; };
+		9332F458200711DE0031DC83 /* AddressBookHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookHandle.m; sourceTree = "<group>"; };
+		9332F45A200712010031DC83 /* ADPersonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADPersonModel.h; sourceTree = "<group>"; };
+		9332F45B2007120C0031DC83 /* ADPersonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADPersonModel.m; sourceTree = "<group>"; };
 		9382C8B61FF245BA0089BEDC /* collectionIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectionIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9382C8B91FF245BA0089BEDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9382C8BA1FF245BA0089BEDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -128,6 +141,29 @@
 			path = "开发日志";
 			sourceTree = "<group>";
 		};
+		9332F44A2005A8650031DC83 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9332F44B2005A8B20031DC83 /* AddressBookIndexController.h */,
+				9332F44C2005A8BE0031DC83 /* AddressBookIndexController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9332F452200709000031DC83 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				9332F453200709480031DC83 /* ABSingleton.h */,
+				9332F45420070E1C0031DC83 /* AddressBook.h */,
+				9332F45520070E2B0031DC83 /* AddressBook.m */,
+				9332F457200711D00031DC83 /* AddressBookHandle.h */,
+				9332F458200711DE0031DC83 /* AddressBookHandle.m */,
+				9332F45A200712010031DC83 /* ADPersonModel.h */,
+				9332F45B2007120C0031DC83 /* ADPersonModel.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
 		9382C8AD1FF245B90089BEDC = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +195,7 @@
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
 				9382C9071FFB392F0089BEDC /* Util */,
+				9332F44A2005A8650031DC83 /* Controllers */,
 				9382C8F71FF483740089BEDC /* RootControllers */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
 				9382C8BA1FF245BA0089BEDC /* AppDelegate.m */,
@@ -231,6 +268,7 @@
 		9382C90F1FFB77340089BEDC /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				9332F452200709000031DC83 /* AddressBook */,
 				9332F442200306FD0031DC83 /* SegmentControl */,
 			);
 			path = Vender;
@@ -506,11 +544,15 @@
 				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
+				9332F459200711DE0031DC83 /* AddressBookHandle.m in Sources */,
+				9332F45C2007120C0031DC83 /* ADPersonModel.m in Sources */,
 				9382C8CC1FF245BA0089BEDC /* main.m in Sources */,
 				9382C9001FF491840089BEDC /* ThreeRootVC.m in Sources */,
 				9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */,
 				9382C9AC1FFCD9360089BEDC /* UIView+Common.m in Sources */,
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
+				9332F45620070E2B0031DC83 /* AddressBook.m in Sources */,
+				9332F44D2005A8BE0031DC83 /* AddressBookIndexController.m in Sources */,
 				9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

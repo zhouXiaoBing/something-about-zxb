@@ -5,11 +5,14 @@
 //  Created by Mac on 2017/12/28.
 //  Copyright © 2017年 Vitagou. All rights reserved.
 //网易效果的Segment切换
+//索引显示的tableview
 
 #import "OneRootVC.h"
 #import "HMSegmentedControl.h"
+#import "MBProgressHUD.h"
 
-@interface OneRootVC() <UIScrollViewDelegate>
+
+@interface OneRootVC() <UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) UIView *testView;
 
@@ -17,6 +20,7 @@
 
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 
+@property (nonatomic, strong) NSArray * IndexDataSource;
 @end
 
 @implementation OneRootVC
@@ -28,8 +32,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-//    _testView = [[UIView alloc]initWithFrame:self.view.bounds];
-//    _testView.backgroundColor = [UIColor greenColor];
+    //后期可以从jsondata里面获取
+    _IndexDataSource = @[@"字母索引形式的通讯录",@"待定1",@"待定2",@"待定3",@"待定4"];
+
     
     [self SegmentToScrollView];
 
@@ -72,10 +77,14 @@
     [self.scrollView scrollRectToVisible:CGRectMake(0, 0, viewWidth, 200) animated:NO];//决定了 scrollVIew 首次显示的是哪一个 对应的label
     [self.view addSubview:self.scrollView];
     
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewWidth, 310)];
-    [self setApperanceForLabel:label1];
-    label1.text = @"label1";
-    [self.scrollView addSubview:label1];
+//    显示各种项目的入口目录
+//    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewWidth, 310)];
+//    [self setApperanceForLabel:label1];
+//    label1.text = @"label1";
+//    [self.scrollView addSubview:label1];
+    
+    [self initIndexTable];
+    
     
     UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth, 0, viewWidth, 110)];
     [self setApperanceForLabel:label2];
@@ -99,6 +108,65 @@
 
     
 }
+
+//索引-start-----------------------------------------
+-(void)initIndexTable{
+    
+     UITableView *tableView = [[UITableView alloc]initWithFrame:self.scrollView.bounds style:UITableViewStylePlain];//UITableViewStyleGrouped 会在上面有个空白显示分组
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [self.scrollView addSubview:tableView];
+    
+    
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _IndexDataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *reuseIdentifier = @"cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = _IndexDataSource[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    static UIViewController *VC;
+    
+    if(indexPath.row == 0)
+    {
+        [self alertMessage:@"字母索引形式的通讯录"];
+    }
+    else if(indexPath.row == 1)
+    {
+        [self alertMessage:@"待定1"];
+    }
+    else if(indexPath.row == 2)
+    {
+        [self alertMessage:@"待定2"];
+    }
+    else if(indexPath.row == 3)
+    {
+        [self alertMessage:@"待定3"];
+    }
+    else if(indexPath.row == 4)
+    {
+        [self alertMessage:@"待定4"];
+    }
+//    [self.navigationController pushViewController:VC animated:YES];
+}
+//索引-end-------------------------------------------
+
 // 随机生成 label 的颜色
 - (void)setApperanceForLabel:(UILabel *)label {
     CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
@@ -111,7 +179,7 @@
     label.textAlignment = NSTextAlignmentCenter;
 }
 
-
+//切换页
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
     NSInteger page = scrollView.contentOffset.x / pageWidth;
@@ -119,5 +187,14 @@
     [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
 }
 
+-(void)alertMessage:(NSString *)str{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.mode = MBProgressHUDModeText;//文字模式
+    //        hud.label.text = NSLocalizedString(@"Message here!", nil);//NSLocalizedString: 本地化 键值对 第一个是当前语言环境的默认值 第二个参数是对这个“键值对”的注释
+    hud.label.text =str;
+    // Move to bottm center.
+    //        hud.offset = CGPointMake(kScreen_Width/2, 200);//调整坐标
+    [hud hideAnimated:YES afterDelay:1.f];
+}
 
 @end
