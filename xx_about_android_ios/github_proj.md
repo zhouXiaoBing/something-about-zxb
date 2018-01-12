@@ -12,7 +12,7 @@ iOS
 
 Android
 
-
+svn import /Users/Darin/Desktop/SVN_vitagou/test svn://192.168.1.218/sadoc/zxb —username=zxb —password=0741 -m "测试怎么用命令行使用svn" 
 
 
 

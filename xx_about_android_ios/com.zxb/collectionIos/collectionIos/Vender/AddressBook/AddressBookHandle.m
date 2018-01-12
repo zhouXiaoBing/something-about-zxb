@@ -63,7 +63,14 @@ ABSingletonM(AddressBookHandle)
 
 -(void)getAddressBookDataSource:(PersonModelBlock)personModel authorizationFailure:(AuthorizatationFailure)failure{
     
-    
+    if(IOS9_LATER)
+    {
+        [self getDataSourceFrom_IOS9_Later:personModel authorizationFailure:failure];
+    }
+    else
+    {
+        [self getDataSourceFrom_IOS9_Ago:personModel authorizationFailure:failure];
+    }
 }
 #pragma mark - IOS9之前获取通讯录的方法
 - (void)getDataSourceFrom_IOS9_Ago:(PersonModelBlock)personModel authorizationFailure:(AuthorizatationFailure)failure
@@ -151,6 +158,34 @@ ABSingletonM(AddressBookHandle)
     
     // 3.2.创建联系人的请求对象
     // keys决定能获取联系人哪些信息,例:姓名,电话,头像等
+    NSArray *fetchKeys = @[[CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName],CNContactPhoneNumbersKey,CNContactThumbnailImageDataKey];
+    CNContactFetchRequest *request = [[CNContactFetchRequest alloc]initWithKeysToFetch:fetchKeys];
+    
+    //请求联系人
+    [self.contactStore enumerateContactsWithFetchRequest:request error:nil usingBlock:^(CNContact * _Nonnull contact,BOOL * _Nonnull stop) {
+        //获取联系人全名
+        NSString *name = [CNContactFormatter stringFromContact:contact style:CNContactFormatterStyleFullName];
+        
+        //创建联系人模型
+        
+        ADPersonModel *model = [ADPersonModel new];
+        model.name = name.length > 0 ? name : @"无名氏";
+        
+        //联系人头像
+        model.headerImage = [UIImage imageWithData:contact.thumbnailImageData];
+        //获取一个人所有的电话号码
+        NSArray *phones = contact.phoneNumbers;
+        
+        for (CNLabeledValue *lableValue in  phones) {
+            CNPhoneNumber *phoneNumber = lableValue.value;
+            NSString *mobile = [self removeSpecialSubString:phoneNumber.stringValue];
+            [model.mobileArray addObject:mobile ?mobile : @"空号"];
+        }
+        
+        //将联系人模型回调回去
+        personModel ? personModel(model) : nil;
+    }];
+    
 #endif
     
     
@@ -169,4 +204,14 @@ ABSingletonM(AddressBookHandle)
     return string;
 }
 
+#ifdef __IPHONE_9_0
+- (CNContactStore *)contactStore
+{
+    if(!_contactStore)
+    {
+        _contactStore = [[CNContactStore alloc] init];
+    }
+    return _contactStore;
+}
+#endif
 @end
