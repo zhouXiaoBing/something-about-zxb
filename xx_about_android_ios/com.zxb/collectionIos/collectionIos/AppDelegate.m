@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AddressBook.h"
 
 
 @interface AppDelegate ()
@@ -29,6 +30,9 @@
         [UIScrollView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         [UICollectionView appearance].contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+    
+    //获取通讯录的权限
+    [AddressBook requestAddressBookAuthorization];
     
  
     

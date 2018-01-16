@@ -9,7 +9,8 @@
 
 #import "OneRootVC.h"
 #import "HMSegmentedControl.h"
-#import "MBProgressHUD.h"
+#import "AddressBookIndexController.h"//侧边显示通讯录
+
 
 
 @interface OneRootVC() <UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -33,7 +34,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //后期可以从jsondata里面获取
-    _IndexDataSource = @[@"字母索引形式的通讯录",@"待定1",@"待定2",@"待定3",@"待定4"];
+    _IndexDataSource = @[@"字母索引形式的通讯录",@"购物App的商品显示首页",@"待定2",@"待定3",@"待定4"];
 
     
     [self SegmentToScrollView];
@@ -141,15 +142,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    static UIViewController *VC;
-    
     if(indexPath.row == 0)
     {
-        [self alertMessage:@"字母索引形式的通讯录"];
+//        [self alertMessage:@"字母索引形式的通讯录"];
+        AddressBookIndexController *controller = [[AddressBookIndexController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
     }
     else if(indexPath.row == 1)
     {
-        [self alertMessage:@"待定1"];
+        [self alertMessage:@"购物App的商品显示首页"];
     }
     else if(indexPath.row == 2)
     {

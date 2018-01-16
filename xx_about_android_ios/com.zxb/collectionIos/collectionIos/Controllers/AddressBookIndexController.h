@@ -6,6 +6,6 @@
 //  Copyright © 2018年 Vitagou. All rights reserved.
 //
 
-@interface AddressBookIndexController : BaseViewVC
+@interface AddressBookIndexController : UITableViewController
 
 @end

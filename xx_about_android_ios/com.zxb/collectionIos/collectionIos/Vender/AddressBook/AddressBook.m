@@ -59,6 +59,8 @@
         [kAddressBookHandle getAddressBookDataSource:^(ADPersonModel *model){
             ////获取到姓名的大写首字母
             NSString *firstLetterString = [self getFirstLetterFromString:model.name];
+//            NSLog(@"AddressBook:getFirstLetterFromString:model.name %@",model.name);
+//                NSLog(@"AddressBook:firstLetterString %@",firstLetterString);
             //如果该字母对应的联系人模型不为空,则将此联系人模型添加到此数组中
             if (addressBookDict[firstLetterString])
             {
@@ -86,7 +88,8 @@
         if ([nameKeys.firstObject isEqualToString:@"#"]) {
             
             NSMutableArray *mutableNamekeys = [NSMutableArray arrayWithArray:nameKeys];
-            [mutableNamekeys insertObject:nameKeys.firstObject atIndex:nameKeys.count];
+            [mutableNamekeys
+             insertObject:nameKeys.firstObject atIndex:nameKeys.count];
             [mutableNamekeys removeObjectAtIndex:0];
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -100,7 +103,26 @@
 #pragma mark - 获取联系人姓名首字母(传入汉字字符串, 返回大写拼音首字母)
 + (NSString *)getFirstLetterFromString:(NSString *)aString
 {
+    /**
+     * **************************************** START ***************************************
+     * 参考博主-庞海礁先生的一文:iOS开发中如何更快的实现汉字转拼音 http://www.olinone.com/?p=131
+     */
+    NSMutableString *mutableString = [NSMutableString stringWithString:aString];
+    CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformToLatin, false);
+    NSString *pinyinString = [mutableString stringByFoldingWithOptions:NSDiacriticInsensitiveSearch  locale:[NSLocale currentLocale]];
+//     NSLog(@"AddressBook:pinyinString %@",pinyinString);
+    // 将拼音首字母装换成大写
+    NSString *strPinYin = [[self polyphoneStringHandle:aString pinyinString:pinyinString] uppercaseString];
     
+    // 截取大写首字母
+    NSString *firstString = [strPinYin substringToIndex:1];
+//    NSLog(@"AddressBook:截取大写首字母 %@",firstString);
+    // 判断姓名首位是否为大写字母
+    NSString *regexA = @"^[A-Z]$";
+    NSPredicate *predA = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regexA];
+    return [predA evaluateWithObject:firstString] ? firstString : @"#"
+    ;
+    // 获取并返回首字母
 }
 
 /**
