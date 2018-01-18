@@ -29,6 +29,16 @@
 		9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9051FF4DE410089BEDC /* BaseNavigationController.m */; };
 		9382C9A91FFC86900089BEDC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9382C9A81FFC86900089BEDC /* README.md */; };
 		9382C9AC1FFCD9360089BEDC /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382C9AB1FFCD9360089BEDC /* UIView+Common.m */; };
+		9382FE4F200EDDC400FF4E28 /* SaleAppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE4E200EDDC400FF4E28 /* SaleAppData.m */; };
+		9382FE52200EE5CB00FF4E28 /* SaleAppData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE51200EE5CB00FF4E28 /* SaleAppData.json */; };
+		9382FE58200EE6D300FF4E28 /* rotate3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE53200EE6D300FF4E28 /* rotate3.jpeg */; };
+		9382FE59200EE6D300FF4E28 /* rotate5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE54200EE6D300FF4E28 /* rotate5.jpeg */; };
+		9382FE5A200EE6D300FF4E28 /* rotate2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE55200EE6D300FF4E28 /* rotate2.jpeg */; };
+		9382FE5B200EE6D300FF4E28 /* rotate4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE56200EE6D300FF4E28 /* rotate4.jpeg */; };
+		9382FE5C200EE6D300FF4E28 /* rotate1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9382FE57200EE6D300FF4E28 /* rotate1.jpeg */; };
+		9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE5F200F23F600FF4E28 /* CyrclePagerView.m */; };
+		9382FE63200F24F600FF4E28 /* CyrclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */; };
+		9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE65200F2C9300FF4E28 /* PageControll.m */; };
 		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +106,20 @@
 		9382C9A81FFC86900089BEDC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9382C9AA1FFCD9290089BEDC /* UIView+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Common.h"; sourceTree = "<group>"; };
 		9382C9AB1FFCD9360089BEDC /* UIView+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Common.m"; sourceTree = "<group>"; };
+		9382FE4D200EDDB000FF4E28 /* SaleAppData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleAppData.h; sourceTree = "<group>"; };
+		9382FE4E200EDDC400FF4E28 /* SaleAppData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleAppData.m; sourceTree = "<group>"; };
+		9382FE51200EE5CB00FF4E28 /* SaleAppData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SaleAppData.json; sourceTree = "<group>"; };
+		9382FE53200EE6D300FF4E28 /* rotate3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = rotate3.jpeg; path = ../../../../../pic/rotate3.jpeg; sourceTree = "<group>"; };
+		9382FE54200EE6D300FF4E28 /* rotate5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = rotate5.jpeg; path = ../../../../../pic/rotate5.jpeg; sourceTree = "<group>"; };
+		9382FE55200EE6D300FF4E28 /* rotate2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = rotate2.jpeg; path = ../../../../../pic/rotate2.jpeg; sourceTree = "<group>"; };
+		9382FE56200EE6D300FF4E28 /* rotate4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = rotate4.jpeg; path = ../../../../../pic/rotate4.jpeg; sourceTree = "<group>"; };
+		9382FE57200EE6D300FF4E28 /* rotate1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = rotate1.jpeg; path = ../../../../../pic/rotate1.jpeg; sourceTree = "<group>"; };
+		9382FE5E200F23E900FF4E28 /* CyrclePagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyrclePagerView.h; sourceTree = "<group>"; };
+		9382FE5F200F23F600FF4E28 /* CyrclePagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyrclePagerView.m; sourceTree = "<group>"; };
+		9382FE61200F24E900FF4E28 /* CyrclePagerTransformLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyrclePagerTransformLayout.h; sourceTree = "<group>"; };
+		9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyrclePagerTransformLayout.m; sourceTree = "<group>"; };
+		9382FE64200F2C8500FF4E28 /* PageControll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageControll.h; sourceTree = "<group>"; };
+		9382FE65200F2C9300FF4E28 /* PageControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageControll.m; sourceTree = "<group>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +220,7 @@
 			children = (
 				9332F44620049FDF0031DC83 /* 开发日志 */,
 				9382C9AD1FFE0E530089BEDC /* JsonData */,
+				9382FE50200EE35100FF4E28 /* Picture */,
 				9382C9791FFC75850089BEDC /* Models */,
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
@@ -273,6 +298,7 @@
 		9382C90F1FFB77340089BEDC /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				9382FE5D200F1D5E00FF4E28 /* CyrclePagerView */,
 				9332F452200709000031DC83 /* AddressBook */,
 				9332F442200306FD0031DC83 /* SegmentControl */,
 			);
@@ -296,6 +322,8 @@
 		9382C9791FFC75850089BEDC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9382FE4D200EDDB000FF4E28 /* SaleAppData.h */,
+				9382FE4E200EDDC400FF4E28 /* SaleAppData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,8 +331,34 @@
 		9382C9AD1FFE0E530089BEDC /* JsonData */ = {
 			isa = PBXGroup;
 			children = (
+				9382FE51200EE5CB00FF4E28 /* SaleAppData.json */,
 			);
 			path = JsonData;
+			sourceTree = "<group>";
+		};
+		9382FE50200EE35100FF4E28 /* Picture */ = {
+			isa = PBXGroup;
+			children = (
+				9382FE57200EE6D300FF4E28 /* rotate1.jpeg */,
+				9382FE55200EE6D300FF4E28 /* rotate2.jpeg */,
+				9382FE53200EE6D300FF4E28 /* rotate3.jpeg */,
+				9382FE56200EE6D300FF4E28 /* rotate4.jpeg */,
+				9382FE54200EE6D300FF4E28 /* rotate5.jpeg */,
+			);
+			path = Picture;
+			sourceTree = "<group>";
+		};
+		9382FE5D200F1D5E00FF4E28 /* CyrclePagerView */ = {
+			isa = PBXGroup;
+			children = (
+				9382FE5E200F23E900FF4E28 /* CyrclePagerView.h */,
+				9382FE5F200F23F600FF4E28 /* CyrclePagerView.m */,
+				9382FE61200F24E900FF4E28 /* CyrclePagerTransformLayout.h */,
+				9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */,
+				9382FE64200F2C8500FF4E28 /* PageControll.h */,
+				9382FE65200F2C9300FF4E28 /* PageControll.m */,
+			);
+			path = CyrclePagerView;
 			sourceTree = "<group>";
 		};
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
@@ -433,9 +487,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9382FE59200EE6D300FF4E28 /* rotate5.jpeg in Resources */,
+				9382FE52200EE5CB00FF4E28 /* SaleAppData.json in Resources */,
 				9382C9A91FFC86900089BEDC /* README.md in Resources */,
+				9382FE5C200EE6D300FF4E28 /* rotate1.jpeg in Resources */,
+				9382FE5B200EE6D300FF4E28 /* rotate4.jpeg in Resources */,
+				9382FE58200EE6D300FF4E28 /* rotate3.jpeg in Resources */,
 				9382C8C61FF245BA0089BEDC /* Assets.xcassets in Resources */,
 				9382C8F11FF330420089BEDC /* Devlog in Resources */,
+				9382FE5A200EE6D300FF4E28 /* rotate2.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,9 +605,12 @@
 			files = (
 				9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */,
 				9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */,
+				9382FE4F200EDDC400FF4E28 /* SaleAppData.m in Sources */,
 				9332F4452003075B0031DC83 /* HMSegmentedControl.m in Sources */,
 				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
+				9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */,
+				9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
 				9332F459200711DE0031DC83 /* AddressBookHandle.m in Sources */,
 				9332F45C2007120C0031DC83 /* ADPersonModel.m in Sources */,
@@ -559,6 +622,7 @@
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
 				9332F45620070E2B0031DC83 /* AddressBook.m in Sources */,
 				9332F44D2005A8BE0031DC83 /* AddressBookIndexController.m in Sources */,
+				9382FE63200F24F600FF4E28 /* CyrclePagerTransformLayout.m in Sources */,
 				9382C9031FF4C7260089BEDC /* BaseViewVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
