@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger,PagerScrollDirection) {
 
 -(void)pagerViewWillBeginDecelerating:(CyrclePagerView *)pageView;
 
--(void)pagerViewDidEndDeceleratuing:(CyrclePagerView *)pageView;
+-(void)pagerViewDidEndDecelerating:(CyrclePagerView *)pageView;
 
 -(void)pagerViewWillBeginScrollingAnimation:(CyrclePagerView *)pageView;
 
