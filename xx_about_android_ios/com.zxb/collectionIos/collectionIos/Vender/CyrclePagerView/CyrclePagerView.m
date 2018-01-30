@@ -542,7 +542,8 @@ NS_INLINE IndexSection MakeIndexSection(NSInteger index, NSInteger section) {
         [_delegate pagerViewDidEndDragging:self willDecelerate:decelerate];
     }
 }
-
+/**
+ */
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if ([_delegate respondsToSelector:@selector(pagerViewWillBeginDecelerating:)]) {
         [_delegate pagerViewWillBeginDecelerating:self];
@@ -555,7 +556,8 @@ NS_INLINE IndexSection MakeIndexSection(NSInteger index, NSInteger section) {
         [_delegate pagerViewDidEndDecelerating:self];
     }
 }
-
+/**
+ */
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     [self recyclePagerViewIfNeed];
     if ([_delegate respondsToSelector:@selector(pagerViewDidEndScrollingAnimation:)]) {
@@ -586,6 +588,7 @@ NS_INLINE IndexSection MakeIndexSection(NSInteger index, NSInteger section) {
         [self setNeedUpdateLayout];
     }
 }
+
 
 - (void)dealloc {
     ((CyrclePagerTransformLayout *)_collectionView.collectionViewLayout).delegate = nil;

@@ -39,6 +39,9 @@
 		9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE5F200F23F600FF4E28 /* CyrclePagerView.m */; };
 		9382FE63200F24F600FF4E28 /* CyrclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */; };
 		9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE65200F2C9300FF4E28 /* PageControll.m */; };
+		93CF4C6520205B3B001E6F90 /* SaleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6420205B3B001E6F90 /* SaleResult.m */; };
+		93CF4C6820205E14001E6F90 /* SaleRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6720205E14001E6F90 /* SaleRotate.m */; };
+		93DEAD32201B1C530095A2CF /* mainCyrclePagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */; };
 		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +123,12 @@
 		9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyrclePagerTransformLayout.m; sourceTree = "<group>"; };
 		9382FE64200F2C8500FF4E28 /* PageControll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageControll.h; sourceTree = "<group>"; };
 		9382FE65200F2C9300FF4E28 /* PageControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageControll.m; sourceTree = "<group>"; };
+		93CF4C6320205B25001E6F90 /* SaleResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleResult.h; sourceTree = "<group>"; };
+		93CF4C6420205B3B001E6F90 /* SaleResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleResult.m; sourceTree = "<group>"; };
+		93CF4C6620205E02001E6F90 /* SaleRotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleRotate.h; sourceTree = "<group>"; };
+		93CF4C6720205E14001E6F90 /* SaleRotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleRotate.m; sourceTree = "<group>"; };
+		93DEAD30201B1C390095A2CF /* mainCyrclePagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainCyrclePagerCell.h; sourceTree = "<group>"; };
+		93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mainCyrclePagerCell.m; sourceTree = "<group>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +234,7 @@
 				9382C9171FFB78160089BEDC /* Common */,
 				9382C90F1FFB77340089BEDC /* Vender */,
 				9382C9071FFB392F0089BEDC /* Util */,
+				93DEAD2F201B18E10095A2CF /* Views */,
 				9332F44A2005A8650031DC83 /* Controllers */,
 				9382C8F71FF483740089BEDC /* RootControllers */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
@@ -324,6 +334,10 @@
 			children = (
 				9382FE4D200EDDB000FF4E28 /* SaleAppData.h */,
 				9382FE4E200EDDC400FF4E28 /* SaleAppData.m */,
+				93CF4C6320205B25001E6F90 /* SaleResult.h */,
+				93CF4C6420205B3B001E6F90 /* SaleResult.m */,
+				93CF4C6620205E02001E6F90 /* SaleRotate.h */,
+				93CF4C6720205E14001E6F90 /* SaleRotate.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -359,6 +373,15 @@
 				9382FE65200F2C9300FF4E28 /* PageControll.m */,
 			);
 			path = CyrclePagerView;
+			sourceTree = "<group>";
+		};
+		93DEAD2F201B18E10095A2CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				93DEAD30201B1C390095A2CF /* mainCyrclePagerCell.h */,
+				93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
@@ -606,9 +629,12 @@
 				9382C8BE1FF245BA0089BEDC /* ViewController.m in Sources */,
 				9382C8FA1FF491190089BEDC /* OneRootVC.m in Sources */,
 				9382FE4F200EDDC400FF4E28 /* SaleAppData.m in Sources */,
+				93CF4C6820205E14001E6F90 /* SaleRotate.m in Sources */,
 				9332F4452003075B0031DC83 /* HMSegmentedControl.m in Sources */,
 				9382C8FD1FF4914F0089BEDC /* TwoRootVC.m in Sources */,
 				9382C8BB1FF245BA0089BEDC /* AppDelegate.m in Sources */,
+				93DEAD32201B1C530095A2CF /* mainCyrclePagerCell.m in Sources */,
+				93CF4C6520205B3B001E6F90 /* SaleResult.m in Sources */,
 				9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */,
 				9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
