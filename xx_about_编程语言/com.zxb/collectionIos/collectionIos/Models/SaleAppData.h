@@ -16,4 +16,6 @@
 
 @property(nonatomic, strong) SaleResult *result;
 
++(void)getSaleAppData:(void(^)(NSString *request_code, NSString *reason, SaleResult *result))success
+              failure:(void(^)(NSError *error))failure;
 @end
