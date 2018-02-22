@@ -1,0 +1,33 @@
+{
+    "request_code": 0,
+    "reason": "请求成功！",
+    "result":{
+        
+        "rotateZxb": [
+          {
+          "name": "rotateZxb1",
+          "url": "https://github.com/zhouXiaoBing/something-about-zxb/blob/master/pic/rotate1.jpeg"
+          },
+          {
+          "name": "rotateZxb2",
+          "url": "https://github.com/zhouXiaoBing/something-about-zxb/blob/master/pic/rotate2.jpeg"
+          },
+          {
+          "name": "rotateZxb3",
+          "url": "https://github.com/zhouXiaoBing/something-about-zxb/blob/master/pic/rotate3.jpeg"
+          }
+          ,
+          {
+          "name": "rotateZxb4",
+          "url": "https://github.com/zhouXiaoBing/something-about-zxb/blob/master/pic/rotate4.jpeg"
+          }
+          ,
+          {
+          "name": "rotateZxb5",
+          "url": "https://github.com/zhouXiaoBing/something-about-zxb/blob/master/pic/rotate5.jpeg"
+          }
+          ]
+        
+    }
+    
+}
