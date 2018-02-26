@@ -59,8 +59,8 @@
 
 - (void)customizeTabBarForController {
     
-    NSArray * tabBarItemImages = @[@"tab",@"tab",@"tab"];
-    NSArray * tabBarItemTitles = @[@"壹",@"贰",@"叁"];
+    NSArray * tabBarItemImages = @[@"tab",@"tab",@"tab",];
+    NSArray * tabBarItemTitles = @[@"常用功能",@"第三方库",@"基础知识"];
     NSInteger index = 0;
     
     for (RDVTabBarItem *item in [[self tabBar] items]) {

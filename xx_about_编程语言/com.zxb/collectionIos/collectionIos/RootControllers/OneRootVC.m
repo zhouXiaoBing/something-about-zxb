@@ -34,7 +34,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //后期可以从jsondata里面获取
-    _IndexDataSource = @[@"字母索引形式的通讯录",@"购物App的商品显示首页",@"待定2",@"待定3",@"待定4"];
+    _IndexDataSource = @[@"字母索引形式的通讯录",@"图片上传",@"待定2",@"待定3",@"待定4"];
 
     
     [self SegmentToScrollView];
@@ -150,7 +150,7 @@
     }
     else if(indexPath.row == 1)
     {
-        [self alertMessage:@"购物App的商品显示首页"];
+        [self alertMessage:@"图片上传"];
     }
     else if(indexPath.row == 2)
     {
