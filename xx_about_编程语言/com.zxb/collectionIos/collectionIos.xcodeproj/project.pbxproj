@@ -39,6 +39,10 @@
 		9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE5F200F23F600FF4E28 /* CyrclePagerView.m */; };
 		9382FE63200F24F600FF4E28 /* CyrclePagerTransformLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */; };
 		9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382FE65200F2C9300FF4E28 /* PageControll.m */; };
+		93B6C3832044E5A300E76350 /* UpLoadProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B6C3822044E5A300E76350 /* UpLoadProgressViewController.m */; };
+		93B6C3862044F04A00E76350 /* ImagePickerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B6C3852044F04A00E76350 /* ImagePickerStoryboard.storyboard */; };
+		93B6C38E204532A100E76350 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B6C38C204532A000E76350 /* LxGridViewFlowLayout.m */; };
+		93B6C3912045330500E76350 /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B6C3902045330500E76350 /* TZTestCell.m */; };
 		93CF4C6520205B3B001E6F90 /* SaleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6420205B3B001E6F90 /* SaleResult.m */; };
 		93CF4C6820205E14001E6F90 /* SaleRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6720205E14001E6F90 /* SaleRotate.m */; };
 		93DEAD32201B1C530095A2CF /* mainCyrclePagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */; };
@@ -123,6 +127,13 @@
 		9382FE62200F24F600FF4E28 /* CyrclePagerTransformLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CyrclePagerTransformLayout.m; sourceTree = "<group>"; };
 		9382FE64200F2C8500FF4E28 /* PageControll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageControll.h; sourceTree = "<group>"; };
 		9382FE65200F2C9300FF4E28 /* PageControll.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageControll.m; sourceTree = "<group>"; };
+		93B6C3812044E59200E76350 /* UpLoadProgressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpLoadProgressViewController.h; sourceTree = "<group>"; };
+		93B6C3822044E5A300E76350 /* UpLoadProgressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpLoadProgressViewController.m; sourceTree = "<group>"; };
+		93B6C3852044F04A00E76350 /* ImagePickerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImagePickerStoryboard.storyboard; sourceTree = "<group>"; };
+		93B6C38C204532A000E76350 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
+		93B6C38D204532A100E76350 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		93B6C38F204532F700E76350 /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
+		93B6C3902045330500E76350 /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		93CF4C6320205B25001E6F90 /* SaleResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleResult.h; sourceTree = "<group>"; };
 		93CF4C6420205B3B001E6F90 /* SaleResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleResult.m; sourceTree = "<group>"; };
 		93CF4C6620205E02001E6F90 /* SaleRotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaleRotate.h; sourceTree = "<group>"; };
@@ -180,10 +191,7 @@
 		9332F44A2005A8650031DC83 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9332F44B2005A8B20031DC83 /* AddressBookIndexController.h */,
-				9332F44C2005A8BE0031DC83 /* AddressBookIndexController.m */,
-				934316C4200DEADE00CE0CFB /* SaleAppMainPage.h */,
-				934316C5200DEAEE00CE0CFB /* SaleAppMainPage.m */,
+				93B6C37F2044E26C00E76350 /* commonFunction */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 				93DEAD2F201B18E10095A2CF /* Views */,
 				9332F44A2005A8650031DC83 /* Controllers */,
 				9382C8F71FF483740089BEDC /* RootControllers */,
+				93B6C3842044EFE600E76350 /* storyBoard */,
 				9382C8B91FF245BA0089BEDC /* AppDelegate.h */,
 				9382C8BA1FF245BA0089BEDC /* AppDelegate.m */,
 				9382C8BC1FF245BA0089BEDC /* ViewController.h */,
@@ -375,9 +384,42 @@
 			path = CyrclePagerView;
 			sourceTree = "<group>";
 		};
+		93B6C37F2044E26C00E76350 /* commonFunction */ = {
+			isa = PBXGroup;
+			children = (
+				9332F44B2005A8B20031DC83 /* AddressBookIndexController.h */,
+				9332F44C2005A8BE0031DC83 /* AddressBookIndexController.m */,
+				934316C4200DEADE00CE0CFB /* SaleAppMainPage.h */,
+				934316C5200DEAEE00CE0CFB /* SaleAppMainPage.m */,
+				93B6C3812044E59200E76350 /* UpLoadProgressViewController.h */,
+				93B6C3822044E5A300E76350 /* UpLoadProgressViewController.m */,
+			);
+			path = commonFunction;
+			sourceTree = "<group>";
+		};
+		93B6C3842044EFE600E76350 /* storyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				93B6C3852044F04A00E76350 /* ImagePickerStoryboard.storyboard */,
+			);
+			path = storyBoard;
+			sourceTree = "<group>";
+		};
+		93B6C38B2045327C00E76350 /* UpLoadPictrue */ = {
+			isa = PBXGroup;
+			children = (
+				93B6C38D204532A100E76350 /* LxGridViewFlowLayout.h */,
+				93B6C38C204532A000E76350 /* LxGridViewFlowLayout.m */,
+				93B6C38F204532F700E76350 /* TZTestCell.h */,
+				93B6C3902045330500E76350 /* TZTestCell.m */,
+			);
+			path = UpLoadPictrue;
+			sourceTree = "<group>";
+		};
 		93DEAD2F201B18E10095A2CF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				93B6C38B2045327C00E76350 /* UpLoadPictrue */,
 				93DEAD30201B1C390095A2CF /* mainCyrclePagerCell.h */,
 				93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */,
 			);
@@ -510,6 +552,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93B6C3862044F04A00E76350 /* ImagePickerStoryboard.storyboard in Resources */,
 				9382FE59200EE6D300FF4E28 /* rotate5.jpeg in Resources */,
 				9382FE52200EE5CB00FF4E28 /* SaleAppData.json in Resources */,
 				9382C9A91FFC86900089BEDC /* README.md in Resources */,
@@ -596,6 +639,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDCAutoLayout/SDCAutoLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -613,6 +657,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCAutoLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -636,6 +681,7 @@
 				93DEAD32201B1C530095A2CF /* mainCyrclePagerCell.m in Sources */,
 				93CF4C6520205B3B001E6F90 /* SaleResult.m in Sources */,
 				9382FE66200F2C9300FF4E28 /* PageControll.m in Sources */,
+				93B6C38E204532A100E76350 /* LxGridViewFlowLayout.m in Sources */,
 				9382FE60200F23F600FF4E28 /* CyrclePagerView.m in Sources */,
 				9382C9061FF4DE410089BEDC /* BaseNavigationController.m in Sources */,
 				9332F459200711DE0031DC83 /* AddressBookHandle.m in Sources */,
@@ -645,7 +691,9 @@
 				9382C8C41FF245BA0089BEDC /* collectionIos.xcdatamodeld in Sources */,
 				9382C9AC1FFCD9360089BEDC /* UIView+Common.m in Sources */,
 				934316C6200DEAEE00CE0CFB /* SaleAppMainPage.m in Sources */,
+				93B6C3912045330500E76350 /* TZTestCell.m in Sources */,
 				9382C8F41FF3335D0089BEDC /* MyRootViewController.m in Sources */,
+				93B6C3832044E5A300E76350 /* UpLoadProgressViewController.m in Sources */,
 				9332F45620070E2B0031DC83 /* AddressBook.m in Sources */,
 				9332F44D2005A8BE0031DC83 /* AddressBookIndexController.m in Sources */,
 				9382FE63200F24F600FF4E28 /* CyrclePagerTransformLayout.m in Sources */,
