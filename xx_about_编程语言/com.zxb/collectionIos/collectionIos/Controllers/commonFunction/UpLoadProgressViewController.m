@@ -89,6 +89,7 @@
         if(iOS7Later){
             _imagePickerVc.navigationBar.barTintColor = self.navigationController.navigationBar.barTintColor;
         }
+        _imagePickerVc.navigationBar.tintColor = self.navigationController.navigationBar.tintColor;
         
     }
     
