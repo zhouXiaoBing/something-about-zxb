@@ -785,7 +785,7 @@ arr = newArr;
 
 为了避免插入和删除的线性开销，我们需要保存表可以不连续存储，否则表的每个部分都可能需要整体移动。
 
-![image-20180417104422120](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180417104422120.png)
+![image-20180417104422120](image-20180417104422120.png)
 
 链表由一系列的节点组成，这些节点不必在内存中相连。每一个节点均含有表元素和到包含该元素后继元的节点的链（link）。我们称之为 next 链。最后一个单元的next 链引用 null。
 
@@ -795,7 +795,7 @@ arr = newArr;
 
 insert 方法需要使用 new 操作符从系统中取得一个新的节点，此后执行两次引用的调整。下图中的虚线表示原来的 next 引用
 
-![B94C766F-5EB3-40FC-9B99-746854AAC057](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/B94C766F-5EB3-40FC-9B99-746854AAC057.png)
+![B94C766F-5EB3-40FC-9B99-746854AAC057](B94C766F-5EB3-40FC-9B99-746854AAC057.png)
 
 实践中如果知道变动将要发生的地方，那么向链表插入或从链表中删除一项的操作不需要移动很多的项，而只是涉及常数个节点链的改变。
 
@@ -803,7 +803,7 @@ insert 方法需要使用 new 操作符从系统中取得一个新的节点，�
 
 保留指向最后节点的节点的第三个链的想法行不通，因为它在删除操作期间也会更新，我们的做法是，让每一个节点持有一个指向它在表中的前驱节点的链，称之为双链表（double linked list）
 
-![4499E1FD-4452-4648-AA6D-F70957FA9B1D](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/4499E1FD-4452-4648-AA6D-F70957FA9B1D.png)
+![4499E1FD-4452-4648-AA6D-F70957FA9B1D](4499E1FD-4452-4648-AA6D-F70957FA9B1D.png)
 
 
 
@@ -990,7 +990,7 @@ public interface ListIterator<AnyType> extends Iterator<AnyType>{
 }
 ```
 
-![image-20180419090823881](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180419090823881.png)
+![image-20180419090823881](image-20180419090823881.png)
 
 
 
@@ -1215,7 +1215,7 @@ public class MyArrayList<AnyType> implements Iterable<AnyType>{
 
 在每一个内部类的对象都恰好与外部类对象的一个实例相关联的情况下，内部类是有用的，在这种情况下，内部类的对像在没有外部类对象与其关联的时是永远不可能存在的。对于 MyArrayList 及其迭代器的情形，内部类都是用来实现迭代器 。（对比图下的代码）
 
-![image-20180420100929796](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180420100929796.png)
+![image-20180420100929796](image-20180420100929796.png)
 
 theList.theItems 的使用可以由 MyArrayList.this.theItems 代替。这很难说是一种改进，但是进一步的量化，还是可能的。正如 this.data 可以简写为 data 一样（假设不存在引起冲突的也叫做 data 的另外的变量），MyArrayList.this.theItems 可以简写为 theItems 。
 
@@ -1293,7 +1293,7 @@ public class MyArrayList<AnyType> implements Iterable<AnyType>{
 
 使用这些额外的节点的优点在于，通过排除许多特殊情形极大的简化了编码。例如，如果我们不是用头节点，那么删除第一个节点就变成了一个特殊的情况，因为再删除期间重新调整链表到第一个节点的链，还是因为删除算法一般还要访问被删除节点前面的那个节点（没有头节点的话，第一个节点前面就没有节点）。
 
-![image-20180420112400512](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180420112400512.png)
+![image-20180420112400512](image-20180420112400512.png)
 
 ```java
 //LinkedList 泛型类实现
@@ -1655,11 +1655,11 @@ public class MyLinkedList<AnyType> implements Iterator<AnyType>{
 
 每一颗子树的根叫做根 r 的儿子（child），而 r 是每一颗子树的根的父亲（parent）。显示用递归定义的典型的树。
 
-![image-20180424112652138](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180424112652138.png)
+![image-20180424112652138](image-20180424112652138.png)
 
 从递归的定义中我们发现，一棵树是 N 个节点和 N - 1 条边的集合，其中的一个节点叫做根。每条边都将某个节点 连接到它的父亲，而除去根节点外每一个节点都有一个父亲。
 
-![image-20180424113037297](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180424113037297.png)
+![image-20180424113037297](image-20180424113037297.png)
 
 如上：节点 A 是根节点。节点 F 有一个父节点 A 并且有儿子 K、L 和 M。每一个节点可以由任意多个儿子，也可以是零个儿子。没有儿子的节点称为树叶（leaf）；具有相同父亲的节点称为兄弟（siblings）；用类似的方式可以定多层级的关系。
 
@@ -1686,7 +1686,7 @@ class TreeNode
 
 树的典型的应用之一是包括 UNIX 和 DOS 在内的许多常用操作系统中的目录结构。
 
-![image-20180424171821152](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180424171821152.png)
+![image-20180424171821152](image-20180424171821152.png)
 
 目录的根：/usr(名字后面是星号指出 /usr 本身就是一个目录)。
 
@@ -1715,7 +1715,7 @@ public void listAll(){
 
 
 
-![image-20180425153913475](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180425153913475.png)
+![image-20180425153913475](image-20180425153913475.png)
 
 与前面 前序遍历 时的目录结构相同，其中圆括号内的数字代表每个文件占用的磁盘区块（disk blocks）的个数
 
@@ -1735,7 +1735,7 @@ public int size(){
 
 如果当前的对象不是目录，那么 size 只返会它所占的区块数。否则，被该目录占用的区块数将被加到在其所有子节点（递归地）发现的区块数中去。为了区别 后序遍历策略和先序遍历的策略之间的不同，下图显示目录或者文件的大小是如何由该算法产生的
 
-![image-20180425155933720](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180425155933720.png)
+![image-20180425155933720](image-20180425155933720.png)
 
 
 
@@ -1745,7 +1745,7 @@ public int size(){
 
 二叉树（binary tree），每个节点都不多于两个子节点。
 
-![image-20180425161032113](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180425161032113.png)
+![image-20180425161032113](image-20180425161032113.png)
 
 二叉树的一个性质是一棵平均二叉树的深度要比节点个数 N 小得多 ，这个性质有时候很重要。分析表明，其平均深度为 O（√N），而对于特殊类型的二叉树，即**二叉查找树**（binary search tree），其深度的平均值是O(log N), 不幸的是 最坏的时候，这个深度是可以大到 N - 1 的。
 
@@ -1768,7 +1768,7 @@ class BinaryNode
 
 #### 表达式树（应用）
 
-![image-20180426094559627](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180426094559627.png)
+![image-20180426094559627](image-20180426094559627.png)
 
 表达式树的树叶是操作树（operand），如常数和变量名，而其他的节点为操作符（operator）。由于这里所有的操作都是二次元的，因此这棵特定的树正好是二叉树，虽然这是最简单的情况，但是节点还是有可能含有多于两个的儿子。一个节点也可能只有一个儿子，如具有**一目减算符**（unary minus operator）的情形。我们可以将通过递归计算左子树和右子树所得到的值应用在根处的运算符上而算出表达式树 T 的值。
 
@@ -1929,7 +1929,7 @@ public class BinarySearchTree<AnyType extands Comparable<? super AnyType>>{
 
 remove 方法： 是一个最为困难的额操作。一旦我们发现节点要被删除，就要考虑几种可能的情况。
 
-![image-20180427110456601](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/006tKfTcgy1fqr1bwez8jj30my05fab1.png)
+![image-20180427110456601](006tKfTcgy1fqr1bwez8jj30my05fab1.png)
 
 如果节点是一个叶节点，那么他可以直接的被删除。
 
@@ -1973,7 +1973,7 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
 
 一棵 AVL 树是其每个节点的左子树和右子树的高度最多差 1 的二叉查找树（空树的高度定义为 -1）。下图左边的树是 AVL 树，但是右边的树不是。每一个节点（在其节点结构中）保留高度信息。可以证明，粗略的说，一个 AVL 树的高度最多为 1.44log(N + 2) - 1.328,但是实际上的高度只略大于 log N。下图展示了一棵具有最少节点（143）高度为9的 AVL 树。这棵树的左子树是高度为7且大小最小的 AVL 树，右子树是高度为8且大小最小的 AVL 树。他告诉我们，在高度为 h 的 AVL 树中，最少的节点数 S(h) 由 S(h) = S(h -1) + S(h - 2) +1 给出。对于 h  = 0，S(h) = 1,  h = 1,S(h) = 2。函数S(h)与斐波那契数列密切相关，由此推出上面提到的关于 AVL 树的高度的界。
 
-![image-20180428152428179](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180428152428179.png)
+![image-20180428152428179](image-20180428152428179.png)
 
 因此，除去可能的插入外（我们将假设懒惰删除），所有的树操作都可以以时间 O(log N)执行。当进行插入时，我们需要更新通向根节点路径上那些节点的所有平衡信息，而插入操作隐藏着困难的原因在于，插入一个节点有可能破坏 AVL 树的特性，如果发生这种情况，那么就要考虑这一步插入完成之前恢复平衡的性质。事实上，这总可以通过对树进行简单的修正来做到。我们称其为旋转。
 
@@ -2590,7 +2590,7 @@ NSLog(@"block return from function: %@", [self blockTest]); // block return from
 
 实例对象中存放 isa 指针以及实例变量，有 isa 指针可以找到实例对象所属的类对象（类是对象，面向对象中一切都是对象），类中存放着实例方法列表，在这个方法列表中 SEL 作为 key ，IMP 作为 value。在编译时期，根据方法名会生成一个唯一的 int 标识，这个标识就是 SEL 。IMP 实际上就是函数指针指向了最终的函数实现。整个 Runtime 的核心就是 objc_msgSend 函数，通过给类发送 SEL 以传递消息，找到匹配的 IMP 再获得最终的实现。如下的这张描述了对象的内存布局
 
-![image-20180503143007666](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180503143007666.png)
+![image-20180503143007666](image-20180503143007666.png)
 
 类中的 super_class 指针可以追溯到整个继承链。向一个对象发送消息时，Runtime 会根据实例对象的 isa 指针找到其所属的类，并自底向上直至根类（NSObject）中，去寻找 SEL 所对应的方法，找到后就运行整个方法。
 
@@ -2822,7 +2822,9 @@ IMP lookUpImpOrForward(Class cls, SEL sel, id inst,
 
 ### 动态消息解析
 
-![img](https://raw.githubusercontent.com/WiInputMethod/interview/master/img/ios-runtime-method-resolve.png)
+![image-201805081018](image-201805081018.png)
+
+
 
 如下用于描述动态消息解析的流程:
 
@@ -2891,7 +2893,7 @@ IMP lookUpImpOrForward(Class cls, SEL sel, id inst,
 - 系统运行库与Android运行环境(Libraris & Android Runtime)
 - Linux内核(Linux Kernel)
 
-![image-20180504162117452](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180504162117452.png)
+![image-20180504162117452](image-20180504162117452.png)
 
 #### 1.应用程序层（Applications）
 
@@ -2949,7 +2951,7 @@ Android的核心系统服务依赖于Linux 2.6 内核，如安全性，内存管
 
 首先在开头放出生命周期的一张总图：
 
-![image-20180504163128279](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180504163128279.png)
+![image-20180504163128279](image-20180504163128279.png)
 
 #### 四种状态
 
@@ -2991,10 +2993,10 @@ service 有两种启动模式
 
 一张图解释：
 
-![image-20180504164349739](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180504164349739.png)
+![image-20180504164349739](image-20180504164349739.png)
 
 回调方法的结构下图解释的很明白：
-![image-20180504164611927](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180504164611927.png)
+![image-20180504164611927](image-20180504164611927.png)
 
 参考博客：[圣骑士Wind的博客：Android Service的生命周期](http://www.cnblogs.com/mengdd/archive/2013/03/24/2979944.html)
 
@@ -3159,7 +3161,7 @@ JAVA的加载方式与第一种方法相同。
 
 每次扫描栈顶，如果在任务栈顶发现了相同的实例则重用，否则新建并压入栈顶。
 
-![image-20180504172440631](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180504172440631.png)
+![image-20180504172440631](image-20180504172440631.png)
 
 配置方法在 AndroidMainifest.xml 
 
@@ -3177,7 +3179,7 @@ JAVA的加载方式与第一种方法相同。
 
 listview 的实现离不开 adapter。可以这么理解：listview中给出了数据的时候，View如何实现的具体方式，相当于MVC中的 V ，而 adapter 相当于 MVC 中的 C 指挥了listview 的数据加载等行为。
 
-![image-20180507142654926](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/image-20180507142654926.png)
+![image-20180507142654926](image-20180507142654926.png)
 
 可以看到当一个View移出可视区域的时候，设为View1，它会被标记Recycle，然后可能：
 
@@ -3242,11 +3244,11 @@ Android 中的 Broadcast 实际底层使用Binder机制。
 
 整个View树的绘图流程是在ViewRootImpl类的performTraversals()方法（这个方法巨长）开始的，该函数做的执行过程主要是根据之前设置的状态，判断是否重新计算视图大小(measure)、是否重新放置视图的位置(layout)、以及是否重绘 (draw)。
 
-![](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/draw_1.png)
+![](draw_1.png)
 
 ### Measure
 
-![](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/draw_2.png)
+![](draw_2.png)
 
 通过上面可以看出measure过程主要就是从顶层父View向子View递归调用`view.measure`方法（measure中又回调onMeasure方法）的过程。具体measure核心主要有如下几点：
 
@@ -3263,7 +3265,7 @@ Android 中的 Broadcast 实际底层使用Binder机制。
 
 ### Layout
 
-![](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/draw_3.png)
+![](draw_3.png)
 
 layout方法接收四个参数，这四个参数分别代表相对Parent的左、上、右、下坐标。而且还可以看见左上都为0，右下分别为上面刚刚测量的width和height。
 
@@ -3276,7 +3278,7 @@ layout方法接收四个参数，这四个参数分别代表相对Parent的左�
 
 ### Draw
 
-![](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/draw_4.png)
+![](draw_4.png)
 
 ViewRootImpl中的代码会创建一个Canvas对象，然后调用View的draw()方法来执行具体的绘制工作。
 
@@ -3333,7 +3335,7 @@ public boolean dispatchTouchEvent(MotionEvent ev) {
 
 ## Binder
 
-Binder使用`Client－Server`通信方式。Binder框架定义了四个角色：`Server`,`Client`,`ServiceManager`以及`Binder驱动`。其中`Server`,`Client`,`ServiceManager`运行于用户空间，驱动运行于内核空间。Binder驱动程序提供设备文件`/dev/binder`与用户空间交互，`Client`、`Server`和`Service Manager`通过`open`和`ioctl`文件操作函数与Binder驱动程序进行通信。![](/Users/Darin/Desktop/github/something-about-zxb/pic/programKnowledgeTrim/binder.png)
+Binder使用`Client－Server`通信方式。Binder框架定义了四个角色：`Server`,`Client`,`ServiceManager`以及`Binder驱动`。其中`Server`,`Client`,`ServiceManager`运行于用户空间，驱动运行于内核空间。Binder驱动程序提供设备文件`/dev/binder`与用户空间交互，`Client`、`Server`和`Service Manager`通过`open`和`ioctl`文件操作函数与Binder驱动程序进行通信。![](binder.png)
 
 ### Binder原理简述
 
@@ -3346,11 +3348,128 @@ Binder使用`Client－Server`通信方式。Binder框架定义了四个角色：
 
 当然，不是所有的Binder都需要注册给`ServiceManager`广而告之的。Server端可以通过已经建立的Binder连接将创建的Binder实体传给Client，当然这条已经建立的Binder连接必须是通过实名Binder实现。由于这个Binder没有向ServiceManager注册名字，所以是 **匿名Binder**。Client将会收到这个匿名Binder的引用，通过这个引用向位于Server中的实体发送请求。匿名Binder为通信双方建立一条私密通道，只要Server没有把匿名Binder发给别的进程，别的进程就无法通过穷举或猜测等任何方式获得该Binder的引用，向该Binder发送请求。
 
-https://github.com/hadyang/interview
+### Binder的数据拷贝
+
+Linux内核实际上没有从一个用户空间到另一个用户空间直接拷贝的函数，需要先用`copy_from_user()`拷贝到内核空间，再用`copy_to_user()`拷贝到另一个用户空间。**为了实现用户空间到用户空间的拷贝，`mmap()`分配的内存除了映射进了接收方进程里，还映射进了内核空间**。所以调用`copy_from_user()`将数据拷贝进内核空间也相当于拷贝进了接收方的用户空间，这就是Binder只需一次拷贝的"秘密"。
+
+最底层的是Android的`ashmen(Anonymous shared memory)`机制，它负责辅助实现内存的分配，以及跨进程所需要的内存共享。AIDL(android interface definition language)对Binder的使用进行了封装，可以让开发者方便的进行方法的远程调用，后面会详细介绍。Intent是最高一层的抽象，方便开发者进行常用的跨进程调用。
+
+使用共享内存通信的一个显而易见的好处是效率高，因为 **进程可以直接读写内存，而不需要任何数据的拷贝**。对于像管道和消息队列等通信方式，则需要在内核和用户空间进行四次的数据拷贝，而共享内存则只拷贝两次内存数据：一次从输入文件到共享内存区，另一次从共享内存到输出文件。实际上，进程之间在共享内存时，并不总是读写少量数据后就解除映射，有新的通信时，再重新建立共享内存区域，而是保持共享区域，直到通信完成为止，这样，数据内容一直保存在共享内存中，并没有写回文件。共享内存中的内容往往是在解除内存映射时才写回文件的。因此，采用共享内存的通信方式效率是非常高的。
+
+## 性能优化
+
+### ANR
+
+全称 Application Not Responding，意思教务处程序未响应
+
+### 出现场景
+
+- 主线程被IO操作（从4.0之后网络IO不允许在主线程中）阻塞。
+- 主线程中存在耗时的计算
+- 主线程中错误的操作，比如Thread.wait或者Thread.sleep等
+
+Android系统会监控程序的响应状况，一旦出现下面两种情况，则弹出ANR对话框
+
+- 应用在5秒内未响应用户的输入事件（如按键或者触摸）
+- BroadcastReceiver未在10秒内完成相关的处理
+
+### 如何避免
+
+基本的思路就是将IO操作在工作线程来处理，减少其他耗时操作和错误操作
+
+- 使用AsyncTask处理耗时IO操作。
+- 使用Thread或者HandlerThread时，调用`Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)`设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。
+- 使用Handler处理工作线程结果，而不是使用Thread.wait()或者Thread.sleep()来阻塞主线程。
+- `Activity`的`onCreate`和`onResume`回调中尽量避免耗时的代码
+- `BroadcastReceiver`中`onReceive`代码也要尽量减少耗时，建议使用`IntentService`处理。
+
+### 如何改善
+
+通常100到200毫秒就会让人察觉程序反应慢，为了更加提升响应，可以使用下面的几种方法
+
+- 如果程序正在后台处理用户的输入，建议使用让用户得知进度，比如使用ProgressBar控件。
+- 程序启动时可以选择加上欢迎界面，避免让用户察觉卡顿。
+- 使用`Systrace`和`TraceView`找出影响响应的问题。
+
+如果开发机器上出现问题，我们可以通过查看`/data/anr/traces.txt`即可，最新的ANR信息在最开始部分。
+
+### OOM
+
+在实践操作当中，可以从四个方面着手减小内存使用，首先是减小对象的内存占用，其次是内存对象的重复利用，然后是避免对象的内存泄露，最后是内存使用策略优化。
+
+### 减小对象的内存占用
+
+- `使用更加轻量级的数据结构`：例如，我们可以考虑使用`ArrayMap`/`SparseArray`而不是`HashMap`等传统数据结构，相比起Android系统专门为移动操作系统编写的`ArrayMap`容器，在大多数情况下，`HashMap`都显示效率低下，更占内存。另外，`SparseArray`更加高效在于，**避免了对key与value的自动装箱，并且避免了装箱后的解箱**。（后面有源码分析的文章）
+
+- `避免使用Enum`：在Android中应该尽量使用`int`来代替`Enum`，因为使用`Enum`会导致编译后的dex文件大小增大，并且使用`Enum`时，其运行时还会产生额外的内存占用。
+
+- `减小`Bitmap`对象的内存占用`：
+
+  - `inBitmap`：如果设置了这个字段，Bitmap在加载数据时可以复用这个字段所指向的bitmap的内存空间。**但是，内存能够复用也是有条件的。比如，在`Android 4.4(API level 19)`之前，只有新旧两个Bitmap的尺寸一样才能复用内存空间。`Android 4.4`开始只要旧 Bitmap 的尺寸大于等于新的 Bitmap 就可以复用了**。
+  - `inSampleSize`：缩放比例，在把图片载入内存之前，我们需要先计算出一个合适的缩放比例，避免不必要的大图载入。
+  - `decode format`：解码格式，选择`ARGB_8888` `RBG_565` `ARGB_4444` `ALPHA_8`，存在很大差异。
+
+  > ARGB_4444：每个像素占四位，即A=4，R=4，G=4，B=4，那么一个像素点占4+4+4+4=16位
+  > ARGB_8888：每个像素占四位，即A=8，R=8，G=8，B=8，那么一个像素点占8+8+8+8=32位
+  > RGB_565：每个像素占四位，即R=5，G=6，B=5，没有透明度，那么一个像素点占5+6+5=16位
+  > ALPHA_8：每个像素占四位，只有透明度，没有颜色。
+
+- `使用更小的图片`：在设计给到资源图片的时候，我们需要特别留意这张图片是否存在可以压缩的空间，是否可以使用一张更小的图片。**尽量使用更小的图片不仅仅可以减少内存的使用，还可以避免出现大量的InflationException**。假设有一张很大的图片被XML文件直接引用，很有可能在初始化视图的时候就会因为内存不足而发生InflationException，这个问题的根本原因其实是发生了OOM。
+
+#### HashMap，ArrayMap，SparseArray源码分析及性能对比
+
+ArrayMap及SparseArray是android的系统API，是专门为移动设备而定制的。用于在一定情况下取代HashMap而达到节省内存的目的。
+
+##### 源码分析
+
+##### 实现原理和数据结构对比
+
+###### 1.hashmap
+
+![img](1438561-cb49a5db98ecba9e.png)
+
+从hashMap的结构中可以看出，首先对key值求hash，根据hash结果确定在table数组中的位置，当出现哈希冲突时采用开放链地址法进行处理。Map.Entity的数据结构如下：
+
+```java
+static class HashMapEntry<K, V> implements Entry<K, V> {    
+final K key;    
+V value; 
+final int hash;   
+ HashMapEntry<K, V> next;
+}   
+```
+
+这里可以看出来的是，从空间的角度分析，HashMap中会有一个利用率不超过负载因子（默认为0.75）的table数组，其次，对于HashMap的每一条数据都会用一个HashMapEntry进行记录，除了记录key，value外，还会记录下hash值，及下一个entity的指针。
+ 时间效率方面，利用hash算法，插入和查找等操作都很快，且一般情况下，每一个数组值后面不会存在很长的链表（因为出现hash冲突毕竟占比较小的比例），所以不考虑空间利用率的话，HashMap的效率非常高。
+
+##### 2.ArrayMap 
+
+![img](366.png)
+
+ 
+
+ ArrayMap利用两个数组，mHashes用来保存每一个key的hash值，mArrray大小为mHashes的2倍，依次保存key和value。只看关键语句：
+
+```java
+mHashes[index] = hash;
+mArray[index<<1] = key;
+mArray[(index<<1)+1] = value;
+```
+
+相信看到这大家都明白了原理了。但是它怎么查询呢？答案是二分查找。当插入时，根据key的hashcode()方法得到hash值，计算出在mArrays的index位置，然后利用二分查找找到对应的位置进行插入，当出现哈希冲突时，会在index的相邻位置插入。
+ 总结一下，空间角度考虑，ArrayMap每存储一条信息，需要保存一个hash值，一个key值，一个value值。对比下HashMap 粗略的看，只是减少了一个指向下一个entity的指针。还有就是节省了一部分可见空间上的内存节省也不是特别明显。是不是这样呢？后面会验证。
+ 时间效率上看，插入和查找的时候因为都用的二分法，查找的时候应该是没有hash查找快，插入的时候呢，如果顺序插入的话效率肯定高，但如果是随机插入，肯定会涉及到大量的数组搬移，数据量大，肯定不行，再想一下，如果是不凑巧，每次插入的hash值都比上一次的小，那就得次次搬移，效率一下就扛不住了的感脚。
+
+ 3.SparseArray
 
 
 
+ 
 
+ 
 
+ 
 
+  
 
+ 
