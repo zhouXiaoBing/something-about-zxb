@@ -1,6 +1,6 @@
 # 面向对象基础
 
-![](oop.gif)
+![](/Users/Darin/Desktop/github/something-about-zxb/programKnowledgeSummary/oop.png)
 
 面向对象三要素：封装、继承、多态
 
