@@ -25,7 +25,7 @@
 
 ## Java虚拟机体系结构
 
-![](jvm-architecture.png)
+![](/Users/Darin/Desktop/github/something-about-zxb/programKnowledgeSummary/jvm-architecture.png)
 
 每个Java虚拟机都有一个类装载器子系统，他根据给定的全限定名来装在类型。同样，每个Java虚拟机都有一个执行引擎，它负责执行那些包含在被装载类的方法中的指令。**当Java虚拟机运行一个程序时，它需要内存来存储很多东西，例如：字节码，从已装载的class文件中得到的其他信息，程序创建的对象，传递给方法的参数，返回值，局部变量，以及运算的中间结果等等，Java虚拟机把这些东西都组织到几个“运行时数据区”中，以便管理。**
 
