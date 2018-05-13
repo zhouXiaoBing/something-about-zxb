@@ -3328,7 +3328,9 @@ Java 类加载器是 Java 运行环境（Java Runtime Environment）的一部分
 
 类加载器子系统涉及 Java 虚拟机的其他几个组成部分，以及几个来自 java.lang 库的类。比如，用户自定义的类加载器只是普通 的 Java 对象，它的类必须派生自 java.lang.ClassLoader 。`ClassLoader`中定义的方法为程序提供了访问类装载器机制的接口。此外，对于每个被装载的类型，Java虚拟机都会为他创建一个`java.lang.Class`类的实例来代表该类型。和所有其他对象一样，用户自定义的类装载器以及`Class`类的实例都放在内存中的堆区，而装载的类型信息都位于方法区。
 
-# Objective-c 基础
+# iOS 开发
+
+## Objective-c 基础
 
 ### 类与对象
 
@@ -4177,25 +4179,133 @@ IMP lookUpImpOrForward(Class cls, SEL sel, id inst,
 - <http://www.cocoawithlove.com/2010/01/what-is-meta-class-in-objective-c.html>
 - <https://github.com/opensource-apple/objc4>
 
-   
+### Objective-C 内存分配
 
+在 Objective-c 中，对象通常是使用 alloc 方法在堆上创建的。[NSObject alloc] 方法会在对堆上分配一块内存，按照`NSObject`的内部结构填充这块儿内存区域。
 
+ 一旦对象创建完成，就不可能再移动它了。因为很可能有很多指针都指向这个对象，这些指针并没有被追踪。因此没有办法在移动对象的位置之后更新全部的这些指针。
 
+### MRC 与 ARC
 
+#### MRC
 
+对象操作的四个类别
 
+| 对象操作       | OC中对应的方法               | 对应的 retainCount 变化 |
+| -------------- | ---------------------------- | ----------------------- |
+| 生成并持有对象 | alloc/new/copy/mutableCopy等 | +1                      |
+| 持有对象       | retain                       | +1                      |
+| 释放对象       | release                      | -1                      |
+| 废弃对象       | dealloc                      | -                       |
 
+**注意：**
 
+- ~~这些对象操作的方法其实并不包括在OC中，而是包含在Cocoa框架下的Foundation框架中。~~[从 iOS 7 开始](https://developer.apple.com/library/content/releasenotes/General/iOS70APIDiffs/index.html)，这些方法被移动到了 Runtime 当中，可以在 [objc4-680 NSObject.h](http://opensource.apple.com/source/objc4/objc4-680/runtime/NSObject.h) 找到。
+- 对象的 `reatinCount` 属性并没有实际上的参考价值，参考苹果官方文档[《Practical Memory Management》](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html).
 
+####  四个法则
 
+- 自己生成的对象，自己持有。
+- 非自己生成的对象，自己也能持有。
+- 不在需要自己持有对象的时候，释放。
+- 非自己持有的对象无需释放。
 
+如下是四个黄金法则对应的代码示例：
 
+```objc
+/*
+ * 自己生成并持有该对象
+ */
+ id obj0 = [[NSObeject alloc] init];
+ id obj1 = [NSObeject new];
 
+/*
+ * 持有非自己生成的对象
+ */
+id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但自己不持有
+[obj retain]; // 自己持有对象
 
+/*
+ * 不在需要自己持有的对象的时候，释放
+ */
+id obj = [[NSObeject alloc] init]; // 此时持有对象
+[obj release]; // 释放对象
+/*
+ * 指向对象的指针仍就被保留在obj这个变量中
+ * 但对象已经释放，不可访问
+ */
 
+/*
+ * 非自己持有的对象无法释放
+ */
+id obj = [NSArray array]; // 非自己生成的对象，且该对象存在，但自己不持有
+[obj release]; // ~~~此时将运行时crash 或编译器报error~~~ 非 ARC 下，调用该方法会导致编译器报 issues。此操作的行为是未定义的，可能会导致运行时 crash 或者其它未知行为
+```
 
+其中，非自己生成的对象，且该对象存在，但自己不持有，这个特性使用 'autorelease' 来实现
 
+```objc
+- (id) getAObjNotRetain {
+    id obj = [[NSObject alloc] init]; // 自己持有对象
+    [obj autorelease]; // 取得的对象存在，但自己不持有该对象
+    return obj;
 
+```
+
+autorelease 使得对象在超出生命周期后能正确的被释放（通过调用 release 方法）。在调用 `release` 后，对象会被立即释放，而调用 `autorelease` 后，对象不会被立即释放，而是注册到 `autoreleasepool` 中，经过一段时间后 `pool`结束，此时调用release方法，对象被释放。
+
+在MRC的内存管理模式下，与对变量的管理相关的方法有：retain, release 和 autorelease。retain 和 release 方法操作的是引用记数，当引用记数为零时，便自动释放内存。并且可以用 NSAutoreleasePool 对象，对加入自动释放池（autorelease 调用）的变量进行管理，当 drain 时回收内存。
+
+#### ARC 
+
+ARC 是苹果引入的一种自动内存管理机制，会根据引用计数自动监视对象的生存周期，实现方式是在编译时期自动在已有代码中插入合适的内存管理代码以及在 Runtime 做一些优化。
+
+##### 变量标识符
+
+在ARC中与内存管理有关的变量标识符，有下面几种：
+
+- `__strong`
+- `__weak`
+- `__unsafe_unretained`
+- `__autoreleasing`
+
+`__strong` 是默认使用的标识符。只有还有一个强指针指向某个对象，这个对象就会一直存活。
+
+`__weak` 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，弱引用会被置为 nil
+
+`__unsafe_unretained` 声明这个引用不会保持被引用对象的存活，如果对象没有强引用了，它不会被置为 nil。如果它引用的对象被回收掉了，该指针就变成了野指针。
+
+`__autoreleasing` 用于标示使用引用传值的参数（id *），在函数返回时会被自动释放掉。
+
+变量标识符的用法如下：
+
+```
+Number* __strong num = [[Number alloc] init];
+```
+
+注意 `__strong` 的位置应该放到 `*` 和变量名中间，放到其他的位置严格意义上说是不正确的，只不过编译器不会报错。
+
+##### 属性标识符
+
+```objc
+@perporty (assign /retain /strong/weak/unsafe_unretained/copy) Number* num
+```
+
+类中的属性也可以加上标志符：
+
+```
+@property (assign/retain/strong/weak/unsafe_unretained/copy) Number* num
+```
+
+`assign`表明 setter 仅仅是一个简单的赋值操作，通常用于基本的数值类型，例如`CGFloat`和`NSInteger`。
+
+`strong` 表明属性定义一个拥有者关系。当给属性设定一个新值的时候，首先这个值进行 `retain` ，旧值进行 `release` ，然后进行赋值操作。
+
+`weak` 表明属性定义了一个非拥有者关系。当给属性设定一个新值的时候，这个值不会进行 `retain`，旧值也不会进行 `release`， 而是进行类似 `assign` 的操作。不过当属性指向的对象被销毁时，该属性会被置为nil。
+
+`unsafe_unretained` 的语义和 `assign` 类似，不过是用于对象类型的，表示一个非拥有(unretained)的，同时也不会在对象被销毁时置为nil的(unsafe)关系。
+
+`copy` 类似于 `strong`，不过在赋值时进行 `copy` 操作而不是 `retain` 操作。通常在需要保留某个不可变对象（NSString最常见），并且防止它被意外改变时使用。
 
 
 
