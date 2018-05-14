@@ -46,6 +46,24 @@
     NSLog(@"随机数3：%d",nh3);
     
 //    NSString char1 = [NSStrin]
+    
+    NSString *ch1 = [chars substringWithRange:NSMakeRange(nh1, 1)];
+    NSString *ch2 = [chars substringWithRange:NSMakeRange(nh2, 1)];
+    NSString *ch3 = [chars substringWithRange:NSMakeRange(nh3, 1)];
+    NSLog(@"ch1：%@",ch1);
+    NSLog(@"ch2：%@",ch2);
+    NSLog(@"ch3：%@",ch3);
+    
+    int nhnum = nh1 + nh2 + nh3;
+    
+    int knum = 0;
+    
+    int i = 0;
+    
+    
+    
+    
+    
 }
 
 
