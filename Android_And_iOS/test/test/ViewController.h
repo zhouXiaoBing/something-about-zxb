@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+- (NSString *)md5String:(NSString *)str;
 
 @end
 

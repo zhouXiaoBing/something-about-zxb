@@ -4503,9 +4503,92 @@ Number* __strong num = [[Number alloc] init];
     [String1 hasPrefix:@"NSString"] = = 1 ?  NSLog(@"YES") : NSLog(@"NO");
     [String1 hasSuffix:@".txt"] = = 1 ?  NSLog(@"YES") : NSLog(@"NO");
     //02：查找字符串某处是否包含其它字符串 - (NSRange) rangeOfString: (NSString *) aString，这一点前面在串中搜索子串用到过;
+//字符串的 ASCII 码 操作
+	// NSString to ASCII
+	NSString *string = @"A";
+	int asciiCode = [string characterAtIndex:0]; //65
+	//ASCII to NSString
+	int asciiCode = 65;
+	NSString *string =[NSString stringWithFormat:@"%c",asciiCode]; 
+//字符串的替换
+NSString *myString = @"Hello, World • good morning";
+NSLog(@"original string: %@", myString);
+NSString *replaceString = [myString stringByReplacingOccurrencesOfString:@"•" withString:@"测试"];
+NSLog(@"replaced string: %@", replaceString);
+
 ```
 
+### objc 时间操作
 
+```objc
+//根据月头获取月尾日期
+	/** 
+     *  GetMonthEndDate 
+     *  根据月头获取月尾日期 
+     * 
+     *  @param monthBegin 月头(yyyy-MM-dd HH:mm:ss) 
+     * 
+     *  @return NSDate / nil 
+     */  
+	+(NSDate *) GetMonthEndDate:(NSString *)monthBegin{  
+        if (![monthBegin isEqualToString:@""]){  
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];  
+            [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC+8"]];  
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];  
+
+            NSDateComponents *currentMonth = [[NSDateComponents alloc] init];  
+            currentMonth.month = 1;  
+
+             NSDate *end = [[NSCalendar currentCalendar] dateByAddingComponents:currentMonth toDate:[formatter dateFromString:monthBegin] options:0];  
+            return end;  
+        }else return nil;  
+    } 
+//根据日期获取星期 
+    /** 
+     *  GetWeekForDate 
+     *  根据日期获取星期 
+     * 
+     *  @param NSString strDate 日期(yyyy-MM-dd) 
+     * 
+     *  @return NSString / empty 
+     */  
+    +(NSString*) GetWeekForDate:(NSString *) strDate{  
+        if (![strDate isEqualToString:@""]) {  
+            //时间格式化  
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];  
+            //获取对应时间  
+            [formatter setDateFormat:@"yyyy-MM-dd"];  
+            NSDate *cdate = [formatter dateFromString:strDate];  
+            //获取时间信息  
+            [formatter setDateFormat:@"yyyy-MM-dd EEEE HH:mm:ss a"];  
+            NSString *locationString=[formatter stringFromDate: cdate];  
+            NSArray *arrDate = [locationString componentsSeparatedByString:@" "];  
+            NSString *strWeek = [NSString stringWithFormat:@"%@",[arrDate objectAtIndex:1]];  
+            if ([strWeek isEqualToString:@"Sunday"])        return @"周末";  
+            else if ([strWeek isEqualToString:@"Monday"])   return @"周一";  
+            else if ([strWeek isEqualToString:@"Tuesday"])  return @"周二";  
+            else if ([strWeek isEqualToString:@"Wednesday"])return @"周三";  
+            else if ([strWeek isEqualToString:@"Thursday"]) return @"周四";  
+            else if ([strWeek isEqualToString:@"Friday"])   return @"周五";  
+            else if ([strWeek isEqualToString:@"Saturday"]) return @"周六";  
+            else return @"";  
+        }else return nil;  
+    } 
+//根据当前时间获取 unix时间戳
+    //获取时间戳  
+    NSDate *datetime = [NSDate date];  
+    NSTimeZone *zone = [NSTimeZone timeZoneForSecondsFromGMT:8];  
+    NSInteger interval = [zone secondsFromGMTForDate:datetime];  
+    NSDate *localeDate = [datetime  dateByAddingTimeInterval: interval];  
+    NSString *unixtime = [NSString stringWithFormat:@"%.f", floor([localeDate timeIntervalSince1970])]; 
+//根据unix时间戳获取时间
+    NSInteger interval = [[dict objectForKey:@"publish"] integerValue];  
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];  
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];  
+    [fomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC+8"]];  
+    [fomatter setDateFormat:@"MM-dd HH:mm:ss"];  
+    NSLog(@"%@",[fomatter stringFromDate:date]); 
+```
 
 
 
