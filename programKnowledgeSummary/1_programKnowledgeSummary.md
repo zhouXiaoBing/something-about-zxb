@@ -2008,6 +2008,10 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
 
 # 设计模式
 
+# C语言基础
+
+
+
 # Java基础
 
 ## 面向对象
@@ -4314,6 +4318,20 @@ Number* __strong num = [[Number alloc] init];
 
 
 ```objc
+/*
+1.创建字符串
+2.创建空字符串，然后赋值
+3.用标准c创建字符串:initWithCString方法
+4.创建格式化字符串:占位符（由一个%加一个字符组成）
+5.创建临时字符串
+6.判断字符串为空
+7.是否以”test”开头;是否以”.move”结尾;
+8.比较两个字符串:
+9.声明一个可变字符;长度是40个字符;
+10.在一个字符串后面附加一个新的字符串
+11.
+12.
+*/
 //创建字符串
 	NSString *astring = @"This is a String!";//
 //创建空字符串，然后赋值
@@ -4511,11 +4529,18 @@ Number* __strong num = [[Number alloc] init];
 	int asciiCode = 65;
 	NSString *string =[NSString stringWithFormat:@"%c",asciiCode]; 
 //字符串的替换
-NSString *myString = @"Hello, World • good morning";
-NSLog(@"original string: %@", myString);
-NSString *replaceString = [myString stringByReplacingOccurrencesOfString:@"•" withString:@"测试"];
-NSLog(@"replaced string: %@", replaceString);
-
+    NSString *myString = @"Hello, World • good morning";
+    NSLog(@"original string: %@", myString);
+    NSString *replaceString = [myString stringByReplacingOccurrencesOfString:@"•" withString:@"测试"];
+    NSLog(@"replaced string: %@", replaceString);
+//返回字符串货字符的位置
+    NSRange range;  
+        range = [tmpStr rangeOfString:@"ccd"];  
+        if (range.location != NSNotFound) {  
+            NSLog(@"found at location = %d, length = %d",range.location,range.length);  
+        }else{  
+            NSLog(@"Not Found");  
+        } 
 ```
 
 ### objc 时间操作
@@ -4590,9 +4615,55 @@ NSLog(@"replaced string: %@", replaceString);
     NSLog(@"%@",[fomatter stringFromDate:date]); 
 ```
 
+### objc base64 编解码
 
+```objc
+/**
+  *  编码
+  */
++ (NSString *)base64Encoding:(NSString *)plainString
+{
+    NSData *plainData = [plainString dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64String = [plainData base64EncodedStringWithOptions:0];
+    return base64String;
+}
 
+/**
+ *   解码
+ */
 
++ (NSString *)base64Decoding:(NSString *)encodedString
+{
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:encodedString options:0];
+    NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+    return decodedString;
+}
+```
+
+#### swift base64 编解码
+
+```swift
+/**
+    *   编码
+    */
+    func base64Encoding(plainString:String)->String
+    {
+
+        let plainData = plainString.dataUsingEncoding(NSUTF8StringEncoding)
+        let base64String = plainData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
+        return base64String!
+    }
+
+    /**
+     *   解码
+     */
+    func base64Decoding(encodedString:String)->String
+    {
+        let decodedData = NSData(base64EncodedString: encodedString, options: NSDataBase64DecodingOptions.init(rawValue: 0))
+        let decodedString = NSString(data: decodedData!, encoding: NSUTF8StringEncoding) as! String
+        return decodedString
+    }
+```
 
 
 
@@ -6050,6 +6121,10 @@ for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
 - `View`：显示视图，内置画布，提供图形绘制函数、触屏事件、按键事件函数等；**必须在UI主线程内更新画面，速度较慢**。
 - `SurfaceView`：基于view视图进行拓展的视图类，更适合2D游戏的开发；**View的子类，类似使用双缓机制，在新的线程（也可以在UI线程）中更新画面所以刷新界面速度比 View 快**，但是会涉及到线程同步问题。
 - `GLSurfaceView`：openGL专用。基于SurfaceView视图再次进行拓展的视图类，**专用于3D游戏开发的视图**。
+
+# 正则表达式
+
+
 
 # LOG
 
