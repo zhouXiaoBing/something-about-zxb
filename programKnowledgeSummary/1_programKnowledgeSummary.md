@@ -3332,6 +3332,176 @@ Java 类加载器是 Java 运行环境（Java Runtime Environment）的一部分
 
 类加载器子系统涉及 Java 虚拟机的其他几个组成部分，以及几个来自 java.lang 库的类。比如，用户自定义的类加载器只是普通 的 Java 对象，它的类必须派生自 java.lang.ClassLoader 。`ClassLoader`中定义的方法为程序提供了访问类装载器机制的接口。此外，对于每个被装载的类型，Java虚拟机都会为他创建一个`java.lang.Class`类的实例来代表该类型。和所有其他对象一样，用户自定义的类装载器以及`Class`类的实例都放在内存中的堆区，而装载的类型信息都位于方法区。
 
+## java 功能代码
+
+### java字符串操作
+
+```java
+/**
+1.length() 字符串的长度
+2、charAt() 截取一个字符
+3、getChars() 截取多个字符
+4、getBytes() 替代 getChars() 的一种方法 是将字符的存储在字节数组中，即 getBytes() 
+5、toCharArray() 转为字符数组
+6、equals()和equalsIgnoreCase() 比较两个字符串 忽略大小写
+7、regionMatches() 用于比较一个字符串中特定区域与另一特定区域，它有一个重载的形式允许在比较中忽略大小写。
+8、startsWith()和endsWith()
+9、equals()和==
+10、compareTo()和compareToIgnoreCase() 比较字符串 忽略大小写
+11、indexOf()和lastIndexOf()
+12、substring()
+13、concat() 连接两个字符串
+14 、replace() 替换
+15、trim() 去掉起始和结尾的空格
+16、valueOf() 转换为字符串
+17、toLowerCase() 转换为小写
+18、toUpperCase() 转换为大写
+19、StringBuffer构造函数
+*/
+//1.length() 字符串的长度
+    char chars[]={'a','b'.'c'};
+    String s=new String(chars);
+    int len=s.length();
+//2.截取一个字符串
+    char ch;
+    ch = "abc".charAt.(1);//返回b
+//3.getChars() 截取多个字符串
+	/*
+	@sourceStart:指定了子串开始字符的下标
+	@sourceEnd:指定了子串结束后的下一个字符的下标
+	@target:接收字符的数组
+	@targetStart:开始复制子串的下标值
+	*/
+	void getChars(int sourceStart,int sourceEnd,char target[],int targetStart);
+	String s="this is a demo of the getChars method."
+    char buf[]=new char[20];
+	s.getChars(10,14,buf,0);
+//7. regionMatchs() 用于比较一个字符串中特定区域与另一个特定区域，它有一个重载的形式允许在比较中忽略大小写
+	boolean regionMatches(int startIndex,String str2,int str2StartIndex,int numChars)
+    boolean regionMatches(boolean ignoreCase,int startIndex,String str2,int str2StartIndex,int numChars)
+//8.startsWith() and endsWith
+	//前者为决定是否已特定的字符开始 后者决定是否已特定的字符结束
+//9. equals() and ==
+	//equals()比较字符串对象中的字符，==运算符比较两个对象是否引用同一个实例
+	String s1 = "hello";
+	String s2 = new String(s1);
+	s1.equals(s2);// return true
+	s1==s2;// return false
+//11.
+	indexOf()://查找字符或者子串第一次出现的位置
+	lastIndexOf()://查找字符或者子串最后一次出现的地方
+//12.
+	subString(int startIndex)
+    subString(int startIndex, int endIndex)
+//14.replace()
+	(1)://字符替换字符
+		String replace(char original,char replacement)
+        String s = "Hello".replace("l","w");
+	(2)://字符序列替换字符序列
+		String replace(CharSequence original,CharSequence replacement)
+//19. StringBusffer
+	//StringBuffer 定义了三个构造函数
+            StringBuffer()
+            StringBuffer(int size)
+            StringBuffer(String str)
+            StringBuffer(CharSequence chars)
+	(1).length() : 获得当前长度
+		capacity():获得可分配空间
+	(2).ensureCapacity(int capacity) 设置缓冲区的大小
+	(3).setLength(int len) 设置缓冲区长度
+	(4).charAt(int where) and void setCharAt(int where,char ch)
+	(5)、getChars()
+		void getChars(int sourceStart,int sourceEnd,char target[],int targetStart)
+	(6)、append() 可把任何类型数据的字符串表示连接到调用的StringBuffer对象的末尾。
+		int a=42;
+		StringBuffer sb=new StringBuffer(40);
+		String s=sb.append("a=").append(a).append("!").toString();
+　　(7)、insert() 插入字符串
+　　　　StringBuffer insert(int index,String str)
+　　　　StringBuffer insert(int index,char ch)
+　　　　StringBuffer insert(int index,Object obj)
+　　　　//index指定将字符串插入到StringBuffer对象中的位置的下标。
+　　(8)、reverse() 颠倒StringBuffer对象中的字符
+　　　　StringBuffer reverse()
+　　(9)、delete()和deleteCharAt() 删除字符
+　　　　StringBuffer delete(int startIndex,int endIndex)
+　　　　StringBuffer deleteCharAt(int loc)
+　　(10)、replace() 替换
+　　　　StringBuffer replace(int startIndex,int endIndex,String str)
+　　(11)、substring() 截取子串
+　　　　String substring(int startIndex)
+　　　　String substring(int startIndex,int endIndex)
+```
+
+### String ASCII 互转
+
+```java
+/** 
+ * Java中将一个字符与对应Ascii码互转 
+ * 1 byte = 8bit 可以表示 0-127 
+ */  
+public class GetCharAscii {  
+  
+    /*0-9对应Ascii 48-57 
+     *A-Z 65-90 
+     *a-z 97-122 
+     *第33～126号(共94个)是字符，其中第48～57号为0～9十个阿拉伯数字 
+     */  
+    public static void main(String[] args) {  
+        // TODO Auto-generated method stub  
+  
+        System.out.println(charToByteAscii('9'));  
+        System.out.println(byteAsciiToChar(57));  
+        System.out.println(SumStrAscii("19"));  
+        System.out.println(SumStrAscii("一"));  
+    }  
+  
+    /** 
+     * 方法一：将char 强制转换为byte 
+     * @param ch 
+     * @return 
+     */  
+    public static byte charToByteAscii(char ch){  
+        byte byteAscii = (byte)ch;  
+          
+        return byteAscii;  
+    }  
+    /** 
+     * 方法二：将char直接转化为int，其值就是字符的ascii 
+     * @param ch 
+     * @return 
+     */  
+    public static byte charToByteAscii2(char ch){  
+        byte byteAscii = (byte)ch;  
+          
+        return byteAscii;  
+    }  
+    /** 
+     * 同理，ascii转换为char 直接int强制转换为char 
+     * @param ascii 
+     * @return 
+     */  
+    public static char byteAsciiToChar(int ascii){  
+        char ch = (char)ascii;  
+        return ch;  
+    }  
+    /** 
+     * 求出字符串的ASCII值和 
+     * 注意，如果有中文的话，会把一个汉字用两个byte来表示，其值是负数 
+     */  
+    public static int SumStrAscii(String str){  
+        byte[] bytestr = str.getBytes();  
+        int sum = 0;  
+        for(int i=0;i<bytestr.length;i++){  
+            sum += bytestr[i];  
+        }  
+        return sum;  
+    }  
+}  
+```
+
+
+
 # iOS 开发
 
 ## Objective-c 基础
