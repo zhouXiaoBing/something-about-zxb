@@ -3500,7 +3500,7 @@ public class GetCharAscii {
 }  
 ```
 
-### String StringBuilder StringBuffer 区别
+### String/StringBuilder/StringBuffer
 
 **String：**  字符串常量，长度不可变。
 
