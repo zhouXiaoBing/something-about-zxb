@@ -3332,6 +3332,28 @@ Java 类加载器是 Java 运行环境（Java Runtime Environment）的一部分
 
 类加载器子系统涉及 Java 虚拟机的其他几个组成部分，以及几个来自 java.lang 库的类。比如，用户自定义的类加载器只是普通 的 Java 对象，它的类必须派生自 java.lang.ClassLoader 。`ClassLoader`中定义的方法为程序提供了访问类装载器机制的接口。此外，对于每个被装载的类型，Java虚拟机都会为他创建一个`java.lang.Class`类的实例来代表该类型。和所有其他对象一样，用户自定义的类装载器以及`Class`类的实例都放在内存中的堆区，而装载的类型信息都位于方法区。
 
+## java 对象的生命周期
+
+一个类一旦被装载、连接和初始化，他就可以随时被使用。程序可以访问它的静态字段，调用它的静态方法，或者创建它的实例。明确的实例化类有四种途径：
+
+- 明确调用`new`。
+- 调用`Class`或者`java.lang.reflect.Constructor`对象的`newInstance`方法。
+- 调用任何现有对象的`clone`。
+- 通过`java.io.ObjectInputStream.getObject()`反序列化。
+
+隐含的实例化：
+
+- 可能是保存命令行参数的`String`对象。
+- 对于Java虚拟机装载的每个类，都会暗中实例化一个Class对象来代表这个类型
+- 当Java虚拟机装载了在常量池中包含`CONSTANT_String_info`入口的类的时候，它会创建新的`String`对象来表示这些常量字符串。
+- 执行包含字符串连接操作符的表达式会产生新的对象。
+
+
+
+### 类实例化
+
+在 Java 程序中，类可以被明确或隐含的实例化。
+
 ## java 功能代码
 
 ### java字符串操作
