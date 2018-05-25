@@ -74,3 +74,9 @@
     * [Intent](android/intent.md)
     * [版本问题](android/version.md)
     * [面试题](android/questions.md)
+
+
+
+Android 和 iOS 端两边重新各起了一个包 服务端的加密算法完成了
+
+接口的话是现在做的是，不涉及Token验证的部分 就是首页 详情 和分类展示的部分 加上商品搜索的部分，不过目前没有数据都不太全  考虑要跟随这改动 Android和iOS的代码 
