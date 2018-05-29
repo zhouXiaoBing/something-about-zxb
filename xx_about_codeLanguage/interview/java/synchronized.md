@@ -38,7 +38,7 @@ Java对象头里的`Mark Word`里默认存储对象的`HashCode`，分代年龄�
 
 在运行期间`Mark Word`里存储的数据会随着锁标志位的变化而变化。`Mark Word`可能变化为存储以下4种数据：
 
-![](synchronized_1.png)
+![](/Users/Darin/Desktop/github/something-about-zxb/programKnowledgeSummary/synchronized_1.png)
 
 ### 锁的升级
 
@@ -55,7 +55,7 @@ Java SE1.6为了减少获得锁和释放锁所带来的性能消耗，引入了�
   - `Owner`：获得锁的线程称为Owner
   - `!Owner`：释放锁的线程
 
-![](synchronized_2.gif)
+![](/Users/Darin/Desktop/github/something-about-zxb/programKnowledgeSummary/synchronized_2.png)
 
 新请求锁的线程将首先被加入到`ConetentionList`中，当某个拥有锁的线程（Owner状态）调用unlock之后，如果发现`EntryList`为空则从`ContentionList`中移动线程到`EntryList`，下面说明下`ContentionList`和`EntryList`的实现方式：
 
