@@ -2184,11 +2184,10 @@ public static void shell_sort(int array[],int lenth){
 | 72     | 6    | 57   | 88     | 60   | 42     | 83   | 73   | 48     | 85   |
 | **48** | 6    | 57   | **88** | 60   | 42     | 83   | 73   | **88** | 85   |
 | 48     | 6    | 57   | **42** | 60   | **72** | 83   | 73   | 88     | 85   |
-|        |      |      |        |      |        |      |      |        |      |
 
 | 1.初始 i = 0; j = 9; key = 72  i<=j   j→后(<72) a[8]  则 a[0] = a[8] ，i→前(>72) a[3] 则 a[8] = a[3] |
 | ------------------------------------------------------------ |
-| 2.i=3;j=8; key =72; i<=j;  j→后(<72) a[5] 则 a[3] = a[5] ,i→前（>72）,因为 j =5 i<=j, 所以i==5退出   72填入a[5] |
+| **2.i=3;j=8; key =72; i<=j;  j→后(<72) a[5] 则 a[3] = a[5] ,i→前（>72）,因为 j =5 i<=j, 所以i==5退出   72填入a[5]** |
 
  
 
@@ -2220,7 +2219,7 @@ public static void quickSort(int a[],int l; int r){
 }
 ```
 
-#### 归并排序（Merge Sort）
+### 归并排序（Merge Sort）
 
 归并排序是建立在归并操作上的一种有效的排序方法。是采用分治的典型应用
 
@@ -2297,7 +2296,110 @@ public static void mergeArray(int a[],int first,int middle,int end,int temp[]){
 }
 ```
 
+### 堆排序（Heap Sort）
 
+基本思想：
+
+![6660](66606.png)
+
+图示：（88，85，83，73，72，60，57，48，42，6）
+
+![7770](77707.png)
+
+```java
+//构建最小堆
+public static void MakeMinHeap(int a[],int n){
+    for(int i=(n-1)/2;i>=0;i--){
+        MinHeapFixDown(a,i,n);
+    }
+}
+//从i节点开始调整，n为节点总数 从0开始计算 i节点的子节点为 2*i+1，2*i+2
+public static void MinHeapFixDown(int a[], int i, int n){
+    int j = 2*i+1;
+    int temp = 0;
+    while(j<n){
+        if(j+1<n && a[j+1] < a[j]){
+            j++;
+        }
+        if(a[i] <= a[j]){
+            break;
+        }
+        //the bigger node go down
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+        
+        i = j;
+        j = 2*i+1;
+    }
+}
+
+public static void MinHeap_Sort(int a[],int n){
+    int temp = 0;
+    MakeMinHeap(a,n);
+    
+    for(int i = n-1;i>0;i--){
+        temp = a[0];
+        a[0] = a[i];
+        a[i] = temp;
+        MinHeapFixDwon(a,0,i);
+    }
+}
+```
+
+### 基数排序（Radix Sort）
+
+**binSort**
+
+1.基本思想：首先创建数组A[MaxValue];然后将每个数放到相应的位置上（例如17放在下标17的数组位置 ）；最后遍历数组，即为排序后的结果
+
+![img](88808.png)
+
+2.问题：当序列中存在较大的值时，BinsSort 的排序方法会浪费大量的空间开销
+
+**RadixSort**
+
+1.基本思想基数排序在BinSort的基础上，通过基数的限制来减少空间的开销
+
+![10101001](101010010.png)
+
+![9990](99909.png)
+
+（1）首先确定基数为10，数组的长度以前就是为10，每个数34都会在这10个数中寻找自己的额位置
+
+（2）不同于BinSort会直接将数34放在数组的下标34处，基数排序是将34分开为3和4，第一轮排序根据末位放在数组的下标4处，第二轮排序根据倒数第二位放在数组的下标3处，然后遍历数组。
+
+```java
+public static void RadixSort(int A[],int temp[],int n,int k,int r,int cnt[]){
+   //A:原数组
+   //temp:临时数组
+   //n:序列的数字个数
+   //k:最大的位数2
+   //r:基数10
+   //cnt:存储bin[i]的个数
+    for(int i=0, rtok=1; i<k; i++, rtok = rtok*r){
+        //init
+        for(int j=0;j<r;j++){
+           cnt[j] = 0;
+        }
+        //counting number in the box
+        for(int j=0;j<n;j++){
+            cnt[(A[j]/rtok)%r]--; 
+        }
+        //cnt[j]的个数修改为前j个箱子一共有几个数字
+        for(int j=1;j<r;j++){
+           cnt[j] = cnt[j-1] + cnt[j];
+       }
+        for(int j = n-1;j>=0;j--){      //重点理解
+           cnt[(A[j]/rtok)%r]--;
+           temp[cnt[(A[j]/rtok)%r]] = A[j];
+       }
+       for(int j=0;j<n;j++){
+           A[j] = temp[j];
+       }
+    }
+}
+```
 
 
 
