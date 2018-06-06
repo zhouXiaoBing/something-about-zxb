@@ -8140,7 +8140,12 @@ ps：所有的 : 命令都必须以 <enter> 结束。
 提示：补全对于许多命令都有效。您只需尝试按 CTRL-D 和 <TAB>。
       它对于 :help 命令非常有用。
 ```
-
+## vim的.vimrc 文件的配置
+```
+ 1. .vimrc 文件在用户目录下 查询用户目录的命令：'echo $HOME' 可以复制安装目录下的 .vimrc 过来 命令：'sudo cp  /usr/share/vim/vimrc  ~/.vimrc'
+ 2. .XXX 为隐藏目录 可以通过命令：'defaults write com.apple.finder AppleShowAllFiles -bool true' 显示在 Finder 里 然后更改读写权限
+ 3.复制相应的配置到用户目录下的 .vimrc 文件里 保存退出 再启用vim
+```
 
 
 ## vim命令总结
