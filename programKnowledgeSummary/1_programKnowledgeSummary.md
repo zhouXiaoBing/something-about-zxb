@@ -8187,7 +8187,7 @@ ps：所有的 : 命令都必须以 <enter> 结束。
 | :%s/old/new/g                   | 在文件内替换所有的字符串 old 为新的字符串 new，请输入    |                                                              |
 | :%s/old/new/gc                  | 进行全文替换时询问用户确认每个替换需添加 c 标志          |                                                              |
 |                                 |                                                          |                                                              |
-| :!command                       | 执行一个外部命令 command                                 | :!dir            :!ls            -  用于显示当前目录的内容。<br />:!del FILENAME   :!rm FILENAME   -  用于删除名为 FILENAME 的文件。 |
+| :!command                       | 执行一个外部命令 command                                 | :!dir            :!ls            -  用于显示当前目录的内容。<br/>:!del FILENAME   :!rm FILENAME   -  用于删除名为 FILENAME 的文件。 |
 | :w FILENAME                     | 将 当前 vim 中正在编辑的文件保存到名为 FILENAME 的文件中 |                                                              |
 | v motion :w FILENAME            | 将当前编辑文件中可视模式下选中的内容保存到文件           |                                                              |
 | :r FILENAME                     | 提取 FILENAME 并插入到当前文件的光标位置后面             |                                                              |
@@ -8207,8 +8207,4 @@ ps：所有的 : 命令都必须以 <enter> 结束。
 # LOG
 
 https://github.com/hadyang/interview
-试一试
-
-
-
-
+试dhi        " for insert mode
