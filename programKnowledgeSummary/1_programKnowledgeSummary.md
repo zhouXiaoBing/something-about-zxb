@@ -8546,4 +8546,6 @@ ps：所有的 : 命令都必须以 <enter> 结束。
 
 https://github.com/hadyang/interview
 
+https://zhongfucheng.bitcron.com/post/shou-ji/wen-zhang-dao-hang
+
 由于文件过大会导致卡顿所以以后写笔记的时候留下全部何在一起的和分拆开的
