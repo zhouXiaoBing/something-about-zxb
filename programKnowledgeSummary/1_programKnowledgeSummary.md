@@ -2456,16 +2456,16 @@ op1->op3
 
 ```mermaid
 graph TB
-/-->bin
-/-->boot
-/-->dev
-/-->etc
-/-->home
-/-->lib
-/-->proc
-/-->usr
-/-->var
-/-->...
+a((/:根目录))-->bin
+a((/:根目录))-->boot
+a((/:根目录))-->dev
+a((/:根目录))-->etc
+a((/:根目录))-->home
+a((/:根目录))-->lib
+a((/:根目录))-->proc
+a((/:根目录))-->usr
+a((/:根目录))-->var
+a((/:根目录))-->...
 ```
 
 **linux**文件系统是一个 **目录树结构**，文件系统结构从一个根目录开始，根目录了下可以有任意多个文件和子目录，子目录又可以有任意多个文件和子目录
@@ -8544,6 +8544,8 @@ ps：所有的 : 命令都必须以 <enter> 结束。
 |                                 |                                                          |                                                              |
 # **markdown** 图表 diagram 语法示例
 
+[mermaid_gitbook](https://mermaidjs.github.io/)
+
 ### [Sequence](https://github.com/bramp/js-sequence-diagrams)
 
 ```sequence
@@ -8672,5 +8674,9 @@ sequenceDiagram
 https://github.com/hadyang/interview
 
 https://zhongfucheng.bitcron.com/post/shou-ji/wen-zhang-dao-hang
+
+https://mermaidjs.github.io/
+
+[**js算法实现**](https://github.com/trekhleb/javascript-algorithms/blob/master/README.zh-CN.md)
 
 由于文件过大会导致卡顿所以以后写笔记的时候留下全部何在一起的和分拆开的
