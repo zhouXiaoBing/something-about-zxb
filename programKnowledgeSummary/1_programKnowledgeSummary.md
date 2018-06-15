@@ -1983,6 +1983,12 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
 
 #### 红黑树
 
+### 二叉树的另一种理解（网载）
+
+
+
+![img](image-20180614090453095.png)
+
 
 
 ## Hash
@@ -2035,11 +2041,9 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
 
    ```java
    public static void BubbleSort(int [] arr){
-   
         int temp;//临时变量
         for(int i=0; i<arr.length-1; i++){   //表示趟数，一共arr.length-1次。
             for(int j=arr.length-1; j>i; j--){
-   
                 if(arr[j] < arr[j-1]){
                     temp = arr[j];
                     arr[j] = arr[j-1];
@@ -2050,7 +2054,26 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
     }
    ```
 
-4. 优化
+   
+
+4. C代码实现
+
+   ```c
+   void BubleSort(int a[], int n){//n为数组长度
+       int i,j,temp;
+       for(j=0;j<n;j++){
+           for(i=0;i<n-j;i++){
+               if(a[i]>a[i+1]){
+                   temp=a[i];
+                   a[i]=a[i+1];
+                   a[i+1]=temp;
+               }
+           }
+       }
+   }
+   ```
+
+5. 优化
 
    1. 问题：数据顺序排好之后，冒泡算法仍然会进行下一轮的比较，直到arr.length-1,后面的比较没有意义
 
@@ -2191,14 +2214,11 @@ public static void shell_sort(int array[],int lenth){
 | ------------------------------------------------------------ |
 | **2.i=3;j=8; key =72; i<=j;  j→后(<72) a[5] 则 a[3] = a[5] ,i→前（>72）,因为 j =5 i<=j, 所以i==5退出   72填入a[5]** |
 
- 
-
 ```java
+//java 实现
 public static void quickSort(int a[],int l; int r){
     if(l>=r) return;
-    
     int i = l; int j = r; int key = a[l];
-        
     while(i<j){
         while (i<j && a[j]>=key){
             j--;
@@ -2220,6 +2240,36 @@ public static void quickSort(int a[],int l; int r){
     quickSort(a,i+1,r);
 }
 ```
+
+```c
+//C语言实现
+int partition(int *data,int low,int high){//数组指针，数组位置低位，数组位置高位
+    int t = 0;//临时变量
+    t = data[low];//
+    while(low<high){
+        while(low < high && data[high] >= t){
+            high--;
+        }
+        data[low] = data[high];
+        while(low < high && data[low] <= t){
+            low++;
+        }
+        data[high] = data[low];
+    }
+    data[low] = t;
+    return low;
+}
+
+void sort(int *data, int low, int high){
+    if(low >= high)  return;
+    int pivotloc = 0;
+    pivotoc = partition(data,low,high);
+    sort(data,low,pivotloc-1);
+    sort(data,pivotloc+1,high);
+}
+```
+
+
 
 ### 归并排序（Merge Sort）
 
