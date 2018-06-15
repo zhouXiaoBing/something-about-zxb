@@ -7530,6 +7530,260 @@ View（包括ViewGroup）使用的是组合模式，将View组成成树形结构
 
 ## OkHttp
 
+[官方使用文档](http://square.github.io/okhttp/3.x/okhttp/)
+
+### 使用配置
+
+```java
+1.Android studio 配置
+	compile 'com.squareup.okhttp3:okhttp:3.2.0'
+	compile 'com.squareup.okio:okio:1.7.0'
+2.添加网络权限
+    <uses-permission android:name="android.permission.INTERNET"/>
+```
+
+### 异步**get**请求
+
+```java
+      private void getAsynHttp() {
+        mOkHttpClient=new OkHttpClient();
+        Request.Builder requestBuilder = new Request.Builder().url("http://www.baidu.com");
+        //可以省略，默认是GET请求
+        requestBuilder.method("GET",null);
+        Request request = requestBuilder.build();
+        Call mcall= mOkHttpClient.newCall(request);
+        mcall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (null != response.cacheResponse()) {
+                    String str = response.cacheResponse().toString();
+                    Log.i("wangshu", "cache---" + str);
+                } else {
+                    response.body().string();
+                    String str = response.networkResponse().toString();
+                    Log.i("wangshu", "network---" + str);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+//回调不在UI线程 需要自己写
+```
+
+### 异步Post请求
+
+```java
+  private void postAsynHttp() {
+        mOkHttpClient=new OkHttpClient();
+        RequestBody formBody = new FormBody.Builder()
+                .add("size", "10")
+                .build();
+        Request request = new Request.Builder()
+                .url("http://api.1-blog.com/biz/bizserver/article/list.do")
+                .post(formBody)//OkHttp3异步POST请求和OkHttp2.x有一些差别就是没有FormEncodingBuilder这个类，替代它的是功能更加强大的FormBody
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String str = response.body().string();
+                Log.i("wangshu", str);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+```
+
+### 异步上传文件
+
+```java
+//上传文件本身也是一个POST请求,首先定义上传文件类型：
+public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
+//将sdcard根目录的wangshu.txt文件上传到服务器上：
+private void postAsynFile() {
+        mOkHttpClient=new OkHttpClient();
+        File file = new File("/sdcard/wangshu.txt");
+        Request request = new Request.Builder()
+                .url("https://api.github.com/markdown/raw")
+                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+                .build();
+
+            mOkHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.i("wangshu",response.body().string());
+                }
+            });
+        }
+//添加SD卡权限
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+```
+
+### 异步下载文件
+
+```java
+///下载文件同样在上一篇没有讲到，实现起来比较简单，在这里下载一张图片，我们得到Response后将流写进我们指定的图片文件中就可以了 
+private void downAsynFile() {
+        mOkHttpClient = new OkHttpClient();
+        String url = "http://img.my.csdn.net/uploads/201603/26/1458988468_5804.jpg";
+        Request request = new Request.Builder().url(url).build();
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                InputStream inputStream = response.body().byteStream();
+                FileOutputStream fileOutputStream = null;
+                try {
+                    fileOutputStream = new FileOutputStream(new File("/sdcard/wangshu.jpg"));
+                    byte[] buffer = new byte[2048];
+                    int len = 0;
+                    while ((len = inputStream.read(buffer)) != -1) {
+                        fileOutputStream.write(buffer, 0, len);
+                    }
+                    fileOutputStream.flush();
+                } catch (IOException e) {
+                    Log.i("wangshu", "IOException");
+                    e.printStackTrace();
+               }
+
+               Log.d("wangshu", "文件下载成功");
+           }
+       });
+   }
+```
+
+### 异步上传Multipart文件
+
+```java
+//这种场景很常用，我们有时会上传文件同时还需要传其他类型的字段，OkHttp3实现起来很简单，需要注意的是没有服务器接收我这个Multipart文件，所以这里只是举个例子，具体的应用还要结合实际工作中对应的服务器。 
+private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");//定义上传类型
+private void sendMultipart(){
+    mOkHttpClient = new OkHttpClient();
+    RequestBody requestBody = new MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("title", "wangshu")
+            .addFormDataPart("image", "wangshu.jpg",
+                    RequestBody.create(MEDIA_TYPE_PNG, new File("/sdcard/wangshu.jpg")))
+            .build();
+
+    Request request = new Request.Builder()
+            .header("Authorization", "Client-ID " + "...")
+            .url("https://api.imgur.com/3/image")
+            .post(requestBody)
+            .build();
+
+   mOkHttpClient.newCall(request).enqueue(new Callback() {
+       @Override
+       public void onFailure(Call call, IOException e) {
+
+       }
+
+       @Override
+       public void onResponse(Call call, Response response) throws IOException {
+           Log.i("wangshu", response.body().string());
+       }
+   });
+}
+
+```
+
+### 设置超时时间和缓存
+
+```java
+//和OkHttp2.x有区别的是不能通过OkHttpClient直接设置超时时间和缓存了，而是通过OkHttpClient.Builder来设置，通过builder配置好OkHttpClient后用builder.build()来返回OkHttpClient，所以我们通常不会调用new OkHttpClient()来得到OkHttpClient，而是通过builder.build()：
+File sdcache = getExternalCacheDir();
+        int cacheSize = 10 * 1024 * 1024;
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .cache(new Cache(sdcache.getAbsoluteFile(), cacheSize));
+        OkHttpClient mOkHttpClient=builder.build();       
+```
+
+### 取消请求
+
+```java
+//使用call.cancel()可以立即停止掉一个正在执行的call。如果一个线程正在写请求或者读响应，将会引发IOException。当用户离开一个应用时或者跳到其他界面时，使用Call.cancel()可以节约网络资源，另外不管同步还是异步的call都可以取消。 
+//也可以通过tags来同时取消多个请求。当你构建一请求时，使用RequestBuilder.tag(tag)来分配一个标签。之后你就可以用OkHttpClient.cancel(tag)来取消所有带有这个tag的call。
+//模拟这个场景我们首先创建一个定时的线程池：
+private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+private  void cancel(){
+        final Request request = new Request.Builder()
+                .url("http://www.baidu.com")
+                .cacheControl(CacheControl.FORCE_NETWORK)
+                .build();
+        Call call=null;
+        call = mOkHttpClient.newCall(request);
+        final Call finalCall = call;
+        //100毫秒后取消call
+        executor.schedule(new Runnable() {
+            @Override public void run() {
+                finalCall.cancel();
+            }
+        }, 100, TimeUnit.MILLISECONDS);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+            }
+
+            @Override
+            public void onResponse(final Response response) {
+                if (null != response.cacheResponse()) {
+                    String str = response.cacheResponse().toString();
+                    Log.i("wangshu", "cache---" + str);
+                } else {
+                    try {
+                        response.body().string();
+
+                    } catch (IOException e) {
+                        Log.i("wangshu", "IOException");
+                        e.printStackTrace();
+                    }
+                    String str = response.networkResponse().toString();
+                    Log.i("wangshu", "network---" + str);
+                }
+            }
+        });
+           Log.i("wangshu", "是否取消成功"+call.isCanceled());
+    }
+```
+
+### 关于OkHTTP的封装
+
+如果每次请求网络都需要写重复的代码绝对是令人头疼的，网上也有很多对OkHttp封装的优秀开源项目，功能也非常强大，封装的意义就在于更加方便的使用，具有拓展性，但是对OkHttp封装最需要解决的是以下的两点：
+
+1. 避免重复代码调用
+2. 将请求结果回调改为UI线程
+
+具体的封装参见 github 上面的项目 [OkHttpFinal](https://github.com/pengjianbo/OkHttpFinal)
+
 ## Intent
 
 Intent 是一个消息传递对象，您可以使用它从其他应用组件请求操作。尽管 Intent 可以通过多种方式促进组件之间的通信，但其基本用例主要包括以下三个：
