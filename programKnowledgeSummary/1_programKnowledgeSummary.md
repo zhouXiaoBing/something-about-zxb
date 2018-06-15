@@ -26,6 +26,41 @@ by zxb
 
 ![image-20180615145337112](image-20180615145337112.png)
 
+```mermaid
+graph LR
+url(url构成)==>scheme(方案)
+scheme==描述==>se(访问服务器获取资<br>源时使用的协议)
+se==默认值==>se1(无)
+url==>user(用户)
+user==描述==>ur(某些方案访问资源<br>时需要的用户名)
+ur==默认值==>ur1(匿名)
+url==>password(密码)
+password==描述==>pd(用户名后面可能要<br>包含的密码,中间用':'隔开)
+pd==默认值==>pd1(E-mail地址)
+url==>host(主机)
+host==描述==>ht(资源宿主服务器的<br>主机名或点分IP地址)
+ht==默认值==>ht1(无)
+url==>port(端口)
+port==描述==>pt(资源宿主服务器正在监听<br>的端口号很多方案有默认端口)
+pt==默认值==>pt1(每个方案特有<br>如http:80)
+url==>path(路径)
+path==描述==>ph(服务器上的资源本地<br>路径用/与URL分开)
+ph==默认值==>ph1(无)
+url==>params(参数)
+params==描述==>ps(某些方案会用此来输入参数<br>参数为一个或多个键值对)
+ps==默认值==>ps1(无)
+url==>query(查询)
+query==描述==>qy(用于激活应用程序<br>如数据库没有通用格式)
+qy==默认值==>qy1(无)
+url==>frag(片段)
+frag==描述==>fg(部分资源的名字是在客户端<br>内部使用不会传到服务器)
+fg==默认值==>fg1(无)
+```
+
+**url构成：<scheme>://<user><password>@<host>:<port>/<path>;<params>?<query>#<frag>**
+
+
+
 ##### URN
 
 统一资源名，与位置无关。
