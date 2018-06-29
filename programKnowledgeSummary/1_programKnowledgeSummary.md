@@ -6804,6 +6804,36 @@ Android的核心系统服务依赖于Linux 2.6 内核，如安全性，内存管
 
 ![image-20180504163128279](image-20180504163128279.png)
 
+#### activity的异常生命周期
+
+##### 1.资源相关的系统配置发生改变导致 **Activity** 被杀死并重新创建
+
+当系统配置发生改变后，如从横屏手机切换到了竖屏，**Activity**会被销毁，其**onPause,onStop,onDestroy**方法均会被调用，同时由于是在异常情况下被终止的，系统会调用**onSavedInstanceState**来保存当前**Activity**的状态(正常情况下不会调用此方法)，这个方法的调用时机是在**onStop**之前，当**Activity**重新被创建后，系统调用会调用**onRestoreInstanceState**方法，并且把Activity销毁时**onSavedInstanceState**方法所保存的**Bundle**对象作为参数同时传递给**onRestoreInstanceState**和**onCreate**方法，**onRestoreInstanceState**是在**onStart**之后调用。 
+
+**Note：**
+
+```txt
+我们知道，当Activity被异常终止后被恢复时，系统会自动的帮我们恢复数据和一些状态，如文本框用户输入的数据，listview的滚动位置等，关于保存和恢复View的层次结构和数据，系统的工作流程是这样的，首先Activity被意外终止时，Activity会调用onSavedInstanceState去保存数据，然后Activity会委托Window去保存数据，接着Window再委托它上面的顶级容器去保存数据，顶层容器是一个ViewGroup，一般来说它很可能是一个DecorView.最后顶层容器再去一一通知它的子元素来保存数据，这样整个数据保存过程就完成了，可以发现，这是一种典型的委托思想，上层委托下层，父容器委托子容器去处理一些事情。
+```
+
+
+
+##### 2.资源内存不足导致低优先级的Activity被杀死 
+
+**Activity**按照优先级我们可以分为以下的三种： 
+
+- 前台**Activity**—正在和用户交互的**Activity**，优先级最高。
+- 可见但非前台**Activity**,如处于**onPause**状态的**Activity**，**Activity**中弹出了一个对话框，导致**Activity**可见但是位于后台无法和用户直接交互。 
+- 后台**Activity**—已经被暂停的**Activity**,比如执行了**onStop**方法，优先级最低。
+
+当系统内存不足时，系统就会按照上述的优先级顺序选择杀死Activity所在的进程，并在后续通过onSaveInstanceState缓存数据和onRestoreInstanceState恢复数据。
+
+**Note：**
+
+```txt
+如果一个进程中没有四大组件在执行，那么这个进程将很快被杀死，因此，一些后台工作不适合脱离了四大组件工作，比较好的方法是将后台工作放入Service中从而保证进程有一定的优先级，这样就不会轻易的被系统杀死。
+系统只恢复那些被开发者指定过id的控件，如果没有为控件指定id,则系统就无法恢复了
+```
 #### 四种状态
 
 - 活动（Active/Running）状态
@@ -6829,7 +6859,7 @@ Android的核心系统服务依赖于Linux 2.6 内核，如安全性，内存管
 
    该状态由onStop()进入，如果被杀掉，可能进入onCreate()或onRestart()，如果彻底死亡，进入onDestroy()
 
-### Service 生命周期
+#### Service 生命周期
 
 service 有两种启动模式
 
@@ -6997,10 +7027,10 @@ JAVA的加载方式与第一种方法相同。
 
 对安卓而言，Activity有四种启动模式，它们是：
 
-- standard 标准模式，每次都新建一个实例对象
-- singleTop 如果在任务栈顶发现了相同的实例则重用，否则新建并压入栈顶
-- singleTask 如果在任务栈中发现了相同的实例，将其上面的任务终止并移除，重用该实例。否则新建实例并入栈
-- singleInstance 允许不同应用，进程线程等共用一个实例，无论从何应用调用该实例都重用
+- standard 标准模式，每次都新建一个实例对象（普通activity）
+- singleTop 如果在任务栈顶发现了相同的实例则重用，否则新建并压入栈顶（要展示推送过来的消息）
+- singleTask 如果在任务栈中发现了相同的实例，将其上面的任务终止并移除，重用该实例。否则新建实例并入栈（程序入口等启动页面）
+- singleInstance 允许不同应用，进程线程等共用一个实例，无论从何应用调用该实例都重用（完全独立的，类似闹钟的提示）
 
 想要感受一下的话写一个小demo，然后自己启动自己再点返回键就看出来了。下面详细说说每一种启动模式
 
