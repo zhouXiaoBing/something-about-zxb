@@ -7032,28 +7032,6 @@ JAVA的加载方式与第一种方法相同。
 - singleTask 如果在任务栈中发现了相同的实例，将其上面的任务终止并移除，重用该实例。否则新建实例并入栈（程序入口等启动页面）
 - singleInstance 允许不同应用，进程线程等共用一个实例，无论从何应用调用该实例都重用（完全独立的，类似闹钟的提示）
 
-想要感受一下的话写一个小demo，然后自己启动自己再点返回键就看出来了。下面详细说说每一种启动模式
-
-**standard**
-
-什么配置都不写就是默认的这种启动模式。但是每次新建一个实例的话真是过于浪费，为了优化应该考虑余下三种方式。
-
-**singleTop**
-
-每次扫描栈顶，如果在任务栈顶发现了相同的实例则重用，否则新建并压入栈顶。
-
-![image-20180504172440631](image-20180504172440631.png)
-
-配置方法在 AndroidMainifest.xml 
-
-```xml
-<activity
-    android:name=".SingleTopActivity"
-    android:label="@string/singletop"
-    android:launchMode="singleTop" >
-</activity>
-```
-
 ## listView 的原理和优化
 
 ### 原理
