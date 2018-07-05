@@ -6721,9 +6721,11 @@ Number* __strong num = [[Number alloc] init];
 
 ## 第三方库
 
+## iOS 常用策略
 
+### Background Execution
 
-
+[Background Execution]https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html()
 
 
 
