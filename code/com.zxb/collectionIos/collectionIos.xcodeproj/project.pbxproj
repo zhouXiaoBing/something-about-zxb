@@ -46,6 +46,8 @@
 		93CF4C6520205B3B001E6F90 /* SaleResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6420205B3B001E6F90 /* SaleResult.m */; };
 		93CF4C6820205E14001E6F90 /* SaleRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF4C6720205E14001E6F90 /* SaleRotate.m */; };
 		93DEAD32201B1C530095A2CF /* mainCyrclePagerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */; };
+		93F29F6A20F44E2F00139094 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F29F6920F44E2F00139094 /* XCTest.framework */; };
+		93F29F6C20F44E4B00139094 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F29F6B20F44E4B00139094 /* libOCMock.a */; };
 		DB60C1FEB8E8AC6E5CD8FAE5 /* Pods_collectionIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72886A44299527F32A9757B0 /* Pods_collectionIos.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +142,8 @@
 		93CF4C6720205E14001E6F90 /* SaleRotate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaleRotate.m; sourceTree = "<group>"; };
 		93DEAD30201B1C390095A2CF /* mainCyrclePagerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainCyrclePagerCell.h; sourceTree = "<group>"; };
 		93DEAD31201B1C530095A2CF /* mainCyrclePagerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mainCyrclePagerCell.m; sourceTree = "<group>"; };
+		93F29F6920F44E2F00139094 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		93F29F6B20F44E4B00139094 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = collectionIosTests/libOCMock.a; sourceTree = "<group>"; };
 		B684136185E32E2C0C0D061C /* Pods-collectionIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.release.xcconfig"; sourceTree = "<group>"; };
 		CC8ABC6446F3C90C245764AF /* Pods-collectionIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionIos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionIos/Pods-collectionIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +161,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93F29F6C20F44E4B00139094 /* libOCMock.a in Frameworks */,
+				93F29F6A20F44E2F00139094 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +435,8 @@
 		ECEEEAA2DC055EA51C724972 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93F29F6B20F44E4B00139094 /* libOCMock.a */,
+				93F29F6920F44E2F00139094 /* XCTest.framework */,
 				72886A44299527F32A9757B0 /* Pods_collectionIos.framework */,
 			);
 			name = Frameworks;
@@ -885,6 +893,10 @@
 				DEVELOPMENT_TEAM = 3J42VADECF;
 				INFOPLIST_FILE = collectionIosTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/collectionIosTests",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxb.collectionIosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -900,6 +912,10 @@
 				DEVELOPMENT_TEAM = 3J42VADECF;
 				INFOPLIST_FILE = collectionIosTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/collectionIosTests",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zxb.collectionIosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

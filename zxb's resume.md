@@ -17,11 +17,11 @@
 
 **技术范围**
 - Android 独立开发 ，工具使用如 Android studio ，eclipse  熟练常用第三方开源 如 EventBus 、okHttp 、imageLoader
-- iOS  独立开发 熟练使用 Xcode 等 熟练 OC 熟悉 swift
+- iOS  独立开发 熟练使用 Xcode 等 熟练 OC 
 - react native  熟悉混合 App 的开发
 - java  基础较好，基于java实现的各种数据结构及算法 有一定积累（笔记或手写伪代码实现）
 - php  能够在已有框架下 进行 App 的接口的 维护、修改和简单开发
-- sql  熟悉Android 和 iOS 下的 sqlite 的 使用 以及相关的第三方封装 如 Android Query  FMDB等
+- sql  熟悉Android 和 iOS 下的 sqlite 的 使用 以及相关的第三方封装 如 GreenDao  FMDB等
 
 **工作经历**
 | 单位名称                     | 工作时间    | 职位        | 工作内容                   |
