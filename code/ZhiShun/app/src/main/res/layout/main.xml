@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="Connect" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_weight="0.31"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="292dp"
+            android:layout_weight="1.37"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/sendText"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:fontFamily="1"
+                android:lines="1"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:shadowRadius="1"
+                android:layout_alignTop="@+id/sendButton1"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/sendButton"
+                android:text="0.2" />
+
+            <ListView
+                android:id="@+id/listMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_above="@+id/sendButton2"
+                android:layout_below="@+id/textView3">
+            </ListView>
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="單次讀取"
+                android:layout_alignWithParentIfMissing="false"
+                android:height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/sendText"
+                android:layout_alignParentStart="true" />
+            <Button
+                android:id="@+id/sendButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:enabled="false"
+                android:text="連續讀取每X.X秒"
+                android:layout_alignWithParentIfMissing="false"
+                android:height="50dp"
+                android:layout_above="@+id/sendButton"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/sendText" />
+            <Button
+                android:id="@+id/sendButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="停止連續讀取"
+                android:layout_alignWithParentIfMissing="false"
+                android:height="50dp"
+                android:layout_above="@+id/sendButton1"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/sendText"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ADC:"
+                android:id="@+id/textView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="normal"
+                android:textSize="@dimen/acc"
+                android:background="@color/ADCBLUE"
+                android:textColor="@android:color/holo_orange_light"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="T1:"
+                android:id="@+id/textView2"
+                android:textStyle="bold"
+                android:textSize="@dimen/acc"
+                android:background="@color/T1yellow"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView2"
+                android:background="@color/T2GREEN"
+                android:text="T2:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#910407"
+                android:textSize="@dimen/acc"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -5606,7 +5606,7 @@ Category常见的方法
 
 ##### Extension
 
-可以认为是一种匿名的 Category ，Extension 与 Category 有如下几点显著的区别：
+可以认为是一种匿名的 Category ，Extension 与 Category 有如下几点显著的区别： 
 
 1. 使用 Extension 必须有原有类的源码
 2. Extension 声明的方法必须在类的主 @implementation 区间实现，可以避免使用名 Category 带来多个不必要的 implementation 段
