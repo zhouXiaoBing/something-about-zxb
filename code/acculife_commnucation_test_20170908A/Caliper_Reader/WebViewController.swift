@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-//import WKWebViewJavascriptBridge
+import WKWebViewJavascriptBridge
 
 class WebViewController : UIViewController {
 //    let webView = WKWebView(frame: CGRect(),configuration:WKWebViewConfiguration())

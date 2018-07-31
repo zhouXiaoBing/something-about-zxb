@@ -19,6 +19,7 @@
 		7D6070889CE65525DB9FC28E /* Pods_AcculifeCommunication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */; };
 		9369FE0A211040D100EDB5B2 /* flow.md in Resources */ = {isa = PBXBuildFile; fileRef = 9369FE09211040D100EDB5B2 /* flow.md */; };
 		9369FE1621104A0B00EDB5B2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE1521104A0B00EDB5B2 /* WebViewController.swift */; };
+		9369FE1E2110656900EDB5B2 /* WKWebViewJavascriptBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9369FE1D2110656900EDB5B2 /* WKWebViewJavascriptBridge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AcculifeCommunication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9369FE09211040D100EDB5B2 /* flow.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = flow.md; sourceTree = "<group>"; };
 		9369FE1521104A0B00EDB5B2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		9369FE1D2110656900EDB5B2 /* WKWebViewJavascriptBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WKWebViewJavascriptBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9369FE1E2110656900EDB5B2 /* WKWebViewJavascriptBridge.framework in Frameworks */,
 				2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */,
 				7D6070889CE65525DB9FC28E /* Pods_AcculifeCommunication.framework in Frameworks */,
 			);
@@ -137,6 +140,7 @@
 		2BFD8ECE1EA5FC1000CCAFB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9369FE1D2110656900EDB5B2 /* WKWebViewJavascriptBridge.framework */,
 				2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */,
 				5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */,
 			);
