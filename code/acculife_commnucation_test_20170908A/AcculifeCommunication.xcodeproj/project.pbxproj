@@ -17,10 +17,7 @@
 		2BFD8ECD1EA1ED6D00CCAFB3 /* BleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */; };
 		2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */; };
 		9369FE0A211040D100EDB5B2 /* flow.md in Resources */ = {isa = PBXBuildFile; fileRef = 9369FE09211040D100EDB5B2 /* flow.md */; };
-		9369FE0E2110491900EDB5B2 /* WKWebViewJavascriptBridgeJS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE0D2110491900EDB5B2 /* WKWebViewJavascriptBridgeJS.swift */; };
-		9369FE102110492F00EDB5B2 /* WKWebViewJavascriptBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE0F2110492F00EDB5B2 /* WKWebViewJavascriptBridge.swift */; };
-		9369FE122110493600EDB5B2 /* WKWebViewJavascriptBridgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE112110493600EDB5B2 /* WKWebViewJavascriptBridgeBase.swift */; };
-		9369FE142110494000EDB5B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9369FE132110494000EDB5B2 /* Info.plist */; };
+		9369FE1621104A0B00EDB5B2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE1521104A0B00EDB5B2 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,11 +52,7 @@
 		2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleTableViewCell.swift; sourceTree = "<group>"; };
 		2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9369FE09211040D100EDB5B2 /* flow.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = flow.md; sourceTree = "<group>"; };
-		9369FE0C2110490F00EDB5B2 /* WKWebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewJavascriptBridge.h; sourceTree = "<group>"; };
-		9369FE0D2110491900EDB5B2 /* WKWebViewJavascriptBridgeJS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewJavascriptBridgeJS.swift; sourceTree = "<group>"; };
-		9369FE0F2110492F00EDB5B2 /* WKWebViewJavascriptBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewJavascriptBridge.swift; sourceTree = "<group>"; };
-		9369FE112110493600EDB5B2 /* WKWebViewJavascriptBridgeBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewJavascriptBridgeBase.swift; sourceTree = "<group>"; };
-		9369FE132110494000EDB5B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9369FE1521104A0B00EDB5B2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +103,10 @@
 		2B543E721E9FE58A00F8D802 /* AcculifeCommunication */ = {
 			isa = PBXGroup;
 			children = (
-				9369FE0B211048B800EDB5B2 /* WKWebViewJavascriptBrige */,
 				2B543E731E9FE58A00F8D802 /* AppDelegate.swift */,
 				2B543E751E9FE58A00F8D802 /* CaliperViewController.swift */,
 				2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */,
+				9369FE1521104A0B00EDB5B2 /* WebViewController.swift */,
 				2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */,
 				2B543E771E9FE58A00F8D802 /* Main.storyboard */,
 				2B543E7D1E9FE58A00F8D802 /* Assets.xcassets */,
@@ -132,18 +125,6 @@
 				2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9369FE0B211048B800EDB5B2 /* WKWebViewJavascriptBrige */ = {
-			isa = PBXGroup;
-			children = (
-				9369FE0C2110490F00EDB5B2 /* WKWebViewJavascriptBridge.h */,
-				9369FE0D2110491900EDB5B2 /* WKWebViewJavascriptBridgeJS.swift */,
-				9369FE0F2110492F00EDB5B2 /* WKWebViewJavascriptBridge.swift */,
-				9369FE112110493600EDB5B2 /* WKWebViewJavascriptBridgeBase.swift */,
-				9369FE132110494000EDB5B2 /* Info.plist */,
-			);
-			path = WKWebViewJavascriptBrige;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +239,6 @@
 			files = (
 				2B543E811E9FE58A00F8D802 /* LaunchScreen.storyboard in Resources */,
 				9369FE0A211040D100EDB5B2 /* flow.md in Resources */,
-				9369FE142110494000EDB5B2 /* Info.plist in Resources */,
 				2B543E7E1E9FE58A00F8D802 /* Assets.xcassets in Resources */,
 				2B543E791E9FE58A00F8D802 /* Main.storyboard in Resources */,
 				2BFD8ECB1EA1ED4900CCAFB3 /* BleTableViewCell.xib in Resources */,
@@ -287,12 +267,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B543E7C1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld in Sources */,
-				9369FE102110492F00EDB5B2 /* WKWebViewJavascriptBridge.swift in Sources */,
 				2B543E761E9FE58A00F8D802 /* CaliperViewController.swift in Sources */,
-				9369FE122110493600EDB5B2 /* WKWebViewJavascriptBridgeBase.swift in Sources */,
 				2B543E741E9FE58A00F8D802 /* AppDelegate.swift in Sources */,
 				2BFD8ECD1EA1ED6D00CCAFB3 /* BleTableViewCell.swift in Sources */,
-				9369FE0E2110491900EDB5B2 /* WKWebViewJavascriptBridgeJS.swift in Sources */,
+				9369FE1621104A0B00EDB5B2 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +433,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6USEZG8689;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Caliper_Reader",
+				);
 				INFOPLIST_FILE = Caliper_Reader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -469,6 +452,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6USEZG8689;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Caliper_Reader",
+				);
 				INFOPLIST_FILE = Caliper_Reader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
