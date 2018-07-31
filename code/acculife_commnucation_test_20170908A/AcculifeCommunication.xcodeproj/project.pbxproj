@@ -16,6 +16,7 @@
 		2BFD8ECB1EA1ED4900CCAFB3 /* BleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */; };
 		2BFD8ECD1EA1ED6D00CCAFB3 /* BleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */; };
 		2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */; };
+		7D6070889CE65525DB9FC28E /* Pods_AcculifeCommunication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */; };
 		9369FE0A211040D100EDB5B2 /* flow.md in Resources */ = {isa = PBXBuildFile; fileRef = 9369FE09211040D100EDB5B2 /* flow.md */; };
 		9369FE1621104A0B00EDB5B2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE1521104A0B00EDB5B2 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EAA55BF09DDF4503B8D950F /* Pods-AcculifeCommunication.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcculifeCommunication.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AcculifeCommunication/Pods-AcculifeCommunication.debug.xcconfig"; sourceTree = "<group>"; };
 		2B543E701E9FE58A00F8D802 /* AcculifeCommunication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcculifeCommunication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B543E731E9FE58A00F8D802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B543E751E9FE58A00F8D802 /* CaliperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BleTableViewCell.xib; sourceTree = "<group>"; };
 		2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleTableViewCell.swift; sourceTree = "<group>"; };
 		2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5723CE07C4883F3E6A6A0839 /* Pods-AcculifeCommunication.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcculifeCommunication.release.xcconfig"; path = "Pods/Target Support Files/Pods-AcculifeCommunication/Pods-AcculifeCommunication.release.xcconfig"; sourceTree = "<group>"; };
+		5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AcculifeCommunication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9369FE09211040D100EDB5B2 /* flow.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = flow.md; sourceTree = "<group>"; };
 		9369FE1521104A0B00EDB5B2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */,
+				7D6070889CE65525DB9FC28E /* Pods_AcculifeCommunication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,12 +86,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2090EBC5D9CFBA1D9BE12305 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1EAA55BF09DDF4503B8D950F /* Pods-AcculifeCommunication.debug.xcconfig */,
+				5723CE07C4883F3E6A6A0839 /* Pods-AcculifeCommunication.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2B543E671E9FE58A00F8D802 = {
 			isa = PBXGroup;
 			children = (
 				2B543E721E9FE58A00F8D802 /* AcculifeCommunication */,
 				2B543E711E9FE58A00F8D802 /* Products */,
 				2BFD8ECE1EA5FC1000CCAFB3 /* Frameworks */,
+				2090EBC5D9CFBA1D9BE12305 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */,
+				5E04C23489D600BF70BDEC06 /* Pods_AcculifeCommunication.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B543E9B1E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunication" */;
 			buildPhases = (
+				257680722C6052187E2015FB /* [CP] Check Pods Manifest.lock */,
 				2B543E6C1E9FE58A00F8D802 /* Sources */,
 				2B543E6D1E9FE58A00F8D802 /* Frameworks */,
 				2B543E6E1E9FE58A00F8D802 /* Resources */,
+				ABBBD019FE7365BF189D4B4C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +278,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		257680722C6052187E2015FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AcculifeCommunication-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABBBD019FE7365BF189D4B4C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AcculifeCommunication/Pods-AcculifeCommunication-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/WKWebViewJavascriptBridge/WKWebViewJavascriptBridge.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WKWebViewJavascriptBridge.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AcculifeCommunication/Pods-AcculifeCommunication-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2B543E6C1E9FE58A00F8D802 /* Sources */ = {
@@ -430,6 +487,7 @@
 		};
 		2B543E9C1E9FE58A00F8D802 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EAA55BF09DDF4503B8D950F /* Pods-AcculifeCommunication.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6USEZG8689;
@@ -449,6 +507,7 @@
 		};
 		2B543E9D1E9FE58A00F8D802 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5723CE07C4883F3E6A6A0839 /* Pods-AcculifeCommunication.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6USEZG8689;
