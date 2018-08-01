@@ -15,6 +15,9 @@
 		9369FE39211161AF00EDB5B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9369FE37211161AF00EDB5B2 /* LaunchScreen.storyboard */; };
 		9369FE44211161AF00EDB5B2 /* AcculifeCommunicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE43211161AF00EDB5B2 /* AcculifeCommunicationTests.swift */; };
 		9369FE4F211161AF00EDB5B2 /* AcculifeCommunicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9369FE4E211161AF00EDB5B2 /* AcculifeCommunicationUITests.swift */; };
+		FF34CBA02111FC810066A794 /* CaliperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF34CB9F2111FC810066A794 /* CaliperViewController.swift */; };
+		FF34CBA22111FC960066A794 /* BleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF34CBA12111FC960066A794 /* BleTableViewCell.swift */; };
+		FF34CBA42111FCAA0066A794 /* BleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF34CBA32111FCAA0066A794 /* BleTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		9369FE4A211161AF00EDB5B2 /* AcculifeCommunicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcculifeCommunicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9369FE4E211161AF00EDB5B2 /* AcculifeCommunicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcculifeCommunicationUITests.swift; sourceTree = "<group>"; };
 		9369FE50211161AF00EDB5B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF34CB9F2111FC810066A794 /* CaliperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaliperViewController.swift; sourceTree = "<group>"; };
+		FF34CBA12111FC960066A794 /* BleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleTableViewCell.swift; sourceTree = "<group>"; };
+		FF34CBA32111FCAA0066A794 /* BleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BleTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +107,14 @@
 			children = (
 				9369FE2B211161A800EDB5B2 /* AppDelegate.swift */,
 				9369FE2D211161A800EDB5B2 /* ViewController.swift */,
+				FF34CB9F2111FC810066A794 /* CaliperViewController.swift */,
+				FF34CBA12111FC960066A794 /* BleTableViewCell.swift */,
 				9369FE2F211161A800EDB5B2 /* Main.storyboard */,
 				9369FE35211161AF00EDB5B2 /* Assets.xcassets */,
 				9369FE37211161AF00EDB5B2 /* LaunchScreen.storyboard */,
 				9369FE3A211161AF00EDB5B2 /* Info.plist */,
 				9369FE32211161A800EDB5B2 /* AcculifeCommunication.xcdatamodeld */,
+				FF34CBA32111FCAA0066A794 /* BleTableViewCell.xib */,
 			);
 			path = AcculifeCommunication;
 			sourceTree = "<group>";
@@ -234,6 +243,7 @@
 			files = (
 				9369FE39211161AF00EDB5B2 /* LaunchScreen.storyboard in Resources */,
 				9369FE36211161AF00EDB5B2 /* Assets.xcassets in Resources */,
+				FF34CBA42111FCAA0066A794 /* BleTableViewCell.xib in Resources */,
 				9369FE31211161A800EDB5B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,7 +270,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9369FE2E211161A800EDB5B2 /* ViewController.swift in Sources */,
+				FF34CBA02111FC810066A794 /* CaliperViewController.swift in Sources */,
 				9369FE34211161A800EDB5B2 /* AcculifeCommunication.xcdatamodeld in Sources */,
+				FF34CBA22111FC960066A794 /* BleTableViewCell.swift in Sources */,
 				9369FE2C211161A800EDB5B2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.AcculifeCommunication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,7 +474,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.AcculifeCommunication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

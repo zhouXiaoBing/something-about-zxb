@@ -16,6 +16,8 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
     
     
     var webView : WKWebView!
+    
+    var itemString :String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +35,10 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         let webConfiguration = WKWebViewConfiguration()
         // 创建UserContentController（提供JavaScript向webView发送消息的方法）
         let userContent = WKUserContentController()
-        userContent.add(self as! WKScriptMessageHandler, name: "toNrfActivity")
+        userContent.add(self as WKScriptMessageHandler, name: "myName")
         webConfiguration.userContentController = userContent
 //        webConfiguration.e
-        let myURL = URL(string: "http://125.227.206.31:136/AcuLife/app/index.html")
+        let myURL = URL(string: "http://125.227.206.31:136/AcuLife/ios/index.html")
         webView = WKWebView(frame: UIScreen.main.bounds, configuration: webConfiguration)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
@@ -53,14 +55,27 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("js 调用 native 代理")
         // 判断是否是调用原生的
-        if "toNrfActivity" == message.name {
+        if "myName" == message.name {
             // 判断message的内容，然后做相应的操作
-            if "close" == message.body as! String {
-                
-            }
+            print(message.body)//message.body就是 mmappbid ，另一个参数是1.
+            //带着 mmappbid，1 跳转到蓝牙连接页面
+            itemString = message.body as? String
+            self.performSegue(withIdentifier: "CaliperView", sender: self)
+            
         }
         
     }
+    
+    //segue 给新页面传递数据的方法
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CaliperView"{
+            print("给新页面传递数据的方法")
+            let con = segue.destination as! CaliperViewController
+            con.uuidfromViewController = itemString
+        }
+        
+    }
+    
     
     //内容开始加载
     func webViewDidStartLoad(_ webView: UIWebView) {
