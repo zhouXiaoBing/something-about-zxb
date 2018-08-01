@@ -1,14 +1,13 @@
 //
 //  AppDelegate.swift
-//  Caliper_Reader
+//  AcculifeCommunication
 //
-//  Created by Wesley Chen on 2017/3/30.
-//  Copyright © 2017年 Wesley Chen. All rights reserved.
+//  Created by Mac on 2018/8/1.
+//  Copyright © 2018年 vitagou. All rights reserved.
 //
 
 import UIKit
 import CoreData
- 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
-        print("persistentContainer: NSPersistentContainer")
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -61,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                  
-                /*LaunchScreen
+                /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
                  * The persistent store is not accessible, due to permissions or data protection when the device is locked.
@@ -78,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Core Data Saving support
 
     func saveContext () {
-        let context = persistentContainer.viewContext//当前容器
+        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -86,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")//错误日志
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

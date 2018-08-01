@@ -5,7 +5,8 @@
 //  Created by 周小兵 on 2018/7/31.
 //  Copyright © 2018年 ugolazy. All rights reserved.
 //
-
+/**在工程里用  故事板写了 wkwebview  如果运行在 ios11以下 就会报这个错误，如果要支持iOS 11 以下的用户，需重写View部分，使用代码调用WKWebView，而不用使用故事版来加载wkwebview。
+*/
 import Foundation
 import UIKit
 import JavaScriptCore
@@ -36,7 +37,7 @@ let context : JSContext = JSContext()
 
 class ViewController : UIViewController,SwiftJavaScriptDelegate,WKNavigationDelegate{
     
-    @IBOutlet var Web:WKWebView!
+
     var webView  = WKWebView()
    
     func callHandler(handlerFuncName: String) {
@@ -44,7 +45,7 @@ class ViewController : UIViewController,SwiftJavaScriptDelegate,WKNavigationDele
     }
     
     override func viewDidLoad() {
-        
+        print("viewController_viewDidLoad")
         self.addWebView()
     }
     //
