@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B543E741E9FE58A00F8D802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543E731E9FE58A00F8D802 /* AppDelegate.swift */; };
+		2B543E761E9FE58A00F8D802 /* CaliperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B543E751E9FE58A00F8D802 /* CaliperViewController.swift */; };
+		2B543E791E9FE58A00F8D802 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B543E771E9FE58A00F8D802 /* Main.storyboard */; };
+		2B543E7C1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B543E7A1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld */; };
+		2B543E7E1E9FE58A00F8D802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B543E7D1E9FE58A00F8D802 /* Assets.xcassets */; };
+		2B543E811E9FE58A00F8D802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B543E7F1E9FE58A00F8D802 /* LaunchScreen.storyboard */; };
+		2BFD8ECB1EA1ED4900CCAFB3 /* BleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */; };
+		2BFD8ECD1EA1ED6D00CCAFB3 /* BleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */; };
+		2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */; };
+		FF34CB9A2110B30F0066A794 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF34CB992110B30F0066A794 /* ViewController.swift */; };
+		FF34CB9C2110D3A70066A794 /* Web.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF34CB9B2110D3A70066A794 /* Web.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2B543E881E9FE58A00F8D802 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B543E681E9FE58A00F8D802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B543E6F1E9FE58A00F8D802;
+			remoteInfo = Caliper_Reader;
+		};
+		2B543E931E9FE58A00F8D802 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B543E681E9FE58A00F8D802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B543E6F1E9FE58A00F8D802;
+			remoteInfo = Caliper_Reader;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2B543E701E9FE58A00F8D802 /* AcculifeCommunication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcculifeCommunication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B543E731E9FE58A00F8D802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2B543E751E9FE58A00F8D802 /* CaliperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperViewController.swift; sourceTree = "<group>"; };
+		2B543E781E9FE58A00F8D802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2B543E7B1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Caliper_Reader.xcdatamodel; sourceTree = "<group>"; };
+		2B543E7D1E9FE58A00F8D802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B543E801E9FE58A00F8D802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B543E821E9FE58A00F8D802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B543E871E9FE58A00F8D802 /* AcculifeCommunicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcculifeCommunicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B543E921E9FE58A00F8D802 /* AcculifeCommunicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcculifeCommunicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BleTableViewCell.xib; sourceTree = "<group>"; };
+		2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleTableViewCell.swift; sourceTree = "<group>"; };
+		2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FF34CB992110B30F0066A794 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FF34CB9B2110D3A70066A794 /* Web.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Web.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B543E6D1E9FE58A00F8D802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BFD8ED01EA5FC1000CCAFB3 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E841E9FE58A00F8D802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E8F1E9FE58A00F8D802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B543E671E9FE58A00F8D802 = {
+			isa = PBXGroup;
+			children = (
+				2B543E721E9FE58A00F8D802 /* AcculifeCommunication */,
+				2B543E711E9FE58A00F8D802 /* Products */,
+				2BFD8ECE1EA5FC1000CCAFB3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2B543E711E9FE58A00F8D802 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B543E701E9FE58A00F8D802 /* AcculifeCommunication.app */,
+				2B543E871E9FE58A00F8D802 /* AcculifeCommunicationTests.xctest */,
+				2B543E921E9FE58A00F8D802 /* AcculifeCommunicationUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B543E721E9FE58A00F8D802 /* AcculifeCommunication */ = {
+			isa = PBXGroup;
+			children = (
+				2B543E731E9FE58A00F8D802 /* AppDelegate.swift */,
+				2B543E751E9FE58A00F8D802 /* CaliperViewController.swift */,
+				2BFD8ECC1EA1ED6D00CCAFB3 /* BleTableViewCell.swift */,
+				2BFD8ECA1EA1ED4900CCAFB3 /* BleTableViewCell.xib */,
+				2B543E771E9FE58A00F8D802 /* Main.storyboard */,
+				2B543E7D1E9FE58A00F8D802 /* Assets.xcassets */,
+				2B543E7F1E9FE58A00F8D802 /* LaunchScreen.storyboard */,
+				2B543E821E9FE58A00F8D802 /* Info.plist */,
+				2B543E7A1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld */,
+				FF34CB992110B30F0066A794 /* ViewController.swift */,
+				FF34CB9B2110D3A70066A794 /* Web.storyboard */,
+			);
+			name = AcculifeCommunication;
+			path = Caliper_Reader;
+			sourceTree = "<group>";
+		};
+		2BFD8ECE1EA5FC1000CCAFB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2BFD8ECF1EA5FC1000CCAFB3 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B543E6F1E9FE58A00F8D802 /* AcculifeCommunication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B543E9B1E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunication" */;
+			buildPhases = (
+				2B543E6C1E9FE58A00F8D802 /* Sources */,
+				2B543E6D1E9FE58A00F8D802 /* Frameworks */,
+				2B543E6E1E9FE58A00F8D802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AcculifeCommunication;
+			productName = Caliper_Reader;
+			productReference = 2B543E701E9FE58A00F8D802 /* AcculifeCommunication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2B543E861E9FE58A00F8D802 /* AcculifeCommunicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B543E9E1E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunicationTests" */;
+			buildPhases = (
+				2B543E831E9FE58A00F8D802 /* Sources */,
+				2B543E841E9FE58A00F8D802 /* Frameworks */,
+				2B543E851E9FE58A00F8D802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B543E891E9FE58A00F8D802 /* PBXTargetDependency */,
+			);
+			name = AcculifeCommunicationTests;
+			productName = Caliper_ReaderTests;
+			productReference = 2B543E871E9FE58A00F8D802 /* AcculifeCommunicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2B543E911E9FE58A00F8D802 /* AcculifeCommunicationUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B543EA11E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunicationUITests" */;
+			buildPhases = (
+				2B543E8E1E9FE58A00F8D802 /* Sources */,
+				2B543E8F1E9FE58A00F8D802 /* Frameworks */,
+				2B543E901E9FE58A00F8D802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B543E941E9FE58A00F8D802 /* PBXTargetDependency */,
+			);
+			name = AcculifeCommunicationUITests;
+			productName = Caliper_ReaderUITests;
+			productReference = 2B543E921E9FE58A00F8D802 /* AcculifeCommunicationUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B543E681E9FE58A00F8D802 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				KnownAssetTags = (
+					Story,
+					storyBoard,
+				);
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = ugolazy;
+				TargetAttributes = {
+					2B543E6F1E9FE58A00F8D802 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 6USEZG8689;
+						ProvisioningStyle = Automatic;
+					};
+					2B543E861E9FE58A00F8D802 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 686Q67N45F;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2B543E6F1E9FE58A00F8D802;
+					};
+					2B543E911E9FE58A00F8D802 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 686Q67N45F;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2B543E6F1E9FE58A00F8D802;
+					};
+				};
+			};
+			buildConfigurationList = 2B543E6B1E9FE58A00F8D802 /* Build configuration list for PBXProject "AcculifeCommunication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B543E671E9FE58A00F8D802;
+			productRefGroup = 2B543E711E9FE58A00F8D802 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2B543E6F1E9FE58A00F8D802 /* AcculifeCommunication */,
+				2B543E861E9FE58A00F8D802 /* AcculifeCommunicationTests */,
+				2B543E911E9FE58A00F8D802 /* AcculifeCommunicationUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B543E6E1E9FE58A00F8D802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B543E811E9FE58A00F8D802 /* LaunchScreen.storyboard in Resources */,
+				2B543E7E1E9FE58A00F8D802 /* Assets.xcassets in Resources */,
+				FF34CB9C2110D3A70066A794 /* Web.storyboard in Resources */,
+				2B543E791E9FE58A00F8D802 /* Main.storyboard in Resources */,
+				2BFD8ECB1EA1ED4900CCAFB3 /* BleTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E851E9FE58A00F8D802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E901E9FE58A00F8D802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B543E6C1E9FE58A00F8D802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF34CB9A2110B30F0066A794 /* ViewController.swift in Sources */,
+				2B543E7C1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld in Sources */,
+				2B543E761E9FE58A00F8D802 /* CaliperViewController.swift in Sources */,
+				2B543E741E9FE58A00F8D802 /* AppDelegate.swift in Sources */,
+				2BFD8ECD1EA1ED6D00CCAFB3 /* BleTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E831E9FE58A00F8D802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B543E8E1E9FE58A00F8D802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2B543E891E9FE58A00F8D802 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B543E6F1E9FE58A00F8D802 /* AcculifeCommunication */;
+			targetProxy = 2B543E881E9FE58A00F8D802 /* PBXContainerItemProxy */;
+		};
+		2B543E941E9FE58A00F8D802 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B543E6F1E9FE58A00F8D802 /* AcculifeCommunication */;
+			targetProxy = 2B543E931E9FE58A00F8D802 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2B543E771E9FE58A00F8D802 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B543E781E9FE58A00F8D802 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2B543E7F1E9FE58A00F8D802 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B543E801E9FE58A00F8D802 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2B543E991E9FE58A00F8D802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B543E9A1E9FE58A00F8D802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B543E9C1E9FE58A00F8D802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6USEZG8689;
+				INFOPLIST_FILE = Caliper_Reader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ugolazy.AcculiferCommunication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2B543E9D1E9FE58A00F8D802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6USEZG8689;
+				INFOPLIST_FILE = Caliper_Reader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ugolazy.AcculiferCommunication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2B543E9F1E9FE58A00F8D802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 686Q67N45F;
+				INFOPLIST_FILE = Caliper_ReaderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bluetooth.Caliper-ReaderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcculifeCommunication.app/AcculifeCommunication";
+			};
+			name = Debug;
+		};
+		2B543EA01E9FE58A00F8D802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 686Q67N45F;
+				INFOPLIST_FILE = Caliper_ReaderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bluetooth.Caliper-ReaderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AcculifeCommunication.app/AcculifeCommunication";
+			};
+			name = Release;
+		};
+		2B543EA21E9FE58A00F8D802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 686Q67N45F;
+				INFOPLIST_FILE = Caliper_ReaderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bluetooth.Caliper-ReaderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Caliper_Reader;
+			};
+			name = Debug;
+		};
+		2B543EA31E9FE58A00F8D802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 686Q67N45F;
+				INFOPLIST_FILE = Caliper_ReaderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bluetooth.Caliper-ReaderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Caliper_Reader;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B543E6B1E9FE58A00F8D802 /* Build configuration list for PBXProject "AcculifeCommunication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B543E991E9FE58A00F8D802 /* Debug */,
+				2B543E9A1E9FE58A00F8D802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B543E9B1E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B543E9C1E9FE58A00F8D802 /* Debug */,
+				2B543E9D1E9FE58A00F8D802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B543E9E1E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B543E9F1E9FE58A00F8D802 /* Debug */,
+				2B543EA01E9FE58A00F8D802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B543EA11E9FE58A00F8D802 /* Build configuration list for PBXNativeTarget "AcculifeCommunicationUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B543EA21E9FE58A00F8D802 /* Debug */,
+				2B543EA31E9FE58A00F8D802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2B543E7A1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2B543E7B1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodel */,
+			);
+			currentVersion = 2B543E7B1E9FE58A00F8D802 /* Caliper_Reader.xcdatamodel */;
+			path = Caliper_Reader.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2B543E681E9FE58A00F8D802 /* Project object */;
+}
