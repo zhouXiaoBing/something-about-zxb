@@ -72,6 +72,7 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
             print("给新页面传递数据的方法")
             let con = segue.destination as! CaliperViewController
             con.uuidfromViewController = itemString
+//            print(itemString ?? )
         }
         
     }

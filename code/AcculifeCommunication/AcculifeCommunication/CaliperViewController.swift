@@ -445,7 +445,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
     var uuid: UUID!
     var uuidfromViewController: String!
     
-    var bleFindPeripheral = [CBPeripheral!]()
+    var bleFindPeripheral = [CBPeripheral?]()
     var bleDeviceNameList = [String]()
     var bleDeviceUUIDList = [String]()
     var bleDeviceRSSIList = [NSNumber]()
@@ -491,7 +491,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         
         print(uuidfromViewController)
         
-//        centralManager.connect(uuidfromViewController.identifier.uuidString, options: nil)//连接蓝牙的方法
+//        centralManager.connect(23, options: nil)//连接蓝牙的方法
 //        var itemString:String?
 //        print("zxb:")
 //        print(itemString)
@@ -621,14 +621,15 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         print("BLE Stop Scan")
         
         if connectPeripheral != nil {
-            if connectPeripheral.identifier.uuidString != bleFindPeripheral[indexPath.row].identifier.uuidString {
+            if connectPeripheral.identifier.uuidString != bleFindPeripheral[indexPath.row]?.identifier.uuidString {
                 if self.connectPeripheral != nil {
+                    //取消连接 有蓝牙连接的时候
                     centralManager.cancelPeripheralConnection(connectPeripheral)
                 }
                 
             }
         }
-        centralManager.connect(bleFindPeripheral[indexPath.row], options: nil)
+        centralManager.connect(bleFindPeripheral[indexPath.row]!, options: nil)
     }
     
     
@@ -789,6 +790,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
     }
     
     func _CheckADCVal(ADC: UInt16) -> Double {
+        print(_CheckADCVal)
         //ADC=3971;
         var ADCV : Double = 0
         if(Double(ADC) <= ADCMap[ADCMap.count-1][0]) {
@@ -848,6 +850,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
             return
         }
         let data = characteristic.value! as NSData
+        print("zxb_data")
         print("====\(data)")
         
         if(data.length>12)
@@ -880,6 +883,10 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
                 self.labelT1Data.text = str1
                 let str2 = String(format: "T2:%d=%.2f", T2,fT2Val)
                 self.labelT2Data.text = str2
+                print(str)
+                print("str_str")
+                print(str1)
+                print(str2)
             
             }
         }
