@@ -1,0 +1,6 @@
+framework module Pods_vitagouTests {
+  umbrella header "Pods-vitagouTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
