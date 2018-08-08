@@ -6,6 +6,8 @@
 //  Copyright © 2018年 vitagou. All rights reserved.
 //
 #import "adv_list_item.h"
+#import "adv_list.h"
+
 @interface adv_list : NSObject
 
 @property (strong,nonatomic) NSMutableArray *item;

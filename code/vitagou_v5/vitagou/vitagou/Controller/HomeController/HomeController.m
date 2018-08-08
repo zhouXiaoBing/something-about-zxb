@@ -32,7 +32,7 @@
 
 @property (assign,nonatomic) adv_list *advList;
 
-@property (assign,nonatomic) adv_list_item *advListItem;
+@property (assign,nonatomic) NSMutableArray *advListItem;
 
 @property (assign,nonatomic) SDCycleScrollView *CyclePageView;
 
@@ -71,19 +71,22 @@
         NSLog(@"homeData——code %@",data.code);//地址值
         if (data.datas != nil) {
 //            id key = data.datas;
+//            homeData *dt;
+//            NSMutableDictionary *dic = [dt.datas mj_keyValuesWithIgnoredKeys:data.datas];
+//            NSLog(@"dic %@",dic);
                     for (int i = 0; i < data.datas.count; i++) {
             
                         NSArray *key = [data.datas[i] allKeys];
                         for (int j = 0; j < key.count; j++) {
+                            //__NSSingleEntryDictionaryI 没有键导致的错误
                             if ([key[j] isEqualToString:@"adv_list"]) {
                                 NSLog(@"识别出来了");
-                                self.advList = data.datas[i];
-                                NSLog(@"data.datas[i] %@",data.datas[i]);
-//                                NSDictionary *dt = data.datas[i];
-//                                self.advList.item = [dt objectForKey:@"item"];
-                                
-                                NSLog(@"self.advList.item %lu", (unsigned long)self.advList.item.count);
-                                
+                               self.advList.item = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
+                                [self.advList.item enumerateObjectsUsingBlock:^(adv_list_item* obj, NSUInteger idx, BOOL * _Nonnull stop)
+                                {
+                                    [self.imageArray addObject:obj.image];
+                                    NSLog(@"obj.iamge %@",obj.image);
+                                }];
                             }
                         }
                     }

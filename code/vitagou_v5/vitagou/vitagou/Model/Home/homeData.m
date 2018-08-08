@@ -30,6 +30,8 @@
         NSLog(@"homeData_POST %@",responseObject);
 //        NSLog(@"homeData_responseObject %@",responseObject);
         homeData *hd = [homeData mj_objectWithKeyValues:responseObject];
+        
+        
         NSLog(@"code %@",hd.code);
         NSString *code = hd.code;
         success(code,hd);
