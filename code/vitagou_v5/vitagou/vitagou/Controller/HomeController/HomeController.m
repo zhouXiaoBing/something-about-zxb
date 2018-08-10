@@ -22,9 +22,10 @@
 #import "homeData.h"
 #import "adv_list.h"
 #import "adv_list_item.h"
-#import <SDCycleScrollView/SDCycleScrollView.h>//轮播图
+#import "HomeHeaderView.h"
+
 //第一层cell是基本的布局结构，
-@interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate,SDCycleScrollViewDelegate
+@interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
 >
 @property (assign,nonatomic) SearchNavView *searchView;
 
@@ -34,7 +35,7 @@
 
 @property (assign,nonatomic) NSMutableArray *advListItem;
 
-@property (assign,nonatomic) SDCycleScrollView *CyclePageView;
+@property (strong,nonatomic) UICollectionView *collectionView;
 
 //轮播图的数组 image: 图片地址 type：类型 data：根据类型来的 可能是跳转地址
 @property (assign,nonatomic) NSMutableArray *imageArray;
@@ -46,11 +47,18 @@
 
 @implementation HomeController
 
+#pragma -mark conllectionViewCell
+static NSString *pageScroller = @"pageScroller";
+
+NSMutableArray *imageArr;
+NSMutableArray *typeArr;
+NSMutableArray *dataArr;
 
 - (void)viewDidLoad{
     NSLog(@"HomeController_viewDidLoad");
     [super viewDidLoad];
     [self getHomeData];
+    [self buildCollectionView];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     static dispatch_once_t onceToken;
@@ -65,28 +73,50 @@
 
 }
 
+-(void)buildCollectionView{
+    NSLog(@"enter_buildConllectionView");
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
+    //---------------------------------------------------//
+    [self.collectionView registerClass:[SDCycleScrollView class] forCellWithReuseIdentifier:@"pageScroller"];
+    
+    [self.view addSubview:self.collectionView];
+    //location
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.edges.equalTo(self.view);
+        }];
+    }];
+    
+}
+
 -(void)getHomeData{
     [homeData getHomeData:^(NSString *code, homeData *data) {
 //        NSLog(@"code %@",code);
         NSLog(@"homeData——code %@",data.code);//地址值
+        
+         imageArr = [NSMutableArray array];
+         typeArr = [NSMutableArray array];
+         dataArr = [NSMutableArray array];
         if (data.datas != nil) {
-//            id key = data.datas;
-//            homeData *dt;
-//            NSMutableDictionary *dic = [dt.datas mj_keyValuesWithIgnoredKeys:data.datas];
-//            NSLog(@"dic %@",dic);
+//            self.imageArray = [NSMutableArray arrayWithCapacity:10];
                     for (int i = 0; i < data.datas.count; i++) {
-            
                         NSArray *key = [data.datas[i] allKeys];
                         for (int j = 0; j < key.count; j++) {
-                            //__NSSingleEntryDictionaryI 没有键导致的错误
                             if ([key[j] isEqualToString:@"adv_list"]) {
                                 NSLog(@"识别出来了");
-                               self.advList.item = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
-                                [self.advList.item enumerateObjectsUsingBlock:^(adv_list_item* obj, NSUInteger idx, BOOL * _Nonnull stop)
-                                {
-                                    [self.imageArray addObject:obj.image];
-                                    NSLog(@"obj.iamge %@",obj.image);
-                                }];
+                               NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
+                                for (int h = 0; h < dic.count; h++) {
+                                    NSLog(@"image %@",[dic[h] objectForKey:@"image"]);//可以输出
+                                    [imageArr addObject:[dic[h] objectForKey:@"image"]];
+                                    [typeArr addObject:[dic[h] objectForKey:@"image"]];
+                                    [dataArr addObject:[dic[h] objectForKey:@"image"]];
+                                }
                             }
                         }
                     }
@@ -110,12 +140,21 @@
     NSLog(@"HomeController_searchViewEvent");
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+//        SDCycleScrollView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:pageScroller forIndexPath:indexPath];
+    }
     return nil;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (section == 0) {//轮播图
+        return 1;
+    }
     return 0;
 }
 

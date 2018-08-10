@@ -59,6 +59,7 @@
 		93FD4E392119A2A4008AC7D9 /* guide3.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD4E352119A2A4008AC7D9 /* guide3.png */; };
 		93FD4E3A2119A2A4008AC7D9 /* guide4.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD4E362119A2A4008AC7D9 /* guide4.png */; };
 		93FD4E3B2119A2A4008AC7D9 /* guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD4E372119A2A4008AC7D9 /* guide1.png */; };
+		93FD4E41211D741B008AC7D9 /* HomeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E40211D741B008AC7D9 /* HomeScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,8 @@
 		93FD4E352119A2A4008AC7D9 /* guide3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide3.png; sourceTree = "<group>"; };
 		93FD4E362119A2A4008AC7D9 /* guide4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide4.png; sourceTree = "<group>"; };
 		93FD4E372119A2A4008AC7D9 /* guide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide1.png; sourceTree = "<group>"; };
+		93FD4E3F211D740C008AC7D9 /* HomeScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeScrollView.h; sourceTree = "<group>"; };
+		93FD4E40211D741B008AC7D9 /* HomeScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeScrollView.m; sourceTree = "<group>"; };
 		ACB5C010E6477DC4A3690D10 /* Pods-vitagouUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1ECFD535AA99D70DCF938B5 /* Pods-vitagouUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFD1D05C2734556BD549D895 /* Pods-vitagou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagou.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagou/Pods-vitagou.release.xcconfig"; sourceTree = "<group>"; };
@@ -400,6 +403,8 @@
 			children = (
 				93D1591B2101725C000FD53E /* SearchNavView.h */,
 				93D1591C2101726F000FD53E /* SearchNavView.m */,
+				93FD4E3F211D740C008AC7D9 /* HomeScrollView.h */,
+				93FD4E40211D741B008AC7D9 /* HomeScrollView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 				93D158FF21003350000FD53E /* WordItem.m in Sources */,
 				93D1591821016A70000FD53E /* HomeController.m in Sources */,
 				93D158F42100217A000FD53E /* MBProgressHUD+LMJ.m in Sources */,
+				93FD4E41211D741B008AC7D9 /* HomeScrollView.m in Sources */,
 				9369FDF1210AF4DE00EDB5B2 /* week_new.m in Sources */,
 				9369FDEB210ABF3400EDB5B2 /* goods1.m in Sources */,
 				9369FDE3210AABFC00EDB5B2 /* adv_list.m in Sources */,
