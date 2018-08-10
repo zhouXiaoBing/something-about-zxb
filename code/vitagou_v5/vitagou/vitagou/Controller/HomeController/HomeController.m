@@ -22,7 +22,7 @@
 #import "homeData.h"
 #import "adv_list.h"
 #import "adv_list_item.h"
-#import "HomeHeaderView.h"
+#import "HomeScrollView.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -36,6 +36,8 @@
 @property (assign,nonatomic) NSMutableArray *advListItem;
 
 @property (strong,nonatomic) UICollectionView *collectionView;
+
+@property (assign,nonatomic) HomeScrollView *homeScrollView;
 
 //轮播图的数组 image: 图片地址 type：类型 data：根据类型来的 可能是跳转地址
 @property (assign,nonatomic) NSMutableArray *imageArray;
@@ -82,7 +84,7 @@ NSMutableArray *dataArr;
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
     //---------------------------------------------------//
-    [self.collectionView registerClass:[SDCycleScrollView class] forCellWithReuseIdentifier:@"pageScroller"];
+    [self.collectionView registerClass:[HomeScrollView class] forCellWithReuseIdentifier:@"pageScroller"];
     
     [self.view addSubview:self.collectionView];
     //location
@@ -146,9 +148,12 @@ NSMutableArray *dataArr;
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-//        SDCycleScrollView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:pageScroller forIndexPath:indexPath];
+        HomeScrollView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:pageScroller forIndexPath:indexPath];
+        //数据
+        
+      return cell;
     }
-    return nil;
+    return  nil;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
