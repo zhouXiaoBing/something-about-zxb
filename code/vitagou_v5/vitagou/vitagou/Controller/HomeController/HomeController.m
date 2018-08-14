@@ -23,6 +23,7 @@
 #import "adv_list.h"
 #import "adv_list_item.h"
 #import "HomeScrollView.h"
+#import "HomeHeaderCell.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -51,6 +52,8 @@
 
 #pragma -mark conllectionViewCell
 static NSString *pageScroller = @"pageScroller";
+static NSString *footerCellId = @"footerCellId";
+static NSString *headerCellId = @"headerCellId";
 
 NSMutableArray *imageArr;
 NSMutableArray *typeArr;
@@ -84,7 +87,9 @@ NSMutableArray *dataArr;
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
     //---------------------------------------------------//
-    [self.collectionView registerClass:[HomeScrollView class] forCellWithReuseIdentifier:@"pageScroller"];
+    [self.collectionView registerClass:[HomeScrollView class] forCellWithReuseIdentifier:pageScroller];
+    [self.collectionView registerClass:[HomeFooterCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId];
+    [self.collectionView registerClass:[HomeHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId];
     
     [self.view addSubview:self.collectionView];
     //location
@@ -112,18 +117,23 @@ NSMutableArray *dataArr;
                         for (int j = 0; j < key.count; j++) {
                             if ([key[j] isEqualToString:@"adv_list"]) {
                                 NSLog(@"识别出来了");
+                                //将item里面的字典转为模型
                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 for (int h = 0; h < dic.count; h++) {
                                     NSLog(@"image %@",[dic[h] objectForKey:@"image"]);//可以输出
+                                    NSLog(@"image %@",[dic[h] objectForKey:@"type"]);
+                                    NSLog(@"image %@",[dic[h] objectForKey:@"data"]);
                                     [imageArr addObject:[dic[h] objectForKey:@"image"]];
-                                    [typeArr addObject:[dic[h] objectForKey:@"image"]];
-                                    [dataArr addObject:[dic[h] objectForKey:@"image"]];
+                                    [typeArr addObject:[dic[h] objectForKey:@"type"]];
+                                    [dataArr addObject:[dic[h] objectForKey:@"data"]];
                                 }
                             }
                         }
                     }
-            
-        }
+                }
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
+        
     } failure:^(NSError *error) {
         
     }];
@@ -147,10 +157,12 @@ NSMutableArray *dataArr;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSLog(@"cellForItemAtIndexPath...");
     if (indexPath.section == 0) {
         HomeScrollView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:pageScroller forIndexPath:indexPath];
         //数据
-        
+        cell.imageArray = imageArr;
+        NSLog(@"imageArr %lu",(unsigned long)imageArr.count);
       return cell;
     }
     return  nil;
@@ -161,6 +173,52 @@ NSMutableArray *dataArr;
         return 1;
     }
     return 0;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize itemSize = CGSizeZero;
+    if (indexPath.section == 0) {
+        itemSize = CGSizeMake(kScreen_Width, kScreen_Width*13/32);
+    }
+    return itemSize;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return  CGSizeZero;
+    }
+    return CGSizeZero;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    return CGSizeZero;
+}
+
+//显示标题
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"viewForSupplementaryElemetOfKind");
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        HomeHeaderCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId forIndexPath:indexPath];
+        if (indexPath.section == 0) {
+            [cell showTitleLable:NO];
+        }
+       
+        return cell;
+    }
+    if([kind isEqualToString:UICollectionElementKindSectionFooter]){
+        HomeFooterCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId forIndexPath:indexPath];
+        
+        if (indexPath.section == 5) {
+            [cell setHidden:YES];
+        }else{
+            [cell setHidden:NO];
+        }
+        
+        return cell;
+    }
+    
+    return nil;
 }
 
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {

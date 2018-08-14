@@ -10,8 +10,10 @@
 
 @interface  HomeScrollView : UICollectionViewCell
 
+@property (strong,nonatomic) SDCycleScrollView *scrollView;
 
-@property (assign,nonatomic) SDCycleScrollView *scrollView;
+@property (strong,nonatomic) NSArray *imageArray;
+
 
 
 @end

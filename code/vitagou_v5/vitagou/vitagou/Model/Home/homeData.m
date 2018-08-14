@@ -27,7 +27,7 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     [manager POST:Vitagou_URL parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"homeData_POST %@",responseObject);
+//        NSLog(@"homeData_POST %@",responseObject);
 //        NSLog(@"homeData_responseObject %@",responseObject);
         homeData *hd = [homeData mj_objectWithKeyValues:responseObject];
         
@@ -48,7 +48,7 @@
             
 //            NSLog(@"hd.datas[i] %@",key);
 //            if (hd.datas[i] ) {
-//                <#statements#>
+
 //            }
 //        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

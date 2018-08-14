@@ -1,0 +1,21 @@
+//
+//  HomeHeaderCell.h
+//  vitagou
+//
+//  Created by Mac on 2018/8/14.
+//  Copyright © 2018年 vitagou. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface HomeHeaderCell : UICollectionReusableView
+
+-(void)showTitleLable:(BOOL)show;
+
+-(void)setTitle:(NSString *)str;
+
+@end
+
+@interface HomeFooterCell : UICollectionReusableView
+
+@end
