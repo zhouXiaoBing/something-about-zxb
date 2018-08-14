@@ -6,6 +6,12 @@
 //  Copyright © 2018年 vitagou. All rights reserved.
 //
 
-@interface HomeBtnView : UICollectionViweCell
+#import "HotBtnView.h"
+#import "MenuView.h"
+@interface HomeBtnView : UICollectionViewCell
+
+@property (nonatomic,strong) NSArray *hotBtnView;
+
+@property(nonatomic,strong) MenuView *menuView;//跳转button
 
 @end
