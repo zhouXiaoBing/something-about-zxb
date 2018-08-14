@@ -17,7 +17,7 @@ NSArray *foucsImages;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"initWithFrame_HomeScrollView");
+//        NSLog(@"initWithFrame_HomeScrollView");
         [self scrollView];
     }
     return self;
@@ -27,18 +27,9 @@ NSArray *foucsImages;
     [super layoutSubviews];
 }
 
-//- (SDCycleScrollView *)scrollView{
-//    NSLog(@"首页轮播图：HomeScrollView");
-//    _scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 44, kScreen_Width, kScreen_Width*9/16) imageURLStringsGroup:foucsImages];
-//    NSLog(@"iamgeArray %lu",(unsigned long)self.imageArray.count);
-////    self.scrollView = view;
-//    [self addSubview:_scrollView];
-//    return _scrollView;
-//}
-
-
 - (void)setImageArray:(NSArray *)imageArray{
-    _scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 44, kScreen_Width, kScreen_Width*13/32) imageURLStringsGroup:imageArray];
+    _scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 44, kScreen_Width, kScreen_Width*13/32) imageURLStringsGroup:imageArray];//根据轮播图片来的
+    
     [self addSubview:_scrollView];
 }
 

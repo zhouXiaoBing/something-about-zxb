@@ -61,6 +61,10 @@
 		93FD4E3B2119A2A4008AC7D9 /* guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = 93FD4E372119A2A4008AC7D9 /* guide1.png */; };
 		93FD4E41211D741B008AC7D9 /* HomeScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E40211D741B008AC7D9 /* HomeScrollView.m */; };
 		93FD4E4421227FC5008AC7D9 /* HomeHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E4321227FC5008AC7D9 /* HomeHeaderCell.m */; };
+		93FD4E472122CBB8008AC7D9 /* HomeBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E462122CBB8008AC7D9 /* HomeBtnView.m */; };
+		93FD4E4A2122CCD6008AC7D9 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E492122CCD6008AC7D9 /* MenuView.m */; };
+		93FD4E4D2122CD08008AC7D9 /* HotBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */; };
+		93FD4E502122CDC5008AC7D9 /* TitleIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +192,14 @@
 		93FD4E40211D741B008AC7D9 /* HomeScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeScrollView.m; sourceTree = "<group>"; };
 		93FD4E4221227FA6008AC7D9 /* HomeHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHeaderCell.h; sourceTree = "<group>"; };
 		93FD4E4321227FC5008AC7D9 /* HomeHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderCell.m; sourceTree = "<group>"; };
+		93FD4E452122CBAB008AC7D9 /* HomeBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeBtnView.h; sourceTree = "<group>"; };
+		93FD4E462122CBB8008AC7D9 /* HomeBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeBtnView.m; sourceTree = "<group>"; };
+		93FD4E482122CCAF008AC7D9 /* MenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		93FD4E492122CCD6008AC7D9 /* MenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		93FD4E4B2122CCF9008AC7D9 /* HotBtnView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotBtnView.h; sourceTree = "<group>"; };
+		93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotBtnView.m; sourceTree = "<group>"; };
+		93FD4E4E2122CDB3008AC7D9 /* TitleIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleIconView.h; sourceTree = "<group>"; };
+		93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleIconView.m; sourceTree = "<group>"; };
 		ACB5C010E6477DC4A3690D10 /* Pods-vitagouUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1ECFD535AA99D70DCF938B5 /* Pods-vitagouUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFD1D05C2734556BD549D895 /* Pods-vitagou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagou.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagou/Pods-vitagou.release.xcconfig"; sourceTree = "<group>"; };
@@ -410,6 +422,14 @@
 				93FD4E40211D741B008AC7D9 /* HomeScrollView.m */,
 				93FD4E4221227FA6008AC7D9 /* HomeHeaderCell.h */,
 				93FD4E4321227FC5008AC7D9 /* HomeHeaderCell.m */,
+				93FD4E452122CBAB008AC7D9 /* HomeBtnView.h */,
+				93FD4E462122CBB8008AC7D9 /* HomeBtnView.m */,
+				93FD4E482122CCAF008AC7D9 /* MenuView.h */,
+				93FD4E492122CCD6008AC7D9 /* MenuView.m */,
+				93FD4E4B2122CCF9008AC7D9 /* HotBtnView.h */,
+				93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */,
+				93FD4E4E2122CDB3008AC7D9 /* TitleIconView.h */,
+				93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -754,6 +774,8 @@
 			files = (
 				93D1590221003615000FD53E /* WordArrowItem.m in Sources */,
 				9369FDF4210AF65500EDB5B2 /* week_new_item.m in Sources */,
+				93FD4E4D2122CD08008AC7D9 /* HotBtnView.m in Sources */,
+				93FD4E472122CBB8008AC7D9 /* HomeBtnView.m in Sources */,
 				93D158E820FDEADC000FD53E /* TextViewController.m in Sources */,
 				93D158FB2100305C000FD53E /* AutoRefreshFooter.m in Sources */,
 				93D1591521008EA4000FD53E /* UseController.m in Sources */,
@@ -782,6 +804,7 @@
 				9369FDFA210AFC3D00EDB5B2 /* special_pic_item.m in Sources */,
 				9369FDF6210AF87C00EDB5B2 /* special_pic.m in Sources */,
 				93D158F721002FA3000FD53E /* NormalRefreshHeader.m in Sources */,
+				93FD4E502122CDC5008AC7D9 /* TitleIconView.m in Sources */,
 				93D158D120F8A335000FD53E /* MyCollectionViewController.m in Sources */,
 				93D1590B21003C23000FD53E /* HorizontalFlowLayout.m in Sources */,
 				93D158EE20FF3770000FD53E /* BaseViewController.m in Sources */,
@@ -794,6 +817,7 @@
 				93D158D920FC6A4F000FD53E /* NavUIBaseViewController.m in Sources */,
 				93D158C820F88F8D000FD53E /* MainTabBarController.m in Sources */,
 				9369FDEE210ACC9C00EDB5B2 /* goods1_item.m in Sources */,
+				93FD4E4A2122CCD6008AC7D9 /* MenuView.m in Sources */,
 				93F29F7B20F457FE00139094 /* AppDelegate.m in Sources */,
 				93D158F121001E08000FD53E /* RequestBaseViewController.m in Sources */,
 			);
