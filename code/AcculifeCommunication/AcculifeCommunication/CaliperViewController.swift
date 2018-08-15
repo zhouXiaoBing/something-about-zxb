@@ -491,7 +491,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         
         print(uuidfromViewController)
         
-//        centralManager.connect(23, options: nil)//连接蓝牙的方法
+
 //        var itemString:String?
 //        print("zxb:")
 //        print(itemString)
