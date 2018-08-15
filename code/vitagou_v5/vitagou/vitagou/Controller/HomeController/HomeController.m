@@ -89,7 +89,7 @@ NSMutableArray *dataArr;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
-    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    layout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 5);
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
     //---------------------------------------------------//
@@ -202,13 +202,17 @@ NSMutableArray *dataArr;
     if (section == 0) {
         return  CGSizeZero;
     }else  if (section == 1) {
-        return  CGSizeZero;
+        return  CGSizeMake(kScreen_Width, 40);
     }
     return CGSizeZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    
+    if (section == 0) {
+        return  CGSizeZero;
+    }else  if (section == 1) {
+        return CGSizeZero;
+    }
     return CGSizeZero;
 }
 
@@ -240,6 +244,8 @@ NSMutableArray *dataArr;
     
     return nil;
 }
+
+
 
 - (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
     

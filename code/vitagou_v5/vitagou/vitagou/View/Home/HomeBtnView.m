@@ -22,6 +22,15 @@
         _menuView = [[MenuView alloc]initMenus:self.hotBtnView WithLine:NO];
         
         [self addSubview:_menuView];
+        
+        [self.menuView mas_makeConstraints:^(MASConstraintMaker *make)
+         {
+             make.leading.equalTo(self);
+             make.top.equalTo(self);
+             make.trailing.equalTo(self);
+             make.leading.equalTo(self);
+             make.height.mas_equalTo(80);
+         }];
     }
     return self;
 }
