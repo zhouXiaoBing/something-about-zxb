@@ -11,7 +11,8 @@
 
 #import "AppConst.h"
 #import "UIView+Frame.h"
-#import "YYKit.h"
+
+#import <YYKit/YYKit.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "MJRefresh.h"
 #import "Masonry.h"
@@ -20,6 +21,16 @@
 #import <AFNetworking/AFNetworking.h>
 #import "url_macro.h"
 //--------------------------------------------------
+
+typedef NS_ENUM(NSInteger ,HeadViewItemType){
+    HeadViewItemTypePage,
+    HeadViewItemTypeHot,
+    HeadViewItemTypeHeadLine,
+    HeadViewItemTypeBrand,
+    HeadViewItemTypeScene
+};
+typedef void (^CompleteBlock)(id data,NSError *error);
+typedef void(^ClikedCallback) (HeadViewItemType type,NSInteger tag);
 
 //弱引用
 #define Weak(type) __weak typeof(type)weak##type = type

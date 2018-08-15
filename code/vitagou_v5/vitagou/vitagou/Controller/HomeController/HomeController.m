@@ -24,6 +24,7 @@
 #import "adv_list_item.h"
 #import "HomeScrollView.h"
 #import "HomeHeaderCell.h"
+#import "HomeBtnView.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -40,6 +41,10 @@
 
 @property (assign,nonatomic) HomeScrollView *homeScrollView;
 
+@property (strong,nonatomic) HomeBtnView *homeBtnView;
+
+
+
 //轮播图的数组 image: 图片地址 type：类型 data：根据类型来的 可能是跳转地址
 @property (assign,nonatomic) NSMutableArray *imageArray;
 @property (assign,nonatomic) NSMutableArray *typeArray;
@@ -54,6 +59,7 @@
 static NSString *pageScroller = @"pageScroller";
 static NSString *footerCellId = @"footerCellId";
 static NSString *headerCellId = @"headerCellId";
+static NSString *homeBtnViewId = @"homeBtnView";
 
 NSMutableArray *imageArr;
 NSMutableArray *typeArr;
@@ -88,6 +94,7 @@ NSMutableArray *dataArr;
     self.collectionView.backgroundColor = [UIColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
     //---------------------------------------------------//
     [self.collectionView registerClass:[HomeScrollView class] forCellWithReuseIdentifier:pageScroller];
+    [self.collectionView registerClass:[HomeBtnView class] forCellWithReuseIdentifier:homeBtnViewId];
     [self.collectionView registerClass:[HomeFooterCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId];
     [self.collectionView registerClass:[HomeHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId];
     
@@ -153,7 +160,7 @@ NSMutableArray *dataArr;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
+    return 2;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -164,12 +171,18 @@ NSMutableArray *dataArr;
         cell.imageArray = imageArr;
         NSLog(@"imageArr %lu",(unsigned long)imageArr.count);
       return cell;
+    }else if(indexPath.section == 1){
+        HomeBtnView *btn = [collectionView dequeueReusableCellWithReuseIdentifier:homeBtnViewId forIndexPath:indexPath];
+        [btn init];
+        return btn;
     }
     return  nil;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {//轮播图
+        return 1;
+    }else if(section == 1){
         return 1;
     }
     return 0;
@@ -179,12 +192,16 @@ NSMutableArray *dataArr;
     CGSize itemSize = CGSizeZero;
     if (indexPath.section == 0) {
         itemSize = CGSizeMake(kScreen_Width, kScreen_Width*13/32);
+    }else if (indexPath.section == 1){
+        itemSize = CGSizeMake(kScreen_Width, 80);
     }
     return itemSize;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
+        return  CGSizeZero;
+    }else  if (section == 1) {
         return  CGSizeZero;
     }
     return CGSizeZero;
@@ -202,7 +219,10 @@ NSMutableArray *dataArr;
         HomeHeaderCell *cell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId forIndexPath:indexPath];
         if (indexPath.section == 0) {
             [cell showTitleLable:NO];
+        }else if (indexPath.section == 1) {
+            [cell showTitleLable:NO];
         }
+
        
         return cell;
     }

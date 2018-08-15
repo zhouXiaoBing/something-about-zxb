@@ -12,6 +12,13 @@
 
 @property (nonatomic,strong) NSArray *hotBtnView;
 
-@property(nonatomic,strong) MenuView *menuView;//跳转button
+@property (nonatomic,strong) MenuView *menuView;//跳转button
+
+//@property (nonatomic,strong) ClikedCallback callback;
 
 @end
+
+
+
+
+
