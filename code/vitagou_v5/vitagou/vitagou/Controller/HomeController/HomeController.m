@@ -25,6 +25,7 @@
 #import "HomeScrollView.h"
 #import "HomeHeaderCell.h"
 #import "HomeBtnView.h"
+#import "goods1.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -34,6 +35,8 @@
 @property (assign,nonatomic) UICollectionView *tableView;
 
 @property (assign,nonatomic) adv_list *advList;
+
+@property (strong,nonatomic) goods1 *goods1;
 
 @property (assign,nonatomic) NSMutableArray *advListItem;
 
@@ -127,12 +130,27 @@ NSMutableArray *dataArr;
                                 //将item里面的字典转为模型
                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 for (int h = 0; h < dic.count; h++) {
-                                    NSLog(@"image %@",[dic[h] objectForKey:@"image"]);//可以输出
-                                    NSLog(@"image %@",[dic[h] objectForKey:@"type"]);
-                                    NSLog(@"image %@",[dic[h] objectForKey:@"data"]);
+//                                    NSLog(@"image %@",[dic[h] objectForKey:@"image"]);//可以输出
+//                                    NSLog(@"image %@",[dic[h] objectForKey:@"type"]);
+//                                    NSLog(@"image %@",[dic[h] objectForKey:@"data"]);
                                     [imageArr addObject:[dic[h] objectForKey:@"image"]];
                                     [typeArr addObject:[dic[h] objectForKey:@"type"]];
                                     [dataArr addObject:[dic[h] objectForKey:@"data"]];
+                                }
+                            }else if([key[j] isEqualToString:@"goods1"]){
+                                NSLog(@"goods1 %@",[data.datas[i] objectForKey:key[j]]);
+                                self.goods1 =[data.datas[i] objectForKey:key[j]];
+                                NSLog(@"self.good1 %@",[data.datas[i] objectForKey:key[j]]);
+//                                NSLog(@"self.good1.item %@",self.goods1.item);
+                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
+                                NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
+                                self.goods1 = [[goods1 alloc]init];
+                                [self.goods1 setValue:title forKey:@"title"];
+                                [self.goods1 setValue:dic forKey:@"item"];
+                                NSLog(@"self.good1.item %@",self.goods1.item);
+//                                NSLog(@"self.good1.item %@",self.goods1.title);
+                                for (int h = 0; h < dic.count; h++) {
+                                    
                                 }
                             }
                         }
@@ -202,7 +220,7 @@ NSMutableArray *dataArr;
     if (section == 0) {
         return  CGSizeZero;
     }else  if (section == 1) {
-        return  CGSizeMake(kScreen_Width, 40);
+        return  CGSizeMake(kScreen_Width, 40);//section 重叠
     }
     return CGSizeZero;
 }

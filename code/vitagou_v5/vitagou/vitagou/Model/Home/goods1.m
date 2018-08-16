@@ -11,4 +11,10 @@
 
 @implementation goods1 
 
++ (NSDictionary *)objectClassInArray{
+    return @{
+             @"item" : [goods1_item class]
+             };
+}
+
 @end
