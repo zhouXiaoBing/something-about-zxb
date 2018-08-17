@@ -26,6 +26,7 @@
 #import "HomeHeaderCell.h"
 #import "HomeBtnView.h"
 #import "goods1.h"
+#import "goods_item.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -37,6 +38,8 @@
 @property (assign,nonatomic) adv_list *advList;
 
 @property (strong,nonatomic) goods1 *goods1;
+
+@property (strong,nonatomic) goods1_item *goods1Item;
 
 @property (assign,nonatomic) NSMutableArray *advListItem;
 
@@ -145,13 +148,24 @@ NSMutableArray *dataArr;
                                 NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
                                 self.goods1 = [[goods1 alloc]init];
+                                self.goods1Item = [[goods1_item alloc]init];
                                 [self.goods1 setValue:title forKey:@"title"];
                                 [self.goods1 setValue:dic forKey:@"item"];
                                 NSLog(@"self.good1.item %@",self.goods1.item);
-//                                NSLog(@"self.good1.item %@",self.goods1.title);
-                                for (int h = 0; h < dic.count; h++) {
+
+//                                for (int h = 0; h < dic.count; h++) {
+//                                    [self.goods1Item setValue:[dic[h] objectForKey:@"groupbuy_id"] forKey:@"groupbuy_id"];
+//                                    [self.goods1.item addObject: dic[h]];
+//
+//                                }
+                                for (int h = 0; h < self.goods1.item.count; h++) {
+                                    //保证 此处的 item 可以 传递给到 goods1Item 然后可以用点语法调用相应的值
+                                    NSLog(@"---- %@",self.goods1.item);
+                                    
                                     
                                 }
+
+                                NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
                             }
                         }
                     }
