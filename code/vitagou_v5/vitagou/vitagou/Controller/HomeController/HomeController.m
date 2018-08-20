@@ -152,6 +152,8 @@ NSMutableArray *dataArr;
                                 [self.goods1 setValue:title forKey:@"title"];
                                 [self.goods1 setValue:dic forKey:@"item"];
                                 NSLog(@"self.good1.item %@",self.goods1.item);
+                                //item 内部结构应该还是 JsonString
+                                
 
 //                                for (int h = 0; h < dic.count; h++) {
 //                                    [self.goods1Item setValue:[dic[h] objectForKey:@"groupbuy_id"] forKey:@"groupbuy_id"];

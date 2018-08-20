@@ -65,6 +65,7 @@
 		93FD4E4A2122CCD6008AC7D9 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E492122CCD6008AC7D9 /* MenuView.m */; };
 		93FD4E4D2122CD08008AC7D9 /* HotBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */; };
 		93FD4E502122CDC5008AC7D9 /* TitleIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */; };
+		93FD4E53212AB509008AC7D9 /* NewGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FD4E52212AB509008AC7D9 /* NewGoodsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,8 @@
 		93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotBtnView.m; sourceTree = "<group>"; };
 		93FD4E4E2122CDB3008AC7D9 /* TitleIconView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TitleIconView.h; sourceTree = "<group>"; };
 		93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TitleIconView.m; sourceTree = "<group>"; };
+		93FD4E51212AB4F4008AC7D9 /* NewGoodsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewGoodsCell.h; sourceTree = "<group>"; };
+		93FD4E52212AB509008AC7D9 /* NewGoodsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewGoodsCell.m; sourceTree = "<group>"; };
 		ACB5C010E6477DC4A3690D10 /* Pods-vitagouUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C1ECFD535AA99D70DCF938B5 /* Pods-vitagouUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagouUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vitagouUITests/Pods-vitagouUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFD1D05C2734556BD549D895 /* Pods-vitagou.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagou.release.xcconfig"; path = "Pods/Target Support Files/Pods-vitagou/Pods-vitagou.release.xcconfig"; sourceTree = "<group>"; };
@@ -408,6 +411,7 @@
 		93D159192101708B000FD53E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				93FD4E54212AB9A9008AC7D9 /* common */,
 				93D1591A210170B0000FD53E /* Home */,
 			);
 			path = View;
@@ -430,6 +434,8 @@
 				93FD4E4C2122CD08008AC7D9 /* HotBtnView.m */,
 				93FD4E4E2122CDB3008AC7D9 /* TitleIconView.h */,
 				93FD4E4F2122CDC5008AC7D9 /* TitleIconView.m */,
+				93FD4E51212AB4F4008AC7D9 /* NewGoodsCell.h */,
+				93FD4E52212AB509008AC7D9 /* NewGoodsCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -500,6 +506,13 @@
 				93F29FA220F4580900139094 /* Info.plist */,
 			);
 			path = vitagouUITests;
+			sourceTree = "<group>";
+		};
+		93FD4E54212AB9A9008AC7D9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		E4F4C7261A752431234ADE12 /* Frameworks */ = {
@@ -820,6 +833,7 @@
 				93FD4E4A2122CCD6008AC7D9 /* MenuView.m in Sources */,
 				93F29F7B20F457FE00139094 /* AppDelegate.m in Sources */,
 				93D158F121001E08000FD53E /* RequestBaseViewController.m in Sources */,
+				93FD4E53212AB509008AC7D9 /* NewGoodsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
