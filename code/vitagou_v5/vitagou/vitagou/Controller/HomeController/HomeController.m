@@ -107,6 +107,7 @@ NSMutableArray *dataArr;
     //---------------------------------------------------//
     [self.collectionView registerClass:[HomeScrollView class] forCellWithReuseIdentifier:pageScroller];
     [self.collectionView registerClass:[HomeBtnView class] forCellWithReuseIdentifier:homeBtnViewId];
+    [self.collectionView registerClass:[NewGoodsCell class] forCellWithReuseIdentifier:newGoodsCellId];
     [self.collectionView registerClass:[HomeFooterCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId];
     [self.collectionView registerClass:[HomeHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId];
     
@@ -150,19 +151,23 @@ NSMutableArray *dataArr;
                                 self.goods1Item = [[goods1_item alloc]init];
                                 [self.goods1 setValue:title forKey:@"title"];
                                 [self.goods1 setValue:dic forKey:@"item"];
-                                NSLog(@"self.good1.item %@",self.goods1.item);
+//                                NSLog(@"self.good1.item %@",self.goods1.item);
                                 //item 内部结构应该还是 JsonString
                                 for (int h = 0; h < self.goods1.item.count; h++) {
                                     //保证 此处的 item 可以 传递给到 goods1Item 然后可以用点语法调用相应的值
                                     NSLog(@"---- %@",self.goods1.item[h] );
 
                                 }
-                                NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
+//                                NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
                             }else if([key[j] isEqualToString:@"week_new"]){
+                                self.week_new = [[week_new alloc]init];
                                 NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
                                 [self.week_new setValue:title forKey:@"title"];
                                 [self.week_new setValue:dic forKey:@"item"];
+                                NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
+                                
+                                
                             }
                         }
                     }
@@ -194,17 +199,19 @@ NSMutableArray *dataArr;
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     NSLog(@"cellForItemAtIndexPath...");
+//     NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
     if (indexPath.section == 0) {
         HomeScrollView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:pageScroller forIndexPath:indexPath];
         //数据
         cell.imageArray = imageArr;
-        NSLog(@"imageArr %lu",(unsigned long)imageArr.count);
+//        NSLog(@"imageArr %lu",(unsigned long)imageArr.count);
       return cell;
     }else if(indexPath.section == 1){
         HomeBtnView *btn = [collectionView dequeueReusableCellWithReuseIdentifier:homeBtnViewId forIndexPath:indexPath];
         [btn init];
         return btn;
     }else if(indexPath.section == 2){
+        NSLog(@"sec2");
         NewGoodsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:newGoodsCellId forIndexPath:indexPath];
         cell.item = self.week_new.item[indexPath.row];
         return cell;
@@ -230,6 +237,7 @@ NSMutableArray *dataArr;
     }else if (indexPath.section == 1){
         itemSize = CGSizeMake(kScreen_Width, 80);
     }else if (indexPath.section == 2){
+        NSLog(@"sizeForItemAtIndexPath_sec=2");
         itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3*self.week_new.item.count);
     }
     return itemSize;
