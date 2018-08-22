@@ -27,6 +27,7 @@
 #import "HomeBtnView.h"
 #import "goods1.h"
 #import "goods_item.h"
+#import "NewGoodsCell.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -40,6 +41,10 @@
 @property (strong,nonatomic) goods1 *goods1;
 
 @property (strong,nonatomic) goods1_item *goods1Item;
+
+@property (strong,nonatomic) week_new *week_new;
+
+@property (strong,nonatomic) week_new_item *weekNewItem;
 
 @property (assign,nonatomic) NSMutableArray *advListItem;
 
@@ -66,6 +71,7 @@ static NSString *pageScroller = @"pageScroller";
 static NSString *footerCellId = @"footerCellId";
 static NSString *headerCellId = @"headerCellId";
 static NSString *homeBtnViewId = @"homeBtnView";
+static NSString *newGoodsCellId = @"newGoodsCellId";
 
 NSMutableArray *imageArr;
 NSMutableArray *typeArr;
@@ -133,18 +139,11 @@ NSMutableArray *dataArr;
                                 //将item里面的字典转为模型
                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 for (int h = 0; h < dic.count; h++) {
-//                                    NSLog(@"image %@",[dic[h] objectForKey:@"image"]);//可以输出
-//                                    NSLog(@"image %@",[dic[h] objectForKey:@"type"]);
-//                                    NSLog(@"image %@",[dic[h] objectForKey:@"data"]);
                                     [imageArr addObject:[dic[h] objectForKey:@"image"]];
                                     [typeArr addObject:[dic[h] objectForKey:@"type"]];
                                     [dataArr addObject:[dic[h] objectForKey:@"data"]];
                                 }
                             }else if([key[j] isEqualToString:@"goods1"]){
-                                NSLog(@"goods1 %@",[data.datas[i] objectForKey:key[j]]);
-                                self.goods1 =[data.datas[i] objectForKey:key[j]];
-                                NSLog(@"self.good1 %@",[data.datas[i] objectForKey:key[j]]);
-//                                NSLog(@"self.good1.item %@",self.goods1.item);
                                 NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
                                 self.goods1 = [[goods1 alloc]init];
@@ -153,21 +152,17 @@ NSMutableArray *dataArr;
                                 [self.goods1 setValue:dic forKey:@"item"];
                                 NSLog(@"self.good1.item %@",self.goods1.item);
                                 //item 内部结构应该还是 JsonString
-                                
-
-//                                for (int h = 0; h < dic.count; h++) {
-//                                    [self.goods1Item setValue:[dic[h] objectForKey:@"groupbuy_id"] forKey:@"groupbuy_id"];
-//                                    [self.goods1.item addObject: dic[h]];
-//
-//                                }
                                 for (int h = 0; h < self.goods1.item.count; h++) {
                                     //保证 此处的 item 可以 传递给到 goods1Item 然后可以用点语法调用相应的值
-                                    NSLog(@"---- %@",self.goods1.item);
-                                    
-                                    
-                                }
+                                    NSLog(@"---- %@",self.goods1.item[h] );
 
+                                }
                                 NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
+                            }else if([key[j] isEqualToString:@"week_new"]){
+                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
+                                NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
+                                [self.week_new setValue:title forKey:@"title"];
+                                [self.week_new setValue:dic forKey:@"item"];
                             }
                         }
                     }
@@ -194,7 +189,7 @@ NSMutableArray *dataArr;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    return 3;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -209,6 +204,10 @@ NSMutableArray *dataArr;
         HomeBtnView *btn = [collectionView dequeueReusableCellWithReuseIdentifier:homeBtnViewId forIndexPath:indexPath];
         [btn init];
         return btn;
+    }else if(indexPath.section == 2){
+        NewGoodsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:newGoodsCellId forIndexPath:indexPath];
+        cell.item = self.week_new.item[indexPath.row];
+        return cell;
     }
     return  nil;
 }
@@ -218,6 +217,8 @@ NSMutableArray *dataArr;
         return 1;
     }else if(section == 1){
         return 1;
+    }else if(section == 2){
+        return self.week_new.item.count;
     }
     return 0;
 }
@@ -228,6 +229,8 @@ NSMutableArray *dataArr;
         itemSize = CGSizeMake(kScreen_Width, kScreen_Width*13/32);
     }else if (indexPath.section == 1){
         itemSize = CGSizeMake(kScreen_Width, 80);
+    }else if (indexPath.section == 2){
+        itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3*self.week_new.item.count);
     }
     return itemSize;
 }
@@ -237,6 +240,8 @@ NSMutableArray *dataArr;
         return  CGSizeZero;
     }else  if (section == 1) {
         return  CGSizeMake(kScreen_Width, 40);//section 重叠
+    }else if (section == 2){
+        return CGSizeZero;
     }
     return CGSizeZero;
 }
@@ -245,6 +250,8 @@ NSMutableArray *dataArr;
     if (section == 0) {
         return  CGSizeZero;
     }else  if (section == 1) {
+        return CGSizeZero;
+    }else  if (section == 2) {
         return CGSizeZero;
     }
     return CGSizeZero;
@@ -258,6 +265,8 @@ NSMutableArray *dataArr;
         if (indexPath.section == 0) {
             [cell showTitleLable:NO];
         }else if (indexPath.section == 1) {
+            [cell showTitleLable:NO];
+        }else if (indexPath.section == 2) {
             [cell showTitleLable:NO];
         }
 

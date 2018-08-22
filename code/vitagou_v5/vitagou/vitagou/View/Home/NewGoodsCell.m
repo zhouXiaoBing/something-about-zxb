@@ -135,14 +135,11 @@
 - (void)click
 {
     NSLog(@"Click 被点击 ！！！");
-    
-    
 }
 
 
 -(void)setBuyBtn:(UIButton *)buyBtn{
     NSLog(@"BuyBtn 被点击 ！！！");
-    
     }
 
 @end
