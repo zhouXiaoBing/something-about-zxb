@@ -166,6 +166,17 @@ NSMutableArray *dataArr;
                                 [self.week_new setValue:title forKey:@"title"];
                                 [self.week_new setValue:dic forKey:@"item"];
                                 NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
+                                //
+                                for (int k = 0; k < self.week_new.item.count; k++) {
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_id"] forKey:@"goods_id"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_name"] forKey:@"goods_name"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_price"] forKey:@"goods_price"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_promotion_price"] forKey:@"goods_promotion_price"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_marketprice"] forKey:@"goods_marketprice"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_image"] forKey:@"goods_image"];
+                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_coupon_label"] forKey:@"goods_coupon_label"];
+                                    
+                                }
                                 
                                 
                             }
