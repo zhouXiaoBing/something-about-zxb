@@ -7,8 +7,15 @@
 //
 
 #import "week_new.h"
+#import "week_new_item.h"
 
 @implementation  week_new
+
++ (NSDictionary *)objectClassInArray{//出现关键字冲突
+    return @{
+             @"item" : [week_new_item class]
+             };
+}
 
 @end
 

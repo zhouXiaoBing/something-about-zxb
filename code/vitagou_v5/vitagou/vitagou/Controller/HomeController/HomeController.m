@@ -161,22 +161,36 @@ NSMutableArray *dataArr;
 //                                NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
                             }else if([key[j] isEqualToString:@"week_new"]){
                                 self.week_new = [[week_new alloc]init];
-                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
-                                NSString *title = [[data.datas[i] objectForKey:key[j]] objectForKey:@"title"];
-                                [self.week_new setValue:title forKey:@"title"];
-                                [self.week_new setValue:dic forKey:@"item"];
+                                
+                                //考虑把 item 和 title 转成 json 然后在调用 MJ_Extension
+                                NSLog(@"key_j %@",[data.datas[i] objectForKey:key[j]]);
+                                NSError *parseError = nil;
+                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[data.datas[i] objectForKey:key[j]] options:NSJSONWritingPrettyPrinted error:&parseError];
+                                NSLog(@"jsondata %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+                                
+                                NSString *string =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                
+                                self.week_new = [week_new mj_objectWithKeyValues:string];
+                                NSLog(@"weee %@",self.week_new.title);\
+                                NSLog(@"weee %lu",(unsigned long)self.week_new.item.count);
+//                                [self.week_new setValue:title forKey:@"title"];
+//                                [self.week_new setValue:dic forKey:@"item"];
+                                
                                 NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
-                                //
-                                for (int k = 0; k < self.week_new.item.count; k++) {
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_id"] forKey:@"goods_id"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_name"] forKey:@"goods_name"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_price"] forKey:@"goods_price"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_promotion_price"] forKey:@"goods_promotion_price"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_marketprice"] forKey:@"goods_marketprice"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_image"] forKey:@"goods_image"];
-                                    [self.week_new.item setValue:[self.week_new.item[k] objectForKey:@"goods_coupon_label"] forKey:@"goods_coupon_label"];
-                                    
-                                }
+                                
+//                                //
+//                                for (int k = 0; k < self.week_new.item.count; k++) {
+//                                    self.weekNewItem = [[week_new_item alloc]init];
+//                                    NSLog(@"hudykd %@",[self.week_new.item[k] objectForKey:@"goods_id"]);//
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_id"] forKey:@"goods_id"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_name"] forKey:@"goods_name"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_price"] forKey:@"goods_price"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_promotion_price"] forKey:@"goods_promotion_price"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_marketprice"] forKey:@"goods_marketprice"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_image"] forKey:@"goods_image"];
+//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_coupon_label"] forKey:@"goods_coupon_label"];
+//
+//                                }
                                 
                                 
                             }
@@ -249,7 +263,7 @@ NSMutableArray *dataArr;
         itemSize = CGSizeMake(kScreen_Width, 80);
     }else if (indexPath.section == 2){
         NSLog(@"sizeForItemAtIndexPath_sec=2");
-        itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3*self.week_new.item.count);
+        itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3);
     }
     return itemSize;
 }
