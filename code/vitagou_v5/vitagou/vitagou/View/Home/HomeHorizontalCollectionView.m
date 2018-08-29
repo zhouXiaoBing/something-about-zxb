@@ -9,16 +9,12 @@
 
 #import "HomeHorizontalCollectionView.h"
 
-@interface HomeHorizontalCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource>
-
-@property (nonatomic,strong) UICollectionView *collectionView;
+@interface HomeHorizontalCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource,HomeHorizontalCollectionViewDataSource>
 
 
 @end
 
 @implementation HomeHorizontalCollectionView
-
-
 
 @end
 
