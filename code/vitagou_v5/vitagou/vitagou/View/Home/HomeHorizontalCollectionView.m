@@ -8,13 +8,93 @@
 //
 
 #import "HomeHorizontalCollectionView.h"
+#import "HorizontalFlowLayout.h"
 
-@interface HomeHorizontalCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource,HomeHorizontalCollectionViewDataSource>
+@interface HomeHorizontalCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource,HomeHorizontalDataSource,HorizontalFlowLayoutDelegate>
+
+@property (nonatomic,strong) UICollectionView *collectionView;
 
 
 @end
 
 @implementation HomeHorizontalCollectionView
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
+        
+        
+        UICollectionViewLayout *myLayout = [self collectionViewController:self
+ layoutForColletionView:self.collectionView];
+        self.collectionView.collectionViewLayout = myLayout;
+        self.collectionView.backgroundColor = [UIColor whiteColor];
+        self.collectionView.contentInset = UIEdgeInsetsZero;
+        self.collectionView.dataSource = self;
+        self.collectionView.delegate = self;
+        
+        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.edges.mas_equalTo(UIEdgeInsetsMake(100, 20, 100, 20));
+        }];
+    }
+    return self;
+}
+
+#pragma mark - HomeHorizontalDataSource
+
+- (UICollectionViewLayout *)collectionViewController:(HomeHorizontalCollectionView *)collectionViewController layoutForColletionView:(UICollectionView *)collectionView{
+    HorizontalFlowLayout *layout = [[HorizontalFlowLayout alloc]initWithDelegate:self];//id 类型：horizontal
+    
+    return layout;
+}
+
+#pragma mark - horizontalFlowLayoutDelegate
+
+- (CGFloat)waterflowLayout:(HorizontalFlowLayout *)waterflowLayout collectionView:(UICollectionView *)collectionView widthForItemAtIndexPath:(NSIndexPath *)indexPath itemHeight:(CGFloat)itemHeight{
+    return itemHeight;
+}
+
+- (NSInteger)waterflowLayout:(HorizontalFlowLayout *)waterflowLayout linesInCollectionView:(UICollectionView *)collectionView{
+    return 1; //只显示一排
+}
+
+
+#pragma mark - delegate
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 100;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = [UIColor yellowColor];
+    
+    cell.contentView.clipsToBounds = YES;
+    if (![cell.contentView viewWithTag:100]) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        label.tag = 100;
+        label.textColor = [UIColor redColor];
+        label.font = [UIFont boldSystemFontOfSize:17];
+        [cell.contentView addSubview:label];
+    }
+    
+    UILabel *label = [cell.contentView viewWithTag:100];
+    
+    label.text = [NSString stringWithFormat:@"%zd", indexPath.item];
+    
+    return cell;
+}
+
+#pragma mark - scrollDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    UIEdgeInsets contentInset = self.collectionView.contentInset;
+    contentInset.bottom -= self.collectionView.mj_footer.height;
+    self.collectionView.scrollIndicatorInsets = contentInset;
+    [self endEditing:YES];
+}
 
 @end
 

@@ -28,6 +28,7 @@
 #import "goods1.h"
 #import "goods_item.h"
 #import "NewGoodsCell.h"
+#import "HomeHorizontalCollectionView.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -72,6 +73,7 @@ static NSString *footerCellId = @"footerCellId";
 static NSString *headerCellId = @"headerCellId";
 static NSString *homeBtnViewId = @"homeBtnView";
 static NSString *newGoodsCellId = @"newGoodsCellId";
+static NSString *horizontalCellId = @"horizontalCellId";
 
 NSMutableArray *imageArr;
 NSMutableArray *typeArr;
@@ -110,6 +112,7 @@ NSMutableArray *dataArr;
     [self.collectionView registerClass:[NewGoodsCell class] forCellWithReuseIdentifier:newGoodsCellId];
     [self.collectionView registerClass:[HomeFooterCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId];
     [self.collectionView registerClass:[HomeHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId];
+    [self.collectionView registerClass:[HomeHorizontalCollectionView class] forCellWithReuseIdentifier:horizontalCellId];
     
     [self.view addSubview:self.collectionView];
     //location
@@ -158,7 +161,7 @@ NSMutableArray *dataArr;
                                     NSLog(@"---- %@",self.goods1.item[h] );
 
                                 }
-//                                NSLog(@"self.goods1.item %lu",(unsigned long)self.goods1.item.count);
+
                             }else if([key[j] isEqualToString:@"week_new"]){
                                 self.week_new = [[week_new alloc]init];
                                 
@@ -177,22 +180,6 @@ NSMutableArray *dataArr;
 //                                [self.week_new setValue:dic forKey:@"item"];
                                 
                                 NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
-                                
-//                                //
-//                                for (int k = 0; k < self.week_new.item.count; k++) {
-//                                    self.weekNewItem = [[week_new_item alloc]init];
-//                                    NSLog(@"hudykd %@",[self.week_new.item[k] objectForKey:@"goods_id"]);//
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_id"] forKey:@"goods_id"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_name"] forKey:@"goods_name"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_price"] forKey:@"goods_price"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_promotion_price"] forKey:@"goods_promotion_price"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_marketprice"] forKey:@"goods_marketprice"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_image"] forKey:@"goods_image"];
-//                                    [self.weekNewItem setValue:[self.week_new.item[k] objectForKey:@"goods_coupon_label"] forKey:@"goods_coupon_label"];
-//
-//                                }
-                                
-                                
                             }
                         }
                     }
