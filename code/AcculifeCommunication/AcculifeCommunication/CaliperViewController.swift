@@ -928,7 +928,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         self.view.endEditing(true)
         if viewScanBle.isHidden == true {
             viewScanBle.isHidden = false
-            //iPhoneSay("開始搜尋")
+
             self.centralManager.scanForPeripherals(withServices: nil, options: nil)
             print("BLE Scan")
             btnBleScan.setTitle("Stop Scan", for: .normal)
