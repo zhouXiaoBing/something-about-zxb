@@ -11,11 +11,15 @@ import UIKit
 import JavaScriptCore
 import WebKit
 
-class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WKScriptMessageHandler {
+
+
+
+class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WKScriptMessageHandler{
     
     
     
     var webView : WKWebView!
+    
     
     var itemString :String?
 
@@ -31,13 +35,14 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
     }
     
     func addWebView() {
-        
+        print("addWebView")
         let webConfiguration = WKWebViewConfiguration()
-        // 创建UserContentController（提供JavaScript向webView发送消息的方法）
+//        // 创建UserContentController（提供JavaScript向webView发送消息的方法）
         let userContent = WKUserContentController()
         userContent.add(self as WKScriptMessageHandler, name: "myName")
         webConfiguration.userContentController = userContent
-//        webConfiguration.e
+//
+//
         let myURL = URL(string: "http://125.227.206.31:136/AcuLife/ios/index.html")
         webView = WKWebView(frame: UIScreen.main.bounds, configuration: webConfiguration)
         let myRequest = URLRequest(url: myURL!)
@@ -50,7 +55,23 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
 //        }
         
         
+        
+//        self.webView = UIWebView(frame: self.view.bounds)
+//        self.view.addSubview(self.webView)
+//        self.webView.delegate = self
+//        self.webView.scalesPageToFit = true
+//
+////         加载网络Html页面 请设置允许Http请求
+//        let url = NSURL(string: "http://125.227.206.31:136/AcuLife/ios/index.html");
+//        let request = NSURLRequest(url:url! as URL)
+//
+//        self.webView.loadRequest(request as URLRequest)
+//
     }
+    
+    
+    
+    
     //js 调用 native 代理
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("js 调用 native 代理")
@@ -61,7 +82,6 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
             //带着 mmappbid，1 跳转到蓝牙连接页面
             itemString = message.body as? String
             self.performSegue(withIdentifier: "CaliperView", sender: self)
-            
         }
         
     }
@@ -80,31 +100,28 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
     
     //内容开始加载
     func webViewDidStartLoad(_ webView: UIWebView) {
-        
+        print("内容开始加载")
     }
     
-    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        
-    }
     //页面加载完成
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        
-    }
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-    }
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+//        print("页面加载完成")
+//    }
+   
     //页面加载失败
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        
+        print("页面加载页面加载失败")
     }
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        
-    }
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        
-    }
+ 
     
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+         print("页面加载完成")
     
 
-}
+        }
+    }
+    
+
+
 
