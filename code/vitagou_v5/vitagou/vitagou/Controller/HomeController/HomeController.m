@@ -29,6 +29,7 @@
 #import "goods_item.h"
 #import "NewGoodsCell.h"
 #import "HomeHorizontalCollectionView.h"
+#import "special_pic.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -54,6 +55,8 @@
 @property (assign,nonatomic) HomeScrollView *homeScrollView;
 
 @property (strong,nonatomic) HomeBtnView *homeBtnView;
+
+@property (strong,nonatomic) special_pic *special;
 
 
 
@@ -164,22 +167,17 @@ NSMutableArray *dataArr;
 
                             }else if([key[j] isEqualToString:@"week_new"]){
                                 self.week_new = [[week_new alloc]init];
-                                
-                                //考虑把 item 和 title 转成 json 然后在调用 MJ_Extension
-                                NSLog(@"key_j %@",[data.datas[i] objectForKey:key[j]]);
                                 NSError *parseError = nil;
                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[data.datas[i] objectForKey:key[j]] options:NSJSONWritingPrettyPrinted error:&parseError];
-                                NSLog(@"jsondata %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-                                
                                 NSString *string =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                
                                 self.week_new = [week_new mj_objectWithKeyValues:string];
-                                NSLog(@"weee %@",self.week_new.title);\
-                                NSLog(@"weee %lu",(unsigned long)self.week_new.item.count);
-//                                [self.week_new setValue:title forKey:@"title"];
-//                                [self.week_new setValue:dic forKey:@"item"];
-                                
-                                NSLog(@"self.week_new.item %lu",(unsigned long)self.week_new.item.count);
+                            }
+                            else if ([key[j] isEqualToString:@"special_pic"]){
+                                self.special = [[special_pic alloc]init];
+                                 NSError *parseError = nil;
+                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[data.datas[i] objectForKey:key[j]] options:NSJSONWritingPrettyPrinted error:&parseError];
+                                NSString *string =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                self.special = [special_pic mj_objectWithKeyValues:string];
                             }
                         }
                     }
@@ -206,7 +204,7 @@ NSMutableArray *dataArr;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return 4;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -223,9 +221,16 @@ NSMutableArray *dataArr;
         [btn init];
         return btn;
     }else if(indexPath.section == 2){
-        NSLog(@"sec2");
+        
         NewGoodsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:newGoodsCellId forIndexPath:indexPath];
         cell.item = self.week_new.item[indexPath.row];
+        return cell;
+    }
+    else if (indexPath.section == 3){
+        HomeHorizontalCollectionView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:horizontalCellId forIndexPath:indexPath];
+        NSLog(@"self_special %lu",(unsigned long)self.special.item.count);
+        cell.special = self.special;
+        [cell init];
         return cell;
     }
     return  nil;
@@ -238,6 +243,8 @@ NSMutableArray *dataArr;
         return 1;
     }else if(section == 2){
         return self.week_new.item.count;
+    }else if (section == 3){
+        return 1;
     }
     return 0;
 }
@@ -249,8 +256,11 @@ NSMutableArray *dataArr;
     }else if (indexPath.section == 1){
         itemSize = CGSizeMake(kScreen_Width, 80);
     }else if (indexPath.section == 2){
-        NSLog(@"sizeForItemAtIndexPath_sec=2");
+        
         itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3);
+    }else if (indexPath.section == 3){
+        NSLog(@"horizontal_itemsize");
+        itemSize = CGSizeMake(kScreen_Width, kScreen_Width);
     }
     return itemSize;
 }
@@ -262,6 +272,8 @@ NSMutableArray *dataArr;
         return  CGSizeMake(kScreen_Width, 40);//section 重叠
     }else if (section == 2){
         return CGSizeZero;
+    }else if (section == 3){
+        return CGSizeZero;
     }
     return CGSizeZero;
 }
@@ -272,6 +284,8 @@ NSMutableArray *dataArr;
     }else  if (section == 1) {
         return CGSizeZero;
     }else  if (section == 2) {
+        return CGSizeZero;
+    }else  if (section == 3) {
         return CGSizeZero;
     }
     return CGSizeZero;
@@ -287,6 +301,9 @@ NSMutableArray *dataArr;
         }else if (indexPath.section == 1) {
             [cell showTitleLable:NO];
         }else if (indexPath.section == 2) {
+            [cell showTitleLable:NO];
+        }
+        else if (indexPath.section == 3) {
             [cell showTitleLable:NO];
         }
 

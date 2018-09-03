@@ -6,6 +6,7 @@
 //  Copyright © 2018年 vitagou. All rights reserved.
 //
 
+#import "special_pic.h"
 @class HomeHorizontalCollectionView;
 
 @protocol HomeHorizontalDataSource <NSObject>
@@ -19,6 +20,7 @@
 
 @interface HomeHorizontalCollectionView : UICollectionViewCell
 
+@property (strong,nonatomic) special_pic *special;
 
 @end
 

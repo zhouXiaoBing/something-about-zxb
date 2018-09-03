@@ -7,8 +7,15 @@
 //
 
 #import "special_pic.h"
+#import "special_pic_item.h"
 
 @implementation  special_pic
+
++ (NSDictionary *)objectClassInArray{//出现关键字冲突
+    return @{
+             @"item" : [special_pic_item class]
+             };
+}
 
 @end
 

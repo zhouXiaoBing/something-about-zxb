@@ -41,7 +41,6 @@
 		93D1590221003615000FD53E /* WordArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1590121003615000FD53E /* WordArrowItem.m */; };
 		93D1590521003677000FD53E /* ItemSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1590421003677000FD53E /* ItemSection.m */; };
 		93D1590821003888000FD53E /* VerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1590721003888000FD53E /* VerticalFlowLayout.m */; };
-		93D1590B21003C23000FD53E /* HorizontalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1590A21003C23000FD53E /* HorizontalFlowLayout.m */; };
 		93D1590E21003D30000FD53E /* ElementsFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1590D21003D30000FD53E /* ElementsFlowLayout.m */; };
 		93D1591121008E66000FD53E /* CartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1591021008E66000FD53E /* CartController.m */; };
 		93D1591521008EA4000FD53E /* UseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D1591421008EA4000FD53E /* UseController.m */; };
@@ -161,8 +160,6 @@
 		93D1590421003677000FD53E /* ItemSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemSection.m; sourceTree = "<group>"; };
 		93D1590621003871000FD53E /* VerticalFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VerticalFlowLayout.h; sourceTree = "<group>"; };
 		93D1590721003888000FD53E /* VerticalFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VerticalFlowLayout.m; sourceTree = "<group>"; };
-		93D1590921003C14000FD53E /* HorizontalFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HorizontalFlowLayout.h; sourceTree = "<group>"; };
-		93D1590A21003C23000FD53E /* HorizontalFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HorizontalFlowLayout.m; sourceTree = "<group>"; };
 		93D1590C21003D22000FD53E /* ElementsFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElementsFlowLayout.h; sourceTree = "<group>"; };
 		93D1590D21003D30000FD53E /* ElementsFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElementsFlowLayout.m; sourceTree = "<group>"; };
 		93D1590F21008E5B000FD53E /* CartController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CartController.h; sourceTree = "<group>"; };
@@ -405,8 +402,6 @@
 				93D1590421003677000FD53E /* ItemSection.m */,
 				93D1590621003871000FD53E /* VerticalFlowLayout.h */,
 				93D1590721003888000FD53E /* VerticalFlowLayout.m */,
-				93D1590921003C14000FD53E /* HorizontalFlowLayout.h */,
-				93D1590A21003C23000FD53E /* HorizontalFlowLayout.m */,
 				93D1590C21003D22000FD53E /* ElementsFlowLayout.h */,
 				93D1590D21003D30000FD53E /* ElementsFlowLayout.m */,
 			);
@@ -850,7 +845,6 @@
 				93D158F721002FA3000FD53E /* NormalRefreshHeader.m in Sources */,
 				93FD4E502122CDC5008AC7D9 /* TitleIconView.m in Sources */,
 				93D158D120F8A335000FD53E /* MyCollectionViewController.m in Sources */,
-				93D1590B21003C23000FD53E /* HorizontalFlowLayout.m in Sources */,
 				93D158EE20FF3770000FD53E /* BaseViewController.m in Sources */,
 				93F29F8C20F4580900139094 /* main.m in Sources */,
 				93D158E020FC7089000FD53E /* NavigationBar.m in Sources */,

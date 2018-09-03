@@ -15,14 +15,20 @@
 @property (nonatomic,strong) UICollectionView *collectionView;
 
 
+
 @end
 
 @implementation HomeHorizontalCollectionView
+
+
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        NSLog(@"homeHorizontal_init");
+//        NSLog(@"special_count %lu",(unsigned long)self.special.item.count);
+        //注册
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
         
         
@@ -34,6 +40,7 @@
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         
+        [self addSubview:self.collectionView];
         [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.edges.mas_equalTo(UIEdgeInsetsMake(100, 20, 100, 20));
@@ -42,6 +49,10 @@
     return self;
 }
 
+- (void)setSpecial:(special_pic *)special{
+//    NSLog(@"special_count %lu",(unsigned long)special.item.count);
+    
+}
 #pragma mark - HomeHorizontalDataSource
 
 - (UICollectionViewLayout *)collectionViewController:(HomeHorizontalCollectionView *)collectionViewController layoutForColletionView:(UICollectionView *)collectionView{
@@ -63,7 +74,7 @@
 
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 100;
+    return 3;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -94,6 +105,16 @@
     contentInset.bottom -= self.collectionView.mj_footer.height;
     self.collectionView.scrollIndicatorInsets = contentInset;
     [self endEditing:YES];
+}
+
+#pragma mark - getter
+- (UICollectionView *)collectionView{
+    if (_collectionView == nil) {
+        UICollectionView *collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:[UICollectionViewLayout new]];
+        _collectionView = collectionView;
+        collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    }
+    return _collectionView;
 }
 
 @end

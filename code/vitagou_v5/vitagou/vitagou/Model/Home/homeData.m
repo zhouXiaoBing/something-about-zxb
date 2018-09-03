@@ -12,7 +12,8 @@
 
 + (NSDictionary *)objectClassInArray{//出现关键字冲突
     return @{
-//             @"datas" : [adv_list class]
+//             @"datas" : [adv_list class],
+             
              };
 }
 
