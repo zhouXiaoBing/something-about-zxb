@@ -16,10 +16,8 @@ import WebKit
 
 class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WKScriptMessageHandler{
     
-    
-    
+
     var webView : WKWebView!
-    
     
     var itemString :String?
 
@@ -37,35 +35,30 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
     func addWebView() {
         print("addWebView")
         let webConfiguration = WKWebViewConfiguration()
-//        // 创建UserContentController（提供JavaScript向webView发送消息的方法）
+  // 创建UserContentController（提供JavaScript向webView发送消息的方法）
         let userContent = WKUserContentController()
         userContent.add(self as WKScriptMessageHandler, name: "myName")
         webConfiguration.userContentController = userContent
-//
-//
         let myURL = URL(string: "http://125.227.206.31:136/AcuLife/ios/index.html")
         webView = WKWebView(frame: UIScreen.main.bounds, configuration: webConfiguration)
         let myRequest = URLRequest(url: myURL!)
+        print("addWebView1")
         webView.load(myRequest)
         self.view.addSubview(webView)
         webView.navigationDelegate = self;
-        
-//        webView.evaluateJavaScript(String) { (<#Any?#>, <#Error?#>) in
-//
-//        }
+        print("addWebView2")
         
         
-        
-//        self.webView = UIWebView(frame: self.view.bounds)
+//        self.webView = WKWebView(frame: self.view.bounds)
 //        self.view.addSubview(self.webView)
-//        self.webView.delegate = self
-//        self.webView.scalesPageToFit = true
+////        self.webView.delegate = self
+////        self.webView.scalesPageToFit = true
 //
 ////         加载网络Html页面 请设置允许Http请求
 //        let url = NSURL(string: "http://125.227.206.31:136/AcuLife/ios/index.html");
 //        let request = NSURLRequest(url:url! as URL)
 //
-//        self.webView.loadRequest(request as URLRequest)
+//        self.webView.load(request as URLRequest)
 //
     }
     
@@ -103,11 +96,7 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         print("内容开始加载")
     }
     
-    //页面加载完成
-//    func webViewDidFinishLoad(_ webView: UIWebView) {
-//        print("页面加载完成")
-//    }
-   
+    
     //页面加载失败
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         print("页面加载页面加载失败")
