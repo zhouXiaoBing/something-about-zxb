@@ -445,7 +445,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
     var uuid: UUID!
     var uuidfromViewController: String!
     
-    var bleFindPeripheral = [CBPeripheral?]()
+    var bleFindPeripheral = [CBPeripheral!]()
     var bleDeviceNameList = [String]()
     var bleDeviceUUIDList = [String]()
     var bleDeviceRSSIList = [NSNumber]()
@@ -482,16 +482,11 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
     
     //@IBOutlet weak var viewTextField: UIView!
     
-    
-    
     override func viewDidLoad() {
         print("CaliperViewController viewDidLoad")
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         print(uuidfromViewController)
-        
-
 //        var itemString:String?
 //        print("zxb:")
 //        print(itemString)
@@ -539,7 +534,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         //textFieldDownLimit.delegate = self
         
         //labelBleDeviceInfo.text = "Device: Not Connected"
-//        btnReadE0.isEnabled = false
+        btnReadE0.isEnabled = false
         
         synth.delegate = self
         
@@ -780,7 +775,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
             self.bleDeviceRSSIList.removeAll()
             self.tableViewBle.reloadData()
             //self.labelBleDeviceInfo.text = "Device: Connected"
-//            self.btnReadE0.isEnabled = true
+            self.btnReadE0.isEnabled = true
             self.btnBleConnect.setTitle("Disconnect", for: .normal)
         }
         
@@ -900,7 +895,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         
         DispatchQueue.main.async(){
             //self.labelBleDeviceInfo.text = "Device: Not Connected"
-//            self.btnReadE0.isEnabled = false
+            self.btnReadE0.isEnabled = false
             
             self.btnBleConnect.setTitle("Connect", for: .normal)
         }
@@ -912,7 +907,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         
         DispatchQueue.main.async(){
             //self.labelBleDeviceInfo.text = "Device: Not Connected"
-//            self.btnReadE0.isEnabled = false
+            self.btnReadE0.isEnabled = false
             self.btnBleConnect.setTitle("Connect", for: .normal)
         }
     }
@@ -1009,11 +1004,6 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
         //connectPeripheral.writeValue(TxNSData as Data, for: WriteCharacteristic, type: .withoutResponse)
         connectPeripheral.writeValue(TxNSData as Data, for: WriteCharacteristic, type: .withResponse)
     }
-    
-    
-
-    
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("TextField BeginEditing")
         viewScanBle.isHidden = true

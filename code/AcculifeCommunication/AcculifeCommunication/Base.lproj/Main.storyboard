@@ -52,6 +52,9 @@
                                         <state key="normal" title="start auto sending">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SendE1:" destination="3JU-t9-b0s" eventType="touchUpInside" id="C71-EA-n80"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w39-C6-2Hf">
                                         <rect key="frame" x="16" y="500.5" width="288" height="39.5"/>
@@ -63,6 +66,9 @@
                                         <state key="normal" title="Read 1 time">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SendE0:" destination="3JU-t9-b0s" eventType="touchUpInside" id="yoF-h4-Phj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Bp-MS-sAg">
                                         <rect key="frame" x="16" y="404" width="288" height="40"/>
@@ -71,6 +77,9 @@
                                         <state key="normal" title="stop auto send">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SendE3:" destination="3JU-t9-b0s" eventType="touchUpInside" id="z8f-pC-rwj"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mIR-iA-nqo">
                                         <rect key="frame" x="212" y="457.5" width="92" height="30"/>
@@ -196,13 +205,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="dmf-JD-jHD" firstAttribute="top" secondItem="kPF-rF-ZCV" secondAttribute="bottom" id="159-t8-oLz"/>
+                            <constraint firstItem="RSO-gn-LBI" firstAttribute="top" secondItem="dmf-JD-jHD" secondAttribute="bottom" id="46L-cR-wxg"/>
                             <constraint firstItem="Ulw-Vg-M7V" firstAttribute="top" secondItem="G4b-VG-Yw5" secondAttribute="bottom" constant="8" id="9zh-9r-kR1"/>
                             <constraint firstAttribute="trailing" secondItem="dmf-JD-jHD" secondAttribute="trailing" id="CVW-Fw-9Id"/>
-                            <constraint firstItem="G4b-VG-Yw5" firstAttribute="top" secondItem="kPF-rF-ZCV" secondAttribute="bottom" id="Ga7-aw-Rvu"/>
                             <constraint firstItem="KKU-ks-7Ld" firstAttribute="centerX" secondItem="dmf-JD-jHD" secondAttribute="centerX" id="IB2-yI-CEi"/>
+                            <constraint firstItem="dmf-JD-jHD" firstAttribute="top" secondItem="kPF-rF-ZCV" secondAttribute="bottom" id="IkP-I6-hHt"/>
                             <constraint firstItem="G4b-VG-Yw5" firstAttribute="leading" secondItem="SJF-RT-YSP" secondAttribute="leadingMargin" id="Lcn-6n-gnn"/>
-                            <constraint firstItem="RSO-gn-LBI" firstAttribute="top" secondItem="dmf-JD-jHD" secondAttribute="bottom" id="PJZ-RJ-WnS"/>
                             <constraint firstItem="dmf-JD-jHD" firstAttribute="leading" secondItem="SJF-RT-YSP" secondAttribute="leading" id="Suh-kk-T7Y"/>
                             <constraint firstItem="k8a-SM-iPU" firstAttribute="centerX" secondItem="dmf-JD-jHD" secondAttribute="centerX" id="W2o-ky-SZu"/>
                             <constraint firstItem="Ulw-Vg-M7V" firstAttribute="leading" secondItem="G4b-VG-Yw5" secondAttribute="leading" id="ZHi-sR-fRe"/>
@@ -210,6 +218,7 @@
                             <constraint firstItem="Mex-c5-akQ" firstAttribute="centerY" secondItem="dmf-JD-jHD" secondAttribute="centerY" id="acy-Yh-Ulu"/>
                             <constraint firstItem="w2D-eJ-E2K" firstAttribute="centerX" secondItem="dmf-JD-jHD" secondAttribute="centerX" id="bgn-ao-0LQ"/>
                             <constraint firstItem="Ulw-Vg-M7V" firstAttribute="trailing" secondItem="G4b-VG-Yw5" secondAttribute="trailing" id="kK7-KL-Oin"/>
+                            <constraint firstItem="G4b-VG-Yw5" firstAttribute="top" secondItem="kPF-rF-ZCV" secondAttribute="bottom" id="v6O-fw-fjY"/>
                             <constraint firstItem="G4b-VG-Yw5" firstAttribute="trailing" secondItem="SJF-RT-YSP" secondAttribute="trailingMargin" id="vzy-fG-sdu"/>
                             <constraint firstItem="4Bp-MS-sAg" firstAttribute="top" secondItem="w2D-eJ-E2K" secondAttribute="bottom" constant="42" id="yQD-cH-3oa"/>
                         </constraints>
@@ -221,6 +230,9 @@
                     <connections>
                         <outlet property="btnBleConnect" destination="G4b-VG-Yw5" id="VFJ-Fu-mEQ"/>
                         <outlet property="btnBleScan" destination="cGq-Z1-jrp" id="mzO-dA-G57"/>
+                        <outlet property="btnReadE0" destination="w39-C6-2Hf" id="KEu-kG-8aD"/>
+                        <outlet property="btnReadE1" destination="zNq-Fu-xgr" id="f6F-QD-4PN"/>
+                        <outlet property="btnReadE3" destination="4Bp-MS-sAg" id="U2A-a6-hAO"/>
                         <outlet property="btnReadE4" destination="MSq-fL-11v" id="Ug5-Xo-RBC"/>
                         <outlet property="labelADCData" destination="w2D-eJ-E2K" id="Znq-bb-hJ6"/>
                         <outlet property="labelT1Data" destination="k8a-SM-iPU" id="zZh-Z0-ofu"/>
