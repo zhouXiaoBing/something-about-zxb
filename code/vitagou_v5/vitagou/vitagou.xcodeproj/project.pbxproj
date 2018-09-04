@@ -10,6 +10,7 @@
 		03C26D07F9DE77E6BD7BD2AC /* Pods_vitagou.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07888D48C5476206749A87D8 /* Pods_vitagou.framework */; };
 		8E7BFE746D26C0EAFE29D74A /* Pods_vitagouUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D2546ABAA4561D276B0136 /* Pods_vitagouUITests.framework */; };
 		934CB9FB21378441007F38FF /* HorizontalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CB9FA21378441007F38FF /* HorizontalFlowLayout.m */; };
+		934CB9FE213E32A6007F38FF /* HomeHorizontalGoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */; };
 		9369FDE02109C2D000EDB5B2 /* homeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDDF2109C2D000EDB5B2 /* homeData.m */; };
 		9369FDE3210AABFC00EDB5B2 /* adv_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDE2210AABFC00EDB5B2 /* adv_list.m */; };
 		9369FDE6210AB93000EDB5B2 /* adv_list_item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDE5210AB93000EDB5B2 /* adv_list_item.m */; };
@@ -97,6 +98,8 @@
 		70BDACA1BEF883B37DC5B34E /* Pods-vitagou.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vitagou.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vitagou/Pods-vitagou.debug.xcconfig"; sourceTree = "<group>"; };
 		934CB9F921378432007F38FF /* HorizontalFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HorizontalFlowLayout.h; sourceTree = "<group>"; };
 		934CB9FA21378441007F38FF /* HorizontalFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HorizontalFlowLayout.m; sourceTree = "<group>"; };
+		934CB9FC213E3264007F38FF /* HomeHorizontalGoodItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHorizontalGoodItem.h; sourceTree = "<group>"; };
+		934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHorizontalGoodItem.m; sourceTree = "<group>"; };
 		9369FDDB2109BF1E00EDB5B2 /* url_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = url_macro.h; sourceTree = "<group>"; };
 		9369FDDE2109C2BA00EDB5B2 /* homeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = homeData.h; sourceTree = "<group>"; };
 		9369FDDF2109C2D000EDB5B2 /* homeData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeData.m; sourceTree = "<group>"; };
@@ -420,7 +423,6 @@
 		93D1591A210170B0000FD53E /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				93FD4E63213538F7008AC7D9 /* New Group */,
 				93D1591B2101725C000FD53E /* SearchNavView.h */,
 				93D1591C2101726F000FD53E /* SearchNavView.m */,
 				93FD4E3F211D740C008AC7D9 /* HomeScrollView.h */,
@@ -439,6 +441,8 @@
 				93FD4E52212AB509008AC7D9 /* NewGoodsCell.m */,
 				93FD4E62213538F1008AC7D9 /* HomeHorizontalCollectionView.h */,
 				93FD4E6421353902008AC7D9 /* HomeHorizontalCollectionView.m */,
+				934CB9FC213E3264007F38FF /* HomeHorizontalGoodItem.h */,
+				934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -529,13 +533,6 @@
 				93FD4E60212FF632008AC7D9 /* StringUtil.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		93FD4E63213538F7008AC7D9 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		E4F4C7261A752431234ADE12 /* Frameworks */ = {
@@ -842,6 +839,7 @@
 				93D158BC20F87AFD000FD53E /* LMJIntroductoryPagesHelper.m in Sources */,
 				9369FDFA210AFC3D00EDB5B2 /* special_pic_item.m in Sources */,
 				9369FDF6210AF87C00EDB5B2 /* special_pic.m in Sources */,
+				934CB9FE213E32A6007F38FF /* HomeHorizontalGoodItem.m in Sources */,
 				93D158F721002FA3000FD53E /* NormalRefreshHeader.m in Sources */,
 				93FD4E502122CDC5008AC7D9 /* TitleIconView.m in Sources */,
 				93D158D120F8A335000FD53E /* MyCollectionViewController.m in Sources */,

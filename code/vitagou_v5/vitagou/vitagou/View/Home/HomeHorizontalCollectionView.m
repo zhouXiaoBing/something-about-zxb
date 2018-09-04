@@ -9,18 +9,18 @@
 
 #import "HomeHorizontalCollectionView.h"
 #import "HorizontalFlowLayout.h"
-
+#import "HomeHorizontalGoodItem.h"
 @interface HomeHorizontalCollectionView()<UICollectionViewDelegate,UICollectionViewDataSource,HomeHorizontalDataSource,HorizontalFlowLayoutDelegate>
 
 @property (nonatomic,strong) UICollectionView *collectionView;
 
-
+@property (nonatomic,strong) special_pic *special_a;
 
 @end
 
 @implementation HomeHorizontalCollectionView
 
-
+static  NSString *specialGoodId = @"specialGoodId";
 
 - (instancetype)init
 {
@@ -43,7 +43,7 @@
         [self addSubview:self.collectionView];
         [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.edges.mas_equalTo(UIEdgeInsetsMake(100, 20, 100, 20));
+            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, kScreenWidth/2, 0));
         }];
     }
     return self;
@@ -51,6 +51,7 @@
 
 - (void)setSpecial:(special_pic *)special{
 //    NSLog(@"special_count %lu",(unsigned long)special.item.count);
+    _special_a = special;
     
 }
 #pragma mark - HomeHorizontalDataSource
@@ -74,7 +75,7 @@
 
 #pragma mark - delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 3;
+    return _special_a.item.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
