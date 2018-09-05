@@ -878,11 +878,6 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
                 self.labelT1Data.text = str1
                 let str2 = String(format: "T2:%d=%.2f", T2,fT2Val)
                 self.labelT2Data.text = str2
-                print(str)
-                print("str_str")
-                print(str1)
-                print(str2)
-            
             }
         }
         

@@ -77,6 +77,21 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
             self.performSegue(withIdentifier: "CaliperView", sender: self)
         }
         
+        /**
+         "javascript:(function(){" +
+         "window.sessionStorage.setItem('ADCVal','" + ADCVal + "');" +
+         "window.sessionStorage.setItem('T1','" + T1 + "');" +
+         "window.sessionStorage.setItem('T2','" + T2 + "');" +
+         "})();"
+         */
+        let js1:String = "javascript:(function(){"
+        let js2:String = "window.sessionStorage.setItem('ADCVal','"
+        let js3:String = "');"
+        let js4:String = "window.sessionStorage.setItem('T1','"
+        let js5:String = "window.sessionStorage.setItem('T2','"
+        
+        let js:String = js1.appending(js2)
+        
     }
     
     //segue 给新页面传递数据的方法
