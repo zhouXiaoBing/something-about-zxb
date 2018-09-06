@@ -11,9 +11,6 @@ import UIKit
 import JavaScriptCore
 import WebKit
 
-
-
-
 class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WKScriptMessageHandler{
     
 
@@ -89,8 +86,10 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         let js3:String = "');"
         let js4:String = "window.sessionStorage.setItem('T1','"
         let js5:String = "window.sessionStorage.setItem('T2','"
-        
-        let js:String = js1.appending(js2)
+        let js6:String = "})();"
+        let js:String =  js1.appending(js2).appending("").appending(js3).appending(js4).appending("").appending(js3).appending(js5).appending("").appending(js6)
+//        webView.load(js);
+        webView.evaluateJavaScript(js, completionHandler: nil)
         
     }
     
