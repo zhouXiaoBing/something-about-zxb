@@ -88,7 +88,7 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         let js5:String = "window.sessionStorage.setItem('T2','"
         let js6:String = "})();"
         let js:String =  js1.appending(js2).appending("").appending(js3).appending(js4).appending("").appending(js3).appending(js5).appending("").appending(js6)
-//        webView.load(js);
+//        webView.load(js); https://www.jianshu.com/p/c2a09a057306
         webView.evaluateJavaScript(js, completionHandler: nil)
         
     }
