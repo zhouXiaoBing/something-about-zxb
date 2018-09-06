@@ -27,10 +27,8 @@ static  NSString *specialGoodId = @"specialGoodId";
     self = [super init];
     if (self) {
         NSLog(@"homeHorizontal_init");
-//        NSLog(@"special_count %lu",(unsigned long)self.special.item.count);
-        //注册
-        [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class])];
-        
+
+        [self.collectionView registerClass:[HomeHorizontalGoodItem class] forCellWithReuseIdentifier:specialGoodId];
         
         UICollectionViewLayout *myLayout = [self collectionViewController:self
  layoutForColletionView:self.collectionView];
@@ -41,16 +39,13 @@ static  NSString *specialGoodId = @"specialGoodId";
         self.collectionView.delegate = self;
         
         [self addSubview:self.collectionView];
-        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, kScreenWidth/2, 0));
-        }];
+
     }
     return self;
 }
 
 - (void)setSpecial:(special_pic *)special{
-//    NSLog(@"special_count %lu",(unsigned long)special.item.count);
+
     _special_a = special;
     
 }
@@ -65,7 +60,7 @@ static  NSString *specialGoodId = @"specialGoodId";
 #pragma mark - horizontalFlowLayoutDelegate
 
 - (CGFloat)waterflowLayout:(HorizontalFlowLayout *)waterflowLayout collectionView:(UICollectionView *)collectionView widthForItemAtIndexPath:(NSIndexPath *)indexPath itemHeight:(CGFloat)itemHeight{
-    return itemHeight;
+    return itemHeight-40;
 }
 
 - (NSInteger)waterflowLayout:(HorizontalFlowLayout *)waterflowLayout linesInCollectionView:(UICollectionView *)collectionView{
@@ -80,24 +75,21 @@ static  NSString *specialGoodId = @"specialGoodId";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
-    
-    cell.contentView.backgroundColor = [UIColor yellowColor];
-    
+
+    HomeHorizontalGoodItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:specialGoodId forIndexPath:indexPath];
     cell.contentView.clipsToBounds = YES;
-    if (![cell.contentView viewWithTag:100]) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        label.tag = 100;
-        label.textColor = [UIColor redColor];
-        label.font = [UIFont boldSystemFontOfSize:17];
-        [cell.contentView addSubview:label];
-    }
     
-    UILabel *label = [cell.contentView viewWithTag:100];
-    
-    label.text = [NSString stringWithFormat:@"%zd", indexPath.item];
+    cell.special = _special_a.item[indexPath.row];
     
     return cell;
+}
+
+-(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    special_pic_item *item = _special_a.item[indexPath.row];
+    NSLog(@"shouldSelectItemAtIndexpath %@",item.goods_id);
+    return YES;
 }
 
 #pragma mark - scrollDelegate

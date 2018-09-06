@@ -26,10 +26,12 @@
 #import "HomeHeaderCell.h"
 #import "HomeBtnView.h"
 #import "goods1.h"
+#import "goods.h"
 #import "goods_item.h"
 #import "NewGoodsCell.h"
 #import "HomeHorizontalCollectionView.h"
 #import "special_pic.h"
+#import "GradGoodItem.h"
 
 //第一层cell是基本的布局结构，
 @interface HomeController () <UICollectionViewDelegate,UICollectionViewDataSource,SearchViewDelegate
@@ -43,6 +45,8 @@
 @property (strong,nonatomic) goods1 *goods1;
 
 @property (strong,nonatomic) goods1_item *goods1Item;
+
+@property (strong,nonatomic) goods *goods;
 
 @property (strong,nonatomic) week_new *week_new;
 
@@ -77,6 +81,7 @@ static NSString *headerCellId = @"headerCellId";
 static NSString *homeBtnViewId = @"homeBtnView";
 static NSString *newGoodsCellId = @"newGoodsCellId";
 static NSString *horizontalCellId = @"horizontalCellId";
+static NSString *GradGoodsItemId = @"GradGoodsItemId";
 
 NSMutableArray *imageArr;
 NSMutableArray *typeArr;
@@ -116,6 +121,7 @@ NSMutableArray *dataArr;
     [self.collectionView registerClass:[HomeFooterCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerCellId];
     [self.collectionView registerClass:[HomeHeaderCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerCellId];
     [self.collectionView registerClass:[HomeHorizontalCollectionView class] forCellWithReuseIdentifier:horizontalCellId];
+    [self.collectionView registerClass:[GradGoodItem class] forCellWithReuseIdentifier:GradGoodsItemId];
     
     [self.view addSubview:self.collectionView];
     //location
@@ -130,19 +136,14 @@ NSMutableArray *dataArr;
 
 -(void)getHomeData{
     [homeData getHomeData:^(NSString *code, homeData *data) {
-//        NSLog(@"code %@",code);
-        NSLog(@"homeData——code %@",data.code);//地址值
-        
          imageArr = [NSMutableArray array];
          typeArr = [NSMutableArray array];
          dataArr = [NSMutableArray array];
         if (data.datas != nil) {
-//            self.imageArray = [NSMutableArray arrayWithCapacity:10];
                     for (int i = 0; i < data.datas.count; i++) {
                         NSArray *key = [data.datas[i] allKeys];
                         for (int j = 0; j < key.count; j++) {
                             if ([key[j] isEqualToString:@"adv_list"]) {
-                                NSLog(@"识别出来了");
                                 //将item里面的字典转为模型
                                NSArray *dic = [[data.datas[i] objectForKey:key[j]] objectForKey:@"item"];
                                 for (int h = 0; h < dic.count; h++) {
@@ -157,13 +158,6 @@ NSMutableArray *dataArr;
                                 self.goods1Item = [[goods1_item alloc]init];
                                 [self.goods1 setValue:title forKey:@"title"];
                                 [self.goods1 setValue:dic forKey:@"item"];
-//                                NSLog(@"self.good1.item %@",self.goods1.item);
-                                //item 内部结构应该还是 JsonString
-                                for (int h = 0; h < self.goods1.item.count; h++) {
-                                    //保证 此处的 item 可以 传递给到 goods1Item 然后可以用点语法调用相应的值
-                                    NSLog(@"---- %@",self.goods1.item[h] );
-
-                                }
 
                             }else if([key[j] isEqualToString:@"week_new"]){
                                 self.week_new = [[week_new alloc]init];
@@ -178,7 +172,14 @@ NSMutableArray *dataArr;
                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[data.datas[i] objectForKey:key[j]] options:NSJSONWritingPrettyPrinted error:&parseError];
                                 NSString *string =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
                                 self.special = [special_pic mj_objectWithKeyValues:string];
+                            }else if([key[j] isEqualToString:@"goods"]){
+                                self.goods = [[goods alloc]init];
+                                NSError *parseError = nil;
+                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[data.datas[i] objectForKey:key[j]] options:NSJSONWritingPrettyPrinted error:&parseError];
+                                NSString *string =  [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                self.goods = [goods mj_objectWithKeyValues:string];
                             }
+                                
                         }
                     }
                 }
@@ -204,7 +205,7 @@ NSMutableArray *dataArr;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 4;
+    return 5;
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -233,6 +234,12 @@ NSMutableArray *dataArr;
         [cell init];
         return cell;
     }
+    else if (indexPath.section == 4){
+        GradGoodItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:GradGoodsItemId forIndexPath:indexPath];
+        NSLog(@"self.goods.item.count %lu",(unsigned long)self.goods.item.count);
+        cell.goodsItem = self.goods.item[indexPath.row];
+        return cell;
+    }
     return  nil;
 }
 
@@ -245,7 +252,10 @@ NSMutableArray *dataArr;
         return self.week_new.item.count;
     }else if (section == 3){
         return 1;
+    }else if(section == 4){
+        return self.goods.item.count;
     }
+    
     return 0;
 }
 
@@ -260,7 +270,10 @@ NSMutableArray *dataArr;
         itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3);
     }else if (indexPath.section == 3){
         NSLog(@"horizontal_itemsize");
-        itemSize = CGSizeMake(kScreen_Width, kScreen_Width);
+        itemSize = CGSizeMake(kScreen_Width, kScreen_Width/3+60);
+    }else if (indexPath.section == 4){
+        
+        itemSize = CGSizeMake(kScreen_Width/2-5, kScreen_Width/2+40);
     }
     return itemSize;
 }
@@ -307,7 +320,6 @@ NSMutableArray *dataArr;
             [cell showTitleLable:NO];
         }
 
-       
         return cell;
     }
     if([kind isEqualToString:UICollectionElementKindSectionFooter]){

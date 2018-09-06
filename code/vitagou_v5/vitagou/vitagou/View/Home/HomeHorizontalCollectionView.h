@@ -7,6 +7,7 @@
 //
 
 #import "special_pic.h"
+#import "special_pic_item.h"
 @class HomeHorizontalCollectionView;
 
 @protocol HomeHorizontalDataSource <NSObject>

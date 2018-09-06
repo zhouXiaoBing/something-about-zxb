@@ -1,18 +1,19 @@
 //
-//  HomeHorizontalGoodItem.m
+//  GradGoodItem.m
 //  vitagou
 //
-//  Created by Mac on 2018/9/4.
+//  Created by Mac on 2018/9/6.
 //  Copyright © 2018年 vitagou. All rights reserved.
 //
-#import "HomeHorizontalGoodItem.h"
+
+#import "GradGoodItem.h"
 
 
-@implementation HomeHorizontalGoodItem 
+@implementation GradGoodItem
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    NSLog(@"HomeHorizontalGoodItem_initWithFrame");
+    NSLog(@"GradGoodItem_initWithFrame");
     self = [super initWithFrame:frame];
     if (!self) {
         return nil;
@@ -35,31 +36,30 @@
     
     [_goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
-        make.width.mas_equalTo(kScreenWidth/3);
-        make.height.mas_equalTo(kScreenWidth/3);
+        make.width.mas_equalTo(kScreenWidth/2-10);
+        make.height.mas_equalTo(kScreenWidth/2-10);
         make.centerX.equalTo(self);
     }];
     
     [_goodsName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.equalTo(self.goodsView.mas_bottom);
-        make.width.mas_equalTo(kScreenWidth/3);
+        make.width.mas_equalTo(kScreenWidth/2-10);
         make.height.mas_equalTo(30);
     }];
     [_goodsPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.top.equalTo(self.goodsName.mas_bottom);
-        make.width.mas_equalTo(kScreenWidth/3);
+        make.width.mas_equalTo(kScreenWidth/2-10);
         make.height.mas_equalTo(15);
     }];
     return self;
 }
-
-- (void)setSpecial:(special_pic_item *)special{
-    NSLog(@"HomeHorizontalGoodItem_setSpecial");
-    [self.goodsView sd_setImageWithURL:[NSURL URLWithString:special.goods_image] placeholderImage:[UIImage imageNamed:@"place_holder"]];
-    _goodsName.text = special.goods_name;
-    _goodsPrice.text = [NSString stringWithFormat:@"￥%.2f",[special.goods_price doubleValue]];
-    
+- (void)setGoodsItem:(goods_item *)goodsItem{
+    NSLog(@"GradGoodsItem_setGoodsItem");
+    [self.goodsView sd_setImageWithURL:[NSURL URLWithString:goodsItem.goods_image] placeholderImage:[UIImage imageNamed:@"place_holder"]];
+    _goodsName.text = goodsItem.goods_name;
+    _goodsPrice.text = [NSString stringWithFormat:@"￥%.2f",[goodsItem.goods_price doubleValue]];
 }
 @end
+

@@ -11,6 +11,7 @@
 		8E7BFE746D26C0EAFE29D74A /* Pods_vitagouUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D2546ABAA4561D276B0136 /* Pods_vitagouUITests.framework */; };
 		934CB9FB21378441007F38FF /* HorizontalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CB9FA21378441007F38FF /* HorizontalFlowLayout.m */; };
 		934CB9FE213E32A6007F38FF /* HomeHorizontalGoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */; };
+		934CBA012140BCDD007F38FF /* GradGoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA002140BCDD007F38FF /* GradGoodItem.m */; };
 		9369FDE02109C2D000EDB5B2 /* homeData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDDF2109C2D000EDB5B2 /* homeData.m */; };
 		9369FDE3210AABFC00EDB5B2 /* adv_list.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDE2210AABFC00EDB5B2 /* adv_list.m */; };
 		9369FDE6210AB93000EDB5B2 /* adv_list_item.m in Sources */ = {isa = PBXBuildFile; fileRef = 9369FDE5210AB93000EDB5B2 /* adv_list_item.m */; };
@@ -100,6 +101,8 @@
 		934CB9FA21378441007F38FF /* HorizontalFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HorizontalFlowLayout.m; sourceTree = "<group>"; };
 		934CB9FC213E3264007F38FF /* HomeHorizontalGoodItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeHorizontalGoodItem.h; sourceTree = "<group>"; };
 		934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeHorizontalGoodItem.m; sourceTree = "<group>"; };
+		934CB9FF2140BC55007F38FF /* GradGoodItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradGoodItem.h; sourceTree = "<group>"; };
+		934CBA002140BCDD007F38FF /* GradGoodItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradGoodItem.m; sourceTree = "<group>"; };
 		9369FDDB2109BF1E00EDB5B2 /* url_macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = url_macro.h; sourceTree = "<group>"; };
 		9369FDDE2109C2BA00EDB5B2 /* homeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = homeData.h; sourceTree = "<group>"; };
 		9369FDDF2109C2D000EDB5B2 /* homeData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeData.m; sourceTree = "<group>"; };
@@ -443,6 +446,8 @@
 				93FD4E6421353902008AC7D9 /* HomeHorizontalCollectionView.m */,
 				934CB9FC213E3264007F38FF /* HomeHorizontalGoodItem.h */,
 				934CB9FD213E32A6007F38FF /* HomeHorizontalGoodItem.m */,
+				934CB9FF2140BC55007F38FF /* GradGoodItem.h */,
+				934CBA002140BCDD007F38FF /* GradGoodItem.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -838,6 +843,7 @@
 				93D158B920F75119000FD53E /* LMJIntroductoryPagesView.m in Sources */,
 				93D158BC20F87AFD000FD53E /* LMJIntroductoryPagesHelper.m in Sources */,
 				9369FDFA210AFC3D00EDB5B2 /* special_pic_item.m in Sources */,
+				934CBA012140BCDD007F38FF /* GradGoodItem.m in Sources */,
 				9369FDF6210AF87C00EDB5B2 /* special_pic.m in Sources */,
 				934CB9FE213E32A6007F38FF /* HomeHorizontalGoodItem.m in Sources */,
 				93D158F721002FA3000FD53E /* NormalRefreshHeader.m in Sources */,

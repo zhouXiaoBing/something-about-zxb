@@ -7,7 +7,12 @@
 //
 
 #import "goods.h"
-
+#import "goods_item.h"
 @implementation goods
 
++ (NSDictionary *)objectClassInArray{//出现关键字冲突
+    return @{
+             @"item" : [goods_item class]
+             };
+}
 @end

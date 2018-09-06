@@ -20,7 +20,7 @@
 
 @property (strong, nonatomic) NSString *goods_marketprice;
 
-@property (strong, nonatomic) NSString *goods_iamge;
+@property (strong, nonatomic) NSString *goods_image;
 
 @property (strong, nonatomic) NSString *goods_coupon_label;
 
