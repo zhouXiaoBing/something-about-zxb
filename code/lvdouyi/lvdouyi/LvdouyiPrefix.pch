@@ -1,0 +1,28 @@
+//
+//  LvdouyiPrefix.pch
+//  lvdouyi
+//
+//  Created by Mac on 2018/9/7.
+//  Copyright © 2018年 vitagou. All rights reserved.
+//
+
+#ifndef LvdouyiPrefix_pch
+#define LvdouyiPrefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <YYKit/YYKit.h>
+
+
+//不同屏幕尺寸字体适配
+#define kScreenWidthRatio  (UIScreen.mainScreen.bounds.size.width / 375.0)
+#define kScreenHeightRatio (UIScreen.mainScreen.bounds.size.height / 667.0)
+#define AdaptedWidth(x)  ceilf((x) * kScreenWidthRatio)
+#define AdaptedHeight(x) ceilf((x) * kScreenHeightRatio)
+#define AdaptedFontSize(R)     [UIFont systemFontOfSize:AdaptedWidth(R)]
+
+#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
+#endif /* LvdouyiPrefix_pch */
