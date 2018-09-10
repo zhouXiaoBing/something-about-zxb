@@ -10,13 +10,14 @@
 		8BD85202968CE35CB3C9AC7D /* Pods_lvdouyi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */; };
 		934CBA1021420A8D007F38FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA0F21420A8D007F38FF /* AppDelegate.m */; };
 		934CBA1321420A8D007F38FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA1221420A8D007F38FF /* ViewController.m */; };
-		934CBA1621420A8D007F38FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA1421420A8D007F38FF /* Main.storyboard */; };
 		934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA1721420A8D007F38FF /* lvdouyi.xcdatamodeld */; };
 		934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA1A21420AA1007F38FF /* Assets.xcassets */; };
-		934CBA1E21420AA1007F38FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA1C21420AA1007F38FF /* LaunchScreen.storyboard */; };
 		934CBA2121420AA1007F38FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA2021420AA1007F38FF /* main.m */; };
 		934CBA2B214226C1007F38FF /* IntroductoryPagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA2A214226C1007F38FF /* IntroductoryPagesView.m */; };
 		934CBA2F21426832007F38FF /* IntroductoryPagesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA2E21426832007F38FF /* IntroductoryPagesHelper.m */; };
+		934CBA33214605BD007F38FF /* intrthree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA30214605BD007F38FF /* intrthree.jpg */; };
+		934CBA34214605BD007F38FF /* introne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA31214605BD007F38FF /* introne.jpg */; };
+		934CBA35214605BD007F38FF /* intrtwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA32214605BD007F38FF /* intrtwo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +27,8 @@
 		934CBA0F21420A8D007F38FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		934CBA1121420A8D007F38FF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		934CBA1221420A8D007F38FF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		934CBA1521420A8D007F38FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		934CBA1821420A8D007F38FF /* lvdouyi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lvdouyi.xcdatamodel; sourceTree = "<group>"; };
 		934CBA1A21420AA1007F38FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		934CBA1D21420AA1007F38FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		934CBA1F21420AA1007F38FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		934CBA2021420AA1007F38FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		934CBA29214226B6007F38FF /* IntroductoryPagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroductoryPagesView.h; sourceTree = "<group>"; };
@@ -37,6 +36,9 @@
 		934CBA2C2142282A007F38FF /* LvdouyiPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LvdouyiPrefix.pch; sourceTree = "<group>"; };
 		934CBA2D21426824007F38FF /* IntroductoryPagesHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroductoryPagesHelper.h; sourceTree = "<group>"; };
 		934CBA2E21426832007F38FF /* IntroductoryPagesHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroductoryPagesHelper.m; sourceTree = "<group>"; };
+		934CBA30214605BD007F38FF /* intrthree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intrthree.jpg; sourceTree = "<group>"; };
+		934CBA31214605BD007F38FF /* introne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = introne.jpg; sourceTree = "<group>"; };
+		934CBA32214605BD007F38FF /* intrtwo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intrtwo.jpg; sourceTree = "<group>"; };
 		937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lvdouyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lvdouyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,9 +89,7 @@
 				934CBA0F21420A8D007F38FF /* AppDelegate.m */,
 				934CBA1121420A8D007F38FF /* ViewController.h */,
 				934CBA1221420A8D007F38FF /* ViewController.m */,
-				934CBA1421420A8D007F38FF /* Main.storyboard */,
 				934CBA1A21420AA1007F38FF /* Assets.xcassets */,
-				934CBA1C21420AA1007F38FF /* LaunchScreen.storyboard */,
 				934CBA1F21420AA1007F38FF /* Info.plist */,
 				934CBA2021420AA1007F38FF /* main.m */,
 				934CBA1721420A8D007F38FF /* lvdouyi.xcdatamodeld */,
@@ -101,6 +101,9 @@
 		934CBA27214224CE007F38FF /* Introduce */ = {
 			isa = PBXGroup;
 			children = (
+				934CBA31214605BD007F38FF /* introne.jpg */,
+				934CBA30214605BD007F38FF /* intrthree.jpg */,
+				934CBA32214605BD007F38FF /* intrtwo.jpg */,
 				934CBA29214226B6007F38FF /* IntroductoryPagesView.h */,
 				934CBA2A214226C1007F38FF /* IntroductoryPagesView.m */,
 				934CBA2D21426824007F38FF /* IntroductoryPagesHelper.h */,
@@ -177,9 +180,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				934CBA1E21420AA1007F38FF /* LaunchScreen.storyboard in Resources */,
+				934CBA33214605BD007F38FF /* intrthree.jpg in Resources */,
 				934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */,
-				934CBA1621420A8D007F38FF /* Main.storyboard in Resources */,
+				934CBA34214605BD007F38FF /* introne.jpg in Resources */,
+				934CBA35214605BD007F38FF /* intrtwo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,25 +243,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		934CBA1421420A8D007F38FF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				934CBA1521420A8D007F38FF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		934CBA1C21420AA1007F38FF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				934CBA1D21420AA1007F38FF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		934CBA2221420AA1007F38FF /* Debug */ = {
@@ -385,7 +370,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.lvdouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -404,7 +389,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.lvdouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

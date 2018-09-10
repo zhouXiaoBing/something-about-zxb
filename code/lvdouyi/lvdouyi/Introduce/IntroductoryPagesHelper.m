@@ -31,6 +31,7 @@ static IntroductoryPagesHelper *shareInstance_ = nil;
 }
 
 + (void)showIntroductoryPageView:(NSArray<NSString *> *)imageArray{
+    NSLog(@"IntroductoryPagesHelper_showIntroductoryPageView");
     if (![IntroductoryPagesHelper shareInstance].curIntroductoryPagesView) {
         [IntroductoryPagesHelper shareInstance].curIntroductoryPagesView = [IntroductoryPagesView pagesViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) images:imageArray];
         [IntroductoryPagesHelper shareInstance].curWindow = [UIApplication sharedApplication].keyWindow;

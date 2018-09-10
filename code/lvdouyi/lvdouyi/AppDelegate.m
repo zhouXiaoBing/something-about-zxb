@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "IntroductoryPagesHelper.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSLog(@"lvdouyi_Application");
+    //轮播图
+    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
     return YES;
 }
 
