@@ -19,42 +19,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    NSLog(@"lvdouyi_Application");
-//
-//    self.wKWebView = [[WKWebView alloc] initWithFrame:CGRectZero];
-//    [self.wKWebView evaluateJavaScript:@"navigator.userAgent" completionHandler:^(id result, NSError * error) {
-//        //1）获取默认userAgent：
-//        NSString *oldUA = result;   //直接获取为nil
-//        //2）设置userAgent：添加额外的信息
-//        NSString *newUA = [NSString stringWithFormat:@"%@ crfapp/(%@)", oldUA , @"ios;43"];
-//        self.wKWebView.customUserAgent = newUA;
-//        NSDictionary *dictNU = [NSDictionary dictionaryWithObjectsAndKeys:newUA, @"UserAgent", nil];
-//        [[NSUserDefaults standardUserDefaults] registerDefaults:dictNU];
-//    }];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+    //轮播图
+//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
+//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"guide1.png",@"guide2.png"]];
     
+    NSLog(@"lvdouyi_Application");
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     NSString *newUserAgent = [userAgent stringByAppendingString:@" vitagou"];//自定义需要拼接的字符串
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
-    
-    
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[ViewController alloc]init];
-//    ViewController *vc = [[ViewController alloc]init];
-//    self.window.backgroundColor = [UIColor whiteColor];
-//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-//    [self.window setRootViewController:nav];
-    [self.window makeKeyAndVisible];
-    //轮播图
-//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    
-   
+//    [self.window makeKeyAndVisible];
+
     return YES;
 }
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

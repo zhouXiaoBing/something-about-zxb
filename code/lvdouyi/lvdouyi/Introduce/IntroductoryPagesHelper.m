@@ -32,8 +32,10 @@ static IntroductoryPagesHelper *shareInstance_ = nil;
 
 + (void)showIntroductoryPageView:(NSArray<NSString *> *)imageArray{
     NSLog(@"IntroductoryPagesHelper_showIntroductoryPageView");
+    NSLog(@"imageArray_count %lu",(unsigned long)imageArray.count);
     if (![IntroductoryPagesHelper shareInstance].curIntroductoryPagesView) {
-        [IntroductoryPagesHelper shareInstance].curIntroductoryPagesView = [IntroductoryPagesView pagesViewWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) images:imageArray];
+        NSLog(@"IntroductoryPagesHelper_showIntroductoryPageView_if");
+        [IntroductoryPagesHelper shareInstance].curIntroductoryPagesView = [IntroductoryPagesView pagesViewWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) images:imageArray];
         [IntroductoryPagesHelper shareInstance].curWindow = [UIApplication sharedApplication].keyWindow;
         [[IntroductoryPagesHelper shareInstance].curWindow addSubview:[IntroductoryPagesHelper shareInstance].curIntroductoryPagesView];
     }

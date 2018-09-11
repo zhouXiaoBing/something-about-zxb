@@ -19,6 +19,8 @@
 		934CBA34214605BD007F38FF /* introne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA31214605BD007F38FF /* introne.jpg */; };
 		934CBA35214605BD007F38FF /* intrtwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA32214605BD007F38FF /* intrtwo.jpg */; };
 		934CBA382147B2CE007F38FF /* WKDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA372147B2CD007F38FF /* WKDelegateController.m */; };
+		FF1551AC21481E480081C72B /* guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AB21481E480081C72B /* guide1.png */; };
+		FF1551AE21481E500081C72B /* guide2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AD21481E500081C72B /* guide2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		934CBA372147B2CD007F38FF /* WKDelegateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKDelegateController.m; sourceTree = "<group>"; };
 		937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lvdouyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lvdouyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi.release.xcconfig"; sourceTree = "<group>"; };
+		FF1551AB21481E480081C72B /* guide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide1.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide1.png; sourceTree = "<group>"; };
+		FF1551AD21481E500081C72B /* guide2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide2.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 		934CBA27214224CE007F38FF /* Introduce */ = {
 			isa = PBXGroup;
 			children = (
+				FF1551AD21481E500081C72B /* guide2.png */,
+				FF1551AB21481E480081C72B /* guide1.png */,
 				934CBA31214605BD007F38FF /* introne.jpg */,
 				934CBA30214605BD007F38FF /* intrthree.jpg */,
 				934CBA32214605BD007F38FF /* intrtwo.jpg */,
@@ -185,6 +191,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF1551AC21481E480081C72B /* guide1.png in Resources */,
+				FF1551AE21481E500081C72B /* guide2.png in Resources */,
 				934CBA33214605BD007F38FF /* intrthree.jpg in Resources */,
 				934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */,
 				934CBA34214605BD007F38FF /* introne.jpg in Resources */,

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "WKDelegateController.h"
 #import "WebViewJavascriptBridge.h"
+#import "IntroductoryPagesHelper.h"
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
 
@@ -23,9 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"ViewController_viewDidLoad");
- 
+//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
+ //查看 HTTP 信息
 //   [self loadString:@"http://httpbin.org/get"];
-    [self loadString:@"http://s5-test.vitagou.com"];
+    [self loadString:@"http://m.baidu.com"];
+//    [self loadString:@"http://s5-test.vitagou.com"];
     
 }
 

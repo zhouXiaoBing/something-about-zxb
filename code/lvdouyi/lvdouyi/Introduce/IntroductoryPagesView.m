@@ -47,14 +47,14 @@
 - (void)loadPageView
 {
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    self.scrollView.contentSize = CGSizeMake((self.imagesArray.count + 1) * kScreenWidth, kScreenHeight);
+    self.scrollView.contentSize = CGSizeMake((self.imagesArray.count + 1) * ScreenWidth, ScreenHeight);
     self.pageControl.numberOfPages = self.imagesArray.count;
     
     [self.imagesArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc]init];
         
-        imageView.frame = CGRectMake(idx * kScreenWidth, 0, kScreenWidth, kScreenHeight);
+        imageView.frame = CGRectMake(idx * ScreenWidth, 0, ScreenWidth, ScreenHeight);
         
         YYImage *image = [YYImage imageNamed:obj];
         
@@ -80,7 +80,7 @@
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.x >= (_imagesArray.count) * kScreenWidth) {
+    if (scrollView.contentOffset.x >= (_imagesArray.count) * ScreenWidth) {
         [self removeFromSuperview];
     }
 }
@@ -105,7 +105,7 @@
 {
     if(!_pageControl)
     {
-        UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(kScreenWidth/2, kScreenHeight - 60, 0, 40)];
+        UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(ScreenWidth/2, ScreenHeight - 60, 0, 40)];
         pageControl.backgroundColor = [UIColor clearColor];
         pageControl.pageIndicatorTintColor = [UIColor clearColor];
         pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
