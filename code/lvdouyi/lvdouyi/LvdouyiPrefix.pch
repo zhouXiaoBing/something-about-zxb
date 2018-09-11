@@ -15,6 +15,7 @@
 #import <YYKit/YYKit.h>
 
 
+
 //不同屏幕尺寸字体适配
 #define kScreenWidthRatio  (UIScreen.mainScreen.bounds.size.width / 375.0)
 #define kScreenHeightRatio (UIScreen.mainScreen.bounds.size.height / 667.0)

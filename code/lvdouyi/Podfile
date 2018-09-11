@@ -11,6 +11,8 @@ target 'lvdouyi' do
   #pod 'MJRefresh'
   # pod 'SVProgressHUD'#
    pod 'YYKit'#富文本等
+   
+   pod 'WebViewJavascriptBridge', '~> 6.0'
   # pod 'M13ProgressSuite'#进度条
    #pod 'SDCycleScrollView','~> 1.75'#轮播图
   # pod 'MOFSPickerManager'#三级联动

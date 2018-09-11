@@ -18,6 +18,7 @@
 		934CBA33214605BD007F38FF /* intrthree.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA30214605BD007F38FF /* intrthree.jpg */; };
 		934CBA34214605BD007F38FF /* introne.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA31214605BD007F38FF /* introne.jpg */; };
 		934CBA35214605BD007F38FF /* intrtwo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA32214605BD007F38FF /* intrtwo.jpg */; };
+		934CBA382147B2CE007F38FF /* WKDelegateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA372147B2CD007F38FF /* WKDelegateController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		934CBA30214605BD007F38FF /* intrthree.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intrthree.jpg; sourceTree = "<group>"; };
 		934CBA31214605BD007F38FF /* introne.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = introne.jpg; sourceTree = "<group>"; };
 		934CBA32214605BD007F38FF /* intrtwo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = intrtwo.jpg; sourceTree = "<group>"; };
+		934CBA362147B2C4007F38FF /* WKDelegateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKDelegateController.h; sourceTree = "<group>"; };
+		934CBA372147B2CD007F38FF /* WKDelegateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKDelegateController.m; sourceTree = "<group>"; };
 		937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lvdouyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lvdouyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +87,8 @@
 		934CBA0D21420A8D007F38FF /* lvdouyi */ = {
 			isa = PBXGroup;
 			children = (
+				934CBA372147B2CD007F38FF /* WKDelegateController.m */,
+				934CBA362147B2C4007F38FF /* WKDelegateController.h */,
 				934CBA27214224CE007F38FF /* Introduce */,
 				934CBA0E21420A8D007F38FF /* AppDelegate.h */,
 				934CBA0F21420A8D007F38FF /* AppDelegate.m */,
@@ -197,10 +202,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +244,7 @@
 				934CBA1321420A8D007F38FF /* ViewController.m in Sources */,
 				934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */,
 				934CBA2121420AA1007F38FF /* main.m in Sources */,
+				934CBA382147B2CE007F38FF /* WKDelegateController.m in Sources */,
 				934CBA1021420A8D007F38FF /* AppDelegate.m in Sources */,
 				934CBA2B214226C1007F38FF /* IntroductoryPagesView.m in Sources */,
 			);
