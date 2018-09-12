@@ -5,7 +5,7 @@ target 'lvdouyi' do
 
   # pod 'AFNetworking', '~> 3.0'
   # pod 'Masonry','~>1.1.0'
-  # pod 'MJExtension'
+   pod 'MJExtension'
   # pod 'SDWebImage', '~> 4.0'
   # pod 'FMDB'
   #pod 'MJRefresh'
@@ -13,6 +13,10 @@ target 'lvdouyi' do
    pod 'YYKit'#富文本等
    
    pod 'WebViewJavascriptBridge', '~> 6.0'
+   # U-Share SDK UI模块（分享面板，建议添加）
+   pod 'UMCShare/UI'
+   # 集成微信(精简版0.2M)
+   pod 'UMCShare/Social/ReducedWeChat'
   # pod 'M13ProgressSuite'#进度条
    #pod 'SDCycleScrollView','~> 1.75'#轮播图
   # pod 'MOFSPickerManager'#三级联动

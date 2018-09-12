@@ -1,22 +1,41 @@
 PODS:
+  - MJExtension (3.0.15.1)
+  - UMCCommon (1.5.2)
+  - UMCShare/Core (6.9.3):
+    - UMCCommon
+  - UMCShare/Social/ReducedWeChat (6.9.3):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/UI (6.9.3):
+    - UMCCommon
+    - UMCShare/Core
   - WebViewJavascriptBridge (6.0.3)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
+  - MJExtension
+  - UMCShare/Social/ReducedWeChat
+  - UMCShare/UI
   - WebViewJavascriptBridge (~> 6.0)
   - YYKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - MJExtension
+    - UMCCommon
+    - UMCShare
     - WebViewJavascriptBridge
     - YYKit
 
 SPEC CHECKSUMS:
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
+  UMCShare: 023886b10d11119331c9c46d8e8a0c31fe67c23e
   WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 03e4f186022198ae89221a680ce17844b5988bd0
+PODFILE CHECKSUM: 23a8e71fcf8c80ccaff6e9a22aac9d9dc333c137
 
 COCOAPODS: 1.5.3
