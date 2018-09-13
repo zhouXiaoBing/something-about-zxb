@@ -107,8 +107,8 @@
 		934CBA0D21420A8D007F38FF /* lvdouyi */ = {
 			isa = PBXGroup;
 			children = (
-				934CBA372147B2CD007F38FF /* WKDelegateController.m */,
 				934CBA362147B2C4007F38FF /* WKDelegateController.h */,
+				934CBA372147B2CD007F38FF /* WKDelegateController.m */,
 				934CBA27214224CE007F38FF /* Introduce */,
 				934CBA0E21420A8D007F38FF /* AppDelegate.h */,
 				934CBA0F21420A8D007F38FF /* AppDelegate.m */,
@@ -428,6 +428,7 @@
 				DEVELOPMENT_TEAM = 6USEZG8689;
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;
 				INFOPLIST_FILE = lvdouyi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,6 +449,7 @@
 				DEVELOPMENT_TEAM = 6USEZG8689;
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;
 				INFOPLIST_FILE = lvdouyi/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
