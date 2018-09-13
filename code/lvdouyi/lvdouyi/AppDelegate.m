@@ -20,48 +20,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[ViewController alloc]init];
     [self.window makeKeyAndVisible];
     //轮播图
-//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
-//    [IntroductoryPagesHelper showIntroductoryPageView:@[@"guide1.png",@"guide2.png"]];
-    
+    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
     NSLog(@"lvdouyi_Application");
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     NSString *userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
     NSString *newUserAgent = [userAgent stringByAppendingString:@" vitagou"];//自定义需要拼接的字符串
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
-    
-    self.window.rootViewController = [[ViewController alloc]init];
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-//    [self.window makeKeyAndVisible];
-    
        // U-Share 平台设置
     [UMConfigure initWithAppkey:@"5b987e7a8f4a9d1f63000087" channel:nil];
     [self configUSharePlatforms];
     [self confitUShareSettings];
-
     return YES;
 }
 
 - (void)confitUShareSettings
 {
-    /*
-     * 打开图片水印
-     */
-    //[UMSocialGlobal shareInstance].isUsingWaterMark = YES;
-    /*
-     * 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
-     <key>NSAppTransportSecurity</key>
-     <dict>
-     <key>NSAllowsArbitraryLoads</key>
-     <true/>
-     </dict>
-     */
     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
 }
 
@@ -105,10 +84,17 @@
 {
     //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+    
+    NSLog(@"openUrl %@",url);
     if (!result) {
         // 其他如支付等SDK的回调
     }
     return result;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    NSLog(@" openurl %@",url.host);
+    return true;
 }
 #pragma mark - Core Data stack
 

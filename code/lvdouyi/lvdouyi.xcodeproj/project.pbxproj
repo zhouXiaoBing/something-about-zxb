@@ -22,6 +22,8 @@
 		934CBA3A2148A275007F38FF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 934CBA392148A275007F38FF /* libsqlite3.tbd */; };
 		934CBA3C2148A284007F38FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934CBA3B2148A284007F38FF /* CoreGraphics.framework */; };
 		934CBA3F2148BA93007F38FF /* shareBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA3E2148BA93007F38FF /* shareBean.m */; };
+		9381D48F214A5993009D4772 /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9381D48E214A5993009D4772 /* AppConst.m */; };
+		9381D491214A5C12009D4772 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9381D490214A5C12009D4772 /* Images.xcassets */; };
 		FF1551AC21481E480081C72B /* guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AB21481E480081C72B /* guide1.png */; };
 		FF1551AE21481E500081C72B /* guide2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AD21481E500081C72B /* guide2.png */; };
 /* End PBXBuildFile section */
@@ -52,6 +54,9 @@
 		934CBA3D2148BA86007F38FF /* shareBean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shareBean.h; sourceTree = "<group>"; };
 		934CBA3E2148BA93007F38FF /* shareBean.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shareBean.m; sourceTree = "<group>"; };
 		937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lvdouyi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9381D48D214A5983009D4772 /* AppConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
+		9381D48E214A5993009D4772 /* AppConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConst.m; sourceTree = "<group>"; };
+		9381D490214A5C12009D4772 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lvdouyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi.release.xcconfig"; sourceTree = "<group>"; };
 		FF1551AB21481E480081C72B /* guide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide1.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide1.png; sourceTree = "<group>"; };
 		FF1551AD21481E500081C72B /* guide2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide2.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide2.png; sourceTree = "<group>"; };
@@ -116,6 +121,9 @@
 				934CBA2C2142282A007F38FF /* LvdouyiPrefix.pch */,
 				934CBA3D2148BA86007F38FF /* shareBean.h */,
 				934CBA3E2148BA93007F38FF /* shareBean.m */,
+				9381D48D214A5983009D4772 /* AppConst.h */,
+				9381D48E214A5993009D4772 /* AppConst.m */,
+				9381D490214A5C12009D4772 /* Images.xcassets */,
 			);
 			path = lvdouyi;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 			files = (
 				FF1551AC21481E480081C72B /* guide1.png in Resources */,
 				FF1551AE21481E500081C72B /* guide2.png in Resources */,
+				9381D491214A5C12009D4772 /* Images.xcassets in Resources */,
 				934CBA33214605BD007F38FF /* intrthree.jpg in Resources */,
 				934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */,
 				934CBA34214605BD007F38FF /* introne.jpg in Resources */,
@@ -285,6 +294,7 @@
 				934CBA2F21426832007F38FF /* IntroductoryPagesHelper.m in Sources */,
 				934CBA1321420A8D007F38FF /* ViewController.m in Sources */,
 				934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */,
+				9381D48F214A5993009D4772 /* AppConst.m in Sources */,
 				934CBA2121420AA1007F38FF /* main.m in Sources */,
 				934CBA382147B2CE007F38FF /* WKDelegateController.m in Sources */,
 				934CBA1021420A8D007F38FF /* AppDelegate.m in Sources */,
@@ -413,6 +423,7 @@
 			baseConfigurationReference = 329669E36240844A90B06065 /* Pods-lvdouyi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6USEZG8689;
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;
@@ -432,6 +443,7 @@
 			baseConfigurationReference = C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6USEZG8689;
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;

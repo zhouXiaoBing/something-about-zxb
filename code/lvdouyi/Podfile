@@ -11,7 +11,7 @@ target 'lvdouyi' do
   #pod 'MJRefresh'
   # pod 'SVProgressHUD'#
    pod 'YYKit'#富文本等
-   
+#   pod 'SDWebImage'
    pod 'WebViewJavascriptBridge', '~> 6.0'
    # U-Share SDK UI模块（分享面板，建议添加）
    pod 'UMCShare/UI'

@@ -15,7 +15,7 @@
 @property (nonatomic,strong) NSString *title;
 
 @property (nonatomic,strong) NSString *icon;
-
+//description 只能读 不能写
 @property (nonatomic,strong) NSString *description;
 
 @property (nonatomic,strong) NSString *url;

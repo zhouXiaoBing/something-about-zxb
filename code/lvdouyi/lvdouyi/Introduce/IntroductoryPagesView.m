@@ -7,8 +7,7 @@
 //
 
 #import "IntroductoryPagesView.h"
-//#import <YYAnimatedImageView.h>
-//#import <YYImage.h>
+
 
 @interface IntroductoryPagesView() <UIScrollViewDelegate>
 
@@ -16,10 +15,15 @@
 
 @property (nonatomic,strong) UIPageControl *pageControl;
 
+@property (nonatomic, strong) UIButton *countBtn;
+
+@property (nonatomic, strong) dispatch_source_t gcdTimer;
+
 /** <#digest#> */
 @property (weak, nonatomic) UIScrollView *scrollView;
 
 @end
+
 @implementation IntroductoryPagesView
 
 + (instancetype)pagesViewWithFrame:(CGRect)frame images:(NSArray<NSString *> *)images{
@@ -101,28 +105,46 @@
     return _scrollView;
 }
 
-- (UIPageControl *)pageControl
-{
-    if(!_pageControl)
-    {
-        UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(ScreenWidth/2, ScreenHeight - 60, 0, 40)];
-        pageControl.backgroundColor = [UIColor clearColor];
-        pageControl.pageIndicatorTintColor = [UIColor clearColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
-        [self addSubview:pageControl];
-        _pageControl = pageControl;
-    }
-    return _pageControl;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
         [self setupUIOnce];
+        CGFloat btnW = 60;
+        CGFloat btnH = 30;
+        _countBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - btnW - 24, [UIApplication sharedApplication].statusBarFrame.size.height + btnH, btnW, btnH)];
+        [_countBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_countBtn setTitle:@"跳过" forState:UIControlStateNormal];
+        _countBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_countBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _countBtn.backgroundColor = [UIColor colorWithRed:38 /255.0 green:38 /255.0 blue:38 /255.0 alpha:0.6];
+        _countBtn.layer.cornerRadius = 4;
+        [self addSubview:_countBtn];
+        
+        UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(ScreenWidth/2, ScreenHeight - 60, 0, 40)];
+        pageControl.backgroundColor = [UIColor clearColor];
+        pageControl.pageIndicatorTintColor = [UIColor grayColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+        _pageControl = pageControl;
+        [self addSubview:_pageControl];
+        
     }
     return self;
 }
-
+- (void)dismiss
+{
+    if (_gcdTimer) {
+        dispatch_cancel(_gcdTimer);
+    }
+    _gcdTimer = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.3f animations:^{
+            self.alpha = 0.f;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+        
+    });
+}
 - (void)awakeFromNib
 {
     [super awakeFromNib];

@@ -13,7 +13,8 @@
 #import <UShareUI/UShareUI.h>
 #import "shareBean.h"
 
-@interface ViewController ()<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler>
+
+@interface ViewController ()<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler,WKURLSchemeHandler>
 
 @property (nonatomic, strong) WKWebView *webView;
 
@@ -33,7 +34,9 @@
  //查看 HTTP 信息
 //   [self loadString:@"http://httpbin.org/get"];
 //    [self loadString:@"http://m.baidu.com"];
+    
     [self loadString:@"http://s5-test.vitagou.com"];
+   
     
 }
 
@@ -56,6 +59,7 @@
     [self.view addSubview:_webView];
     
     // 1. URL 定位资源,需要资源的地址
+    
     NSString *urlStr = str;
     if (![str hasPrefix:@"http://"]) {
         urlStr = [NSString stringWithFormat:@"http://m.baidu.com/s?word=%@", str];
@@ -95,18 +99,31 @@
     
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.bean.title descr:self.bean.description thumImage:[UIImage imageNamed:@""]];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.bean.title descr:self.bean.title thumImage:self.bean.icon];
     //设置网页地址
     shareObject.webpageUrl =self.bean.url;
+
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_WechatTimeLine)]];
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作
         if (platformType == UMSocialPlatformType_WechatTimeLine) {
-            
+            [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    NSLog(@"response data is %@",data);
+                }
+            }];
         }else if (platformType == UMSocialPlatformType_WechatSession){
-            
+            [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    NSLog(@"response data is %@",data);
+                }
+            }];
         }else if (platformType == UMSocialPlatformType_WechatFavorite){
             [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
                 if (error) {
@@ -119,14 +136,41 @@
     }];
 
 }
+
+
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     NSLog(@"webViewDidStartLoad");
+    NSString *currentURL = webView.URL.absoluteString;
+    NSLog(@"webViewDidStartLoad_currentURL %@",currentURL);
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    NSLog(@"webViewDidFinishLoad");
+    NSString *currentURL = webView.URL.absoluteString;
+    NSLog(@"webViewDidFinishLoad_currentURL %@",currentURL);
+    
 }
 
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString* reqUrl = request.URL.absoluteString;
+    if ([reqUrl hasPrefix:@"alipays://"] || [reqUrl hasPrefix:@"alipay://"]) {
+        // NOTE: 跳转支付宝App
+        BOOL bSucc = [[UIApplication sharedApplication]openURL:request.URL];
+        
+        // NOTE: 如果跳转失败，则跳转itune下载支付宝App
+        if (!bSucc) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示"
+                                                           message:@"未检测到支付宝客户端，请安装后重试。"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"立即安装"
+                                                 otherButtonTitles:nil];
+            [alert show];
+        }
+        return NO;
+    }
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -14,7 +14,7 @@
 
 #import <YYKit/YYKit.h>
 #import "MJExtension.h"
-
+#import "AppConst.h"
 
 
 //不同屏幕尺寸字体适配
