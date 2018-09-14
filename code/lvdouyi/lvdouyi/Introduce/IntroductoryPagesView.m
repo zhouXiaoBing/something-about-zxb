@@ -113,7 +113,7 @@
         CGFloat btnH = 30;
         _countBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenWidth - btnW - 24, [UIApplication sharedApplication].statusBarFrame.size.height + btnH, btnW, btnH)];
         [_countBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-        [_countBtn setTitle:@"跳过" forState:UIControlStateNormal];
+        [_countBtn setTitle:@"进入" forState:UIControlStateNormal];
         _countBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [_countBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _countBtn.backgroundColor = [UIColor colorWithRed:38 /255.0 green:38 /255.0 blue:38 /255.0 alpha:0.6];
@@ -123,7 +123,7 @@
         UIPageControl *pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(ScreenWidth/2, ScreenHeight - 60, 0, 40)];
         pageControl.backgroundColor = [UIColor clearColor];
         pageControl.pageIndicatorTintColor = [UIColor grayColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+        pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
         _pageControl = pageControl;
         [self addSubview:_pageControl];
         

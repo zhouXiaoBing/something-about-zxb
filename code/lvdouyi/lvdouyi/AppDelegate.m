@@ -21,21 +21,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    NSString *userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSString *newUserAgent = [userAgent stringByAppendingString:@" vitagou"];//自定义需要拼接的字符串
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[ViewController alloc]init];
     [self.window makeKeyAndVisible];
     //轮播图
     [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
     NSLog(@"lvdouyi_Application");
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSString *userAgent = [webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    NSString *newUserAgent = [userAgent stringByAppendingString:@" vitagou"];//自定义需要拼接的字符串
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+   
+    
+//    NSLog(@"UserAgent %@",)
        // U-Share 平台设置
     [UMConfigure initWithAppkey:@"5b987e7a8f4a9d1f63000087" channel:nil];
     [self configUSharePlatforms];
     [self confitUShareSettings];
+    
+    
     return YES;
 }
 
