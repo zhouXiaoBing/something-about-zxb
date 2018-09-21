@@ -11,6 +11,7 @@
 #import "ViewController.h"
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
+#import "AXWebViewController.h"
 
 @interface AppDelegate ()
 @property WKWebView *wKWebView;
@@ -28,7 +29,8 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[ViewController alloc]init];
+//    self.window.rootViewController = [[ViewController alloc]init];
+    self.window.rootViewController = [[AXWebViewController alloc]initWithAddress:@"http://s5-test.vitagou.com"];
     [self.window makeKeyAndVisible];
     //轮播图
     [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
@@ -52,6 +54,7 @@
 
 - (void)configUSharePlatforms
 {
+    NSLog(@"configUSharePlatforms");
     /* 设置微信的appKey和appSecret */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx19c0cde35e195f96" appSecret:@"98a8eba2b5b7768100de895d6e2e3b83" redirectURL:nil];
 }
@@ -92,6 +95,8 @@
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
     
     NSLog(@"openUrl %@",url);
+    
+    
     if (!result) {
         // 其他如支付等SDK的回调
     }

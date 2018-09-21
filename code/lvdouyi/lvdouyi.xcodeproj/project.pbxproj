@@ -24,6 +24,20 @@
 		934CBA3F2148BA93007F38FF /* shareBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA3E2148BA93007F38FF /* shareBean.m */; };
 		9381D48F214A5993009D4772 /* AppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9381D48E214A5993009D4772 /* AppConst.m */; };
 		9381D491214A5C12009D4772 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9381D490214A5C12009D4772 /* Images.xcassets */; };
+		93BF12A021510CD800E2A835 /* AXWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BF129F21510CD800E2A835 /* AXWebViewController.m */; };
+		93BF12A221510D5700E2A835 /* AXWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 93BF12A121510D5700E2A835 /* AXWebViewController.bundle */; };
+		93BF12A521510F7E00E2A835 /* AXSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BF12A421510F7D00E2A835 /* AXSecurityPolicy.m */; };
+		93BF12A821510FC200E2A835 /* AXWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BF12A721510FC200E2A835 /* AXWebViewControllerActivity.m */; };
+		93D087382150A1F2000168B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087372150A1F2000168B3 /* libc++.tbd */; };
+		93D0873A2150A1FC000168B3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087392150A1FB000168B3 /* libz.tbd */; };
+		93D0873C2150A207000168B3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D0873B2150A207000168B3 /* SystemConfiguration.framework */; };
+		93D0873E2150A217000168B3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D0873D2150A216000168B3 /* CoreTelephony.framework */; };
+		93D087402150A227000168B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D0873F2150A227000168B3 /* QuartzCore.framework */; };
+		93D087422150A235000168B3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087412150A235000168B3 /* CoreText.framework */; };
+		93D087442150A243000168B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087432150A243000168B3 /* UIKit.framework */; };
+		93D087462150A24F000168B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087452150A24E000168B3 /* Foundation.framework */; };
+		93D087482150A257000168B3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087472150A257000168B3 /* CFNetwork.framework */; };
+		93D0874A2150A265000168B3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D087492150A265000168B3 /* CoreMotion.framework */; };
 		FF1551AC21481E480081C72B /* guide1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AB21481E480081C72B /* guide1.png */; };
 		FF1551AE21481E500081C72B /* guide2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF1551AD21481E500081C72B /* guide2.png */; };
 /* End PBXBuildFile section */
@@ -57,6 +71,23 @@
 		9381D48D214A5983009D4772 /* AppConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConst.h; sourceTree = "<group>"; };
 		9381D48E214A5993009D4772 /* AppConst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppConst.m; sourceTree = "<group>"; };
 		9381D490214A5C12009D4772 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		93BF129E21510CD100E2A835 /* AXWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXWebViewController.h; sourceTree = "<group>"; };
+		93BF129F21510CD800E2A835 /* AXWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXWebViewController.m; sourceTree = "<group>"; };
+		93BF12A121510D5700E2A835 /* AXWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AXWebViewController.bundle; sourceTree = "<group>"; };
+		93BF12A321510F7600E2A835 /* AXSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSecurityPolicy.h; sourceTree = "<group>"; };
+		93BF12A421510F7D00E2A835 /* AXSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSecurityPolicy.m; sourceTree = "<group>"; };
+		93BF12A621510FBA00E2A835 /* AXWebViewControllerActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXWebViewControllerActivity.h; sourceTree = "<group>"; };
+		93BF12A721510FC200E2A835 /* AXWebViewControllerActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXWebViewControllerActivity.m; sourceTree = "<group>"; };
+		93D087372150A1F2000168B3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		93D087392150A1FB000168B3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		93D0873B2150A207000168B3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		93D0873D2150A216000168B3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		93D0873F2150A227000168B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		93D087412150A235000168B3 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		93D087432150A243000168B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		93D087452150A24E000168B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		93D087472150A257000168B3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		93D087492150A265000168B3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		C27D4313EA524D904D6B92FA /* Pods-lvdouyi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lvdouyi.release.xcconfig"; path = "Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi.release.xcconfig"; sourceTree = "<group>"; };
 		FF1551AB21481E480081C72B /* guide1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide1.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide1.png; sourceTree = "<group>"; };
 		FF1551AD21481E500081C72B /* guide2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = guide2.png; path = ../../../vitagou_v5/vitagou/vitagou/Helper/guide2.png; sourceTree = "<group>"; };
@@ -67,6 +98,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D0874A2150A265000168B3 /* CoreMotion.framework in Frameworks */,
+				93D087482150A257000168B3 /* CFNetwork.framework in Frameworks */,
+				93D087462150A24F000168B3 /* Foundation.framework in Frameworks */,
+				93D087442150A243000168B3 /* UIKit.framework in Frameworks */,
+				93D087422150A235000168B3 /* CoreText.framework in Frameworks */,
+				93D087402150A227000168B3 /* QuartzCore.framework in Frameworks */,
+				93D0873E2150A217000168B3 /* CoreTelephony.framework in Frameworks */,
+				93D0873C2150A207000168B3 /* SystemConfiguration.framework in Frameworks */,
+				93D0873A2150A1FC000168B3 /* libz.tbd in Frameworks */,
+				93D087382150A1F2000168B3 /* libc++.tbd in Frameworks */,
 				934CBA3C2148A284007F38FF /* CoreGraphics.framework in Frameworks */,
 				934CBA3A2148A275007F38FF /* libsqlite3.tbd in Frameworks */,
 				8BD85202968CE35CB3C9AC7D /* Pods_lvdouyi.framework in Frameworks */,
@@ -79,6 +120,16 @@
 		5330B07A15D961C2D2D248A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93D087492150A265000168B3 /* CoreMotion.framework */,
+				93D087472150A257000168B3 /* CFNetwork.framework */,
+				93D087452150A24E000168B3 /* Foundation.framework */,
+				93D087432150A243000168B3 /* UIKit.framework */,
+				93D087412150A235000168B3 /* CoreText.framework */,
+				93D0873F2150A227000168B3 /* QuartzCore.framework */,
+				93D0873D2150A216000168B3 /* CoreTelephony.framework */,
+				93D0873B2150A207000168B3 /* SystemConfiguration.framework */,
+				93D087392150A1FB000168B3 /* libz.tbd */,
+				93D087372150A1F2000168B3 /* libc++.tbd */,
 				934CBA3B2148A284007F38FF /* CoreGraphics.framework */,
 				934CBA392148A275007F38FF /* libsqlite3.tbd */,
 				937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */,
@@ -109,6 +160,13 @@
 			children = (
 				934CBA362147B2C4007F38FF /* WKDelegateController.h */,
 				934CBA372147B2CD007F38FF /* WKDelegateController.m */,
+				93BF129E21510CD100E2A835 /* AXWebViewController.h */,
+				93BF129F21510CD800E2A835 /* AXWebViewController.m */,
+				93BF12A321510F7600E2A835 /* AXSecurityPolicy.h */,
+				93BF12A421510F7D00E2A835 /* AXSecurityPolicy.m */,
+				93BF12A621510FBA00E2A835 /* AXWebViewControllerActivity.h */,
+				93BF12A721510FC200E2A835 /* AXWebViewControllerActivity.m */,
+				93BF12A121510D5700E2A835 /* AXWebViewController.bundle */,
 				934CBA27214224CE007F38FF /* Introduce */,
 				934CBA0E21420A8D007F38FF /* AppDelegate.h */,
 				934CBA0F21420A8D007F38FF /* AppDelegate.m */,
@@ -215,6 +273,7 @@
 			files = (
 				FF1551AC21481E480081C72B /* guide1.png in Resources */,
 				FF1551AE21481E500081C72B /* guide2.png in Resources */,
+				93BF12A221510D5700E2A835 /* AXWebViewController.bundle in Resources */,
 				9381D491214A5C12009D4772 /* Images.xcassets in Resources */,
 				934CBA33214605BD007F38FF /* intrthree.jpg in Resources */,
 				934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */,
@@ -233,13 +292,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-lvdouyi/Pods-lvdouyi-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AXIndicatorView/AXIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/AXNavigationBackItemInjection/AXNavigationBackItemInjection.framework",
+				"${BUILT_PRODUCTS_DIR}/AXPracticalHUD/AXPracticalHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Aspects/Aspects.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/NJKWebViewProgress/NJKWebViewProgress.framework",
 				"${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework",
 				"${BUILT_PRODUCTS_DIR}/YYKit/YYKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AXIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AXNavigationBackItemInjection.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AXPracticalHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Aspects.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NJKWebViewProgress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebViewJavascriptBridge.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYKit.framework",
 			);
@@ -292,9 +361,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				934CBA2F21426832007F38FF /* IntroductoryPagesHelper.m in Sources */,
+				93BF12A021510CD800E2A835 /* AXWebViewController.m in Sources */,
 				934CBA1321420A8D007F38FF /* ViewController.m in Sources */,
+				93BF12A821510FC200E2A835 /* AXWebViewControllerActivity.m in Sources */,
 				934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */,
 				9381D48F214A5993009D4772 /* AppConst.m in Sources */,
+				93BF12A521510F7E00E2A835 /* AXSecurityPolicy.m in Sources */,
 				934CBA2121420AA1007F38FF /* main.m in Sources */,
 				934CBA382147B2CE007F38FF /* WKDelegateController.m in Sources */,
 				934CBA1021420A8D007F38FF /* AppDelegate.m in Sources */,
@@ -425,7 +497,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6USEZG8689;
+				DEVELOPMENT_TEAM = RQBGHZMDV9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lvdouyi",
+				);
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;
 				INFOPLIST_FILE = lvdouyi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -433,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.lvdouyi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vtginc.lvdouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -446,7 +522,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6USEZG8689;
+				DEVELOPMENT_TEAM = RQBGHZMDV9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lvdouyi",
+				);
 				GCC_PREFIX_HEADER = lvdouyi/LvdouyiPrefix.pch;
 				INFOPLIST_FILE = lvdouyi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -454,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vitagou.lvdouyi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vtginc.lvdouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

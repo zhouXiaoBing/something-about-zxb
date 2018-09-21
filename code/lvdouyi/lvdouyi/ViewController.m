@@ -8,11 +8,12 @@
 
 #import "ViewController.h"
 #import "WKDelegateController.h"
-#import "WebViewJavascriptBridge.h"
+
 #import "IntroductoryPagesHelper.h"
+#import "WebViewJavascriptBridge.h"
 #import <UShareUI/UShareUI.h>
 #import "shareBean.h"
-
+#import "AXWebViewController.h"
 
 @interface ViewController ()<WKNavigationDelegate,WKUIDelegate,WKScriptMessageHandler,WKURLSchemeHandler>
 
@@ -29,18 +30,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"ViewController_viewDidLoad");
-    [self.navigationController.navigationBar setBarTintColor:[UIColor redColor]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor redColor]];
 //    [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];
  //查看 HTTP 信息
 //   [self loadString:@"http://httpbin.org/get"];
 //    [self loadString:@"http://m.baidu.com"];
-    
+   
     [self loadString:@"http://s5-test.vitagou.com"];
+
    
     
 }
 
 - (void)loadString:(NSString *)str  {
+    
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     _userContentController = [[WKUserContentController alloc] init];
     [_userContentController addScriptMessageHandler:self name:@"GetGoodsId"];
@@ -65,13 +68,21 @@
         urlStr = [NSString stringWithFormat:@"http://m.baidu.com/s?word=%@", str];
     }
     
+    
     NSURL *url = [NSURL URLWithString:urlStr];
     
     // 2. 把URL告诉给服务器,请求,从m.baidu.com请求数据
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
+    //----------------
+    NSMutableURLRequest *reques = [NSMutableURLRequest requestWithURL:url];
+    NSArray *cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+    //Cookies数组转换为requestHeaderFields
+    NSDictionary *requestHeaderFields = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+    //设置请求头
+    reques.allHTTPHeaderFields = requestHeaderFields;
+    //----------------
     // 3. 发送请求给服务器
-    [_webView loadRequest:request];
+    [_webView loadRequest:reques];
 }
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
@@ -151,27 +162,45 @@
 }
 
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString* reqUrl = request.URL.absoluteString;
-    if ([reqUrl hasPrefix:@"alipays://"] || [reqUrl hasPrefix:@"alipay://"]) {
-        // NOTE: 跳转支付宝App
-        BOOL bSucc = [[UIApplication sharedApplication]openURL:request.URL];
-        
-        // NOTE: 如果跳转失败，则跳转itune下载支付宝App
-        if (!bSucc) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示"
-                                                           message:@"未检测到支付宝客户端，请安装后重试。"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"立即安装"
-                                                 otherButtonTitles:nil];
-            [alert show];
-        }
-        return NO;
-    }
-    return YES;
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    //返回支付宝的信息字符串，alipays:// 以后的为支付信息，这个信息后台是经过 URLEncode 后的，前端需要进行解码后才能跳转支付宝支付（坑点）
+    //https://ds.alipay.com/?from=mobilecodec&scheme=alipays://platformapi/startapp?saId=10000007&clientVersion=3.7.0.0718&qrcode=https%253A%252F%252Fqr.alipay.com%252Fbax041244dd0qf8n6ras805b%253F_s%253Dweb-other
+//    NSString *urlStr = [navigationResponse.response.URL.absoluteString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    if ([urlStr containsString:@"weixin://"]) {
+//
+//        NSRange range = [urlStr rangeOfString:@"weixin://"]; //截取的字符串起始位置
+//        NSString * resultStr = [urlStr substringFromIndex:range.location]; //截取字符串
+//
+//        NSURL *alipayURL = [NSURL URLWithString:resultStr];
+//
+//        [[UIApplication sharedApplication] openURL:alipayURL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:^(BOOL success) {
+//
+//        }];
+//    }
+
+    WKNavigationResponsePolicy actionPolicy = WKNavigationResponsePolicyAllow;
+    //这句是必须加上的，不然会异常
+    decisionHandler(actionPolicy);
 }
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    NSString *urlStr =  navigationAction.request.URL.absoluteString;
+    NSLog(@"urlStr %@",urlStr);
+    NSDictionary *headers = [navigationAction.request allHTTPHeaderFields];
+    NSLog(@"headers %@",headers);
+// [[UIApplication sharedApplication]openURL:navigationAction.request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO} completionHandler:nil];
+    if ([urlStr containsString:@"weixin://wap/pay?"]) {
+        [[UIApplication sharedApplication]openURL:navigationAction.request.URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly: @NO,@"from":@"lvdouyi"} completionHandler:nil];
+        decisionHandler(WKNavigationActionPolicyCancel);
+    }else{
+//                WebChatPayH5VIew *h5View = [[WebChatPayH5VIew alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+//                //url是没有拼接redirect_url微信h5支付链接
+//                [h5View loadingURL:urlStr withIsWebChatURL:NO];
+//                [self.view addSubview:h5View];
+
+    decisionHandler(WKNavigationActionPolicyAllow);
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
