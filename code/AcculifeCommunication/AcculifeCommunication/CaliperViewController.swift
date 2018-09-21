@@ -420,6 +420,7 @@ var T2Map : [[Double]] =
     [150,    99.75],
 ];
 
+
 class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, AVSpeechSynthesizerDelegate ,UIGestureRecognizerDelegate{
     
     //let UUID_SERVICE = "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"
@@ -845,7 +846,7 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
             return
         }
         let data = characteristic.value! as NSData
-        print("zxb_data")
+        print("zxb_data——")
         print("====\(data)")
         
         if(data.length>12)
@@ -878,11 +879,12 @@ class CaliperViewController: UIViewController, CBCentralManagerDelegate, CBPerip
                 self.labelT1Data.text = str1
                 let str2 = String(format: "T2:%d=%.2f", T2,fT2Val)
                 self.labelT2Data.text = str2
+                print("str",str)
             }
-        }
-        
+        let notification = Notification.Name(rawValue: "PeripheralNotification")
+        NotificationCenter.default.post(name: notification, object: self, userInfo: ["ADCVal":String(format: "%.2f", ADC,fADCVal), "T1" : String(format: "%.2f", T1,fT1Val),"T2":String(format: "%.2f", T2,fT2Val)])
     }
-    
+}
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Disconnect")
         

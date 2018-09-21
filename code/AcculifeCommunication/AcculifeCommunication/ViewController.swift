@@ -11,17 +11,29 @@ import UIKit
 import JavaScriptCore
 import WebKit
 
+
+
+
 class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WKScriptMessageHandler{
     
+    
+//    let ADCVal : String
+//    let T1 :String
+//    let T2 :String
 
     var webView : WKWebView!
     
     var itemString :String?
+    
+    var js:String?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.addWebView()
+        let notification = Notification.Name(rawValue: "PeripheralNotification")
+        NotificationCenter.default.addObserver(self, selector: #selector(AddSession(notification:)), name:notification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,21 +57,27 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         webView.navigationDelegate = self;
         print("addWebView2")
         
-        
-//        self.webView = WKWebView(frame: self.view.bounds)
-//        self.view.addSubview(self.webView)
-////        self.webView.delegate = self
-////        self.webView.scalesPageToFit = true
-//
-////         加载网络Html页面 请设置允许Http请求
-//        let url = NSURL(string: "http://125.227.206.31:136/AcuLife/ios/index.html");
-//        let request = NSURLRequest(url:url! as URL)
-//
-//        self.webView.load(request as URLRequest)
-//
     }
     
     
+    
+    @objc func AddSession(notification:Notification) {
+        print("AddSession 被调用")
+        let user = notification.userInfo as![String:AnyObject]
+        let ADCVal = user["ADCVal"] as! String
+        let T1 = user["T1"] as! String
+        let T2 = user["T2"] as! String
+        let js1:String = "javascript:(function(){window.sessionStorage.setItem('ADCVal',"
+        let js2:String = ");window.sessionStorage.setItem('T1',"
+        let js3:String = ");window.sessionStorage.setItem('T2',"
+        let js4:String = ");})();"
+        let js:String =  js1.appending(ADCVal).appending(js2).appending(T1).appending(js3).appending(T2).appending(js4)
+        print("js",js)
+        DispatchQueue.main.sync {
+              print("主线程")
+        webView.evaluateJavaScript(js, completionHandler: nil)
+        }
+    }
     
     
     //js 调用 native 代理
@@ -68,29 +86,13 @@ class ViewController: UIViewController,UIWebViewDelegate,WKNavigationDelegate,WK
         // 判断是否是调用原生的
         if "myName" == message.name {
             // 判断message的内容，然后做相应的操作
-            print(message.body)//message.body就是 mmappbid ，另一个参数是1.
+            print("message.body",message.body)//message.body就是 mmappbid ，另一个参数是1.
             //带着 mmappbid，1 跳转到蓝牙连接页面
             itemString = message.body as? String
             self.performSegue(withIdentifier: "CaliperView", sender: self)
         }
         
-        /**
-         "javascript:(function(){" +
-         "window.sessionStorage.setItem('ADCVal','" + ADCVal + "');" +
-         "window.sessionStorage.setItem('T1','" + T1 + "');" +
-         "window.sessionStorage.setItem('T2','" + T2 + "');" +
-         "})();"
-         */
-        let js1:String = "javascript:(function(){"
-        let js2:String = "window.sessionStorage.setItem('ADCVal','"
-        let js3:String = "');"
-        let js4:String = "window.sessionStorage.setItem('T1','"
-        let js5:String = "window.sessionStorage.setItem('T2','"
-        let js6:String = "})();"
-        let js:String =  js1.appending(js2).appending("").appending(js3).appending(js4).appending("").appending(js3).appending(js5).appending("").appending(js6)
-//        webView.load(js); https://www.jianshu.com/p/c2a09a057306
-        webView.evaluateJavaScript(js, completionHandler: nil)
-        
+      
     }
     
     //segue 给新页面传递数据的方法
