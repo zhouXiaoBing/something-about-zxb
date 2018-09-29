@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "IntroductoryPagesHelper.h"
-#import "ViewController.h"
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
 #import "AXWebViewController.h"
@@ -30,7 +29,8 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //    self.window.rootViewController = [[ViewController alloc]init];
-    self.window.rootViewController = [[AXWebViewController alloc]initWithAddress:@"http://s5-test.vitagou.com"];
+//    self.window.rootViewController = [[AXWebViewController alloc]initWithAddress:@"http://s5-test.vitagou.com"];
+    self.window.rootViewController = [[AXWebViewController alloc]initWithAddress:@"http://www.lvdouyi.hk"];
     [self.window makeKeyAndVisible];
     //轮播图
     [IntroductoryPagesHelper showIntroductoryPageView:@[@"introne.jpg",@"intrtwo.jpg",@"intrthree.jpg"]];

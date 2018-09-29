@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8BD85202968CE35CB3C9AC7D /* Pods_lvdouyi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 937B6C2C665F39B365503312 /* Pods_lvdouyi.framework */; };
 		934CBA1021420A8D007F38FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA0F21420A8D007F38FF /* AppDelegate.m */; };
-		934CBA1321420A8D007F38FF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA1221420A8D007F38FF /* ViewController.m */; };
 		934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA1721420A8D007F38FF /* lvdouyi.xcdatamodeld */; };
 		934CBA1B21420AA1007F38FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 934CBA1A21420AA1007F38FF /* Assets.xcassets */; };
 		934CBA2121420AA1007F38FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 934CBA2021420AA1007F38FF /* main.m */; };
@@ -47,8 +46,6 @@
 		934CBA0B21420A8D007F38FF /* lvdouyi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lvdouyi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		934CBA0E21420A8D007F38FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		934CBA0F21420A8D007F38FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		934CBA1121420A8D007F38FF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		934CBA1221420A8D007F38FF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		934CBA1821420A8D007F38FF /* lvdouyi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lvdouyi.xcdatamodel; sourceTree = "<group>"; };
 		934CBA1A21420AA1007F38FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		934CBA1F21420AA1007F38FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,8 +167,6 @@
 				934CBA27214224CE007F38FF /* Introduce */,
 				934CBA0E21420A8D007F38FF /* AppDelegate.h */,
 				934CBA0F21420A8D007F38FF /* AppDelegate.m */,
-				934CBA1121420A8D007F38FF /* ViewController.h */,
-				934CBA1221420A8D007F38FF /* ViewController.m */,
 				934CBA1A21420AA1007F38FF /* Assets.xcassets */,
 				934CBA1F21420AA1007F38FF /* Info.plist */,
 				934CBA2021420AA1007F38FF /* main.m */,
@@ -362,7 +357,6 @@
 			files = (
 				934CBA2F21426832007F38FF /* IntroductoryPagesHelper.m in Sources */,
 				93BF12A021510CD800E2A835 /* AXWebViewController.m in Sources */,
-				934CBA1321420A8D007F38FF /* ViewController.m in Sources */,
 				93BF12A821510FC200E2A835 /* AXWebViewControllerActivity.m in Sources */,
 				934CBA1921420A8D007F38FF /* lvdouyi.xcdatamodeld in Sources */,
 				9381D48F214A5993009D4772 /* AppConst.m in Sources */,
