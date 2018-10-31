@@ -5533,7 +5533,7 @@ ThreadLocal 为解决多线程程序的并发问题提供了一种新的思路�
 
 ## 内省(Instrospector)
 
-内省是用于操作 java 对象的属性的 ：基于反射的封装
+内省是用于操作 java 对象的属性的 ：基于反射的 封装
 
 Q1：什么是 Java 对象的属性和属性的读写方法？
 
@@ -5600,7 +5600,13 @@ public static void main(String[] args) throws Exception {
 
 
 
-## java 功能代码
+
+
+## java 功能dg
+
+###  Properties类与配置文件
+
+
 
 ### java字符串操作
 
