@@ -1570,7 +1570,7 @@ public class MyLinkedList<AnyType> implements Iterator<AnyType>{
      该例的典型计算顺序是可以将 4.99 和 1.06 相乘并存为 A1, 然后将5.99 和A1相加，在将结果存入 A1；我们在将 6.99 和 1.06 相乘并将答案存为A2,最后将A1 和 A2 相加并将最后的结果放入 A1。我们将操作顺序书写如下：
 
      			4.99 1.06 × 5.99 + 6.99 1.06 × +
-	
+		
      			（（（4.99 1.06 ×） 5.99 +）（ 6.99 1.06 ×） +）
 
      这个记法叫做 后缀（ postfix ）或 逆波兰 （ reverse Polish ）记法，其求值的过程恰好是上面描述的过程。计算这个问题最容易的方法是使用一个栈。当见到一个数时就把它推入栈中；在遇到一个运算符时该运算符就作用于该栈弹出的两个数（符号）上，再将所得结果推入栈中。例如，后缀表达式
@@ -3015,6 +3015,194 @@ Java集合框架提供了数据持有对象的方式，提供了对数据集合�
   > - 类设计者没有考虑到比较问题而没有实现Comparable接口。这是我们就可以通过使用Comparator，这种情况下，我们是不需要改变对象的。
   > - 一个集合中，我们可能需要有多重的排序标准，这时候如果使用Comparable就有些捉襟见肘了，可以自己继承Comparator提供多种标准的比较器进行排序。
 
+### 集合相关代码
+
+#### 集合遍历
+
+1， **使用迭代器Iterator的方式。**
+
+2， **使用增强for循环的方式。**
+
+3， **如果有下标，则可以使用下标的方式。**
+
+##### 遍历数组
+
+```java
+public static void main(String[] args) {
+	// 遍历数组：
+	String[] arr = new String[] { "xx", "yy", "zz" };
+	// 1，增强的for循环
+	for (String elt : arr) {
+		System.out.println(elt);
+	}
+	// 2，下标的方式
+	for (int i = 0; i < arr.length; i++) {
+		System.out.println(arr[i]);
+	}
+}
+```
+
+##### 遍历list
+
+```java
+public static void main(String[] args) {
+	// 遍历List：
+	List<String> list = new ArrayList<String>();
+	list.add("aa");
+	list.add("bb");
+	list.add("cc");
+
+	// 1，增强的for循环
+	for (String elt : list) {
+		System.out.println(elt);
+	}
+
+	// 2，下标
+	for (int i = 0; i < list.size(); i++) {
+		System.out.println(list.get(i));
+	}
+
+	// 3，迭代器
+	for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+		String elt = iter.next();
+		System.out.println(elt);
+	}
+}
+```
+
+##### 遍历 Set
+
+```java
+public static void main(String[] args) {//元素不可重复
+	// 遍历Set：
+	Set<String> set = new HashSet<String>();
+	set.add("dd");
+	set.add("ee");
+	set.add("ff");
+
+	// 1，增强的for循环
+	for (String elt : set) {
+		System.out.println(elt);
+	}
+	
+	// 2，迭代器
+	for(Iterator<String> iter = set.iterator(); iter.hasNext() ; ){
+		String elt = iter.next();
+		System.out.println(elt);
+	}
+}
+```
+
+##### 遍历map
+
+```java
+public static void main(String[] args) {
+	// 遍历Map：
+	Map<String, String> map = new HashMap<String, String>();
+	map.put("aa", "xx");
+	map.put("bb", "yy");
+	map.put("cc", "zz");
+
+	// 1，增强的for循环（Entry集合）
+	for (Entry<String, String> entry : map.entrySet()) {
+		System.out.println(entry);
+	}
+	
+	// 2，增强的for循环（Key集合）
+	for(String key : map.keySet()){
+		System.out.println(key + " = " + map.get(key));
+	}
+	
+	// 3，遍历值的集合
+	for(String value : map.values()){
+		System.out.println(value);
+	}
+}
+```
+
+## IO流
+
+|        | 输入流      | 输出流       | 说明                 |
+| ------ | ----------- | ------------ | -------------------- |
+| 字节流 | InputStream | OutputStreem | 处理字节的（二进制） |
+| 字符流 | Reader      | Writer       | 字符流是处理字符的   |
+
+注：这几个类都是抽象类
+
+#### 读文件的代码
+
+```java
+public static void main(String[] args) {
+	String path = "c:/a.txt";
+	FileInputStream in = null;
+	try {
+		// 打开流
+		in = new FileInputStream(path);
+		// 使用流读文件内容
+		int b = in.read();
+		while (b != -1) {
+			System.out.print((char) b);
+			b = in.read();
+		}
+	} catch (Exception e) {
+		throw new RuntimeException(e);
+	} finally {
+		// 释放资源
+		if (in != null) {
+			try {
+				in.close();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+}
+```
+
+#### 拷贝文件的代码
+
+```java
+public static void main(String[] args) {
+	String srcPath = "c:/a.txt";
+	String destPath = "c:/b.txt";
+
+	// 一定要使用字节流
+	InputStream in = null;
+	OutputStream out = null;
+	try {
+		// 打开流
+		in = new FileInputStream(srcPath);
+		out = new FileOutputStream(destPath);
+		// 使用流
+		byte[] buf = new byte[1024 * 8];
+		for (int len = -1; (len = in.read(buf)) != -1;) {
+			out.write(buf, 0, len);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		// 释放资源
+		try {
+			if (in != null) {
+				in.close();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
+}
+```
+
+ 
+
 ## java分配机制
 
 在Java中，符合“编译时可知，运行时不可变”这个要求的方法主要是静态方法和私有方法。这两种方法都不能通过继承或别的方法重写，因此它们适合在类加载时进行解析。
@@ -3108,9 +3296,241 @@ ArrayList<String> al1 = new ArrayList<String>();
 al1.add("abc");
 al1.add(1);   //编译时报错，
 //当我们用String参数类型实例化al1后，我们是不能添加int元素的，否则编译器会报错，通常在IDE编辑器，如eclipse中会有错误标识，与此同时，在取出元素也不需要类型转换.
+
+//什么时候使用泛型：当类中操作的数据类型不确定的时候就可以使用泛型类
+//jdk5.0之前
+package java.lang;
+public interface Comparable {
+    public int compareTo(Object o);
+}
+//jdk5.0之后
+package java.lang;
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+//细节一：声明好泛型类型之后，集合中只能存放特定的元素类型
+public class Demo6 {
+	public static void main(String[] args) {
+		//创建一个存储字符串的list
+		ArrayList<String> arr=new ArrayList<String>();
+		arr.add("gz");
+		arr.add("itcast");
+		//存储非字符串编译报错.
+		arr.add(1);
+	}
+}
+//细节二：泛型类型必须是引用类型
+public class Demo6 {
+	public static void main(String[] args) {
+		// 泛型类型必须是引用类型,也就是说集合不能存储基本数据类型
+		// ArrayList<int> arr2=new ArrayList<int>();
+		// 使用基本数据类型的包装类
+		ArrayList<Integer> arr2 = new ArrayList<Integer>();
+	}
+}
+//细节三：使用泛型后取出元素不需要类型转换
+public class Demo6 {
+	public static void main(String[] args) {
+		ArrayList<String> arr = new ArrayList<String>();
+		arr.add("gzitcast");
+		arr.add("cditcast");
+		arr.add("bjitcast");
+		//使用泛型后取出元素不需要类型转换.
+		String str=arr.get(0);
+		System.out.println();
+	}
+}
 ```
 
 开发人员在使用泛型的时候，很容易根据自己的直觉而犯一些错误。比如一个方法如果接收`List<Object>`作为形式参数，那么如果尝试将一个`List<String>`的对象作为实际参数传进去，却发现无法通过编译。虽然从直觉上来说，`Object`是`String`的父类，这种类型转换应该是合理的。**但是实际上这会产生隐含的类型转换问题，因此编译器直接就禁止这样的行为**。
+
+### 泛型方法
+
+需求：写一个函数，调用者传递什么类型的变量，该函数就返回什么类型的变量？
+
+实现一:
+
+由于无法确定具体传递什么类型的数据.那么方法的形参就定义为Object类型.返回值也就是Object类型.但是使用该函数时需要强制类型转换.
+
+```java
+private Object getDate(Object obj) {
+    return obj;
+}
+```
+
+当不进行强制类型转换能否写出该功能.? 
+
+目前所学的知识无法解决该问题
+
+就需要使用泛型类解决
+
+使用的泛型的自定义来解决以上问题。
+
+泛型： 就是将类型当作变量处理。规范泛型的定义一般是一个大写的任意字母。
+
+#### 函数的泛型定义
+
+当函数中使用了一个不明确的数据类型，那么函数上就可以进行泛型的定义
+
+```java
+//public <泛型的声明> 返回值类型 函数名 (泛型 变量名){}
+public static void main(String[] args) {
+		int[] arr = { 1, 2, 3, 4, 5 };
+		new Demo6().getData(5);
+	}
+	public <T> T getData(T data) {
+		return data;
+	}
+//使用泛型方法前需要进行泛型声明，使用一对尖括号<泛型>，声明的位置在 static 后返回值类型前
+//当一个类中有多个函数声明了泛型，那么泛型的声明可以声明在类上
+
+```
+
+### 泛型类
+
+格式：修饰符 class 类名<泛型>{}
+
+```java
+import java.util.Arrays;
+
+public class Demo6<T> {
+	public static void main(String[] args) {
+		// 使用泛型类，创建对象的时候需要指定具体的类型
+		new Demo6<Integer>().getData(5);
+	}
+
+	public T getData(T data) {
+		return data;
+	}
+
+	// 反序任意类型数组
+	public void reverse(T[] arr) {
+		int start = 0;
+		int end = arr.length - 1;
+		for (int i = 0; i < arr.length; i++) {
+			if (start < end) {
+				T temp = arr[start];
+				arr[start] = arr[end];
+				arr[end] = temp;
+			}
+		}
+}
+/*
+1、创建对象的时候要指定泛型的具体类型
+2、创建对象时可以不指定泛型的具体类型(和创建集合对象一眼)。默认是Object，例如我们使用集合存储元素的时候没有使用泛型就是那么参数的类型就是Object
+3、类上面声明的泛型只能应用于非静态成员函数，如果静态函数需要使用泛型，那么
+需要在函数上独立声明。
+4、如果建立对象后指定了泛型的具体类型，那么该对象操作方法时，这些方法只能操作一种数据类型。
+5、所以既可以在类上的泛型声明，也可以在同时在该类的方法中声明泛型。
+*/
+    // 定义泛型成员
+public class Demo7 {
+	public static void main(String[] args) {
+		Father<String> f = new Father<String>("jack");
+		System.out.println(f.getT());
+		Father<Integer> f2 = new Father<Integer>(20);
+		System.out.println(f2.getT());
+	}
+
+}
+class Father<T> {
+	private T t;
+
+	public Father() {
+	}
+	public Father(T t) {
+		super();
+		this.t = t;
+	}
+	public T getT() {
+		return t;
+	}
+	public void setT(T t) {
+		this.t = t;
+	}
+}
+    //有子类的情况的实现
+public class Demo7 {
+	public static void main(String[] args) {
+		Father<String> f = new Father<String>("jack");
+		System.out.println(f.getT());
+		Father<Integer> f2 = new Father<Integer>(20);
+		System.out.println(f2.getT());
+	}
+
+}
+
+class Father<T> {
+	private T t;
+
+	public Father() {
+
+	}
+
+	public Father(T t) {
+		super();
+		this.t = t;
+	}
+
+	public T getT() {
+		return t;
+	}
+
+	public void setT(T t) {
+		this.t = t;
+	}
+
+}
+//子类指定了具体的类型
+class Son extends Father<String>{
+	
+}
+//子类也需要使用泛型
+class Son3<T> extends Father<T>{
+	
+}
+//错误写法，父类上定义有泛型需要进行处理
+class Son2 extends Father<T>{
+	
+}
+```
+
+**注意**：静态方法不可以使用类中定义的泛型，因为类中的泛型需要在对象初始化时指定具体的类型，而静态优先于对象存在。那么类中的静态方法就需要单独的进行泛型声明。声明的泛型一定要写在 static 后，返回值类型之前
+
+### 泛型接口
+
+```java
+public class Demo8 {
+	public static void main(String[] args) {
+		MyInter<String> my = new MyInter<String>();
+		my.print("泛型");
+
+		MyInter2 my2 = new MyInter2();
+		my.print("只能传字符串");
+	}
+}
+
+interface Inter<T> {
+	void print(T t);
+}
+
+// 实现不知为何类型时可以这样定义
+class MyInter<T> implements Inter<T> {
+	public void print(T t) {
+		System.out.println("myprint:" + t);
+	}
+}
+//使用接口时明确具体类型。
+class MyInter2 implements Inter<String> {
+
+	@Override
+	public void print(String t) {
+		System.out.println("myprint:" + t);
+
+	}
+
+}
+```
 
 ### 类型擦除
 
@@ -3157,6 +3577,8 @@ public void wildcard(List<?> list) {
 - **相同类型参数的泛型类的关系取决于泛型类自身的继承体系结构**。即`List<String>`是`Collection<String>` 的子类型，`List<String>`可以替换`Collection<String>`。这种情况也适用于带有上下界的类型声明。
 - **当泛型类的类型声明中使用了通配符的时候，其子类型可以在两个维度上分别展开**。如对`Collection<? extends Number>`来说，其子类型可以在`Collection`这个维度上展开，即`List<? extends Number>`和`Set<? extends Number>`等；也可以在`Number`这个层次上展开，即`Collection<Double>`和`Collection<Integer>`等。如此循环下去，`ArrayList<Long>`和 `HashSet<Double>`等也都算是`Collection<? extends Number>`的子类型。
 - 如果泛型类中包含多个类型参数，则对于每个类型参数分别应用上面的规则。
+
+
 
 ## Java线程
 
@@ -5109,6 +5531,75 @@ ThreadLocal 为解决多线程程序的并发问题提供了一种新的思路�
 
 每个线程中都保有一个`ThreadLocalMap`的成员变量，`ThreadLocalMap `内部采用`WeakReference`数组保存，数组的key即为`ThreadLocal `内部的Hash值。
 
+## 内省(Instrospector)
+
+内省是用于操作 java 对象的属性的 ：基于反射的封装
+
+Q1：什么是 Java 对象的属性和属性的读写方法？
+
+Q2：如何通过内省访问到 JavaBean 的属性？
+
+1、通过PropertyDescriptor类操作Bean的属性.
+
+```java
+public static void testPropertyDescriptor() throws Exception{
+		Person p = new Person();
+		PropertyDescriptor propertyDescriptor =  new PropertyDescriptor("id",Person.class);
+		//获取属性的写的方法。
+		Method writeMethod = propertyDescriptor.getWriteMethod();
+		Method readMethod = propertyDescriptor.getReadMethod();
+		propertyDescriptor.getReadMethod();
+		writeMethod.invoke(p, 12);
+		System.out.println(readMethod.invoke(p, null));
+	}
+```
+
+2、通过Introspector类获得Bean对象的 BeanInfo，然后通过 BeanInfo 来获取属性的描述器（ PropertyDescriptor ），通过这个属性描述器就可以获取某个属性对应的 getter/setter 方法，然后通过反射机制来调用这些方法。
+
+```java
+public static void testIntrospector() throws Exception{
+		BeanInfo beanInfo = Introspector.getBeanInfo(Person.class);
+		PropertyDescriptor[]  descriptor = beanInfo.getPropertyDescriptors();
+		for(PropertyDescriptor itemProperty : descriptor){
+			System.out.println(itemProperty.getReadMethod().getName());
+		}
+	}
+```
+
+**存在的问题**：sun 公司的的内省 API 过于繁琐，所以 Apache 组织结合很多实际开发中的应用场景开发了一套简单、易用的 API 操作 Bean 的属性 ——BeanUtils
+
+```java
+public static void main(String[] args) throws Exception {
+		Person p = new Person();
+		ConvertUtils.register(new Converter() {
+			
+			@Override
+			public Object convert(Class type, Object value) {
+				 try {
+					if(value!=null){
+						 
+						 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+						 Date d = dateFormat.parse((String) value);
+						 return d;
+					 }
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+		}, Date.class);
+		
+		BeanUtils.setProperty(p,"id","110");
+		BeanUtils.setProperty(p,"name","狗娃");
+		BeanUtils.setProperty(p, "birthDay","1992 12 12");
+		System.out.println(p.getId() +"=="+ p.getName()+"======"+p.getBirthDay());
+	}
+```
+
+
+
 ## java 功能代码
 
 ### java字符串操作
@@ -5383,6 +5874,88 @@ String s1 = s2 + s3 + s4;
 - （4）StringBuilder 一般使用在方法内部来完成类似 + 功能，因为是线程不安全的，所以用完以后可以丢弃。StringBuffer 主要用在全局变量中。
 
 - （5）相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。而在现实的模块化编程中，负责某一模块的程序员不一定能清晰地判断该模块是否会放入多线程的环境中运行，因此：除非确定系统的瓶颈是在 StringBuffer 上，并且确定你的模块不会运行在多线程模式下，才可以采用 StringBuilder；否则还是用 StringBuffer。
+
+### Junit单元测试
+
+#### Junit单元测试框架的基本使用
+
+一、搭建环境
+
+	导入 junit.jar 包（junit4）
+
+二、写测试类
+
+	0、一般一个类对应一个测试类
+
+	1、测试类与被测试类最好是放在同一个包中（可以使不同的源文件夹）
+
+	2、测试类的名字为被测试类的名字加 Test 后缀
+
+三、写测试方法
+
+	0，一般一个方法对应一个单元测试方法。
+
+	1，测试方法的名字为test前缀加被测试方法的名字，如testAddPerson()。
+
+	2，单元测试方法上面要加上@Test注解（org.junit.Test）！
+
+	3，单元测试方法不能有参数，也不能有返回值（返回void）！测试的方法不能是静态的方法。
+
+四、测试方法的基本使用
+
+	1，可以单独执行一个测试方法，也可以一次执行所有的、一个包的、一个类中所有的测试方法。
+
+	2，执行完后，显示绿色表示测试成功；显示红色表示测试失败（抛异常后会测试失败）。
+
+#### 断言工具类
+
+其中有一些静态的工具方法(不符合期望就抛弃)
+
+	assertTrue(...)		参数的值应是true
+
+	assertFalse(...)	参数的值应是false  
+
+	assertNull(...)		应是null值
+
+	assertNotNull(...)	应是非null的值
+
+	assertSame(...)		使用==比较的结果为true（表示同一个对象）
+
+	AssertNotSame(...)	使用==比较的结果为false
+
+	assertEquals(...)	两个对象equals()方法比较结果为true
+
+#### 用户准备环境、清理环境的方法
+
+	@Test
+
+		表示单元测试方法。
+
+	@Before 
+
+		所修饰的方法应是非static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的每个单元测试方法之前都执行一次。
+
+	@After 
+
+		所修饰的方法应是非static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的每个单元测试方法之后都执行一次。
+
+	@BeforeClass 
+
+		所修饰的方法应是static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的所有单元测试方法之前执行，只执行一次。
+
+	@AfterClass 
+
+		所修饰的方法应是static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的所有单元测试方法之后执行，只执行一次。
+
+
 
 # iOS 开发
 
