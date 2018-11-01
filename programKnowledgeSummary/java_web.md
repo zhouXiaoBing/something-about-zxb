@@ -233,21 +233,13 @@ JNIEXPORT jstring JNICALL
 
 从GetStringUTFChars中获取的UTF-8字符串在本地代码中使用完毕后，要使用ReleaseStringUTFChars告诉JVM这个UTF-8字符串不会被使用了，因为这个UTF-8字符串占用的内存会被回收。
 
- 
-
-3.2.3 构造新的字符串
-
- 
+#### 3.2.3 构造新的字符串 
 
 你可以通过JNI函数NewStringUTF在本地方法中创建一个新的java.lang.String字符串对象。这个新创建的字符串对象拥有一个与给定的UTF-8编码的C类型字符串内容相同的Unicode编码字符串。
 
 如果一个VM不能为构造java.lang.String分配足够的内存，NewStringUTF会抛出一个OutOfMemoryError异常，并返回一个NULL。在这个例子中，我们不必检查它的返回值，因为本地方法会立即返回。如果NewStringUTF失败，OutOfMemoryError这个异常会被在Prompt.main（本地方法的调用者）中抛出。如果NeweStringUTF成功，它会返回一个JNI引用，这个引用指向新创建的java.lang.String对象。这个对象被Prompt.getLine返回然后被赋值给Prompt.main中的本地input。
 
- 
-
-3.2.4 其它JNI字符串处理函数
-
- 
+#### 3.2.4 其它JNI字符串处理函数
 
 JNI支持许多操作字符串的函数，这里做个大致介绍。
 
@@ -257,9 +249,11 @@ UTF-8字符串以’\0’结尾，而Unicode字符串不是。如果jstring指�
 
 GetStringChars和GetStringUTFChars函数中的第三个参数需要更进一步的解释：
 
+```c
 const jchar *
 
  GetStringChars(JNIEnv *env, jstring str, jboolean *isCopy);
+```
 
 当从JNI函数GetStringChars中返回得到字符串B时，如果B是原始字符串java.lang.String的拷贝，则isCopy被赋值为JNI_TRUE。如果B和原始字符串指向的是JVM中的同一份数据，则isCopy被赋值为JNI_FALSE。当isCopy值为JNI_FALSE时，本地代码决不能修改字符串的内容，否则JVM中的原始字符串也会被修改，这会打破JAVA语言中字符串不可变的规则。
 
@@ -267,13 +261,9 @@ const jchar *
 
 JVM是否会通过拷贝原始Unicode字符串来生成UTF-8字符串是不可以预测的，程序员最好假设它会进行拷贝，而这个操作是花费时间和内存的。一个典型的JVM会在heap上为对象分配内存。一旦一个JAVA字符串对象的指针被传递给本地代码，GC就不会再碰这个字符串。换言之，这种情况下，JVM必须pin这个对象。可是，大量地pin一个对象是会产生内存碎片的，因为，虚拟机会随意性地来选择是复制还是直接传递指针。
 
-当你不再使用一个从GetStringChars得到的字符串时，不管JVM内部是采用复制还是直接传递指针的方式，都不要忘记调用ReleaseStringChars。根据方法GetStringChars是复制还是直接返回指针，ReleaseStringChars会释放复制对象时所占的内存，或者unpin这个对象。
+当你不再使用一个从GetStringChars得到的字符串时，不管JVM内部是采用复制还是直接传递指针的方式，都不要忘记调用ReleaseStringChars。根据方法GetStringChars是复制还是直接返回指针，ReleaseStringChars会释放复制对象时所占的内存，或者unpin这个对象。 
 
- 
-
-3.2.5 JDK1.2中关于字符串的新JNI函数
-
- 
+#### 3.2.5 JDK1.2中关于字符串的新JNI函数 
 
 为了提高JVM返回字符串直接指针的可能性，JDK1.2中引入了一对新函数，Get/ReleaseStringCritical。表面上，它们和Get/ReleaseStringChars函数差不多，但实际上这两个函数在使用有很大的限制。
 
@@ -291,67 +281,44 @@ Get/ReleaseStringCritical的交迭调用是安全的，这种情况下，它们�
 
 下面代码演示了这对函数的正确用法：
 
+```c
 jchar *s1, *s2;
-
  s1 = (*env)->GetStringCritical(env, jstr1);
-
  if (s1 == NULL) {
-
      ... /* error handling */
-
  }
-
  s2 = (*env)->GetStringCritical(env, jstr2);
-
  if (s2 == NULL) {
-
      (*env)->ReleaseStringCritical(env, jstr1, s1);
-
      ... /* error handling */
-
  }
-
  ...     /* use s1 and s2 */
-
  (*env)->ReleaseStringCritical(env, jstr1, s1);
-
  (*env)->ReleaseStringCritical(env, jstr2, s2);
+```
 
 JNI不支持Get/ReleaseStringUTFCritical，因为这样的函数在进行编码转换时很可能会促使JVM对数据进行复制，因为JVM内部表示字符串一般都是使用Unicode的。
 
 JDK1.2还一对新增的函数：GetStringRegion和GetStringUTFRegion。这对函数把字符串复制到一个预先分配的缓冲区内。Prompt.getLine这个本地方法可以用GetStringUTFRegion重新实现如下：
 
+```c
 JNIEXPORT jstring JNICALL 
-
  Java_Prompt_getLine(JNIEnv *env, jobject obj, jstring prompt)
-
  {
-
      /* assume the prompt string and user input has less than 128
-
         characters */
-
      char outbuf[128], inbuf[128];
-
      int len = (*env)->GetStringLength(env, prompt);
-
      (*env)->GetStringUTFRegion(env, prompt, 0, len, outbuf);
-
      printf("%s", outbuf);
-
      scanf("%s", inbuf);
-
      return (*env)->NewStringUTF(env, inbuf);
-
  }
+```
 
 GetStringUTFRegion这个函数会做越界检查，如果必要的话，会抛出异常StringIndexOutOfBoundsException。这个方法与GetStringUTFChars比较相似，不同的是，GetStringUTFRegion不做任何内存分配，不会抛出内存溢出异常。
 
- 
-
-3.2.6 JNI字符串操作函数总结
-
- 
+#### 3.2.6 JNI字符串操作函数总结
 
 对于小字符串来说，Get/SetStringRegion和Get/SetString-UTFRegion这两对函数是最佳选择，因为缓冲区可以被编译器提前分配，而且永远不会产生内存溢出的异常。当你需要处理一个字符串的一部分时，使用这对函数也是不错的，因为它们提供了一个开始索引和子字符串的长度值。另外，复制少量字符串的消耗是非常小的。
 
@@ -359,97 +326,61 @@ GetStringUTFRegion这个函数会做越界检查，如果必要的话，会抛�
 
 下面的例子演示了使用GetStringCritical时需要注意的一些地方：
 
+```c
 /* This is not safe! */
-
  const char *c_str = (*env)->GetStringCritical(env, j_str, 0);
-
  if (c_str == NULL) {
-
      ... /* error handling */
-
  }
-
  fprintf(fd, "%s\n", c_str);
-
  (*env)->ReleaseStringCritical(env, j_str, c_str);
+```
 
 上面代码的问题在于，GC被当前线程禁止的情况下，向一个文件写数据不一定安全。例如，另外一个线程T正在等待从文件fd中读取数据。假设操作系统的规则是fprintf会等待线程T完成所有对文件fd的数据读取操作，这种情况下就可能会产生死锁：线程T从文件fd中读取数据是需要缓冲区的，如果当前没有足够内存，线程T就会请求GC来回收一部分，GC一旦运行，就只能等到当前线程运行ReleaseStringCritical时才可以。而ReleaseStringCritical只有在fprintf调用返回时才会被调用。而fprintf这个调用，会一直等待线程T完成文件读取操作。
 
- 
-
-3.3 访问数组
-
- 
+#### 3.3 访问数组
 
 JNI在处理基本类型数组和对象数组上面是不同的。对象数组里面是一些指向对象实例或者其它数组的引用。
 
 本地代码中访问JVM中的数组和访问JVM中的字符串有些相似。看一个简单的例子。下面的程序调用了一个本地方法sumArray，这个方法对一个int数组里面的元素进行累加：
 
+```java
 class IntArray {
-
      private native int sumArray(int[] arr);
-
      public static void main(String[] args) {
-
          IntArray p = new IntArray();
-
          int arr[] = new int[10];
-
          for (int i = 0; i < 10; i++) {
-
              arr[i] = i;
-
          }
-
          int sum = p.sumArray(arr);
-
          System.out.println("sum = " + sum);
-
      }
-
      static {
-
          System.loadLibrary("IntArray");
-
      }
-
  }
+```
 
- 
-
-3.3.1 在本地代码中访问数组
-
- 
+#### 3.3.1 在本地代码中访问数组
 
 数组的引用类型是一般是jarray或者或者jarray的子类型jintArray。就像jstring不是一个C字符串类型一样，jarray也不是一个C数组类型。所以，不要直接访问jarray。你必须使用合适的JNI函数来访问基本数组元素：
 
+```c
 JNIEXPORT jint JNICALL 
-
  Java_IntArray_sumArray(JNIEnv *env, jobject obj, jintArray arr)
-
  {
-
      jint buf[10];
-
      jint i, sum = 0;
-
      (*env)->GetIntArrayRegion(env, arr, 0, 10, buf);
-
      for (i = 0; i < 10; i++) {
-
          sum += buf[i];
-
      }
-
      return sum;
-
  }
+```
 
- 
-
-3.3.2 访问基本类型数组
-
- 
+#### 3.3.2 访问基本类型数组 
 
 上一个例子中，使用GetIntArrayRegion函数来把一个int数组中的所有元素复制到一个C缓冲区中，然后我们在本地代码中通过C缓冲区来访问这些元素。
 
@@ -457,45 +388,29 @@ JNI支持一个与GetIntArrayRegion相对应的函数SetIntArrayRegion。这个�
 
 JNI支持一系列的Get/Release<Type>ArrayElement函数，这些函数允许本地代码获取一个指向基本类型数组的元素的指针。由于GC可能不支持pin操作，JVM可能会先对原始数据进行复制，然后返回指向这个缓冲区的指针。我们可以重写上面的本地方法实现：
 
+```c
 JNIEXPORT jint JNICALL 
-
  Java_IntArray_sumArray(JNIEnv *env, jobject obj, jintArray arr)
-
  {
-
      jint *carr;
-
      jint i, sum = 0;
-
      carr = (*env)->GetIntArrayElements(env, arr, NULL);
-
      if (carr == NULL) {
-
          return 0; /* exception occurred */
-
      }
-
      for (i=0; i<10; i++) {
-
          sum += carr[i];
-
      }
-
      (*env)->ReleaseIntArrayElements(env, arr, carr, 0);
-
      return sum;
-
  }
+```
 
 GetArrayLength这个函数返回数组中元素的个数，这个值在数组被首次分配时确定下来。
 
 JDK1.2引入了一对函数：Get/ReleasePrimitiveArrayCritical。通过这对函数，可以在本地代码访问基本类型数组元素的时候禁止GC的运行。但程序员使用这对函数时，必须和使用Get/ReleaseStringCritical时一样的小心。在这对函数调用的中间，同样不能调用任何JNI函数，或者做其它可能会导致程序死锁的阻塞性操作。
 
- 
-
-3.3.3 操作基本类型数组的JNI函数的总结
-
- 
+#### 3.3.3 操作基本类型数组的JNI函数的总结
 
 如果你想在一个预先分配的C缓冲区和内存之间交换数据，应该使用Get/Set</Type>ArrayRegion系列函数。这些函数会进行越界检查，在需要的时候会有可能抛出ArrayIndexOutOfBoundsException异常。
 
@@ -503,47 +418,31 @@ JDK1.2引入了一对函数：Get/ReleasePrimitiveArrayCritical。通过这对�
 
 如果你没有一个预先分配的C缓冲区，并且原始数组长度未定，而本地代码又不想在获取数组元素的指针时阻塞的话，使用Get/ReleasePrimitiveArrayCritical函数对。就像Get/ReleaseStringCritical函数对一样，这对函数很小心地使用，以避免死锁。
 
-Get/Release<type>ArrayElements系列函数永远是安全的。JVM会选择性地返回一个指针，这个指针可能指向原始数据也可能指向原始数据复制。
+Get/Release<type>ArrayElements系列函数永远是安全的。JVM会选择性地返回一个指针，这个指针可能指向原始数据也可能指向原始数据复制。 
 
- 
-
-3.3.5 访问对象数组
-
- 
+#### 3.3.5 访问对象数组 
 
 JNI提供了一个函数对来访问对象数组。GetObjectArrayElement返回数组中指定位置的元素，而SetObjectArrayElement修改数组中指定位置的元素。与基本类型的数组不同的是，你不能一次得到所有的对象元素或者一次复制多个对象元素。字符串和数组都是引用类型，你要使用Get/SetObjectArrayElement来访问字符串数组或者数组的数组。
 
 下面的例子调用了一个本地方法来创建一个二维的int数组，然后打印这个数组的内容：
 
+```java
 class ObjectArrayTest {
-
      private static native int[][] initInt2DArray(int size);
-
      public static void main(String[] args) {
-
          int[][] i2arr = initInt2DArray(3);
-
          for (int i = 0; i < 3; i++) {
-
              for (int j = 0; j < 3; j++) {
-
                   System.out.print(" " + i2arr[i][j]);
-
              }
-
              System.out.println();
-
          }
-
      }
-
      static {
-
          System.loadLibrary("ObjectArrayTest");
-
      }
-
  }
+```
 
 静态本地方法initInt2DArray创建了一个给定大小的二维数组。执行分配和初始化数组任务的本地方法可以是下面这样子的：
 
