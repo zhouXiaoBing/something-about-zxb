@@ -1545,7 +1545,7 @@ public class MyLinkedList<AnyType> implements Iterator<AnyType>{
 
      编译器检查程序的语法错误，但是常常由于缺少一个符号（如遗漏一个花括号或是注释起始符）引起编译器列出上百行的诊断，而真正的错误并没有被找到。在这种情况下，一个有用的工具就是检验是否每件事情都能成对的程序。于是，每一个右花括号、右方括号、及右圆括号必然对应其相应的左括号。序列 [ ( ) ] 是合法的，但是 [ ( ] ) 是错误的。显然不值得为此编写一个大型程序，事实上检验这些事情是很容易的。为简单起见，我们仅就圆括号、方括号和花括号进行检验并忽略出现任何其他的字符。
 
-     ​	这个简单的方法用到一个栈：
+     	这个简单的方法用到一个栈：
 
      做一个空栈。读入字符知道文件结尾。如果字符是一个开放的符号，则将其推入栈中。如果符号是一个封闭符号，则当栈空时报错。否则，将栈元素弹出。如果弹出的符号不是对应的开放符号，则报错。在文件结尾，如果栈非空则报错。（遇 开放符号 栈为空 推进 遇封闭符号 栈里应该有一个元素为开放符号，然后推出这个符号）
 
@@ -1557,25 +1557,25 @@ public class MyLinkedList<AnyType> implements Iterator<AnyType>{
 
      假设我们有一个便携式计算器并想要计算一趟外出购物的花费。为此，我们将一列数据相加并将结果乘以1.06；系数是附加税，如果购物的各项花销为4.99，5.99和6.99，那么输入这些数据的自然方式将是
 
-     ​			4.99 + 5.99 + 6.99 × 1.06 = 
+     			4.99 + 5.99 + 6.99 × 1.06 = 
 
      随着计算器的不同 ，这个结果所要的答案 19.05，或者是科学答案 18.39.最简单的四功能计算器将给出第一个答案，但是许多先进的计算器是知道乘法的优先级高于加法的。
 
      另一方面，有些项是需要上税，有些不用，因此，如果只有第一项和最后一项需要上税，那么计算的顺序是
 
-     ​			4.99 × 1.06 + 5.99 + 6.99 × 1.06 = 
+     			4.99 × 1.06 + 5.99 + 6.99 × 1.06 = 
 
      将在科学计算器上给出正确的答案（18.69） 而在简单计算器上给出错误的答案（19.37）。科学计算器一般包含括号，因此我们总是可以通过加括号的方法得到正确的答案，但是使用简单计算器我们需要记住中间的结果。
 
      该例的典型计算顺序是可以将 4.99 和 1.06 相乘并存为 A1, 然后将5.99 和A1相加，在将结果存入 A1；我们在将 6.99 和 1.06 相乘并将答案存为A2,最后将A1 和 A2 相加并将最后的结果放入 A1。我们将操作顺序书写如下：
 
-     ​			4.99 1.06 × 5.99 + 6.99 1.06 × +
-
-     ​			（（（4.99 1.06 ×） 5.99 +）（ 6.99 1.06 ×） +）
+     			4.99 1.06 × 5.99 + 6.99 1.06 × +
+		
+     			（（（4.99 1.06 ×） 5.99 +）（ 6.99 1.06 ×） +）
 
      这个记法叫做 后缀（ postfix ）或 逆波兰 （ reverse Polish ）记法，其求值的过程恰好是上面描述的过程。计算这个问题最容易的方法是使用一个栈。当见到一个数时就把它推入栈中；在遇到一个运算符时该运算符就作用于该栈弹出的两个数（符号）上，再将所得结果推入栈中。例如，后缀表达式
 
-     ​			6 5 2 3 + 8 × + 3 + ×
+     			6 5 2 3 + 8 × + 3 + ×
 
      |                                          |            |                        |
      | :--------------------------------------- | :--------- | ---------------------- |
@@ -1637,7 +1637,7 @@ public class MyLinkedList<AnyType> implements Iterator<AnyType>{
 
 ### 队列 ADT
 
-​	像栈一样，队列（queue）也是表。然而，使用队列是插入在一端进行而删除在另一端进行。
+	像栈一样，队列（queue）也是表。然而，使用队列是插入在一端进行而删除在另一端进行。
 
 #### 队列模型
 
@@ -2131,8 +2131,6 @@ AVL（Adelson-Velskii 和 Landis）树是带有平衡条件（balance condition�
         }
     }
    ```
-
-   
 
 4. C代码实现
 
@@ -3017,6 +3015,332 @@ Java集合框架提供了数据持有对象的方式，提供了对数据集合�
   > - 类设计者没有考虑到比较问题而没有实现Comparable接口。这是我们就可以通过使用Comparator，这种情况下，我们是不需要改变对象的。
   > - 一个集合中，我们可能需要有多重的排序标准，这时候如果使用Comparable就有些捉襟见肘了，可以自己继承Comparator提供多种标准的比较器进行排序。
 
+### 集合相关代码
+
+#### 集合遍历
+
+1， **使用迭代器Iterator的方式。**
+
+2， **使用增强for循环的方式。**
+
+3， **如果有下标，则可以使用下标的方式。**
+
+##### 遍历数组
+
+```java
+public static void main(String[] args) {
+	// 遍历数组：
+	String[] arr = new String[] { "xx", "yy", "zz" };
+	// 1，增强的for循环
+	for (String elt : arr) {
+		System.out.println(elt);
+	}
+	// 2，下标的方式
+	for (int i = 0; i < arr.length; i++) {
+		System.out.println(arr[i]);
+	}
+}
+```
+
+##### 遍历list
+
+```java
+public static void main(String[] args) {
+	// 遍历List：
+	List<String> list = new ArrayList<String>();
+	list.add("aa");
+	list.add("bb");
+	list.add("cc");
+
+	// 1，增强的for循环
+	for (String elt : list) {
+		System.out.println(elt);
+	}
+
+	// 2，下标
+	for (int i = 0; i < list.size(); i++) {
+		System.out.println(list.get(i));
+	}
+
+	// 3，迭代器
+	for (Iterator<String> iter = list.iterator(); iter.hasNext();) {
+		String elt = iter.next();
+		System.out.println(elt);
+	}
+}
+```
+
+##### 遍历 Set
+
+```java
+public static void main(String[] args) {//元素不可重复
+	// 遍历Set：
+	Set<String> set = new HashSet<String>();
+	set.add("dd");
+	set.add("ee");
+	set.add("ff");
+
+	// 1，增强的for循环
+	for (String elt : set) {
+		System.out.println(elt);
+	}
+	
+	// 2，迭代器
+	for(Iterator<String> iter = set.iterator(); iter.hasNext() ; ){
+		String elt = iter.next();
+		System.out.println(elt);
+	}
+}
+```
+
+##### 遍历map
+
+```java
+public static void main(String[] args) {
+	// 遍历Map：
+	Map<String, String> map = new HashMap<String, String>();
+	map.put("aa", "xx");
+	map.put("bb", "yy");
+	map.put("cc", "zz");
+
+	// 1，增强的for循环（Entry集合）
+	for (Entry<String, String> entry : map.entrySet()) {
+		System.out.println(entry);
+	}
+	
+	// 2，增强的for循环（Key集合）
+	for(String key : map.keySet()){
+		System.out.println(key + " = " + map.get(key));
+	}
+	
+	// 3，遍历值的集合
+	for(String value : map.values()){
+		System.out.println(value);
+	}
+}
+```
+
+## IO流（配置、路径）
+
+|        | 输入流      | 输出流       | 说明                 |
+| ------ | ----------- | ------------ | -------------------- |
+| 字节流 | InputStream | OutputStreem | 处理字节的（二进制） |
+| 字符流 | Reader      | Writer       | 字符流是处理字符的   |
+
+注：这几个类都是抽象类
+
+#### 读文件的代码
+
+```java
+public static void main(String[] args) {
+	String path = "c:/a.txt";
+	FileInputStream in = null;
+	try {
+		// 打开流
+		in = new FileInputStream(path);
+		// 使用流读文件内容
+		int b = in.read();
+		while (b != -1) {
+			System.out.print((char) b);
+			b = in.read();
+		}
+	} catch (Exception e) {
+		throw new RuntimeException(e);
+	} finally {
+		// 释放资源
+		if (in != null) {
+			try {
+				in.close();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+}
+```
+
+#### 拷贝文件的代码
+
+```java
+public static void main(String[] args) {
+	String srcPath = "c:/a.txt";
+	String destPath = "c:/b.txt";
+
+	// 一定要使用字节流
+	InputStream in = null;
+	OutputStream out = null;
+	try {
+		// 打开流
+		in = new FileInputStream(srcPath);
+		out = new FileOutputStream(destPath);
+		// 使用流
+		byte[] buf = new byte[1024 * 8];
+		for (int len = -1; (len = in.read(buf)) != -1;) {
+			out.write(buf, 0, len);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		// 释放资源
+		try {
+			if (in != null) {
+				in.close();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
+}
+```
+
+ Properties 配置文件说明
+
+Properties类对应.properties文件。文件内容是键值对，键值对之间使用"="或空格隔开。开头是"#"的表示注释
+
+	Properties类在加载.properties文件时使用的iso8859-1的编码。所以这个文件中的中文要特殊处理：如果这个配置文件中有中文就必须要进行转义，使用native2ascii.exe命令操作:
+
+**native2ascii d:/my.properties d:/my2.properties**
+
+	使用Properties类中的load(InputStream) 方法可以加载配置文件，使用其中的store(OutputStream) 方法可以保存配置到指定文件。
+
+	更多的信息可以看Properties类的API文档。
+
+#### 加载配置文件
+
+```java
+public static void testLoadProperties() throws Exception {
+	Properties properties = new Properties();
+
+	InputStream in = new FileInputStream("E:/itcast/config.properties");
+	properties.load(in); // 加载
+	in.close();
+
+	System.out.println(properties);
+}
+```
+
+#### 写配置文件
+
+```java
+public static void testStoreProperties() throws Exception {
+	// 准备配置信息
+	Properties properties = new Properties();
+	properties.setProperty("name", "李四");
+	properties.setProperty("age", "20");
+
+	// 准备
+	OutputStream out = new FileOutputStream("d:/my.properties");
+	String comments = "这是我的配置文件";
+
+	// 写出去
+	properties.store(out, comments);
+	out.close();
+}
+```
+
+#### 使用 properties 类 
+
+```java
+public class DBUtil {
+	
+	static Properties properties = new Properties();
+	
+	static{
+		try {
+			Class clazz = DBUtil.class;
+			InputStreamReader fileReader =
+			new InputStreamReader(clazz.getResourceAsStream("/db.properties"));
+			properties.load(fileReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static String getUserName(){
+		String userName =properties.getProperty("userName");
+		return userName;
+	}
+	
+	public static String getPassword(){
+		return	properties.getProperty("password");
+	}
+	public static void main(String[] args) {
+		System.out.println("用户名："+ getUserName());
+		System.out.println("密码: "+  getPassword());
+	}
+}
+```
+
+### 文件路径
+
+#### 绝对路径
+
+以根目录或某盘符开头的路径（或者说完整的路径）
+
+例如：
+
+-  c:/a.txt （Windows操作系统中）
+
+-  c:/xxx/a.txt （Windows操作系统中）
+
+-  /var/xx/aa.txt （Linux操作系统中）
+
+ **绝对路径的问题:** 比如C:\abc\a.properties文件路径，该路径在windows上执行没有 问题，但是如果把该项目移动到linux上面执行 ，该路径就会出现问题了，因为在linux上面没有c盘的，只有根目录\。
+
+#### 相对路径
+
+相对于当前路径的一个路径。例如当前文件夹为c:/abc时：相对路径a.txt表示c:/abc/a.txt，相对路径xx/a.txt = c:/abc/xx/a.txt
+
+-  .  表示当前文件夹
+
+-  .. 表示上级文件夹	
+
+相对路径存在的问题:相对路径是相对于目前执行class文件的时候，控制台所在的路径，这样子也会导致出现问题。
+
+#### java 程序中的相对路径
+
+**在 java 中使用 File 是写相对路径，是指对于执行 java 命令当前所在的文件夹**
+
+测试代码
+
+```java
+public class PathTest {
+	public static void main(String[] args) throws Exception {
+		System.out.println(new File("a.txt").getAbsolutePath());
+	}
+}
+```
+
+**在Eclipse中，当前路径是工程的根目录**
+
+#### classpath 路径
+
+> 在Java程序中，一般情况下使用绝对路径还是相对路径都不太合适，因为Java程序的jar包所放的位置不确定，执行java程序时当前的路径也不确定，所以不合适。一般在Java程序中我们会把资源放到classpath中，然后使用classpath路径查找资源。
+
+Classpath路径：就是使用classpath目前的路径。
+
+#### 获取 classpath 中的资源（InputStreem）
+
+```java
+public static void main(String[] args) throws Exception {
+	Class clazz = new ClassPathTest().getClass();
+	
+	// 开头的'/'表示classpath的根目录，这个是表示从classpath的根目录中开始查找资源
+	InputStream in = clazz.getResourceAsStream("/cn/itcast/my.properties");
+
+	// 如果开头没有'/'，表示从当前这个class所在的包中开始查找
+	InputStream in2 = clazz.getResourceAsStream("my.properties");
+```
+
+
+
 ## java分配机制
 
 在Java中，符合“编译时可知，运行时不可变”这个要求的方法主要是静态方法和私有方法。这两种方法都不能通过继承或别的方法重写，因此它们适合在类加载时进行解析。
@@ -3089,7 +3413,7 @@ Error：
 
   java与c#一样，都存在泛型的概念，及类型的参数化。java中的泛型是在jdk5.0后出现的，但是java中的泛型与C#中的泛型是有本质区别的，首先从集合类型上来说，java 中的ArrayList<Integer>和ArrayList<String>是同一个类型，在编译时会执行类型擦除，及java中的类型是伪泛型，伪泛型将会在后面介绍，其次，对于像集合中添加基本类型的数据时，例如int，会首先将int转化成Integer对象，即我们通常所说的装箱操作，在取出元素的时候需要将Interger对象转换成int值类型，即拆箱操作。而在c#中，List<int>和List<string>是不同的类型，泛型参数在编译后会是一个占位符，并没有被擦除，在运行时被赋予正真的类型，它们在系统运行期生成，有自己的虚方法表和类型数据，这种实现称为类型膨胀（针对类型膨胀，即时编译器已经做了很多的优化工作来解决这一问题），这就是所谓的真泛型。与此同时，在对集合中添加基本元素如int时，不需要装箱操作，取出元素时不需要拆箱操作，因此，性能上较java的集合泛型要好。
 
-​      java中泛型的引入主要是为了解决两个方面的问题：1.集合类型元素在运行期出现类型装换异常，增加编译时类型的检查，2. 解决的时重复代码的编写，能够复用算法。下面通过例子来说明编译器的类型检查。
+      java中泛型的引入主要是为了解决两个方面的问题：1.集合类型元素在运行期出现类型装换异常，增加编译时类型的检查，2. 解决的时重复代码的编写，能够复用算法。下面通过例子来说明编译器的类型检查。
 
 一个没有泛型的例子：
 
@@ -3110,9 +3434,241 @@ ArrayList<String> al1 = new ArrayList<String>();
 al1.add("abc");
 al1.add(1);   //编译时报错，
 //当我们用String参数类型实例化al1后，我们是不能添加int元素的，否则编译器会报错，通常在IDE编辑器，如eclipse中会有错误标识，与此同时，在取出元素也不需要类型转换.
+
+//什么时候使用泛型：当类中操作的数据类型不确定的时候就可以使用泛型类
+//jdk5.0之前
+package java.lang;
+public interface Comparable {
+    public int compareTo(Object o);
+}
+//jdk5.0之后
+package java.lang;
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+//细节一：声明好泛型类型之后，集合中只能存放特定的元素类型
+public class Demo6 {
+	public static void main(String[] args) {
+		//创建一个存储字符串的list
+		ArrayList<String> arr=new ArrayList<String>();
+		arr.add("gz");
+		arr.add("itcast");
+		//存储非字符串编译报错.
+		arr.add(1);
+	}
+}
+//细节二：泛型类型必须是引用类型
+public class Demo6 {
+	public static void main(String[] args) {
+		// 泛型类型必须是引用类型,也就是说集合不能存储基本数据类型
+		// ArrayList<int> arr2=new ArrayList<int>();
+		// 使用基本数据类型的包装类
+		ArrayList<Integer> arr2 = new ArrayList<Integer>();
+	}
+}
+//细节三：使用泛型后取出元素不需要类型转换
+public class Demo6 {
+	public static void main(String[] args) {
+		ArrayList<String> arr = new ArrayList<String>();
+		arr.add("gzitcast");
+		arr.add("cditcast");
+		arr.add("bjitcast");
+		//使用泛型后取出元素不需要类型转换.
+		String str=arr.get(0);
+		System.out.println();
+	}
+}
 ```
 
 开发人员在使用泛型的时候，很容易根据自己的直觉而犯一些错误。比如一个方法如果接收`List<Object>`作为形式参数，那么如果尝试将一个`List<String>`的对象作为实际参数传进去，却发现无法通过编译。虽然从直觉上来说，`Object`是`String`的父类，这种类型转换应该是合理的。**但是实际上这会产生隐含的类型转换问题，因此编译器直接就禁止这样的行为**。
+
+### 泛型方法
+
+需求：写一个函数，调用者传递什么类型的变量，该函数就返回什么类型的变量？
+
+实现一:
+
+由于无法确定具体传递什么类型的数据.那么方法的形参就定义为Object类型.返回值也就是Object类型.但是使用该函数时需要强制类型转换.
+
+```java
+private Object getDate(Object obj) {
+    return obj;
+}
+```
+
+当不进行强制类型转换能否写出该功能.? 
+
+目前所学的知识无法解决该问题
+
+就需要使用泛型类解决
+
+使用的泛型的自定义来解决以上问题。
+
+泛型： 就是将类型当作变量处理。规范泛型的定义一般是一个大写的任意字母。
+
+#### 函数的泛型定义
+
+当函数中使用了一个不明确的数据类型，那么函数上就可以进行泛型的定义
+
+```java
+//public <泛型的声明> 返回值类型 函数名 (泛型 变量名){}
+public static void main(String[] args) {
+		int[] arr = { 1, 2, 3, 4, 5 };
+		new Demo6().getData(5);
+	}
+	public <T> T getData(T data) {
+		return data;
+	}
+//使用泛型方法前需要进行泛型声明，使用一对尖括号<泛型>，声明的位置在 static 后返回值类型前
+//当一个类中有多个函数声明了泛型，那么泛型的声明可以声明在类上
+
+```
+
+### 泛型类
+
+格式：修饰符 class 类名<泛型>{}
+
+```java
+import java.util.Arrays;
+
+public class Demo6<T> {
+	public static void main(String[] args) {
+		// 使用泛型类，创建对象的时候需要指定具体的类型
+		new Demo6<Integer>().getData(5);
+	}
+
+	public T getData(T data) {
+		return data;
+	}
+
+	// 反序任意类型数组
+	public void reverse(T[] arr) {
+		int start = 0;
+		int end = arr.length - 1;
+		for (int i = 0; i < arr.length; i++) {
+			if (start < end) {
+				T temp = arr[start];
+				arr[start] = arr[end];
+				arr[end] = temp;
+			}
+		}
+}
+/*
+1、创建对象的时候要指定泛型的具体类型
+2、创建对象时可以不指定泛型的具体类型(和创建集合对象一眼)。默认是Object，例如我们使用集合存储元素的时候没有使用泛型就是那么参数的类型就是Object
+3、类上面声明的泛型只能应用于非静态成员函数，如果静态函数需要使用泛型，那么
+需要在函数上独立声明。
+4、如果建立对象后指定了泛型的具体类型，那么该对象操作方法时，这些方法只能操作一种数据类型。
+5、所以既可以在类上的泛型声明，也可以在同时在该类的方法中声明泛型。
+*/
+    // 定义泛型成员
+public class Demo7 {
+	public static void main(String[] args) {
+		Father<String> f = new Father<String>("jack");
+		System.out.println(f.getT());
+		Father<Integer> f2 = new Father<Integer>(20);
+		System.out.println(f2.getT());
+	}
+
+}
+class Father<T> {
+	private T t;
+
+	public Father() {
+	}
+	public Father(T t) {
+		super();
+		this.t = t;
+	}
+	public T getT() {
+		return t;
+	}
+	public void setT(T t) {
+		this.t = t;
+	}
+}
+    //有子类的情况的实现
+public class Demo7 {
+	public static void main(String[] args) {
+		Father<String> f = new Father<String>("jack");
+		System.out.println(f.getT());
+		Father<Integer> f2 = new Father<Integer>(20);
+		System.out.println(f2.getT());
+	}
+
+}
+
+class Father<T> {
+	private T t;
+
+	public Father() {
+
+	}
+
+	public Father(T t) {
+		super();
+		this.t = t;
+	}
+
+	public T getT() {
+		return t;
+	}
+
+	public void setT(T t) {
+		this.t = t;
+	}
+
+}
+//子类指定了具体的类型
+class Son extends Father<String>{
+	
+}
+//子类也需要使用泛型
+class Son3<T> extends Father<T>{
+	
+}
+//错误写法，父类上定义有泛型需要进行处理
+class Son2 extends Father<T>{
+	
+}
+```
+
+**注意**：静态方法不可以使用类中定义的泛型，因为类中的泛型需要在对象初始化时指定具体的类型，而静态优先于对象存在。那么类中的静态方法就需要单独的进行泛型声明。声明的泛型一定要写在 static 后，返回值类型之前
+
+### 泛型接口
+
+```java
+public class Demo8 {
+	public static void main(String[] args) {
+		MyInter<String> my = new MyInter<String>();
+		my.print("泛型");
+
+		MyInter2 my2 = new MyInter2();
+		my.print("只能传字符串");
+	}
+}
+
+interface Inter<T> {
+	void print(T t);
+}
+
+// 实现不知为何类型时可以这样定义
+class MyInter<T> implements Inter<T> {
+	public void print(T t) {
+		System.out.println("myprint:" + t);
+	}
+}
+//使用接口时明确具体类型。
+class MyInter2 implements Inter<String> {
+
+	@Override
+	public void print(String t) {
+		System.out.println("myprint:" + t);
+
+	}
+
+}
+```
 
 ### 类型擦除
 
@@ -3159,6 +3715,8 @@ public void wildcard(List<?> list) {
 - **相同类型参数的泛型类的关系取决于泛型类自身的继承体系结构**。即`List<String>`是`Collection<String>` 的子类型，`List<String>`可以替换`Collection<String>`。这种情况也适用于带有上下界的类型声明。
 - **当泛型类的类型声明中使用了通配符的时候，其子类型可以在两个维度上分别展开**。如对`Collection<? extends Number>`来说，其子类型可以在`Collection`这个维度上展开，即`List<? extends Number>`和`Set<? extends Number>`等；也可以在`Number`这个层次上展开，即`Collection<Double>`和`Collection<Integer>`等。如此循环下去，`ArrayList<Long>`和 `HashSet<Double>`等也都算是`Collection<? extends Number>`的子类型。
 - 如果泛型类中包含多个类型参数，则对于每个类型参数分别应用上面的规则。
+
+
 
 ## Java线程
 
@@ -5111,7 +5669,82 @@ ThreadLocal 为解决多线程程序的并发问题提供了一种新的思路�
 
 每个线程中都保有一个`ThreadLocalMap`的成员变量，`ThreadLocalMap `内部采用`WeakReference`数组保存，数组的key即为`ThreadLocal `内部的Hash值。
 
-## java 功能代码
+## 内省(Instrospector)
+
+内省是用于操作 java 对象的属性的 ：基于反射的 封装
+
+Q1：什么是 Java 对象的属性和属性的读写方法？
+
+Q2：如何通过内省访问到 JavaBean 的属性？
+
+1、通过PropertyDescriptor类操作Bean的属性.
+
+```java
+public static void testPropertyDescriptor() throws Exception{
+		Person p = new Person();
+		PropertyDescriptor propertyDescriptor =  new PropertyDescriptor("id",Person.class);
+		//获取属性的写的方法。
+		Method writeMethod = propertyDescriptor.getWriteMethod();
+		Method readMethod = propertyDescriptor.getReadMethod();
+		propertyDescriptor.getReadMethod();
+		writeMethod.invoke(p, 12);
+		System.out.println(readMethod.invoke(p, null));
+	}
+```
+
+2、通过Introspector类获得Bean对象的 BeanInfo，然后通过 BeanInfo 来获取属性的描述器（ PropertyDescriptor ），通过这个属性描述器就可以获取某个属性对应的 getter/setter 方法，然后通过反射机制来调用这些方法。
+
+```java
+public static void testIntrospector() throws Exception{
+		BeanInfo beanInfo = Introspector.getBeanInfo(Person.class);
+		PropertyDescriptor[]  descriptor = beanInfo.getPropertyDescriptors();
+		for(PropertyDescriptor itemProperty : descriptor){
+			System.out.println(itemProperty.getReadMethod().getName());
+		}
+	}
+```
+
+**存在的问题**：sun 公司的的内省 API 过于繁琐，所以 Apache 组织结合很多实际开发中的应用场景开发了一套简单、易用的 API 操作 Bean 的属性 ——BeanUtils
+
+```java
+public static void main(String[] args) throws Exception {
+		Person p = new Person();
+		ConvertUtils.register(new Converter() {
+			
+			@Override
+			public Object convert(Class type, Object value) {
+				 try {
+					if(value!=null){
+						 
+						 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy MM dd");
+						 Date d = dateFormat.parse((String) value);
+						 return d;
+					 }
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return null;
+			}
+		}, Date.class);
+		
+		BeanUtils.setProperty(p,"id","110");
+		BeanUtils.setProperty(p,"name","狗娃");
+		BeanUtils.setProperty(p, "birthDay","1992 12 12");
+		System.out.println(p.getId() +"=="+ p.getName()+"======"+p.getBirthDay());
+	}
+```
+
+
+
+
+
+## java 功能dg
+
+###  Properties类与配置文件
+
+
 
 ### java字符串操作
 
@@ -5385,6 +6018,88 @@ String s1 = s2 + s3 + s4;
 - （4）StringBuilder 一般使用在方法内部来完成类似 + 功能，因为是线程不安全的，所以用完以后可以丢弃。StringBuffer 主要用在全局变量中。
 
 - （5）相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。而在现实的模块化编程中，负责某一模块的程序员不一定能清晰地判断该模块是否会放入多线程的环境中运行，因此：除非确定系统的瓶颈是在 StringBuffer 上，并且确定你的模块不会运行在多线程模式下，才可以采用 StringBuilder；否则还是用 StringBuffer。
+
+### Junit单元测试
+
+#### Junit单元测试框架的基本使用
+
+一、搭建环境
+
+	导入 junit.jar 包（junit4）
+
+二、写测试类
+
+	0、一般一个类对应一个测试类
+
+	1、测试类与被测试类最好是放在同一个包中（可以使不同的源文件夹）
+
+	2、测试类的名字为被测试类的名字加 Test 后缀
+
+三、写测试方法
+
+	0，一般一个方法对应一个单元测试方法。
+
+	1，测试方法的名字为test前缀加被测试方法的名字，如testAddPerson()。
+
+	2，单元测试方法上面要加上@Test注解（org.junit.Test）！
+
+	3，单元测试方法不能有参数，也不能有返回值（返回void）！测试的方法不能是静态的方法。
+
+四、测试方法的基本使用
+
+	1，可以单独执行一个测试方法，也可以一次执行所有的、一个包的、一个类中所有的测试方法。
+
+	2，执行完后，显示绿色表示测试成功；显示红色表示测试失败（抛异常后会测试失败）。
+
+#### 断言工具类
+
+其中有一些静态的工具方法(不符合期望就抛弃)
+
+	assertTrue(...)		参数的值应是true
+
+	assertFalse(...)	参数的值应是false  
+
+	assertNull(...)		应是null值
+
+	assertNotNull(...)	应是非null的值
+
+	assertSame(...)		使用==比较的结果为true（表示同一个对象）
+
+	AssertNotSame(...)	使用==比较的结果为false
+
+	assertEquals(...)	两个对象equals()方法比较结果为true
+
+#### 用户准备环境、清理环境的方法
+
+	@Test
+
+		表示单元测试方法。
+
+	@Before 
+
+		所修饰的方法应是非static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的每个单元测试方法之前都执行一次。
+
+	@After 
+
+		所修饰的方法应是非static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的每个单元测试方法之后都执行一次。
+
+	@BeforeClass 
+
+		所修饰的方法应是static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的所有单元测试方法之前执行，只执行一次。
+
+	@AfterClass 
+
+		所修饰的方法应是static的（且没有参数，返回值为void）。
+
+		表示这个方法会在本类中的所有单元测试方法之后执行，只执行一次。
+
+
 
 # iOS 开发
 
@@ -6723,11 +7438,13 @@ Number* __strong num = [[Number alloc] init];
 
 ## iOS 常用策略
 
-### Background Execution
+### Background Execution（后台策略）
 
 [Background Execution]https://developer.apple.com/library/archive/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html()
 
+## URL schemes
 
+## 面试题
 
 
 
@@ -7225,7 +7942,7 @@ RecycleView.Adapter 则给我们提供了 notifyItemChanged 用于更新单个 i
 
 简单的调用即可实现相应的效果，用起来方便很多，视觉交互上也会更好些
 
-​									 ![img](412.png)
+									 ![img](412.png)
 
 如果你对动画效果有追求，觉得系统提供的并不能满足你的需求，也可以通过相应接口实现自己的动画效果，方式也非常简单，继承 [RecyclerView.ItemAnimator](https://link.jianshu.com?t=https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ItemAnimator.html) 类，并实现相应的方法，再调用 RecyclerView 的 setItemAnimator(RecyclerView.ItemAnimator animator) 方法设置完即可实现自定义的动画效果。
 
@@ -9340,6 +10057,34 @@ protected void onDestroy() {
 
 http://www.trinea.cn/android/android-downloadmanager-pro/
 
+http://www.trinea.cn/android/android-downloadmanager-pro/
+
+# JNI
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 正则表达式
@@ -9440,7 +10185,6 @@ ps：如果没有按下删除操作符，按下操作符对象，光标会出现
    4. 输入 0 (数字零) 移动光标到行首。
    ```
 
-   
 
 ### 2.5：使用计数已删除更多
 
@@ -9505,7 +10249,6 @@ ps：如果没有按下删除操作符，按下操作符对象，光标会出现
       5. 然后输入 c$ 使得该行剩下的部分更正得同第二行一样。最后按 <ESC> 键。
       ```
 
-      
 
 
 ## 第四讲：定位搜索查找替换
@@ -9520,7 +10263,6 @@ ps：如果没有按下删除操作符，按下操作符对象，光标会出现
    3. 输入曾停留的行号，然后输入大写 G 这样就可以跳转到这一行
    ```
 
-   
 
 ### 4.2：搜索类命令
 
@@ -9537,7 +10279,6 @@ ps：如果没有按下删除操作符，按下操作符对象，光标会出现
         回退更多步。CTRL-I 会跳转到较新的位置。
      ```
 
-     
 
 ### 4.3:配对括号的查找
 
@@ -9551,7 +10292,6 @@ ps：如果没有按下删除操作符，按下操作符对象，光标会出现
    5. 移动光标到另一个 (、)、[、]、{ 或 } 处，按 % 查看其所作所为。
    ```
 
-   
 
 ### 4.4:替换命令
 
