@@ -1081,65 +1081,32 @@ C.f方法返回后，VM释放了在这个方法执行期间创建的所有局部
 
 与局部引用可以被大多数JNI函数创建不同，全局引用只能使用一个JNI函数创建：NewGlobalRef。下面这个版本的MyNewString演示了怎么样使用一个全局引用：
 
+```c
 /* This code is OK */
-
- jstring
-
- MyNewString(JNIEnv *env, jchar *chars, jint len)
-
+ jstring MyNewString(JNIEnv *env, jchar *chars, jint len)
  {
-
-     static jclass stringClass = NULL;
-    
-     ...
-    
-     if (stringClass == NULL) {
-    
-         jclass localRefCls =
-    
-             (*env)->FindClass(env, "java/lang/String");
-    
-         if (localRefCls == NULL) {
-    
-             return NULL; /* exception thrown */
-    
-         }
-    
-         /* Create a global reference */
-    
-         stringClass = (*env)->NewGlobalRef(env, localRefCls);
-
- 
-
-
-         /* The local reference is no longer useful */
-    
-         (*env)->DeleteLocalRef(env, localRefCls);
-
- 
-
-
-         /* Is the global reference created successfully? */
-    
-         if (stringClass == NULL) {
-    
-             return NULL; /* out of memory exception thrown */
-    
-         }
-    
+ static jclass stringClass = NULL;
+ if (stringClass == NULL) {
+     jclass localRefCls =
+         (*env)->FindClass(env, "java/lang/String");
+     if (localRefCls == NULL) {
+         return NULL; /* exception thrown */
      }
-    
-     ...
-
+     /* Create a global reference */
+     stringClass = (*env)->NewGlobalRef(env, localRefCls);
+     /* The local reference is no longer useful */
+     (*env)->DeleteLocalRef(env, localRefCls);
+     /* Is the global reference created successfully? */
+     if (stringClass == NULL) {
+         return NULL; /* out of memory exception thrown */
+     }
  }
+ }
+```
 
 上面这段代码中，一个由FindClass返回的局部引用被传入NewGlobalRef，用来创建一个对String类的全局引用。删除localRefCls后，我们检查NewGlobalRef是否成功创建stringClass。
 
- 
-
-5.1.3 弱引用
-
- 
+#### 5.1.3 弱引用
 
 弱引用使用NewGlobalWeakRef创建，使用DeleteGlobalWeakRef释放。与全局引用类似，弱引用可以跨方法、线程使用。与全局引用不同的是，弱引用不会阻止GC回收它所指向的VM内部的对象。
 
@@ -1147,49 +1114,30 @@ C.f方法返回后，VM释放了在这个方法执行期间创建的所有局部
 
 当本地代码中缓存的引用不一定要阻止GC回收它所指向的对象时，弱引用就是一个最好的选择。假设，一个本地方法mypkg.MyCls.f需要缓存一个指向类mypkg.MyCls2的引用，如果在弱引用中缓存的话，仍然允许mypkg.MyCls2这个类被unload：
 
-JNIEXPORT void JNICALL
-
- Java_mypkg_MyCls_f(JNIEnv *env, jobject self)
-
+```c
+JNIEXPORT void JNICALL Java_mypkg_MyCls_f(JNIEnv *env, jobject self)
  {
-
-     static jclass myCls2 = NULL;
-    
-     if (myCls2 == NULL) {
-    
-         jclass myCls2Local =
-    
-             (*env)->FindClass(env, "mypkg/MyCls2");
-    
-         if (myCls2Local == NULL) {
-    
-             return; /* can't find class */
-    
-         }
-    
-         myCls2 = NewWeakGlobalRef(env, myCls2Local);
-    
-         if (myCls2 == NULL) {
-    
-             return; /* out of memory */
-    
-         }
-    
+ static jclass myCls2 = NULL;
+ if (myCls2 == NULL) {
+     jclass myCls2Local =
+         (*env)->FindClass(env, "mypkg/MyCls2");
+     if (myCls2Local == NULL) {
+         return; /* can't find class */
      }
-    
-     ... /* use myCls2 */
-
+     myCls2 = NewWeakGlobalRef(env, myCls2Local);
+     if (myCls2 == NULL) {
+         return; /* out of memory */
+     }
  }
+ ... /* use myCls2 */
+ }
+```
 
 我们假设MyCls和MyCls2有相同的生命周期（例如，他们可能被相同的类加载器加载），因为弱引用的存在，我们不必担心MyCls和它所在的本地代码在被使用时，MyCls2这个类出现先被unload，后来又会preload的情况。
 
 当然，真的发生这种情况时（MyCls和MyCls2的生命周期不同），我们必须检查缓存过的弱引用是指向活动的类对象，还是指向一个已经被GC给unload的类对象。下一节将告诉你怎么样检查弱引用是否活动。
 
- 
-
-5.1.4 引用比较
-
- 
+#### 5.1.4 引用比较
 
 给定两个引用（不管是全局、局部还是弱引用），你可以使用IsSameObject来判断它们两个是否指向相同的对象。例如：
 
@@ -1207,7 +1155,7 @@ JNI中的一个引用NULL指向JVM中的null对象。如果obj是一个局部或
 
  
 
-5.2 释放引用
+### 5.2 释放引用
 
  
 
