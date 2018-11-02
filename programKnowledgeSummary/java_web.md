@@ -181,24 +181,6 @@ JNI把JAVA中的对象当作一个C指针传递到本地方法中，这个指针
 
 所有的JNI引用都是jobject类型，对了使用方便和类型安全，JNI定义了一个引用类型集合，集合当中的所有类型都是jobject的子类型。这些子类型和JAVA中常用的引用类型相对应。例如，jstring表示字符串，jobjectArray表示对象数组。
 
-3.2 访问字符串
-
-
-
-
-
-
-
-
-
-3.2 访问字符串
-
-3.2 访问字符串
-
-3.2 访问字符串
-
-
-
 #### 3.2 访问字符串
 
  Java_Prompt_getLine接收一个jstring类型的参数prompt，jstring类型指向JVM内部的一个字符串，和常规的C字符串类型char*不同。你不能把jstring当作一个普通的C字符串。
@@ -446,69 +428,37 @@ class ObjectArrayTest {
 
 静态本地方法initInt2DArray创建了一个给定大小的二维数组。执行分配和初始化数组任务的本地方法可以是下面这样子的：
 
+```c
 JNIEXPORT jobjectArray JNICALL
-
- Java_ObjectArrayTest_initInt2DArray(JNIEnv *env,
-
-                                    jclass cls,
-
-                                    int size)
-
- {
-
-     jobjectArray result;
-
-     int i;
-
-     jclass intArrCls = (*env)->FindClass(env, "[I");
-
-     if (intArrCls == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
-     result = (*env)->NewObjectArray(env, size, intArrCls,
-
-                                     NULL);
-
-     if (result == NULL) {
-
-         return NULL; /* out of memory error thrown */
-
-     }
-
-     for (i = 0; i < size; i++) {
-
-         jint tmp[256];  /* make sure it is large enough! */
-
-         int j;
-
-         jintArray iarr = (*env)->NewIntArray(env, size);
-
-         if (iarr == NULL) {
-
-             return NULL; /* out of memory error thrown */
-
-         }
-
-         for (j = 0; j < size; j++) {
-
-             tmp[j] = i + j;
-
-         }
-
-         (*env)->SetIntArrayRegion(env, iarr, 0, size, tmp);
-
-         (*env)->SetObjectArrayElement(env, result, i, iarr);
-
-         (*env)->DeleteLocalRef(env, iarr);
-
-     }
-
-     return result;
-
+ Java_ObjectArrayTest_initInt2DArray(JNIEnv *env,jclass cls,int size)
+{
+ jobjectArray result;
+ int i;
+ jclass intArrCls = (*env)->FindClass(env, "[I");
+ if (intArrCls == NULL) {
+     return NULL; /* exception thrown */
  }
+ result = (*env)->NewObjectArray(env, size, intArrCls,NULL);
+ if (result == NULL) {
+     return NULL; /* out of memory error thrown */
+ }
+ for (i = 0; i < size; i++) {
+     jint tmp[256];  /* make sure it is large enough! */
+     int j;
+     jintArray iarr = (*env)->NewIntArray(env, size);
+     if (iarr == NULL) {
+         return NULL; /* out of memory error thrown */
+     }
+     for (j = 0; j < size; j++) {
+         tmp[j] = i + j;
+     }
+     (*env)->SetIntArrayRegion(env, iarr, 0, size, tmp);
+     (*env)->SetObjectArrayElement(env, result, i, iarr);
+     (*env)->DeleteLocalRef(env, iarr);
+ }
+ return result;
+ }
+```
 
 函数newInt2DArray首先调用JNI函数FindClass来获得一个int型二维数组类的引用，传递给FindClass的参数“[I”是JNI class descriptor（JNI类型描述符），它对应着JVM中的int[]类型。如果类加载失败的话，FindClass会返回NULL，然后抛出一个异常。
 
@@ -516,136 +466,74 @@ JNIEXPORT jobjectArray JNICALL
 
 创建第二维数据的方式非常直接，NewInt-Array为每个数组元素分配空间，然后SetIntArrayRegion把tmp[]缓冲区中的内容复制到新分配的一维数组中去。
 
-在循环最后调用DeleteLocalRef，确保JVM释放掉iarr这个JNI引用。
+在循环最后调用DeleteLocalRef，确保JVM释放掉iarr这个JNI引用。 
 
- 
-
-第四章 字段和方法
-
- 
+## 第四章 字段和方法 
 
 现在，你知道了如何通过JNI来访问JVM中的基本类型数据和字符串、数组这样的引用类型数据，下一步就是学习怎么样和JVM中任意对象的字段和方法进行交互。比如从本地代码中调用JAVA中的方法，也就是通常说的来自本地方法中的callbacks（回调）。
 
 我们从进行字段访问和方法回调时需要的JNI函数开始讲解。本章的稍后部分我们会讨论怎么样通过一些cache（缓存）技术来优化这些操作。在最后，我们还会讨论从本地代码中访问字段和回调方法时的效率问题。
 
- 
-
-4.1 访问字段
-
- 
+### 4.1 访问字段
 
 JAVA支持两种field（字段），每一个对象的实例都有一个对象字段的复制；所有的对象共享一个类的静态字段。本地方法使用JNI提供的函数可以获取和修改这两种字段。先看一个从本地代码中访问对象字段的例子：
 
 class InstanceFieldAccess {
 
-     private String s;
-
- 
-
-     private native void accessField();
-
-     public static void main(String args[]) {
-
-         InstanceFieldAccess c = new InstanceFieldAccess();
-
-         c.s = "abc";
-
-         c.accessField();
-
-         System.out.println("In Java:");
-
-         System.out.println("  c.s = \"" + c.s + "\"");
-
-     }
-
-     static {
-
-         System.loadLibrary("InstanceFieldAccess");
-
-     }
-
+```java
+ private String s;
+ private native void accessField();
+ public static void main(String args[]) {
+     InstanceFieldAccess c = new InstanceFieldAccess();
+     c.s = "abc";
+     c.accessField();
+     System.out.println("In Java:");
+     System.out.println("  c.s = \"" + c.s + "\"");
  }
+ static {
+     System.loadLibrary("InstanceFieldAccess");
+ 	}
+ }
+```
 
 InstanceFieldAccess这个类定义了一个对象字段s。main方法创建了一个对象并设置s的值，然后调用本地方法InstanceFieldAccess.accessField在本地代码中打印s的值，并把它修改为一个新值。本地方法返回后，JAVA中把这个值再打印一次，可以看出来，字段s的值已经被改变了。下面是本地方法的实现：
 
+```c
 JNIEXPORT void JNICALL 
-
  Java_InstanceFieldAccess_accessField(JNIEnv *env, jobject obj)
-
  {
-
-     jfieldID fid;   /* store the field ID */
-
-     jstring jstr;
-
-     const char *str;
-
- 
-
-     /* Get a reference to obj's class */
-
-     jclass cls = (*env)->GetObjectClass(env, obj);
-
- 
-
-     printf("In C:\n");
-
- 
-
-     /* Look for the instance field s in cls */
-
-     fid = (*env)->GetFieldID(env, cls, "s",
-
-                              "Ljava/lang/String;");
-
-     if (fid == NULL) {
-
-         return; /* failed to find the field */
-
-     }
-
- 
-
- 
-
- 
-
- 
-
-     /* Read the instance field s */
-
-     jstr = (*env)->GetObjectField(env, obj, fid);
-
-     str = (*env)->GetStringUTFChars(env, jstr, NULL);
-
-     if (str == NULL) {
-
-         return; /* out of memory */
-
-     }
-
-     printf("  c.s = \"%s\"\n", str);
-
-     (*env)->ReleaseStringUTFChars(env, jstr, str);
-
- 
-
-     /* Create a new string and overwrite the instance field */
-
-     jstr = (*env)->NewStringUTF(env, "123");
-
-     if (jstr == NULL) {
-
-         return; /* out of memory */
-
-     }
-
-     (*env)->SetObjectField(env, obj, fid, jstr);
-
+ jfieldID fid;   /* store the field ID */
+ jstring jstr;
+ const char *str;
+ /* Get a reference to obj's class */
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ printf("In C:\n");
+ /* Look for the instance field s in cls */
+ fid = (*env)->GetFieldID(env, cls, "s",
+                          "Ljava/lang/String;");
+ if (fid == NULL) {
+     return; /* failed to find the field */
  }
+ /* Read the instance field s */
+ jstr = (*env)->GetObjectField(env, obj, fid);
+ str = (*env)->GetStringUTFChars(env, jstr, NULL);
+ if (str == NULL) {
+     return; /* out of memory */
+ }
+ printf("  c.s = \"%s\"\n", str);
+ (*env)->ReleaseStringUTFChars(env, jstr, str);
+ /* Create a new string and overwrite the instance field */
+ jstr = (*env)->NewStringUTF(env, "123");
+ if (jstr == NULL) {
+     return; /* out of memory */
+ }
+ (*env)->SetObjectField(env, obj, fid, jstr);
+ }
+```
 
 运行程序，得到输出为：
 
+```
 In C:
 
    c.s = "abc"
@@ -653,12 +541,11 @@ In C:
  In Java:
 
    c.s = "123"
+```
 
  
 
-4.1.1 访问一个对象字段的流程
-
- 
+#### 4.1.1 访问一个对象字段的流程
 
 为了访问一个对象的实例字段，本地方法需要做两步：
 
@@ -670,13 +557,9 @@ Fid=(*env)->GetFieldID(env,cls,”s”,”Ljava/lang/String;”);
 
 Jstr=(*env)->GetObjectField(env,obj,fid);
 
-因为字符串和数组是特殊的对象，所以我们使用GetObjectField来访问字符串类型的实例字段。除了Get/SetObjectField，JNI还支持其它如GetIntField、SetFloatField等用来访问基本类型字段的函数。
+因为字符串和数组是特殊的对象，所以我们使用GetObjectField来访问字符串类型的实例字段。除了Get/SetObjectField，JNI还支持其它如GetIntField、SetFloatField等用来访问基本类型字段的函数。 
 
- 
-
-4.1.2 字段描述符
-
- 
+#### 4.1.2 字段描述符 
 
 在上一节我们使用过一个特殊的C字符串“Ljava/lang/String”来代表一个JVM中的字段类型。这个字符串被称为JNI field descriptor（字段描述符）。
 
@@ -688,89 +571,51 @@ Jstr=(*env)->GetObjectField(env,obj,fid);
 
 你可以使用javap工具来生成字段描述符。
 
- 
-
-4.1.3 访问静态字段
-
- 
+#### 4.1.3 访问静态字段
 
 访问静态字段和访问实例字段相似，看下面这个InstanceFieldAccess例子的变形：
 
+```java
 class StaticFielcdAccess {
-
-     private static int si;
-
- 
-
-     private native void accessField();
-
-     public static void main(String args[]) {
-
-         StaticFieldAccess c = new StaticFieldAccess();
-
-         StaticFieldAccess.si = 100;
-
-         c.accessField();
-
-         System.out.println("In Java:");
-
-         System.out.println("  StaticFieldAccess.si = " + si);
-
-     }
-
-     static {
-
-         System.loadLibrary("StaticFieldAccess");
-
-     }
-
+ private static int si;
+ private native void accessField();
+ public static void main(String args[]) {
+     StaticFieldAccess c = new StaticFieldAccess();
+     StaticFieldAccess.si = 100;
+     c.accessField();
+     System.out.println("In Java:");
+     System.out.println("  StaticFieldAccess.si = " + si);
  }
+ static {
+     System.loadLibrary("StaticFieldAccess");
+ }
+ }
+```
 
 StaticFieldAccess这个类包含一个静态字段si，main方法创建了一个对象，初始化静态字段，然后调用本地方法StaticFieldAccess.accessField在本地代码中打印静态字段中的值，然后设置新的值，为了演示这个值确实被改变了，在本地方法返回后，JAVA中再次这个静态字段的值。
 
 下面是本地方法StaticFieldAccess.accessField的实现：
 
+```C
 JNIEXPORT void JNICALL 
-
  Java_StaticFieldAccess_accessField(JNIEnv *env, jobject obj)
-
  {
-
-     jfieldID fid;   /* store the field ID */
-
-     jint si;
-
- 
-
-     /* Get a reference to obj's class */
-
-     jclass cls = (*env)->GetObjectClass(env, obj);
-
- 
-
-     printf("In C:\n");
-
- 
-
-     /* Look for the static field si in cls */
-
-     fid = (*env)->GetStaticFieldID(env, cls, "si", "I");
-
-     if (fid == NULL) {
-
-         return; /* field not found */
-
-     }
-
-     /* Access the static field si */
-
-     si = (*env)->GetStaticIntField(env, cls, fid);
-
-     printf("  StaticFieldAccess.si = %d\n", si);
-
-     (*env)->SetStaticIntField(env, cls, fid, 200);
-
+ jfieldID fid;   /* store the field ID */
+ jint si;
+ /* Get a reference to obj's class */
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ printf("In C:\n");
+ /* Look for the static field si in cls */
+ fid = (*env)->GetStaticFieldID(env, cls, "si", "I");
+ if (fid == NULL) {
+     return; /* field not found */
  }
+ /* Access the static field si */
+ si = (*env)->GetStaticIntField(env, cls, fid);
+ printf("  StaticFieldAccess.si = %d\n", si);
+ (*env)->SetStaticIntField(env, cls, fid, 200);
+ }
+```
 
 运行程序可得到输出结果：
 
@@ -786,67 +631,44 @@ In C:
 
 1、 访问静态字段使用GetStaticFieldID，而访问对象的实例字段使用GetFieldID，但是，这两个方法都有相同的返回值类型：jfieldID。
 
- 
-
-4.2 调用方法
-
- 
+### 4.2 调用方法
 
 JAVA中有几种不同类型的方法，实例方法必须在一个类的某个对象实例上面调用。而静态方法可以在任何一个对象实例上调用。对于构建方法的调用我们推迟到下一节。
 
 JNI支持一系列完整的函数让你可以在本地代码中回调JAVA方法，下面例子演示了如何从本地代码中调用一个JAVA中的实例方法：
 
+```java
 class InstanceMethodCall {
-
-     private native void nativeMethod();
-
-     private void callback() {
-
-         System.out.println("In Java");
-
-     }
-
-     public static void main(String args[]) {
-
-         InstanceMethodCall c = new InstanceMethodCall();
-
-         c.nativeMethod();
-
-     }
-
-     static {
-
-         System.loadLibrary("InstanceMethodCall");
-
-     }
-
+ private native void nativeMethod();
+ private void callback() {
+     System.out.println("In Java");
  }
+ public static void main(String args[]) {
+     InstanceMethodCall c = new InstanceMethodCall();
+     c.nativeMethod();
+ }
+ static {
+     System.loadLibrary("InstanceMethodCall");
+ }
+}
+```
 
 下面的是本地方法的实现：
 
+```c
 JNIEXPORT void JNICALL 
-
  Java_InstanceMethodCall_nativeMethod(JNIEnv *env, jobject obj)
-
  {
-
-     jclass cls = (*env)->GetObjectClass(env, obj);
-
-     jmethodID mid = 
-
-         (*env)->GetMethodID(env, cls, "callback", "()V");
-
-     if (mid == NULL) {
-
-         return; /* method not found */
-
-     }
-
-     printf("In C\n");
-
-     (*env)->CallVoidMethod(env, obj, mid);
-
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ jmethodID mid =
+     (*env)->GetMethodID(env, cls, "callback", "()V");
+ if (mid == NULL) {
+     return; /* method not found */
  }
+ printf("In C\n");
+ (*env)->CallVoidMethod(env, obj, mid);
+ }
+```
 
 运行程序，得到如下输出：
 
@@ -856,9 +678,7 @@ In C
 
  
 
-4.2.1 调用实例方法
-
- 
+#### 4.2.1 调用实例方法
 
 本地方法Java_InstanceMethodCall_nativeMethod的实现演示了在本地代码中调用JAVA方法的两步：
 
@@ -870,39 +690,26 @@ In C
 
 你也可以使用Call<Type>Method系列的函数来调用接口方法。你必须从接口类型中获取方法ID，下面的代码演示了如何在java.lang.Thread实例上面调用Runnable.run方法：
 
+```c
 jobject thd = ...; /* a java.lang.Thread instance */
-
  jmethodID mid;
-
  jclass runnableIntf = 
-
-     (*env)->FindClass(env, "java/lang/Runnable");
-
+ (*env)->FindClass(env, "java/lang/Runnable");
  if (runnableIntf == NULL) {
-
-     ... /* error handling */
-
+ ... /* error handling */
  }
-
  mid = (*env)->GetMethodID(env, runnableIntf, "run", "()V");
-
  if (mid == NULL) {
-
-     ... /* error handling */
-
+ ... /* error handling */
  }
 
  (*env)->CallVoidMethod(env, thd, mid);
-
  ... /* check for possible exceptions */
+```
 
 在3.3.5中，我们使用FindClass来获取一个类的引用，在这里，我们可以学到如何获取一个接口的引用。
 
- 
-
-4.2.2 生成方法描述符
-
- 
+#### 4.2.2 生成方法描述符
 
 JNI中描述字段使用字段描述符，描述方法同样有方法描述符。一个方法描述符包含参数类型和返回值类型。参数类型出现在前面，并由一对圆括号将它们括起来，参数类型按它们在方法声明中出现的顺序被列出来，并且多个参数类型之间没有分隔符。如果一个方法没有参数，被表示为一对空圆括号。方法的返回值类型紧跟参数类型的右括号后面。
 
@@ -914,11 +721,7 @@ JNI中描述字段使用字段描述符，描述方法同样有方法描述符�
 
 12.3.4详细描述了怎么样生成一个JNI方法描述符。同样，你可以使用javap工具来打印出JNI方法描述符。
 
- 
-
-4.2.3 调用静态方法
-
- 
+#### 4.2.3 调用静态方法
 
 前一个例子演示了一个本地方法怎样调用实例方法。类似地，本地方法中同样可以调用静态方法：
 
@@ -930,57 +733,38 @@ JNI中描述字段使用字段描述符，描述方法同样有方法描述符�
 
 在JAVA访问一个静态方法可以通过类，也可以通过对象实例。而JNI的规定是，在本地代码中回调JAVA中的静态方法时，必须指定一个类引用才行。下面的例子演示了这个用法：
 
+```java
 class StaticMethodCall {
-
-     private native void nativeMethod();
-
-     private static void callback() {
-
-         System.out.println("In Java");
-
-     }
-
-     public static void main(String args[]) {
-
-         StaticMethodCall c = new StaticMethodCall();
-
-         c.nativeMethod();
-
-     }
-
-     static {
-
-         System.loadLibrary("StaticMethodCall");
-
-     }
-
+ private native void nativeMethod();
+ private static void callback() {
+     System.out.println("In Java");
  }
+ public static void main(String args[]) {
+     StaticMethodCall c = new StaticMethodCall();
+     c.nativeMethod();
+ }
+ static {
+     System.loadLibrary("StaticMethodCall");
+ }
+ }
+```
 
 下面是本地方法的实现：
 
+```c
 JNIEXPORT void JNICALL 
-
  Java_StaticMethodCall_nativeMethod(JNIEnv *env, jobject obj)
-
  {
-
-     jclass cls = (*env)->GetObjectClass(env, obj);
-
-     jmethodID mid = 
-
-         (*env)->GetStaticMethodID(env, cls, "callback", "()V");
-
-     if (mid == NULL) {
-
-         return;  /* method not found */
-
-     }
-
-     printf("In C\n");
-
-     (*env)->CallStaticVoidMethod(env, cls, mid);
-
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ jmethodID mid = 
+     (*env)->GetStaticMethodID(env, cls, "callback", "()V");
+ if (mid == NULL) {
+     return;  /* method not found */
  }
+ printf("In C\n");
+ (*env)->CallStaticVoidMethod(env, cls, mid);
+ }
+```
 
 当调用CallStaticVoidMethod时，确保你传入的是类引用cls而不是对象引用obj。运行程序，输出为：
 
@@ -988,11 +772,7 @@ In C
 
 In Java
 
- 
-
-4.2.4 调用父类的实例方法
-
- 
+#### 4.2.4 调用父类的实例方法 
 
 如果一个方法被定义在父类中，在子类中被覆盖，你也可以调用这个实例方法。JNI提供了一系列完成这些功能的函数：CallNonvirtual<Type>Method。为了调用一个定义在父类中的实例方法，你必须遵守下面的步骤：
 
@@ -1004,81 +784,40 @@ In Java
 
 CallNonvirtualVoidMethod也可以被用来调用父类的构造函数。这个在下节就会讲到。
 
- 
-
-4.3 调用构造函数
-
- 
+### 4.3 调用构造函数 
 
 JNI中，构造函数可以和实例方法一样被调用，调用方式也相似。传入“<init>”作为方法名，“V”作为返回类型。你可以通过向JNI函数NewObject传入方法来调用构造函数。下面的代码实现了与JNI函数NewString相同的功能：把存储在C缓冲区内的Unicode编码的字符序列，创建成一个java.lang.String对象：
 
-jstring
-
- MyNewString(JNIEnv *env, jchar *chars, jint len)
-
+```c
+jstring MyNewString(JNIEnv *env, jchar *chars, jint len)
  {
-
-     jclass stringClass;
-
-     jmethodID cid;
-
-     jcharArray elemArr;
-
-     jstring result;
-
- 
-
-     stringClass = (*env)->FindClass(env, "java/lang/String");
-
-     if (stringClass == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
- /* Get the method ID for the String(char[]) constructor */
-
-     cid = (*env)->GetMethodID(env, stringClass,
-
-                               "<init>", "([C)V");
-
-     if (cid == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
- 
-
-     /* Create a char[] that holds the string characters */
-
-     elemArr = (*env)->NewCharArray(env, len);
-
-     if (elemArr == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
-     (*env)->SetCharArrayRegion(env, elemArr, 0, len, chars);
-
- 
-
-     /* Construct a java.lang.String object */
-
-     result = (*env)->NewObject(env, stringClass, cid, elemArr);
-
- 
-
-     /* Free local references */
-
-     (*env)->DeleteLocalRef(env, elemArr);
-
-     (*env)->DeleteLocalRef(env, stringClass);
-
-     return result;
-
+ jclass stringClass;
+ jmethodID cid;
+ jcharArray elemArr;
+ jstring result;
+ stringClass = (*env)->FindClass(env, "java/lang/String");
+ if (stringClass == NULL) {
+     return NULL; /* exception thrown */
  }
+ /* Get the method ID for the String(char[]) constructor */
+ cid = (*env)->GetMethodID(env, stringClass,"<init>", "([C)V");
+ if (cid == NULL) {
+     return NULL; /* exception thrown */
+ }
+ /* Create a char[] that holds the string characters */
+ elemArr = (*env)->NewCharArray(env, len);
+ if (elemArr == NULL) {
+     return NULL; /* exception thrown */
+ }
+ (*env)->SetCharArrayRegion(env, elemArr, 0, len, chars);
+ /* Construct a java.lang.String object */
+ result = (*env)->NewObject(env, stringClass, cid, elemArr);
+ /* Free local references */
+ (*env)->DeleteLocalRef(env, elemArr);
+ (*env)->DeleteLocalRef(env, stringClass);
+ return result;
+ }
+```
 
 上面这个本地方法有些复杂，需要详细解释一下。首先，FindClass返回一个java.lang.String类的引用，接着，GetMethodID返回构造函数String(char[] chars)的方法ID。我们调用NewCharArray分配一个字符数组来保存字符串元素。JNI函数NewObject调用方法ID所标识的构造函数。NewObject函数需要的参数有：类的引用、构造方法的ID、构造方法需要的参数。
 
@@ -1088,271 +827,148 @@ DeleteLocalRef允许VM释放被局部引用elemArr和stringClass引用的资源�
 
 你也可以做到通过CallNonvirtualVoidMethod函数来调用构造函数。这种情况下，本地代码必须首先通过调用AllocObject函数创建一个未初始化的对象。上面例子中的result = (*env)->NewObject(env, stringClass, cid, elemArr);可以被如下代码替换：
 
+```c
 result = (*env)->AllocObject(env, stringClass);
-
  if (result) {
-
-     (*env)->CallNonvirtualVoidMethod(env, result, stringClass,
-
-                                      cid, elemArr);
-
-     /* we need to check for possible exceptions */
-
-     if ((*env)->ExceptionCheck(env)) {
-
-         (*env)->DeleteLocalRef(env, result);
-
-         result = NULL;
-
-     }
-
+ (*env)->CallNonvirtualVoidMethod(env, result, stringClass,cid, elemArr);
+ /* we need to check for possible exceptions */
+ if ((*env)->ExceptionCheck(env)) {
+     (*env)->DeleteLocalRef(env, result);
+     result = NULL;
+	 }
  }
+```
 
 AllocObject创建了一个未初始化的对象，使用时一定要非常小心，确保一个对象上面，构造函数最多被调用一次。本地代码不应该在一个对象上面调用多次构造函数。有时，你可能会发现创建一个未初始化的对象然后一段时间以后再调用构造函数的方式是很有用的。尽管如此，大部分情况下，你应该使用NewObject，尽量避免使用容易出错的AllocObject/CallNonvirtualVoidMethod方法。
 
- 
+### 4.4 缓存字段ID和方法ID
 
-4.4 缓存字段ID和方法ID
+获取字段ID和方法ID时，需要用字段、方法的名字和描述符进行一个检索。检索过程相对比较费时，因此本节讨论用缓存技术来减少这个过程带来的消耗。缓存字段ID和方法ID的方法主要有两种。两种区别主要在于缓存发生的时刻，是在字段ID和方法ID被使用的时候，还是定义字段和方法的类静态初始化的时候。 
 
- 
-
-获取字段ID和方法ID时，需要用字段、方法的名字和描述符进行一个检索。检索过程相对比较费时，因此本节讨论用缓存技术来减少这个过程带来的消耗。缓存字段ID和方法ID的方法主要有两种。两种区别主要在于缓存发生的时刻，是在字段ID和方法ID被使用的时候，还是定义字段和方法的类静态初始化的时候。
-
- 
-
-4.4.1 使用时缓存
-
- 
+#### 4.4.1 使用时缓存 
 
 字段ID和方法ID可以在字段的值被访问或者方法被回调的时候缓存起来。下面的代码中把字段ID存储在静态变量当中，这样当本地方法被重复调用时，不必重新搜索字段ID：
 
+```c
 JNIEXPORT void JNICALL 
-
  Java_InstanceFieldAccess_accessField(JNIEnv *env, jobject obj)
-
  {
-
-     static jfieldID fid_s = NULL; /* cached field ID for s */
-
- 
-
-     jclass cls = (*env)->GetObjectClass(env, obj);
-
-     jstring jstr;
-
-     const char *str;
-
- 
-
+ static jfieldID fid_s = NULL; /* cached field ID for s */
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ jstring jstr;
+ const char *str;
+ if (fid_s == NULL) {
+     fid_s = (*env)->GetFieldID(env, cls, "s", "Ljava/lang/String;");
      if (fid_s == NULL) {
-
-         fid_s = (*env)->GetFieldID(env, cls, "s", 
-
-                                    "Ljava/lang/String;");
-
-         if (fid_s == NULL) {
-
-             return; /* exception already thrown */
-
-         }
-
+         return; /* exception already thrown */
      }
-
- 
-
-     printf("In C:\n");
-
- 
-
-     jstr = (*env)->GetObjectField(env, obj, fid_s);
-
-     str = (*env)->GetStringUTFChars(env, jstr, NULL);
-
-     if (str == NULL) {
-
-         return; /* out of memory */
-
-     }
-
-     printf("  c.s = \"%s\"\n", str);
-
-     (*env)->ReleaseStringUTFChars(env, jstr, str);
-
- 
-
-     jstr = (*env)->NewStringUTF(env, "123");
-
-     if (jstr == NULL) {
-
-         return; /* out of memory */
-
-     }
-
-     (*env)->SetObjectField(env, obj, fid_s, jstr);
-
  }
+ printf("In C:\n");
+ jstr = (*env)->GetObjectField(env, obj, fid_s);
+ str = (*env)->GetStringUTFChars(env, jstr, NULL);
+ if (str == NULL) {
+     return; /* out of memory */
+ }
+ printf("  c.s = \"%s\"\n", str);
+ (*env)->ReleaseStringUTFChars(env, jstr, str);
+ jstr = (*env)->NewStringUTF(env, "123");
+ if (jstr == NULL) {
+     return; /* out of memory */
+ }
+ (*env)->SetObjectField(env, obj, fid_s, jstr);
+ }
+```
 
 由于多个线程可能同时访问这个本地方法，上面方法中的代码很可能会导致混乱，其实没事，多个线程计算的ID其实是相同的。
 
 同样的思想，我们也可以缓存java.lang.String的构造方法的ID：
 
-jstring
-
- MyNewString(JNIEnv *env, jchar *chars, jint len)
-
+```c
+jstring MyNewString(JNIEnv *env, jchar *chars, jint len)
  {
-
-     jclass stringClass;
-
-     jcharArray elemArr;
-
-     static jmethodID cid = NULL;
-
-     jstring result;
-
- 
-
-     stringClass = (*env)->FindClass(env, "java/lang/String");
-
-     if (stringClass == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
- 
-
-     /* Note that cid is a static variable */
-
-     if (cid == NULL) {
-
-         /* Get the method ID for the String constructor */
-
-         cid = (*env)->GetMethodID(env, stringClass,
-
-                                   "<init>", "([C)V");
-
-         if (cid == NULL) {
-
-             return NULL; /* exception thrown */
-
-         }
-
-     }
-
- 
-
-     /* Create a char[] that holds the string characters */
-
-     elemArr = (*env)->NewCharArray(env, len);
-
-     if (elemArr == NULL) {
-
-         return NULL; /* exception thrown */
-
-     }
-
-     (*env)->SetCharArrayRegion(env, elemArr, 0, len, chars);
-
- 
-
-     /* Construct a java.lang.String object */
-
-     result = (*env)->NewObject(env, stringClass, cid, elemArr);
-
- 
-
-     /* Free local references */
-
-     (*env)->DeleteLocalRef(env, elemArr);
-
-     (*env)->DeleteLocalRef(env, stringClass);
-
-     return result;
-
+ jclass stringClass;
+ jcharArray elemArr;
+ static jmethodID cid = NULL;
+ jstring result;
+ stringClass = (*env)->FindClass(env, "java/lang/String");
+ if (stringClass == NULL) {
+     return NULL; /* exception thrown */
  }
+ /* Note that cid is a static variable */
+ if (cid == NULL) {
+     /* Get the method ID for the String constructor */
+     cid = (*env)->GetMethodID(env, stringClass,"<init>", "([C)V");
+     if (cid == NULL) {
+         return NULL; /* exception thrown */
+     }
+ }
+ /* Create a char[] that holds the string characters */
+ elemArr = (*env)->NewCharArray(env, len);
+ if (elemArr == NULL) {
+     return NULL; /* exception thrown */
+ }
+ (*env)->SetCharArrayRegion(env, elemArr, 0, len, chars);
+ /* Construct a java.lang.String object */
+ result = (*env)->NewObject(env, stringClass, cid, elemArr);
+ /* Free local references */
+ (*env)->DeleteLocalRef(env, elemArr);
+ (*env)->DeleteLocalRef(env, stringClass);
+ return result;
+ }
+```
 
 当MyNewString方法第一次被调用时，我们计算java.lang.String的构造方法的ID，并存储在静态变量cid中。
 
- 
-
-4.4.2 类的静态初始化过程中缓存字段和方法ID
-
- 
+#### 4.4.2 类的静态初始化过程中缓存字段和方法ID
 
 我们在使用时缓存字段和方法的ID的话，每次本地方法被调用时都要检查ID是否已经被缓存。许多情况下，在字段ID和方法ID被使用前就初始化是很方便的。VM在调用一个类的方法和字段之前，都会执行类的静态初始化过程，所以在静态初始化该类的过程中计算并缓存字段ID和方法ID是个不错的选择。
 
 例如，为了缓存InstanceMethodCall.callback的方法ID，我们引入了一个新的本地方法initIDs，这个方法在InstanceMethodCall的静态初始化过程中被调用。代码如下：
 
+```java
 class InstanceMethodCall {
-
-     private static native void initIDs();
-
-     private native void nativeMethod();
-
-     private void callback() {
-
-         System.out.println("In Java");
-
-     }
-
-     public static void main(String args[]) {
-
-         InstanceMethodCall c = new InstanceMethodCall();
-
-         c.nativeMethod();
-
-     }
-
-     static {
-
-         System.loadLibrary("InstanceMethodCall");
-
-         initIDs();
-
-     }
-
+ private static native void initIDs();
+ private native void nativeMethod();
+ private void callback() {
+     System.out.println("In Java");
  }
+ public static void main(String args[]) {
+     InstanceMethodCall c = new InstanceMethodCall();
+     c.nativeMethod();
+ }
+ static {
+     System.loadLibrary("InstanceMethodCall");
+     initIDs();
+ }
+ }
+```
 
 与4.2节中的代码相比，上面这段代码多了两行，initIDs方法简单地计算并缓存方法ID：
 
+```c
 jmethodID MID_InstanceMethodCall_callback;
-
- 
-
  JNIEXPORT void JNICALL 
-
  Java_InstanceMethodCall_initIDs(JNIEnv *env, jclass cls)
-
  {
-
-     MID_InstanceMethodCall_callback =
-
-         (*env)->GetMethodID(env, cls, "callback", "()V");
-
+ MID_InstanceMethodCall_callback =
+     (*env)->GetMethodID(env, cls, "callback", "()V");
  }
+```
 
 VM进行静态初始化时在调用任何方法前调用initIDs，这样方法ID就被缓存了全局变量中，本地方法的实现就不必再进行ID计算：
 
+```c
 JNIEXPORT void JNICALL 
-
  Java_InstanceMethodCall_nativeMethod(JNIEnv *env, jobject obj)
-
  {
-
-     printf("In C\n");
-
-     (*env)->CallVoidMethod(env, obj,
-
-                            MID_InstanceMethodCall_callback);
-
- }
+ printf("In C\n");
+ (*env)->CallVoidMethod(env, obj, MID_InstanceMethodCall_callback);
+ } 
+```
 
  
 
-4.4.3 两种缓存ID的方式之间的对比
-
- 
+#### 4.4.3 两种缓存ID的方式之间的对比 
 
 如果JNI程序员不能控制方法和字段所在的类的源码的话，在使用时缓存是个合理的方案。例如在MyNewString当中，我们不能在String类中插入一个initIDs方法。
 
@@ -1362,13 +978,9 @@ JNIEXPORT void JNICALL
 
 2、 方法ID和字段ID在类被unload时就会失效，如果你在使用时缓存ID，你必须确保只要本地代码依赖于这个ID的值，那么这个类不被会unload（下一章演示了如何通过使用JNI函数创建一个类引用来防止类被unload）。另一方面，如果缓存发生在静态初始化时，当类被unload和reload时，ID会被重新计算。
 
-因此，尽可能在静态初始化时缓存字段ID和方法ID。
+因此，尽可能在静态初始化时缓存字段ID和方法ID。 
 
- 
-
-4.5 JNI操作JAVA中的字段和方法时的效率
-
- 
+### 4.5 JNI操作JAVA中的字段和方法时的效率 
 
 学完了如何缓存ID来提高效率后，你可能会对使用JNI访问java字段和方法的效率不太明白，native/java比起java/native和java/java来的话，效率如何呢？
 
@@ -1386,11 +998,7 @@ JNIEXPORT void JNICALL
 
 使用JNI访问字段的花费取决于通过JNIEnv进行调用的消耗。以废弃一个对象引用来说，本地代码必须依赖于特定的JNI函数才能做到，而这个依赖是必须的，它把本地代码和VM中对象的内部形式很好地隔离开。
 
- 
-
-第五章  全局引用和本地引用
-
- 
+## 第五章  全局引用和本地引用
 
 JNI提供了一些实例和数组类型（jobject、jclass、jstring、jarray等）作为不透明的引用供本地代码使用。本地代码永远不会直接操作引用指向的VM内部的数据内容。要进行这些操作，必须通过使用JNI操作一个不引用来间接操作数据内容。因为只操作引用，你不必担心特定JVM中对象的存储方式等信息。这样的话，你有必要了解一下JNI中的几种不同的引用：
 
@@ -1406,7 +1014,7 @@ JNI提供了一些实例和数组类型（jobject、jclass、jstring、jarray等
 
  
 
-5.1 局部引用和全局引用
+### 5.1 局部引用和全局引用
 
  
 
@@ -1424,75 +1032,40 @@ JNI提供了一些实例和数组类型（jobject、jclass、jstring、jarray等
 
 你不能在本地方法中把局部引用存储在静态变量中缓存起来供下一次调用时使用。下面的例子是MyNewString函数的一个修改版本，这里面使用局部引用的方法是错误的：
 
+```c
 /* This code is illegal */
-
- jstring
-
- MyNewString(JNIEnv *env, jchar *chars, jint len)
-
+ jstring MyNewString(JNIEnv *env, jchar *chars, jint len)
  {
-
-     static jclass stringClass = NULL;
-
-     jmethodID cid;
-
-     jcharArray elemArr;
-
-     jstring result;
-
- 
-
+ static jclass stringClass = NULL;
+ jmethodID cid;
+ jcharArray elemArr;
+ jstring result;
+ if (stringClass == NULL) {
+     stringClass = (*env)->FindClass(env,"java/lang/String");
      if (stringClass == NULL) {
-
-         stringClass = (*env)->FindClass(env,
-
-                                         "java/lang/String");
-
-         if (stringClass == NULL) {
-
-             return NULL; /* exception thrown */
-
-         }
-
+         return NULL; /* exception thrown */
      }
-
-     /* It is wrong to use the cached stringClass here,
-
-        because it may be invalid. */
-
-     cid = (*env)->GetMethodID(env, stringClass,
-
-                               "<init>", "([C)V");
-
-     ...
-
-     elemArr = (*env)->NewCharArray(env, len);
-
-     ...
-
-     result = (*env)->NewObject(env, stringClass, cid, elemArr);
-
-     (*env)->DeleteLocalRef(env, elemArr);
-
-     return result;
-
  }
+ /* It is wrong to use the cached stringClass here,
+    because it may be invalid. */
+ cid = (*env)->GetMethodID(env, stringClass,"<init>", "([C)V");
+ elemArr = (*env)->NewCharArray(env, len);
+ result = (*env)->NewObject(env, stringClass, cid, elemArr);
+ (*env)->DeleteLocalRef(env, elemArr);
+ return result;
+ }
+```
 
 上面代码中，我们省略了和我们的讨论无关的代码。因为FindClass返回一个对java.lang.String对象的局部引用，上面的代码中缓存stringClassr做法是错误的。假设一个本地方法C.f调用了MyNewString：
 
+```c
 JNIEXPORT jstring JNICALL
-
  Java_C_f(JNIEnv *env, jobject this)
-
  {
-
-     char *c_str = ...;
-
-     ...
-
-     return MyNewString(c_str);
-
+ char *c_str = ...;
+ return MyNewString(c_str);
  }
+```
 
 C.f方法返回后，VM释放了在这个方法执行期间创建的所有局部引用，也包含对String类的引用stringClass。当再次调用MyNewString时，会试图访问一个无效的局部引用，从而导致非法的内存访问甚至系统崩溃。
 
@@ -1502,11 +1075,7 @@ C.f方法返回后，VM释放了在这个方法执行期间创建的所有局部
 
 局部引用只在创建它们的线程中有效，跨线程使用是被禁止的。不要在一个线程中创建局部引用并存储到全局引用中，然后到另外一个线程去使用。
 
- 
-
-5.1.2 全局引用
-
- 
+#### 5.1.2 全局引用 
 
 全局引用可以跨方法、跨线程使用，直到它被手动释放才会失效。同局部引用一样，全局引用也会阻止它所引用的对象被GC回收。
 
@@ -1521,43 +1090,45 @@ C.f方法返回后，VM释放了在这个方法执行期间创建的所有局部
  {
 
      static jclass stringClass = NULL;
-
+    
      ...
-
+    
      if (stringClass == NULL) {
-
+    
          jclass localRefCls =
-
+    
              (*env)->FindClass(env, "java/lang/String");
-
+    
          if (localRefCls == NULL) {
-
+    
              return NULL; /* exception thrown */
-
+    
          }
-
+    
          /* Create a global reference */
-
+    
          stringClass = (*env)->NewGlobalRef(env, localRefCls);
 
  
 
-         /* The local reference is no longer useful */
 
+         /* The local reference is no longer useful */
+    
          (*env)->DeleteLocalRef(env, localRefCls);
 
  
 
+
          /* Is the global reference created successfully? */
-
+    
          if (stringClass == NULL) {
-
+    
              return NULL; /* out of memory exception thrown */
-
+    
          }
-
+    
      }
-
+    
      ...
 
  }
@@ -1583,29 +1154,29 @@ JNIEXPORT void JNICALL
  {
 
      static jclass myCls2 = NULL;
-
+    
      if (myCls2 == NULL) {
-
+    
          jclass myCls2Local =
-
+    
              (*env)->FindClass(env, "mypkg/MyCls2");
-
+    
          if (myCls2Local == NULL) {
-
+    
              return; /* can't find class */
-
+    
          }
-
+    
          myCls2 = NewWeakGlobalRef(env, myCls2Local);
-
+    
          if (myCls2 == NULL) {
-
+    
              return; /* out of memory */
-
+    
          }
-
+    
      }
-
+    
      ... /* use myCls2 */
 
  }
@@ -1653,12 +1224,12 @@ JNI中的一个引用NULL指向JVM中的null对象。如果obj是一个局部或
 1、 在实现一个本地方法调用时，你需要创建大量的局部引用。这种情况可能会导致JNI局部引用表的溢出，所以，最好是在局部引用不需要时立即手动删除。比如，在下面的代码中，本地代码遍历一个大的字符串数组，每遍历一个元素，都会创建一个局部引用，当对这个元素的遍历完成时，这个局部引用就不再需要了，你应该手动释放它：
 
 	for (i = 0; i < len; i++) {
-
-     jstring jstr = (*env)->GetObjectArrayElement(env, arr, i);
-
-     ... /* process jstr */
-
-     (*env)->DeleteLocalRef(env, jstr);
+	
+	 jstring jstr = (*env)->GetObjectArrayElement(env, arr, i);
+	
+	 ... /* process jstr */
+	
+	 (*env)->DeleteLocalRef(env, jstr);
 
  }
 
@@ -1903,37 +1474,38 @@ Push/PopLocalFrame函数对提供了对局部引用的生命周期更方便的�
 class CatchThrow {
 
      private native void doit() 
-
+    
          throws IllegalArgumentException;
-
+    
      private void callback() throws NullPointerException {
-
+    
          throw new NullPointerException("CatchThrow.callback");
-
+    
      }
 
  
 
+
      public static void main(String args[]) {
-
+    
          CatchThrow c = new CatchThrow();
-
+    
          try {
-
+    
              c.doit();
-
+    
          } catch (Exception e) {
-
+    
              System.out.println("In Java:\n\t" + e);
-
+    
          }
-
+    
      }
-
+    
      static {
-
+    
          System.loadLibrary("CatchThrow");
-
+    
      }
 
  }
@@ -1947,51 +1519,51 @@ JNIEXPORT void JNICALL
  {
 
      jthrowable exc;
-
+    
      jclass cls = (*env)->GetObjectClass(env, obj);
-
+    
      jmethodID mid = 
-
+    
          (*env)->GetMethodID(env, cls, "callback", "()V");
-
+    
      if (mid == NULL) {
-
+    
          return;
-
+    
      }
-
+    
      (*env)->CallVoidMethod(env, obj, mid);
-
+    
      exc = (*env)->ExceptionOccurred(env);
-
+    
      if (exc) {
-
+    
          /* We don't do much with the exception, except that
-
+    
             we print a debug message for it, clear it, and 
-
+    
             throw a new exception. */
-
+    
          jclass newExcCls;
-
+    
          (*env)->ExceptionDescribe(env);
-
+    
          (*env)->ExceptionClear(env);
-
+    
          newExcCls = (*env)->FindClass(env, 
-
+    
                        "java/lang/IllegalArgumentException");
-
+    
          if (newExcCls == NULL) {
-
+    
              /* Unable to find the exception class, give up. */
-
+    
              return;
-
+    
          }
-
+    
          (*env)->ThrowNew(env, newExcCls, "thrown from C code");
-
+    
      }
 
  }
@@ -2001,9 +1573,9 @@ JNIEXPORT void JNICALL
 java.lang.NullPointerException:
 
          at CatchThrow.callback(CatchThrow.java)
-
+    
          at CatchThrow.doit(Native Method)
-
+    
          at CatchThrow.main(CatchThrow.java)
 
  In Java:
@@ -2029,17 +1601,17 @@ void
  {
 
      jclass cls = (*env)->FindClass(env, name);
-
+    
      /* if cls is NULL, an exception has already been thrown */
-
+    
      if (cls != NULL) {
-
+    
          (*env)->ThrowNew(env, cls, msg);
-
+    
      }
-
+    
      /* free the local ref */
-
+    
      (*env)->DeleteLocalRef(env, cls);
 
  }
@@ -2135,13 +1707,13 @@ JNI程序员必须能够预测到可能会发生异常的地方，并编写代�
 public class Fraction {
 
      // details such as constructors omitted
-
+    
      int over, under;
-
+    
      public int floor() {
-
+    
          return Math.floor((double)over/under);
-
+    
      }
 
  }
@@ -2155,17 +1727,17 @@ public class Fraction {
  {
 
      jint floor = (*env)->CallIntMethod(env, fraction,
-
+    
                                         MID_Fraction_floor);
-
+    
      /* important: check if an exception was raised */
-
+    
      if ((*env)->ExceptionCheck(env)) {
-
+    
          return;
-
+    
      }
-
+    
      ... /* use floor */
 
  }
@@ -2195,27 +1767,27 @@ JNIEXPORT void JNICALL
  {
 
      const jchar *cstr = (*env)->GetStringChars(env, jstr);
-
+    
      if (c_str == NULL) {
-
+    
          return;
-
+    
      }
-
+    
      ...
-
+    
      if (...) { /* exception occurred */
-
+    
          (*env)->ReleaseStringChars(env, jstr, cstr);
-
+    
          return;
-
+    
      }
-
+    
      ...
-
+    
      /* normal return */
-
+    
      (*env)->ReleaseStringChars(env, jstr, cstr);
 
  }
@@ -2439,9 +2011,9 @@ JNU_CallMethodByName首先通过EnsureLocalCapacity来确保可以创建两个�
 public class Prog {
 
      public static void main(String[] args) {
-
+    
           System.out.println("Hello World " + args[0]);
-
+    
      }
 
  }
@@ -2461,65 +2033,66 @@ public class Prog {
  main() {
 
      JNIEnv *env;
-
+    
      JavaVM *jvm;
-
+    
      jint res;
-
+    
      jclass cls;
-
+    
      jmethodID mid;
-
+    
      jstring jstr;
-
+    
      jclass stringClass;
-
+    
      jobjectArray args;
 
  
 
+
  \#ifdef JNI_VERSION_1_2
 
      JavaVMInitArgs vm_args;
-
+    
      JavaVMOption options[1];
-
+    
      options[0].optionString =
-
+    
          "-Djava.class.path=" USER_CLASSPATH;
-
+    
      vm_args.version = 0x00010002;
-
+    
      vm_args.options = options;
-
+    
      vm_args.nOptions = 1;
-
+    
      vm_args.ignoreUnrecognized = JNI_TRUE;
-
+    
      /* Create the Java VM */
-
+    
      res = JNI_CreateJavaVM(&jvm, (void**)&env, &vm_args);
 
  \#else
 
      JDK1_1InitArgs vm_args;
-
+    
      char classpath[1024];
-
+    
      vm_args.version = 0x00010001;
-
+    
      JNI_GetDefaultJavaVMInitArgs(&vm_args);
-
+    
      /* Append USER_CLASSPATH to the default system class path */
-
+    
      sprintf(classpath, "%s%c%s",
-
+    
              vm_args.classpath, PATH_SEPARATOR, USER_CLASSPATH);
-
+    
      vm_args.classpath = classpath;
-
+    
      /* Create the Java VM */
-
+    
      res = JNI_CreateJavaVM(&jvm, &env, &vm_args);
 
  \#endif /* JNI_VERSION_1_2 */
@@ -2527,63 +2100,65 @@ public class Prog {
  
 
      if (res < 0) {
-
+    
          fprintf(stderr, "Can't create Java VM\n");
-
+    
          exit(1);
-
+    
      }
-
+    
      cls = (*env)->FindClass(env, "Prog");
-
+    
      if (cls == NULL) {
-
+    
          goto destroy;
-
+    
      }
 
  
 
+
      mid = (*env)->GetStaticMethodID(env, cls, "main",
-
+    
                                      "([Ljava/lang/String;)V");
-
+    
      if (mid == NULL) {
-
+    
          goto destroy;
-
+    
      }
-
+    
      jstr = (*env)->NewStringUTF(env, " from C!");
-
+    
      if (jstr == NULL) {
-
+    
          goto destroy;
-
+    
      }
-
+    
      stringClass = (*env)->FindClass(env, "java/lang/String");
-
+    
      args = (*env)->NewObjectArray(env, 1, stringClass, jstr);
-
+    
      if (args == NULL) {
-
+    
          goto destroy;
-
+    
      }
-
+    
      (*env)->CallStaticVoidMethod(env, cls, mid, args);
 
  
 
+
  destroy:
 
      if ((*env)->ExceptionOccurred(env)) {
-
+    
          (*env)->ExceptionDescribe(env);
-
+    
      }
-
+    
      (*jvm)->DestroyJavaVM(jvm);
 
  }
@@ -2675,23 +2250,23 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
  {
 
      jint res;
-
+    
      jclass cls;
-
+    
      jmethodID mid;
-
+    
      jstring jstr;
-
+    
      jclass stringClass;
-
+    
      jobjectArray args;
-
+    
      JNIEnv *env;
-
+    
      char buf[100];
-
+    
      int threadNum = (int)arg;
-
+    
      /* Pass NULL as the third argument */
 
  \#ifdef JNI_VERSION_1_2
@@ -2705,63 +2280,64 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
  \#endif
 
      if (res < 0) {
-
+    
         fprintf(stderr, "Attach failed\n");
-
+    
         return;
-
+    
      }
-
+    
      cls = (*env)->FindClass(env, "Prog");
-
+    
      if (cls == NULL) {
-
+    
          goto detach;
-
+    
      }
-
+    
      mid = (*env)->GetStaticMethodID(env, cls, "main", 
-
+    
                                      "([Ljava/lang/String;)V");
-
+    
      if (mid == NULL) {
-
+    
          goto detach;
-
+    
      }
-
+    
      sprintf(buf, " from Thread %d", threadNum);
-
+    
      jstr = (*env)->NewStringUTF(env, buf);
-
+    
      if (jstr == NULL) {
-
+    
          goto detach;
-
+    
      }
-
+    
      stringClass = (*env)->FindClass(env, "java/lang/String");
-
+    
      args = (*env)->NewObjectArray(env, 1, stringClass, jstr);
-
+    
      if (args == NULL) {
-
+    
          goto detach;
-
+    
      }
-
+    
      (*env)->CallStaticVoidMethod(env, cls, mid, args);
 
  
 
+
   detach:
 
      if ((*env)->ExceptionOccurred(env)) {
-
+    
          (*env)->ExceptionDescribe(env);
-
+    
      }
-
+    
      (*jvm)->DetachCurrentThread(jvm);
 
  }
@@ -2771,55 +2347,56 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
  main() {
 
      JNIEnv *env;
-
+    
      int i;
-
+    
      jint res;
 
  
 
+
  \#ifdef JNI_VERSION_1_2
 
      JavaVMInitArgs vm_args;
-
+    
      JavaVMOption options[1];
-
+    
      options[0].optionString =
-
+    
          "-Djava.class.path=" USER_CLASSPATH;
-
+    
      vm_args.version = 0x00010002;
-
+    
      vm_args.options = options;
-
+    
      vm_args.nOptions = 1;
-
+    
      vm_args.ignoreUnrecognized = TRUE;
-
+    
      /* Create the Java VM */
-
+    
      res = JNI_CreateJavaVM(&jvm, (void**)&env, &vm_args);
 
  \#else
 
      JDK1_1InitArgs vm_args;
-
+    
      char classpath[1024];
-
+    
      vm_args.version = 0x00010001;
-
+    
      JNI_GetDefaultJavaVMInitArgs(&vm_args);
-
+    
      /* Append USER_CLASSPATH to the default system class path */
-
+    
      sprintf(classpath, "%s%c%s",
-
+    
              vm_args.classpath, PATH_SEPARATOR, USER_CLASSPATH);
-
+    
      vm_args.classpath = classpath;
-
+    
      /* Create the Java VM */
-
+    
      res = JNI_CreateJavaVM(&jvm, &env, &vm_args);
 
  \#endif /* JNI_VERSION_1_2 */
@@ -2829,19 +2406,19 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
  if (res < 0) {
 
          fprintf(stderr, "Can't create Java VM\n");
-
+    
          exit(1);
-
+    
      }
-
+    
      for (i = 0; i < 5; i++)
-
+    
          /* We pass the thread number to every thread */
-
+    
          _beginthread(thread_fun, 0, (void *)i);
-
+    
      Sleep(1000); /* wait for threads to start */
-
+    
      (*jvm)->DestroyJavaVM(jvm);
 
  }
@@ -2937,9 +2514,9 @@ if ((*env)->MonitorEnter(env, obj) != JNI_OK) ...;
  if ((*env)->ExceptionOccurred(env)) {
 
      ... /* exception handling */
-
+    
      /* remember to call MonitorExit here */
-
+    
      if ((*env)->MonitorExit(env, obj) != JNI_OK) ...;
 
  }
@@ -2975,7 +2552,7 @@ JAVA还提供了其它一些和线程监视器有关的API：Object.wait、Objec
  {
 
      (*env)->CallVoidMethod(env, object, MID_Object_wait,
-
+    
                             timeout);
 
  }
@@ -3025,9 +2602,9 @@ JavaVM *jvm; /* already set */
  {
 
      JNIEnv *env;
-
+    
      (*jvm)->AttachCurrentThread(jvm, (void **)&env, NULL);
-
+    
      ... /* use env */
 
  }
@@ -3063,7 +2640,7 @@ JNI的一个使用方式就是编写一些本地方法来使用己有的本地�
 public class C {
 
      public static native int atol(String str);
-
+    
      ...
 
  }
@@ -3077,17 +2654,17 @@ JNIEXPORT jint JNICALL
  {
 
      const char *cstr = env->GetStringUTFChars(str, 0);
-
+    
      if (cstr == NULL) {
-
+    
          return 0; /* out of memory */
-
+    
      }
-
+    
      int result = atol(cstr);
-
+    
      env->ReleaseStringUTFChars(str, cstr);
-
+    
      return result;
 
  }
@@ -3107,19 +2684,19 @@ Shared stubs负责把调用者的请求分发到相应的本地函数，并负�
 public class C {
 
      private static CFunction c_atol =
-
+    
          new CFunction("msvcrt.dll", // native library name
-
+    
                        "atol",       // C function name
-
+    
                        "C");         // calling convention
-
+    
      public static int atol(String str) {
-
+    
          return c_atol.callInt(new Object[] {str});
-
+    
      }
-
+    
      ...
 
  }
@@ -3135,17 +2712,17 @@ CFunction的类层次结构图如下：
 public class CFunction extends CPointer {
 
      public CFunction(String lib,     // native library name
-
+    
                       String fname,   // C function name
-
+    
                       String conv) {  // calling convention
-
+    
          ...
-
+    
      }
-
+    
      public native int callInt(Object[] args);
-
+    
      ...
 
  }
@@ -3157,17 +2734,17 @@ CPointor的定义如下：
 public abstract class CPointer {
 
      public native void copyIn(
-
+    
               int bOff,     // offset from a C pointer
-
+    
               int[] buf,    // source data
-
+    
               int off,      // offset into source
-
+    
               int len);     // number of elements to be copied
-
+    
      public native void copyOut(...);
-
+    
      ...
 
  }
@@ -3177,9 +2754,9 @@ CPointer是一个抽象类，它支持对任意C指针的访问。例如copyIn�
 public class CMalloc extends CPointer {
 
      public CMalloc(int size) throws OutOfMemoryError { ... }
-
+    
      public native void free();
-
+    
      ...
 
  }
@@ -3189,73 +2766,74 @@ CMalloc的构造函数根据给定的大小，在C的heap上创建一块儿内�
 public class Win32 {
 
      private static CFunction c_CreateFile = 
-
+    
          new CFunction ("kernel32.dll",   // native library name
-
+    
                         "CreateFileA",    // native function
-
+    
                         "JNI");           // calling convention
 
  
 
+
      public static int CreateFile(
-
+    
          String fileName,          // file name
-
+    
          int desiredAccess,        // access (read-write) mode 
-
+    
          int shareMode,            // share mode 
-
+    
          int[] secAttrs,           // security attributes 
-
+    
          int creationDistribution, // how to create 
-
+    
          int flagsAndAttributes,   // file attributes 
-
+    
          int templateFile)         // file with attr. to copy
-
+    
      {
-
+    
          CMalloc cSecAttrs = null;
-
+    
          if (secAttrs != null) {
-
+    
              cSecAttrs = new CMalloc(secAttrs.length * 4);
-
+    
              cSecAttrs.copyIn(0, secAttrs, 0, secAttrs.length);
-
+    
          }
-
+    
          try {
-
+    
              return c_CreateFile.callInt(new Object[] {
-
+    
                             fileName,
-
+    
                             new Integer(desiredAccess),
-
+    
                             new Integer(shareMode),
-
+    
                             cSecAttrs,
-
+    
                             new Integer(creationDistribution),
-
+    
                             new Integer(flagsAndAttributes),
-
+    
                             new Integer(templateFile)});
-
+    
          } finally {
-
+    
              if (secAttrs != null) {
-
+    
                  cSecAttrs.free();
-
+    
              }
-
+    
          }
-
+    
      }
-
+    
      ...
 
  }
@@ -3297,13 +2875,13 @@ Shared Stubs的主要优点是程序员不必在本地代码中写一大堆的st
 public abstract class CPointer {
 
      protected long peer;
-
+    
      public native void copyIn(int bOff, int[] buf,
-
+    
                                int off,int len);
-
+    
      public native void copyOut(...);
-
+    
      ...
 
  }
@@ -3319,7 +2897,7 @@ JNIEXPORT void JNICALL
  {
 
      long peer = env->GetLongField(self, FID_CPointer_peer);
-
+    
      env->GetIntArrayRegion(arr, off, len, (jint *)peer + boff);
 
  }
@@ -3337,21 +2915,21 @@ CMalloc这个类中添加了两个本地方法用来分配和释放C内存块儿
 public class CMalloc extends CPointer {
 
      private static native long malloc(int size);
-
+    
      public CMalloc(int size) throws OutOfMemoryError {
-
+    
          peer = malloc(size);
-
+    
          if (peer == 0) {
-
+    
              throw new OutOfMemoryError();
-
+    
          }
-
+    
      }
-
+    
      public native void free();
-
+    
      ...
 
  }
@@ -3377,7 +2955,7 @@ JNIEXPORT jlong JNICALL
  {
 
      long peer = env->GetLongField(self, FID_CPointer_peer);
-
+    
      free((void *)peer);
 
  }
@@ -3393,43 +2971,44 @@ JNIEXPORT jlong JNICALL
 public class CFunction extends CPointer {
 
      private static final int CONV_C = 0;
-
+    
      private static final int CONV_JNI = 1;
-
+    
      private int conv;
-
+    
      private native long find(String lib, String fname);
 
  
 
+
      public CFunction(String lib,     // native library name
-
+    
                       String fname,   // C function name
-
+    
                       String conv) {  // calling convention
-
+    
          if (conv.equals("C")) {
-
+    
              conv = CONV_C;
-
+    
          } else if (conv.equals("JNI")) {
-
+    
              conv = CONV_JNI;
-
+    
          } else {
-
+    
              throw new IllegalArgumentException(
-
+    
                          "bad calling convention");
-
+    
          }
-
+    
          peer = find(lib, fname);
-
+    
      }
-
+    
      public native int callInt(Object[] args);
-
+    
      ...
 
  }
@@ -3445,49 +3024,50 @@ JNIEXPORT jlong JNICALL
  {
 
      void *handle;
-
+    
      void *func;
-
+    
      char *libname;
-
+    
      char *funname;
 
  
 
+
      if ((libname = JNU_GetStringNativeChars(env, lib))) {
-
+    
          if ((funname = JNU_GetStringNativeChars(env, fun))) {
-
+    
              if ((handle = LoadLibrary(libname))) {
-
+    
                  if (!(func = GetProcAddress(handle, funname))) {
-
+    
                      JNU_ThrowByName(env, 
-
+    
                          "java/lang/UnsatisfiedLinkError",
-
+    
                          funname);
-
+    
                  }
-
+    
              } else {
-
+    
                  JNU_ThrowByName(env, 
-
+    
                          "java/lang/UnsatisfiedLinkError",
-
+    
                          libname);
-
+    
              }
-
+    
              free(funname);
-
+    
          }
-
+    
          free(libname);
-
+    
      }
-
+    
      return (jlong)func;
 
  }
@@ -3507,121 +3087,126 @@ JNIEXPORT jint JNICALL
  \#define MAX_NARGS 32
 
      jint ires;
-
+    
      int nargs, nwords;
-
+    
      jboolean is_string[MAX_NARGS];
-
+    
      word_t args[MAX_NARGS];
 
  
 
+
      nargs = env->GetArrayLength(arr);
-
+    
      if (nargs > MAX_NARGS) {
-
+    
          JNU_ThrowByName(env, 
-
+    
                      "java/lang/IllegalArgumentException",
-
+    
                      "too many arguments");
-
+    
          return 0;
-
+    
      }
 
  
 
+
      // convert arguments
-
+    
      for (nwords = 0; nwords < nargs; nwords++) {
-
+    
          is_string[nwords] = JNI_FALSE;
-
+    
          jobject arg = env->GetObjectArrayElement(arr, nwords);
 
  
 
+
          if (arg == NULL) {
-
+    
              args[nwords].p = NULL;
-
+    
          } else if (env->IsInstanceOf(arg, Class_Integer)) {
-
+    
              args[nwords].i =
-
+    
                  env->GetIntField(arg, FID_Integer_value);
-
+    
          } else if (env->IsInstanceOf(arg, Class_Float)) {
-
+    
              args[nwords].f =
-
+    
                  env->GetFloatField(arg, FID_Float_value);
-
+    
          } else if (env->IsInstanceOf(arg, Class_CPointer)) {
-
+    
              args[nwords].p = (void *)
-
+    
                  env->GetLongField(arg, FID_CPointer_peer);
-
+    
          } else if (env->IsInstanceOf(arg, Class_String)) {
-
+    
              char * cstr =
-
+    
                  JNU_GetStringNativeChars(env, (jstring)arg);
-
+    
              if ((args[nwords].p = cstr) == NULL) {
-
+    
                  goto cleanup; // error thrown
-
+    
              }
-
+    
              is_string[nwords] = JNI_TRUE;
-
+    
          } else {
-
+    
              JNU_ThrowByName(env,
-
+    
                  "java/lang/IllegalArgumentException",
-
+    
                  "unrecognized argument type");
-
+    
              goto cleanup;
-
+    
          }
-
+    
          env->DeleteLocalRef(arg);
-
+    
      }
-
+    
      void *func = 
-
+    
          (void *)env->GetLongField(self, FID_CPointer_peer);
-
+    
      int conv = env->GetIntField(self, FID_CFunction_conv);
 
  
 
-     // now transfer control to func.
 
+     // now transfer control to func.
+    
      ires = asm_dispatch(func, nwords, args, conv);
 
  
 
+
  cleanup:
 
      // free all the native strings we have created
-
+    
      for (int i = 0; i < nwords; i++) {
-
+    
          if (is_string[i]) {
-
+    
              free(args[i].p);
-
+    
          }
-
+    
      }
-
+    
      return ires;
 
  }
@@ -3631,9 +3216,9 @@ JNIEXPORT jint JNICALL
 typedef union {
 
      jint i;
-
+    
      jfloat f;
-
+    
      void *p;
 
  } word_t;
@@ -3667,13 +3252,13 @@ typedef union {
 public abstract class CPointer {
 
      protected long peer;
-
+    
      public native void copyIn(int bOff, int[] buf,
-
+    
                                int off, int len);
-
+    
      public native void copyOut(...);
-
+    
      ...
 
  }
@@ -3703,7 +3288,7 @@ JDK中，java.io、java.net和java.awt等包的内部实现就是利用了peer c
  public final class FileDescriptor {
 
      private int fd;
-
+    
      ...
 
  }
@@ -3729,7 +3314,7 @@ Peer classes被定义在JAVA中，因此它们的实例对象会被自动回收�
 public class CMalloc extends CPointer {
 
      public native void free();
-
+    
      ...
 
  }
@@ -3739,13 +3324,13 @@ public class CMalloc extends CPointer {
 public class CMalloc extends CPointer {
 
      public native synchronized void free();
-
+    
      protected void finalize() {
-
+    
          free();
-
+    
      }
-
+    
      ...
 
  }
@@ -3761,17 +3346,17 @@ JNIEXPORT void JNICALL
  {
 
      long peer = env->GetLongField(self, FID_CPointer_peer);
-
+    
      if (peer == 0) {
-
+    
          return; /* not an error, freed previously */
-
+    
      }
-
+    
      free((void *)peer);
-
+    
      peer = 0;
-
+    
      env->SetLongField(self, FID_CPointer_peer, peer);
 
  }
@@ -3821,27 +3406,27 @@ CMalloc cptr = new CMalloc(10);
 class KeyInput {
 
      private long peer;
-
+    
      private native long create();
-
+    
      private native void destroy(long peer);
-
+    
      public KeyInput() {
-
+    
          peer = create();
-
+    
      }
-
+    
      public destroy() {
-
+    
          destroy(peer);
-
+    
      }
-
+    
      private void keyPressed(int key) {
-
+    
          ... /* process the key event */
-
+    
      }
 
  }
@@ -3853,7 +3438,7 @@ class KeyInput {
  struct key_input {
 
      jobject back_ptr;         // back pointer to peer instance
-
+    
      int key_pressed(int key); // called by the operating system
 
  };
@@ -3875,9 +3460,9 @@ JNIEXPORT jlong JNICALL
  {
 
      key_input *cpp_obj = new key_input();
-
+    
      cpp_obj->back_ptr = env->NewGlobalRef(self);
-
+    
      return (jlong)cpp_obj;
 
  }
@@ -3891,11 +3476,11 @@ JNIEXPORT jlong JNICALL
  {
 
      key_input *cpp_obj = (key_input*)peer;
-
+    
      env->DeleteGlobalRef(cpp_obj->back_ptr);
-
+    
      delete cpp_obj;
-
+    
      return;
 
  }
@@ -3913,31 +3498,31 @@ Key_input::key_pressed(int key)方法的实现如下：
  {
 
      jboolean has_exception;
-
+    
      JNIEnv *env = JNU_GetEnv();
-
+    
      JNU_CallMethodByName(env, 
-
+    
                           &has_exception,
-
+    
                           java_peer,
-
+    
                           "keyPressed",
-
+    
                           "()V",
-
+    
                           key);
-
+    
      if (has_exception) {
-
+    
          env->ExceptionClear();
-
+    
          return -1;
-
+    
      } else {
-
+    
          return 0;
-
+    
      }
 
  }
@@ -3947,23 +3532,23 @@ Key_input::key_pressed(int key)方法的实现如下：
 class KeyInput {
 
      ...
-
+    
      public synchronized destroy() {
-
+    
          if (peer != 0) {
-
+    
              destroy(peer);
-
+    
              peer = 0;
-
+    
          }
-
+    
      }
-
+    
      protect void finalize() {
-
+    
          destroy();
-
+    
      }
 
  }
@@ -3977,9 +3562,9 @@ JNIEXPORT jlong JNICALL
  {
 
      key_input *cpp_obj = new key_input();
-
+    
      cpp_obj->back_ptr = env->NewWeakGlobalRef(self);
-
+    
      return (jlong)cpp_obj;
 
  }
@@ -3993,11 +3578,11 @@ JNIEXPORT jlong JNICALL
  {
 
      key_input *cpp_obj = (key_input*)peer;
-
+    
      env->DeleteWeakGlobalRef(cpp_obj->back_ptr);
-
+    
      delete cpp_obj;
-
+    
      return;
 
  }
@@ -4053,15 +3638,15 @@ void print(jboolean condition)
  	/* C compilers generate code that truncates condition
 
        to its lower 8 bits. */
-
+    
      if (condition) {
-
+    
          printf("true\n");
-
+    
      } else {
-
+    
          printf("false\n");
-
+    
      }
 
  }
@@ -4157,7 +3742,7 @@ jmethodID MID_B_f = (*env)->GetMethodID(env, B, "f", "()V");
 class C {
 
      private int i;
-
+    
      native void f();
 
  }
@@ -4171,15 +3756,15 @@ class C {
  Java_C_f(JNIEnv *env, jobject this) {
 
      jclass cls = (*env)->GetObjectClass(env, this);
-
+    
      ... /* error checking */
-
+    
      jfieldID fid = (*env)->GetFieldID(env, cls, "i", "I");
-
+    
      ... /* error checking */
-
+    
      ival = (*env)->GetIntField(env, this, fid);
-
+    
      ... /* ival now has the value of this.i */
 
  }
@@ -4191,11 +3776,11 @@ class C {
  class D extends C {
 
      private int i;
-
+    
      D() {
-
+    
          f(); // inherited from C
-
+    
      }
 
  }
@@ -4211,15 +3796,15 @@ class C {
  class C {
 
      private int i;
-
+    
      native void f();
-
+    
      private static native void initIDs();
-
+    
      static {
-
+    
          initIDs(); // Call an initializing native method
-
+    
      }
 
  }
@@ -4235,9 +3820,9 @@ static jfieldID FID_C_i;
  Java_C_initIDs(JNIEnv *env, jclass cls) {
 
      /* Get IDs to all fields/methods of C that
-
+    
         native methods will need. */
-
+    
      FID_C_i = (*env)->GetFieldID(env, cls, "i", "I");
 
  }
@@ -4249,7 +3834,7 @@ static jfieldID FID_C_i;
  Java_C_f(JNIEnv *env, jobject this) {
 
      ival = (*env)->GetIntField(env, this, FID_C_i);
-
+    
      ... /* ival is always C.i, not D.i */
 
  }
@@ -4293,19 +3878,19 @@ JNIEXPORT jint JNICALL
  {
 
      jint result;
-
+    
      char *cname = JNU_GetStringNativeChars(env, name);
-
+    
      if (cname == NULL) {
-
+    
          return 0;
-
+    
      }
-
+    
      result = open(cname, mode);
-
+    
      free(cname);
-
+    
      return result;
 
  }
@@ -4327,29 +3912,29 @@ JNIEXPORT void JNICALL
  {
 
      const jchar *cstr =
-
+    
          (*env)->GetStringChars(env, jstr, NULL);
-
+    
      if (cstr == NULL) {
-
+    
          return;
-
+    
      }
-
+    
      ...
-
+    
      if (...) { /* exception occurred */
-
+    
          /* misses a ReleaseStringChars call */
-
+    
          return;
-
+    
      }
-
+    
      ...
-
+    
      /* normal return */
-
+    
      (*env)->ReleaseStringChars(env, jstr, cstr);
 
  }
@@ -4365,25 +3950,25 @@ JNIEXPORT void JNICALL
  {
 
      jboolean isCopy;
-
+    
      const jchar *cstr = (*env)->GetStringChars(env, jstr,
-
+    
                                                 &isCopy);
-
+    
      if (cstr == NULL) {
-
+    
          return;
-
+    
      }
-
+    
      ... /* use cstr */
-
+    
      /* This is wrong. Always need to call ReleaseStringChars. */
-
+    
      if (isCopy) {
-
+    
          (*env)->ReleaseStringChars(env, jstr, cstr);
-
+    
      }
 
  }
@@ -4497,11 +4082,11 @@ package pkg;
  class Cls {
 
       native double f(int i, String s);
-
+    
       static {
-
+    
           System.loadLibrary("mypkg");
-
+    
       }
 
  }
@@ -4525,9 +4110,9 @@ JVM内部为每一个类加载器都维护了一个已经加载的本地库的�
 class C {
 
      static {
-
+    
          System.loadLibrary("foo");
-
+    
      }
 
  }
@@ -4547,29 +4132,29 @@ JNIEXPORT void JNICALL
  {
 
      static jclass cachedFooClass; /* cached class Foo */
-
+    
      if (cachedFooClass == NULL) {
-
+    
          jclass fooClass = (*env)->FindClass(env, "Foo");
-
+    
          if (fooClass == NULL) {
-
+    
              return; /* error */
-
+    
          }
-
+    
          cachedFooClass = (*env)->NewGlobalRef(env, fooClass);
-
+    
          if (cachedFooClass == NULL) {
-
+    
              return; /* error */
-
+    
          }
-
+    
      }
-
+    
      assert((*env)->IsInstanceOf(env, self, cachedFooClass));
-
+    
      ... /* use cachedFooClass */
 
  }

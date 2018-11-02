@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\bd33dc6ce7b16bfed443a58bf31bd8b0f7bb08e7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\classes_c34b5cfe5589ad6ee23c30fb953dc18a82ffbd15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\64a4d980a30835b23af7537595420b429c0a2711\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\classes_82c597c210192d085e2cefceffd5e8055bf44f1c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\MyNuts\Android\Sdk_old\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\constraint-layout-solver-1.0.2_e16db74442fda2ea2758fddf261653190ea8b3ff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\0148033266ff6d3ad783a5e8d99b5b73d1d874d7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\classes_520b17be59cb0419968c6cb3f0a6f0af967a27c4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\8bef093406f62b49f325b2dada3680ac60943f51\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\classes_5f1f0c02e7c5697899f5c57137a304bb5ee3ca09.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\f4a518aa89ad1aa968ab78d2ab89561e1777d500\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\classes_47bc87a2cf372b9965cc9e96e0afb312c3dba38d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\MyNuts\Android\Sdk_old\extras\android\m2repository\com\android\support\support-annotations\24.1.0\support-annotations-24.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8a23146e1a8c7cb4758e3d3f62449213f1e51f67">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\support-annotations-24.1.0_51084c503e0b8b3022c85e849b742a2c68c9bd48.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.android\build-cache\0148033266ff6d3ad783a5e8d99b5b73d1d874d7\output\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="D:\MyNuts\androidStudioWork\ZhiShun\app\build\intermediates\pre-dexed\release\internal_impl-23.4.0_017d25d35e325bbe5704a201bf5fe430aa21b0b6.jar" />
+    </item>
+
+</items>

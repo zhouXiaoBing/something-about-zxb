@@ -1,0 +1,25 @@
+#Wed Jan 24 17:08:14 CST 2018
+renamed.7=classes4.dex
+renamed.6=classes8.dex
+renamed.5=classes6.dex
+renamed.4=classes7.dex
+renamed.3=classes5.dex
+renamed.2=classes2.dex
+renamed.1=classes.dex
+renamed.0=classes3.dex
+base.7=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_c0982b8fc00fa9d8458fb14e5c3cb5327f6e9c82
+base.6=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-24.1.0_3b3496a479d8afb58491497e2a40200a4bf3525c
+base.5=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\constraint-layout-solver-1.0.2_dddd495aa1173d6f8b3333ef3479de1da1626653
+base.4=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-23.1.1_6cbcc478cffa47fcb41550232cd2c4fbb42589bc
+base.3=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_f88568387224a61f124bcdd536a51f3d9a836f7a
+base.2=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_0ad61ae816cb96e4d00db92440cd93b163840867
+base.1=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\butterknife-annotations-8.4.0_4f8e44ef2e30341a5639be005039066a973cee5a
+base.0=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_102d448eabc35c3901f7aeb9245501af9f3f3a3b
+file.7=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_c0982b8fc00fa9d8458fb14e5c3cb5327f6e9c82\\classes.dex
+file.6=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\support-annotations-24.1.0_3b3496a479d8afb58491497e2a40200a4bf3525c\\classes.dex
+file.5=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\constraint-layout-solver-1.0.2_dddd495aa1173d6f8b3333ef3479de1da1626653\\classes.dex
+file.4=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\internal_impl-23.1.1_6cbcc478cffa47fcb41550232cd2c4fbb42589bc\\classes.dex
+file.3=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_f88568387224a61f124bcdd536a51f3d9a836f7a\\classes.dex
+file.2=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_0ad61ae816cb96e4d00db92440cd93b163840867\\classes.dex
+file.1=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\butterknife-annotations-8.4.0_4f8e44ef2e30341a5639be005039066a973cee5a\\classes.dex
+file.0=E\:\\AndroidStudioProjects\\ZhiShun\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_102d448eabc35c3901f7aeb9245501af9f3f3a3b\\classes.dex
