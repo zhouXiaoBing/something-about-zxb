@@ -1157,29 +1157,21 @@ JNI中的一个引用NULL指向JVM中的null对象。如果obj是一个局部或
 
 ### 5.2 释放引用
 
- 
+每一个JNI引用被建立时，除了它所指向的JVM中的对象以外，引用本身也会消耗掉一个数量的内存。作为一个JNI程序员，你应该对程序在一个给定时间段内使用的引用数量十分小心。短时间内创建大量不会被立即回收的引用会导致内存溢出。 
 
-每一个JNI引用被建立时，除了它所指向的JVM中的对象以外，引用本身也会消耗掉一个数量的内存。作为一个JNI程序员，你应该对程序在一个给定时间段内使用的引用数量十分小心。短时间内创建大量不会被立即回收的引用会导致内存溢出。
-
- 
-
-5.2.1 释放局部引用
-
- 
+#### 5.2.1 释放局部引用
 
 大部分情况下，你在实现一个本地方法时不必担心局部引用的释放问题，因为本地方法被调用完成后，JVM会自动回收这些局部引用。尽管如此，以下几种情况下，为了避免内存溢出，JNI程序员应该手动释放局部引用：
 
 1、 在实现一个本地方法调用时，你需要创建大量的局部引用。这种情况可能会导致JNI局部引用表的溢出，所以，最好是在局部引用不需要时立即手动删除。比如，在下面的代码中，本地代码遍历一个大的字符串数组，每遍历一个元素，都会创建一个局部引用，当对这个元素的遍历完成时，这个局部引用就不再需要了，你应该手动释放它：
 
-	for (i = 0; i < len; i++) {
-	
-	 jstring jstr = (*env)->GetObjectArrayElement(env, arr, i);
-	
-	 ... /* process jstr */
-	
-	 (*env)->DeleteLocalRef(env, jstr);
-
+```c
+for (i = 0; i < len; i++) {
+ jstring jstr = (*env)->GetObjectArrayElement(env, arr, i);
+ ... /* process jstr */
+ (*env)->DeleteLocalRef(env, jstr);
  }
+```
 
 2、 你想写一个工具函数，这个函数被谁调用你是不知道的。4.3节中的MyNewString演示了怎么样在工具函数中使用引用后，使用DeleteLocalRef删除。不这样做的话，每次MyNewString被调用完成后，就会有两个引用仍然占用空间。
 
@@ -1189,59 +1181,41 @@ JNI中的一个引用NULL指向JVM中的null对象。如果obj是一个局部或
 
 在下面的程序中，因为预先有一个明显的DeleteLocalRef操作，在函数lengthyComputation的执行过程中，GC可能会释放由引用lref指向的对象。
 
- 
-
-5．2．2 管理局部引用
-
- 
+#### 5.2.2 管理局部引用
 
 JDK提供了一系列的函数来管理局部引用的生命周期。这些函数包括：EnsureLocalCapacity、NewLocalRef、PushLocalFrame、PopLocalFrame。
 
-JNI规范中指出，VM会确保每个本地方法可以创建至少16个局部引用。经验表明，这个数量已经满足大多数不需要和JVM中的内部对象有太多交互的本地方法。如果真的需要创建更多的引用，本地方法可以通过调用EnsureLocalCapacity来支持更多的局部引用。在下面的代码中，对前面的例子做了些修改，不考虑内存因素的情况下，它可以为创建大量的局部引用提供足够的空间。
+JNI规范中指出，VM会确保每个本地方法可以创建至少16个局部引用。经验表明，这个数量已经满足大多数不需要和JVM中的内部对象有太多交互的本地方法。如果真的需要创建更多的引用，本地方法可以通过调用EnsureLocalCapacity来支持更多的局部引用。在下面的代码中，对前面的例子做了些修改，不考虑内存因素的情况下，它可以为创建大量的局部引用提供足够的空间
 
+```c
 · /* The number of local references to be created is equal to
-
 ·     the length of the array. */ 
-
 ·  if ((*env)->EnsureLocalCapacity(env, len)) < 0) {
-
 ·      ... /* out of memory */
-
 ·  }
-
 ·  for (i = 0; i < len; i++) {
-
 ·      jstring jstr = (*env)->GetObjectArrayElement(env, arr, i);
-
 ·      ... /* process jstr */
-
 ·      /* DeleteLocalRef is no longer necessary */
-
 ·  }
+```
 
 当然，上面这个版本中没有立即删除不使用的局部引用，因此会比前面的版本消耗更多的内存。
 
 另外，Push/PopLocalFrame函数对允许程序员创建作用范围层层嵌套的局部引用。例如，我们可以把上面的代码重写：
 
+```c
 · #define N_REFS ... /* the maximum number of local references
-
 ·                        used in each iteration */
-
 ·  for (i = 0; i < len; i++) {
-
 ·      if ((*env)->PushLocalFrame(env, N_REFS) < 0) {
-
 ·          ... /* out of memory */
-
 ·      }
-
 ·      jstr = (*env)->GetObjectArrayElement(env, arr, i);
-
 ·      ... /* process jstr */
-
 ·      (*env)->PopLocalFrame(env, NULL);
-
 ·  }
+```
 
 PushLocalFrame为一定数量的局部引用创建了一个使用堆栈，而PopLocalFrame负责销毁堆栈顶端的引用。
 
@@ -1251,21 +1225,13 @@ Push/PopLocalFrame函数对提供了对局部引用的生命周期更方便的�
 
 本地代码可能会创建大量的局部引用，其数量可能会超过16个或PushLocaFrame和EnsureLocalCapacity调用设置的个数。VM可能会尝试分配足够的内存，但不能够保证分配成功。如果失败，VM会退出。
 
- 
-
-5.2.3 释放全局引用
-
- 
+####  5.2.3 释放全局引用 
 
 当你的本地代码不再需要一个全局引用时，你应该调用DeleteGlobalRef来释放它。如果你没有调用这个函数，即使这个对象已经没用了，JVM也不会回收这个全局引用所指向的对象。
 
-当你的本地代码不再需要一个弱引用时，应该调用DeleteWeakGlobalRef来释放它，如果你没有调用这个函数，JVM仍会回收弱引用所指向的对象，但弱引用本身在引用表中所占的内存永远也不会被回收。
+当你的本地代码不再需要一个弱引用时，应该调用DeleteWeakGlobalRef来释放它，如果你没有调用这个函数，JVM仍会回收弱引用所指向的对象，但弱引用本身在引用表中所占的内存永远也不会被回收。 
 
- 
-
-5.3 管理引用的规则
-
- 
+### 5.3 管理引用的规则 
 
 前面已经做了一个全面的介绍，现在我们可以总结一下JNI引用的管理规则了，目标就是减少内存使用和对象被引用保持而不能释放。
 
@@ -1285,117 +1251,72 @@ Push/PopLocalFrame函数对提供了对局部引用的生命周期更方便的�
 
 如果一个工具函数返回一个引用，你应该详细说明返回的引用的类型，以便于调用者更好地管理它们。下面的代码中，频繁地调用工具函数GetInfoString，我们需要知道GetInfoString返回的引用的类型，以便于在每次使用完成后可以释放掉它：
 
+```c
 · while (JNI_TRUE) {
-
 ·      jstring infoString = GetInfoString(info);
-
 ·      ... /* process infoString */
-
-·      
-
 ·      ??? /* we need to call DeleteLocalRef, DeleteGlobalRef,
-
 ·             or DeleteWeakGlobalRef depending on the type of 
-
 ·             reference returned by GetInfoString. */
-
 ·  }
+```
 
 函数NewLocalRef有时被用来确保一个工具函数返回一个局部引用。为了演示这个用法，我们对MyNewString函数做了一些修改。下面的版本把一个被频繁调用的字符串“CommonString” 缓存在了全局引用里：
 
-· jstring
-
-·  MyNewString(JNIEnv *env, jchar *chars, jint len)
-
+```c
+· jstring MyNewString(JNIEnv *env, jchar *chars, jint len)
 ·  {
-
 ·      static jstring result;
-
-·  
-
 ·      /* wstrncmp compares two Unicode strings */
-
 ·      if (wstrncmp("CommonString", chars, len) == 0) {
-
 ·          /* refers to the global ref caching "CommonString" */
-
 ·          static jstring cachedString = NULL;
-
 ·          if (cachedString == NULL) {
-
 ·              /* create cachedString for the first time */
-
 ·              jstring cachedStringLocal = ... ;
-
 ·             /* cache the result in a global reference */
-
 ·              cachedString = 
-
 ·                  (*env)->NewGlobalRef(env, cachedStringLocal);
-
 ·          }
-
 ·          return (*env)->NewLocalRef(env, cachedString);
-
 ·      }
-
-·  
-
 ·      ... /* create the string as a local reference and store in
-
 ·             result as a local reference */
-
 ·      return result;
-
 ·  }
+```
 
 在管理局部引用的生命周期中，Push/PopLocalFrame是非常方便的。你可以在本地函数的入口处调用PushLocalFrame，然后在出口处调用PopLocalFrame，这样的话，在函数对中间任何位置创建的局部引用都会被释放。而且，这两个函数是非常高效的，强烈建议使用它们。
 
 如果你在函数的入口处调用了PushLocalFrame，记住在所有的出口（有return出现的地方）调用PopLocalFrame。在下面的代码中，对PushLocalFrame的调用只有一次，但对PopLocalFrame的调用却需要多次。
 
+```c
 · jobject f(JNIEnv *env, ...)
-
 ·  {
-
 ·      jobject result;
-
 ·      if ((*env)->PushLocalFrame(env, 10) < 0) {
-
 ·          /* frame not pushed, no PopLocalFrame needed */
-
 ·          return NULL; 
-
 ·      }
-
 ·      ...
-
 ·      result = ...;
-
 ·      if (...) {
-
 ·          /* remember to pop local frame before return */
-
 ·          result = (*env)->PopLocalFrame(env, result);
-
 ·          return result;
-
 ·      }
-
 ·      ...
-
 ·      result = (*env)->PopLocalFrame(env, result);
-
 ·      /* normal return */
-
 ·      return result;
-
 ·  }
+```
 
 上面的代码同样演示了函数PopLocalFrame的第二个参数的用法。局部引用result一开始在PushLocalFrame创建的当前frame里面被创建，而把result传入PopLocalFrame中时，PopLocalFrame在弹出当前的frame前，会由result生成一个新的局部引用，再把这个新生成的局部引用存储在上一个frame当中。
 
  
 
-第六章  异常
+## 第六章  异常
 
  
 
@@ -1405,116 +1326,66 @@ Push/PopLocalFrame函数对提供了对局部引用的生命周期更方便的�
 
  
 
-6.1 概述
+### 6.1 概述
 
  
 
 我们通过一些例子来介绍一些JNI异常处理函数
 
- 
-
 6.1.1 本地代码中如何缓存和抛出异常
-
- 
 
 下面的代码中演示了如何声明一个会抛出异常的本地方法。CatchThrow这个类声明了一个会抛出IllegalArgumentException异常的名叫doit的本地方法。
 
+```java
 class CatchThrow {
-
-     private native void doit() 
-    
-         throws IllegalArgumentException;
-    
-     private void callback() throws NullPointerException {
-    
-         throw new NullPointerException("CatchThrow.callback");
-    
-     }
-
- 
-
-
-     public static void main(String args[]) {
-    
-         CatchThrow c = new CatchThrow();
-    
-         try {
-    
-             c.doit();
-    
-         } catch (Exception e) {
-    
-             System.out.println("In Java:\n\t" + e);
-    
-         }
-    
-     }
-    
-     static {
-    
-         System.loadLibrary("CatchThrow");
-    
-     }
-
+ private native void doit() throws IllegalArgumentException;
+ private void callback() throws NullPointerException {
+     throw new NullPointerException("CatchThrow.callback");
  }
+ public static void main(String args[]) {
+     CatchThrow c = new CatchThrow();
+     try {
+         c.doit();
+     } catch (Exception e) {
+         System.out.println("In Java:\n\t" + e);
+     }
+ }
+ static {
+     System.loadLibrary("CatchThrow");
+ }
+}
+```
 
 Main方法调用本地方法doit，doit方法的实现如下：
 
-JNIEXPORT void JNICALL 
-
- Java_CatchThrow_doit(JNIEnv *env, jobject obj)
-
+```c
+JNIEXPORT void JNICALL Java_CatchThrow_doit(JNIEnv *env, jobject obj)
  {
-
-     jthrowable exc;
-    
-     jclass cls = (*env)->GetObjectClass(env, obj);
-    
-     jmethodID mid = 
-    
-         (*env)->GetMethodID(env, cls, "callback", "()V");
-    
-     if (mid == NULL) {
-    
-         return;
-    
-     }
-    
-     (*env)->CallVoidMethod(env, obj, mid);
-    
-     exc = (*env)->ExceptionOccurred(env);
-    
-     if (exc) {
-    
-         /* We don't do much with the exception, except that
-    
-            we print a debug message for it, clear it, and 
-    
-            throw a new exception. */
-    
-         jclass newExcCls;
-    
-         (*env)->ExceptionDescribe(env);
-    
-         (*env)->ExceptionClear(env);
-    
-         newExcCls = (*env)->FindClass(env, 
-    
-                       "java/lang/IllegalArgumentException");
-    
-         if (newExcCls == NULL) {
-    
-             /* Unable to find the exception class, give up. */
-    
-             return;
-    
-         }
-    
-         (*env)->ThrowNew(env, newExcCls, "thrown from C code");
-    
-     }
-
+ jthrowable exc;
+ jclass cls = (*env)->GetObjectClass(env, obj);
+ jmethodID mid = 
+     (*env)->GetMethodID(env, cls, "callback", "()V");
+ if (mid == NULL) {
+     return;
  }
+ (*env)->CallVoidMethod(env, obj, mid);
+ exc = (*env)->ExceptionOccurred(env);
+ if (exc) {
+     /* We don't do much with the exception, except that
+        we print a debug message for it, clear it, and 
+        throw a new exception. */
+     jclass newExcCls;
+     (*env)->ExceptionDescribe(env);
+     (*env)->ExceptionClear(env);
+     newExcCls = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+     if (newExcCls == NULL) {
+         /* Unable to find the exception class, give up. */
+         return;
+     }
+     (*env)->ThrowNew(env, newExcCls, "thrown from C code");
+ }
+}
+```
 
 运行程序，输出是：
 
@@ -1536,165 +1407,100 @@ java.lang.NullPointerException:
 
  
 
-6.1.2 制作一个抛出异常的工具函数
+#### 6.1.2 制作一个抛出异常的工具函数
 
  
 
 抛出异常通常需要两步：通过FindClass找到异常类、调用ThrowNew函数生成异常。为了简化这个过程，我们写了一个工具函数专门用来生成一个指定名字的异常。
 
-void
-
- JNU_ThrowByName(JNIEnv *env, const char *name, const char *msg)
-
+```c
+void JNU_ThrowByName(JNIEnv *env, const char *name, const char *msg)
  {
-
-     jclass cls = (*env)->FindClass(env, name);
-    
-     /* if cls is NULL, an exception has already been thrown */
-    
-     if (cls != NULL) {
-    
-         (*env)->ThrowNew(env, cls, msg);
-    
-     }
-    
-     /* free the local ref */
-    
-     (*env)->DeleteLocalRef(env, cls);
-
+ jclass cls = (*env)->FindClass(env, name);
+ /* if cls is NULL, an exception has already been thrown */
+ if (cls != NULL) {
+     (*env)->ThrowNew(env, cls, msg);
  }
+ /* free the local ref */
+ (*env)->DeleteLocalRef(env, cls);
+ }
+```
 
 本书中，如果一个函数有JNU前缀的话，意味它是一个工具函数。JNU_ThrowByName这个工具函数首先使用FindClass函数来找到异常类，如果FindClass执行失败（返回NULL），VM会抛出一个异常（比如NowClassDefFoundError），这种情况下JNI_ThrowByName不会再抛出另外一个异常。如果FindClass执行成功的话，我们就通过ThrowNew来抛出一个指定名字的异常。当函数JNU_ThrowByName返回时，它会保证有一个异常需要处理，但这个异常不一定是name参数指定的异常。当函数返回时，记得要删除指向异常类的局部引用。向DeleteLocalRef传递NULL不会产生作用。
 
- 
-
-6.2 妥善地处理异常
-
- 
+### 6.2 妥善地处理异常
 
 JNI程序员必须能够预测到可能会发生异常的地方，并编写代码进行检查。妥善地异常处理有时很繁锁，但是一个高质量的程序不可或缺的。
 
- 
-
-6.2.1 异常检查
-
- 
+#### 6.2.1 异常检查
 
 检查一个异常是否发生有两种方式。
 
 第一种方式是：大部分JNI函数会通过特定的返回值（比如NULL）来表示已经发生了一个错误，并且当前线程中有一个异常需要处理。在C语言中，用返回值来标识错误信息是一个很常见的方式。下面的例子中演示了如何通过GetFieldID的返回值来检查错误。这个例子包含两部分，定义了一些实例字段（handle、length、width）的类Window和一个缓存这些字段的字段ID的本地方法。虽然这些字段位于Window类中，调用GetFieldID时，我们仍然需要检查是否有错误发生，因为VM可能没有足够的内存分配给字段ID。
 
-\1. /* a class in the Java programming language */
-
-\2.  public class Window {
-
-\3.      long handle;
-
-\4.      int length;
-
-\5.      int width;
-
-\6.      static native void initIDs();
-
-\7.      static {
-
-\8.          initIDs();
-
-\9.      }
-
-\10.  }
-
-\11.  
-
-\12.  /* C code that implements Window.initIDs */
-
-\13.  jfieldID FID_Window_handle;
-
-\14.  jfieldID FID_Window_length;
-
-\15.  jfieldID FID_Window_width;
-
-\16.  
-
-\17.  JNIEXPORT void JNICALL
-
-\18.  Java_Window_initIDs(JNIEnv *env, jclass classWindow)
-
-\19.  {
-
-\20.      FID_Window_handle =
-
-\21.          (*env)->GetFieldID(env, classWindow, "handle", "J");
-
-\22.      if (FID_Window_handle == NULL) {  /* important check. */
-
-\23.          return; /* error occurred. */
-
-\24.      }
-
-\25.      FID_Window_length =
-
-\26.          (*env)->GetFieldID(env, classWindow, "length", "I");
-
-\27.      if (FID_Window_length == NULL) {  /* important check. */
-
-\28.          return; /* error occurred. */
-
-\29.      }
-
-\30.      FID_Window_width =
-
-\31.          (*env)->GetFieldID(env, classWindow, "width", "I");
-
-\32.      /* no checks necessary; we are about to return anyway */
-
-\33.  }
+```c
+/* a class in the Java programming language */
+public class Window {
+long handle;
+int length;
+int width;
+static native void initIDs();
+static {
+initIDs();
+    }
+}
+/* C code that implements Window.initIDs */
+jfieldID FID_Window_handle;
+jfieldID FID_Window_length;
+jfieldID FID_Window_width;
+JNIEXPORT void JNICALL
+Java_Window_initIDs(JNIEnv *env, jclass classWindow)
+{
+FID_Window_handle =
+(*env)->GetFieldID(env, classWindow, "handle", "J");
+if (FID_Window_handle == NULL) {  /* important check. */
+          return; /* error occurred. */
+      }
+      FID_Window_length =
+          (*env)->GetFieldID(env, classWindow, "length", "I");
+      if (FID_Window_length == NULL) {  /* important check. */
+          return; /* error occurred. */
+      }
+      FID_Window_width =
+          (*env)->GetFieldID(env, classWindow, "width", "I");
+      /* no checks necessary; we are about to return anyway */
+}
+```
 
 第二种方式：
 
+```c
 public class Fraction {
-
-     // details such as constructors omitted
-    
-     int over, under;
-    
-     public int floor() {
-    
-         return Math.floor((double)over/under);
-    
-     }
-
+ // details such as constructors omitted
+ int over, under;
+ public int floor() {
+     return Math.floor((double)over/under);
  }
-
+ }
 /* Native code that calls Fraction.floor. Assume method ID
-
-    MID_Fraction_floor has been initialized elsewhere. */
-
+MID_Fraction_floor has been initialized elsewhere. */
  void f(JNIEnv *env, jobject fraction)
-
  {
-
-     jint floor = (*env)->CallIntMethod(env, fraction,
-    
-                                        MID_Fraction_floor);
-    
-     /* important: check if an exception was raised */
-    
-     if ((*env)->ExceptionCheck(env)) {
-    
-         return;
-    
-     }
-    
-     ... /* use floor */
-
+ jint floor = (*env)->CallIntMethod(env, fraction,
+                                    MID_Fraction_floor);
+ /* important: check if an exception was raised */
+ if ((*env)->ExceptionCheck(env)) {
+     return;
  }
+ ... /* use floor */
+ }
+```
 
 当一个JNI函数返回一个明确的错误码时，你仍然可以用ExceptionCheck来检查是否有异常发生。但是，用返回的错误码来判断比较高效。一旦JNI函数的返回值是一个错误码，那么接下来调用ExceptionCheck肯定会返回JNI_TRUE。
 
  
 
-6.2.2 异常处理
+#### 6.2.2 异常处理
 
  
 
@@ -1708,43 +1514,26 @@ public class Fraction {
 
 当异常发生时，释放资源是一件很重要的事，下面的例子中，调用GetStringChars函数后，如果后面的代码发生异常，不要忘了调用ReleaseStringChars释放资源。
 
+```c
 JNIEXPORT void JNICALL
-
  Java_pkg_Cls_f(JNIEnv *env, jclass cls, jstring jstr)
-
  {
-
-     const jchar *cstr = (*env)->GetStringChars(env, jstr);
-    
-     if (c_str == NULL) {
-    
-         return;
-    
-     }
-    
-     ...
-    
-     if (...) { /* exception occurred */
-    
-         (*env)->ReleaseStringChars(env, jstr, cstr);
-    
-         return;
-    
-     }
-    
-     ...
-    
-     /* normal return */
-    
-     (*env)->ReleaseStringChars(env, jstr, cstr);
-
+ const jchar *cstr = (*env)->GetStringChars(env, jstr);
+ if (c_str == NULL) {
+     return;
  }
+ if (...) { /* exception occurred */
+     (*env)->ReleaseStringChars(env, jstr, cstr);
+     return;
+ }
+ /* normal return */
+ (*env)->ReleaseStringChars(env, jstr, cstr);
+ }
+```
 
  
 
-6.2.3 工具函数中的异常
-
- 
+#### 6.2.3 工具函数中的异常
 
 程序员编写工具函数时，一定要把工具函数内部分发生的异常传播到调用它的方法中去。这里有两个需要注意的地方：
 
@@ -1754,157 +1543,78 @@ JNIEXPORT void JNICALL
 
 为了说明这两点，我们写了一个工具函数，这个工具函数根据对象实例方法的名字和描述符做一些方法回调。
 
-· jvalue
-
-·  JNU_CallMethodByName(JNIEnv *env,
-
-·                       jboolean *hasException,
-
-·                       jobject obj, 
-
-·                       const char *name,
-
-·                       const char *descriptor, ...)
-
-·  {
-
-·      va_list args;
-
-·      jclass clazz;
-
-·      jmethodID mid;
-
-·      jvalue result;
-
-·      if ((*env)->EnsureLocalCapacity(env, 2) == JNI_OK) {
-
-·          clazz = (*env)->GetObjectClass(env, obj);
-
-·          mid = (*env)->GetMethodID(env, clazz, name,
-
-·                                    descriptor);
-
-·          if (mid) {
-
-·              const char *p = descriptor;
-
-·              /* skip over argument types to find out the 
-
-·                 return type */
-
-·              while (*p != ')') p++;
-
-·              /* skip ')' */
-
-·              p++;
-
-·              va_start(args, descriptor);
-
-·              switch (*p) {
-
-·              case 'V':
-
-·                  (*env)->CallVoidMethodV(env, obj, mid, args);
-
-·                  break;
-
-·              case '[':
-
-·              case 'L':
-
-·                  result.l = (*env)->CallObjectMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'Z':
-
-·                  result.z = (*env)->CallBooleanMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'B':
-
-·                  result.b = (*env)->CallByteMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'C':
-
-·                  result.c = (*env)->CallCharMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'S':
-
-·                  result.s = (*env)->CallShortMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'I':
-
-·                  result.i = (*env)->CallIntMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'J':
-
-·                  result.j = (*env)->CallLongMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'F':
-
-·                  result.f = (*env)->CallFloatMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              case 'D':
-
-·                  result.d = (*env)->CallDoubleMethodV(
-
-·                                         env, obj, mid, args);
-
-·                  break;
-
-·              default:
-
-·                  (*env)->FatalError(env, "illegal descriptor");
-
-·              }
-
-·              va_end(args);
-
-·          }
-
-·          (*env)->DeleteLocalRef(env, clazz);
-
-·      }
-
-·      if (hasException) {
-
-·          *hasException = (*env)->ExceptionCheck(env);
-
-·      }
-
-·      return result;
-
-·  }
+```c
+jvalue
+  JNU_CallMethodByName(JNIEnv *env,jboolean *hasException,jobject obj, const char *name,const char *descriptor, ...)
+{
+      va_list args;
+      jclass clazz;
+      jmethodID mid;
+      jvalue result;
+      if ((*env)->EnsureLocalCapacity(env, 2) == JNI_OK) {
+          clazz = (*env)->GetObjectClass(env, obj);
+          mid = (*env)->GetMethodID(env, clazz, name,descriptor);
+          if (mid) {
+              const char *p = descriptor;
+              /* skip over argument types to find out the 
+                 return type */
+              while (*p != ')') p++;
+              /* skip ')' */
+              p++;
+              va_start(args, descriptor);
+              switch (*p) {
+              case 'V':
+                  (*env)->CallVoidMethodV(env, obj, mid, args);
+                  break;
+              case '[':
+              case 'L':
+                  result.l = (*env)->CallObjectMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'Z':
+                  result.z = (*env)->CallBooleanMethodV(env, obj, mid, args);
+                  break;
+              case 'B':
+                  result.b = (*env)->CallByteMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'C':
+                  result.c = (*env)->CallCharMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'S':
+                  result.s = (*env)->CallShortMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'I':
+                  result.i = (*env)->CallIntMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'J':
+                  result.j = (*env)->CallLongMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'F':
+                  result.f = (*env)->CallFloatMethodV(
+                                         env, obj, mid, args);
+                  break;
+              case 'D':
+                  result.d = (*env)->CallDoubleMethodV(
+                                         env, obj, mid, args);
+                  break;
+              default:
+                  (*env)->FatalError(env, "illegal descriptor");
+              }
+              va_end(args);
+          }
+          (*env)->DeleteLocalRef(env, clazz);
+      }
+      if (hasException) {
+          *hasException = (*env)->ExceptionCheck(env);
+      }
+      return result;
+  }
+```
 
 JNU_CallMethodByName的参数当中有一个jboolean指针，如果函数执行成功的话，指针指向的值会被设置为JNI_TRUE，如果有异常发生的话，会被设置成JNI_FALSE。这就可以让调用者方便地检查异常。
 
@@ -1912,37 +1622,32 @@ JNU_CallMethodByName首先通过EnsureLocalCapacity来确保可以创建两个�
 
 函数ExceptionCheck和ExceptionOccurred非常相似，不同的地方是，当有异常发生时，ExceptionCheck不会返回一个指向异常对象的引用，而是返回JNI_TRUE，没有异常时，返回JNI_FALSE。而ExceptionCheck这个函数不会返回一个指向异常对象的引用，它只简单地告诉本地代码是否有异常发生。上面的代码如果使用ExceptionOccurred的话，应该这么写：
 
-· if (hasException) {
-
-·          jthrowable exc = (*env)->ExceptionOccurred(env);
-
-·          *hasException = exc != NULL;
-
-·          (*env)->DeleteLocalRef(env, exc);
-
+```c
+ if (hasException) {
+          jthrowable exc = (*env)->ExceptionOccurred(env);
+          *hasException = exc != NULL;
+          (*env)->DeleteLocalRef(env, exc);
    }
+```
 
 为了删除指向异常对象的局部引用，DeleteLocalRef方法必须被调用。
 
 使用JNU_CallMethodByName这个工具函数，我们可以重写Instance-MethodCall.nativeMethod方法的实现：
 
-· JNIEXPORT void JNICALL 
-
-·  Java_InstanceMethodCall_nativeMethod(JNIEnv *env, jobject obj)
-
-·  {
-
-·      printf("In C\n");
-
-·      JNU_CallMethodByName(env, NULL, obj, "callback", "()V");
-
-·  }
+```c
+ JNIEXPORT void JNICALL 
+  Java_InstanceMethodCall_nativeMethod(JNIEnv *env, jobject obj)
+  {
+      printf("In C\n");
+      JNU_CallMethodByName(env, NULL, obj, "callback", "()V");
+  }
+```
 
 调用JNU_CallMethodByName函数后，我们不需要检查异常，因为本地方法后面会立即返回。
 
  
 
-第七章  调用接口（invocation interface）
+## 第七章  调用接口（invocation interface）
 
  
 
@@ -1997,6 +1702,8 @@ public class Prog {
      jobjectArray args;
 
  
+
+
 
 
  \#ifdef JNI_VERSION_1_2
@@ -2066,6 +1773,8 @@ public class Prog {
  
 
 
+
+
      mid = (*env)->GetStaticMethodID(env, cls, "main",
     
                                      "([Ljava/lang/String;)V");
@@ -2097,6 +1806,8 @@ public class Prog {
      (*env)->CallStaticVoidMethod(env, cls, mid, args);
 
  
+
+
 
 
  destroy:
@@ -2278,6 +1989,8 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
  
 
 
+
+
   detach:
 
      if ((*env)->ExceptionOccurred(env)) {
@@ -2301,6 +2014,8 @@ LoadLibrary和GetProcAddress是Win32平台上用来动态链接的API。虽然Lo
      jint res;
 
  
+
+
 
 
  \#ifdef JNI_VERSION_1_2
@@ -2724,6 +2439,8 @@ public class Win32 {
  
 
 
+
+
      public static int CreateFile(
     
          String fileName,          // file name
@@ -2929,6 +2646,8 @@ public class CFunction extends CPointer {
  
 
 
+
+
      public CFunction(String lib,     // native library name
     
                       String fname,   // C function name
@@ -2980,6 +2699,8 @@ JNIEXPORT jlong JNICALL
      char *funname;
 
  
+
+
 
 
      if ((libname = JNU_GetStringNativeChars(env, lib))) {
@@ -3045,6 +2766,8 @@ JNIEXPORT jint JNICALL
  
 
 
+
+
      nargs = env->GetArrayLength(arr);
     
      if (nargs > MAX_NARGS) {
@@ -3062,6 +2785,8 @@ JNIEXPORT jint JNICALL
  
 
 
+
+
      // convert arguments
     
      for (nwords = 0; nwords < nargs; nwords++) {
@@ -3071,6 +2796,8 @@ JNIEXPORT jint JNICALL
          jobject arg = env->GetObjectArrayElement(arr, nwords);
 
  
+
+
 
 
          if (arg == NULL) {
@@ -3134,11 +2861,15 @@ JNIEXPORT jint JNICALL
  
 
 
+
+
      // now transfer control to func.
     
      ires = asm_dispatch(func, nwords, args, conv);
 
  
+
+
 
 
  cleanup:
