@@ -1,0 +1,65 @@
+PODS:
+  - Aspects (1.4.1)
+  - AXIndicatorView (0.1.1)
+  - AXNavigationBackItemInjection (0.0.2)
+  - AXPracticalHUD (2.1.4):
+    - AXIndicatorView
+  - MJExtension (3.0.15.1)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - UMCCommon (1.5.2)
+  - UMCShare/Core (6.9.3):
+    - UMCCommon
+  - UMCShare/Social/ReducedWeChat (6.9.3):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/UI (6.9.3):
+    - UMCCommon
+    - UMCShare/Core
+  - WebViewJavascriptBridge (6.0.3)
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - Aspects
+  - AXNavigationBackItemInjection
+  - AXPracticalHUD
+  - MJExtension
+  - NJKWebViewProgress
+  - UMCShare/Social/ReducedWeChat
+  - UMCShare/UI
+  - WebViewJavascriptBridge (~> 6.0)
+  - YYKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Aspects
+    - AXIndicatorView
+    - AXNavigationBackItemInjection
+    - AXPracticalHUD
+    - MJExtension
+    - NJKWebViewProgress
+    - UMCCommon
+    - UMCShare
+    - WebViewJavascriptBridge
+    - YYKit
+
+SPEC CHECKSUMS:
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  AXIndicatorView: 566b490a2dd9781d4ffbcc9752be9b9cdc6e728e
+  AXNavigationBackItemInjection: efe0446967f3cbcc85a9118decd1e145138912dd
+  AXPracticalHUD: 821d170b31e050c426ef8754b07b4264a8b1d861
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
+  UMCShare: 023886b10d11119331c9c46d8e8a0c31fe67c23e
+  WebViewJavascriptBridge: 7f5bc4d3581e672e8f32bd0f812d54bc69bb8e29
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: 2e29f253de3a20e6bf774048d401f8f4a9b383c3
+
+COCOAPODS: 1.5.3
