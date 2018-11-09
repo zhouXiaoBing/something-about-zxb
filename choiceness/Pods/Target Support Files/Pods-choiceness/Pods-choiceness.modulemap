@@ -1,0 +1,6 @@
+framework module Pods_choiceness {
+  umbrella header "Pods-choiceness-umbrella.h"
+
+  export *
+  module * { export * }
+}
