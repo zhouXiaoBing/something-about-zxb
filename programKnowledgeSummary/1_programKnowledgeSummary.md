@@ -7436,6 +7436,19 @@ Number* __strong num = [[Number alloc] init];
 
 ## 第三方库
 
+## ios常用操作
+
+### ios 模拟器录屏
+
+1. 在终端 cd 到文件要保存的文件夹
+2. .运行命令：
+
+```
+xcrun simctl io booted recordVideo filename.mov
+```
+
+  3.停止录屏：control + C
+
 ## iOS 常用策略
 
 ### Background Execution（后台策略）
@@ -7445,6 +7458,20 @@ Number* __strong num = [[Number alloc] init];
 ## URL schemes
 
 ## 面试题
+
+## 常用操作技巧
+
+### ios 模拟器录屏
+
+1. 在终端 cd 到文件要保存的文件夹
+
+  2.运行命令：
+
+```lisp
+xcrun simctl io booted recordVideo filename.mov
+```
+
+3.停止录屏：control + C
 
 
 
