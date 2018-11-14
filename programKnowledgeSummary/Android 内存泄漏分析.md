@@ -97,6 +97,447 @@ public class SingleTon {
 //链接：https://www.jianshu.com/p/abee7c186bfa
 ```
 
+这是单例模式饿汉式的双重校验锁的写法，这里的 singleTon 持有 Context 对象，如果 Activity 中调用 getInstance 方法并传入 this 时，singleTon 就持有了此 Activity 的引用，当退出 Activity 时，Activity 就无法回收，造成内存泄漏，所以应该修改它的构造方法
 
+```java
+private SingleTon(Context context) {
+    this.context = context.getApplicationContext();
+}
+```
+
+通过 getApplicationContext 来获取 Application 的Context，让它被单例持有，这样退出 Activity 时，Activity 对象就能够正常被回收了，而 Application 的 Context 的生命周期和单例的声明周期是一致的，整个App 运行过程中都不会发生内存泄漏。
+
+##### 非静态内部类造成的内存泄漏
+
+我们知道非静态内部类会持有外部类的引用，如果这个非静态内部类的生命周期比他的外部类的生命周期长，那么当销毁外部类的时候，它无法被回收，就会造成内存泄漏
+
+##### 外部类中持有非静态内部类的静态对象
+
+假设 Activity 的代码是这样的
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    private static Test test;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if (test == null) {
+            test = new Test();
+        }
+
+    }
+    
+    private class Test {
+
+    }
+    
+}
+```
+
+这个其实是和单例的原理是一样的，由于静态对象 test 的生命周期和整个应用的生命周期一致，而非静态内部类 Test 持有外部类 MainActivity 的引用，导致 MainActivity 退出的时候不能被回收，从而造成内存泄漏。或者 MainActivity 退出的时候不能被回收，从而造成内存泄漏，解决的办法也很简单，把 test 改成非静态，这样test 的生命周期和 MainActivity 是一样的了，就避免了内存泄漏。或者也可以把 Test 改成 静态内部类，让 test 不持有 MainActivity 的引用，不过一般没有这种操作
+
+##### Handler 或 Runnable 作为非静态内部类
+
+handler 和 runnable 都有定时器的功能，当它们作为非静态内部类的时候，同样会持有外部类的引用，如果它们的内部有操作的延迟，在延迟操作还没有发生的时候，销毁了外部类，那么外部类对象无法回收，从而造成内存泄漏 Activity 的代码
+
+```java
+public class MainActivity extends AppCompatActivity {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                
+            }
+        }, 10 * 1000);
+    }
+}
+```
+
+上面的代码，Handler 和 Runnable 作为匿名内部类，都会持有 MainActivity 的引用，而它内部有一个 10s 的定时器，如果 MainActivity 在10s 以内关闭了，那么由于 Handler 和 Runnable 的生命周期比 MainActivity 长，会导致MainActivity 无法被回收，从而导致内存泄漏。
+
+那么这里避免内存泄漏的套路就是把 Handler 和 Runnable 定义为静态内部类，这样就不会再持有 MainActivity 的引用了，从而避免了内存泄漏
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    private Handler handler;
+
+    private Runnable runnable;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        handler = new TestHandler();
+        runnable = new TestRunnable();
+        handler.postDelayed(runnable, 10 * 1000);
+    }
+
+    private static class TestHandler extends Handler {
+
+    }
+
+    private static class TestRunnable implements Runnable {
+        @Override
+        public void run() {
+            Log.d(TAG, "run: ");
+        }
+    }
+    
+    private static final String TAG = "MainActivity";
+}
+
+```
+
+最好再在 onDestroy 调用的时候 调用 Handler 的 removeCallbacks 方法来移除 Message，这样不但避免了内存泄漏，而且在退出 Activity 的时候取消了定时器，保证 10s 以后也不会执行 run 方法
+
+```java
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    handler.removeCallbacks(runnable);
+}
+```
+
+还有一种情况是 Handler 和 Runnable 中持有 Context 对象，那么即使使用静态内部类，还是会发生内存泄漏
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    private Handler handler;
+
+    private Runnable runnable;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        handler = new TestHandler(this);
+        runnable = new TestRunnable();
+        handler.postDelayed(runnable, 10 * 1000);
+    }
+
+    private static class TestHandler extends Handler {
+        private Context context;
+        private TestHandler(Context context) {
+            this.context = context;
+        }
+    }
+
+    private static class TestRunnable implements Runnable {
+        @Override
+        public void run() {
+            Log.d(TAG, "run: ");
+        }
+    }
+
+    private static final String TAG = "MainActivity";
+}
+```
+
+使用 leakcanary 工具会发现依然会发生内存泄漏，而造成内存泄漏的原因和之前用非静态内部类是一样的，那么为什么会出现这样的情况呢？
+
+这是由于 Handler 持有了 Context 对象，而这个 Context 对象是通过 TestHandler 的构造方法传入的，它是一个 MainActivity 对象，也就是说，虽然 TestHandler 作为静态内部类不会持有外部类 MainActivity 的引用，但是我们在调用痛的构造方法的时候，自己传入了 MainActivity 的对象，从而 Handler 对象持有了 MainActivity 的引用， Handler 的生命周期比 MainActivity 的声明周期长，因此会造成内存泄漏，这种情况可以使用弱引用的方式来引用 Context 来避免内存泄漏
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    private Handler handler;
+
+    private Runnable runnable;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        handler = new TestHandler(new WeakReference<Context>(this));
+        runnable = new TestRunnable();
+        handler.postDelayed(runnable, 10 * 1000);
+    }
+
+    private static class TestHandler extends Handler {
+        private Context context;
+        private TestHandler(WeakReference<Context> weakContext) {
+            context = weakContext.get();
+        }
+    }
+
+    private static class TestRunnable implements Runnable {
+        @Override
+        public void run() {
+            Log.d(TAG, "run: ");
+        }
+    }
+
+    private static final String TAG = "MainActivity";
+}
+```
+
+##### 其他内存泄漏的情况
+
+还有一些内存泄漏的情况，比如 broadcastReceiver 未取消注册，InputStream 未关闭，这类内泄漏非常简单，只要在平时写代码的时候朵朵注意就可以避免。
+
+##### 总结
+
+造成 Android 内存泄漏的原因就是生命周期较长的对象持有了生命周期较短的对象的引用，只要理解了这一点，内存泄漏的问题就是迎刃而解了。
+
+#### 应用
+
+在 MVP 构架中，通常 Presenter 要同时持有 View 和 Model 的引用，如果在 Activity 退出的时候， Presenter 正在进行一个耗时操作，那么 Presenter 的生命周期比 Activity 长，导致 Activity 无法回收，造成内存泄漏
 
 ### 检测工具
+
+#### LeakCanary使用方法
+
+##### 1、开始使用：
+
+在 build.gradle 中加入引用，不同的编译使用不同的引用
+
+```gradle
+ dependencies {
+   debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3'
+   releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3'
+ }//可能还存在一个testCompile
+```
+
+在 application 中
+
+```java
+public class ExampleApplication extends Application {
+
+  @Override public void onCreate() {
+    super.onCreate();
+    LeakCanary.install(this);
+  }
+}
+```
+
+如果检测到有内存泄漏，LeakCanary 就会显示一个通知
+
+###### LeakCanary.install(this) 源码
+
+```java
+/**
+   * Creates a {@link RefWatcher} that works out of the box, and starts watching activity
+   * references (on ICS+).
+   */
+  public static RefWatcher install(Application application) {
+    return install(application, DisplayLeakService.class,
+        AndroidExcludedRefs.createAppDefaults().build());
+  }
+//重载的另一个函数 如下
+/**
+   * Creates a {@link RefWatcher} that reports results to the provided service, and starts watching
+   * activity references (on ICS+).
+   */
+  public static RefWatcher install(Application application,
+      Class<? extends AbstractAnalysisResultService> listenerServiceClass,
+      ExcludedRefs excludedRefs) {
+    //判断是否在Analyzer进程里
+    if (isInAnalyzerProcess(application)) {
+      return RefWatcher.DISABLED;
+    }
+    enableDisplayLeakActivity(application);
+    HeapDump.Listener heapDumpListener =
+        new ServiceHeapDumpListener(application, listenerServiceClass);
+    RefWatcher refWatcher = androidWatcher(application, heapDumpListener, excludedRefs);
+    ActivityRefWatcher.installOnIcsPlus(application, refWatcher);
+    return refWatcher;
+  }
+/*
+因为 LeakCanary 会开启一个远程 Service 用来分析每次内存泄漏，鹅软Android的应用每次开启进程都会调用 Application 的 onCreate 方法，因此有必要先预判此次 Application 启动是不是在 analyze Service 启动时，
+*/
+/*
+判断Application是否是在service进程里面启动，最直接的方法就是判断当前进程名和service所属的进程是否相同。当前进程名的获取方式是使用ActivityManager的getRunningAppProcessInfo方法，找到进程pid与当前进程pid相同的进程，然后从中拿到processName. service所属进程名。获取service应处进程的方法是用PackageManager的getPackageInfo方法。
+*/
+public static boolean isInServiceProcess(Context context, Class<? extends Service> serviceClass) {
+    PackageManager packageManager = context.getPackageManager();
+    PackageInfo packageInfo;
+    try {
+      packageInfo = packageManager.getPackageInfo(context.getPackageName(), GET_SERVICES);
+    } catch (Exception e) {
+      Log.e("AndroidUtils", "Could not get package info for " + context.getPackageName(), e);
+      return false;
+    }
+    String mainProcess = packageInfo.applicationInfo.processName;
+
+    ComponentName component = new ComponentName(context, serviceClass);
+    ServiceInfo serviceInfo;
+    try {
+      serviceInfo = packageManager.getServiceInfo(component, 0);
+    } catch (PackageManager.NameNotFoundException ignored) {
+      // Service is disabled.
+      return false;
+    }
+
+    if (serviceInfo.processName.equals(mainProcess)) {
+      Log.e("AndroidUtils",
+          "Did not expect service " + serviceClass + " to run in main process " + mainProcess);
+      // Technically we are in the service process, but we're not in the service dedicated process.
+      return false;
+    }
+
+    //查找当前进程名
+    int myPid = android.os.Process.myPid();
+    ActivityManager activityManager =
+        (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+    ActivityManager.RunningAppProcessInfo myProcess = null;
+    for (ActivityManager.RunningAppProcessInfo process : activityManager.getRunningAppProcesses()) {
+      if (process.pid == myPid) {
+        myProcess = process;
+        break;
+      }
+    }
+    if (myProcess == null) {
+      Log.e("AndroidUtils", "Could not find running process for " + myPid);
+      return false;
+    }
+
+    return myProcess.processName.equals(serviceInfo.processName);
+  }
+```
+
+###### RefWatcher 
+
+RefWatcher 是 LeakCanary 检测内存泄漏的发起点。使用方法为，在生命周期即将结束的时候调用
+
+```java
+RefWatcher.watch(Object object)
+```
+
+为了达到检测的目的，RefWatcher 需要
+
+```java
+//执行内存泄漏检测的 executer  
+private final Executor watchExecutor;
+//用于查询是否正在调试中，调试中不会进行内存泄漏检测
+private final DebuggerControl debuggerControl;
+//用于在内存泄漏钱，再给一次 GC 的机会
+private final GcTrigger gcTrigger;
+//用于在产生内存泄漏时执行dump 内存heap
+private final HeapDumper heapDumper;
+//持有那些待检测以及产生内存泄漏的引用的key
+private final Set<String> retainedKeys;
+//用来判断弱引用所持有的对象是否 GC
+private final ReferenceQueue<Object> queue;
+//用于分析产生的 dump 文件，找到内存泄漏的原因
+private final HeapDump.Listener heapdumpListener;
+//用于排除某些系统 bug 导致的内存泄漏
+private final ExcludedRefs excludedRefs;
+```
+
+接下来我们看看 watch 函数背后是如何利用这些工具，生成内存泄漏分析报告的
+
+```java
+public void watch(Object watchedReference, String referenceName) {
+    checkNotNull(watchedReference, "watchedReference");
+    checkNotNull(referenceName, "referenceName");
+    //如果处于debug模式，则直接返回
+    if (debuggerControl.isDebuggerAttached()) {
+      return;
+    }
+    //记住开始观测的时间
+    final long watchStartNanoTime = System.nanoTime();
+    //生成一个随机的key，并加入set中
+    String key = UUID.randomUUID().toString();
+    retainedKeys.add(key);
+    //生成一个KeyedWeakReference
+    final KeyedWeakReference reference =
+        new KeyedWeakReference(watchedReference, key, referenceName, queue);
+    //调用watchExecutor，执行内存泄露的检测 核心函数
+    watchExecutor.execute(new Runnable() {
+      @Override public void run() {
+        ensureGone(reference, watchStartNanoTime);
+      }
+    });
+  }
+```
+
+所以最后的核心函数是在ensureGone这个runnable里面。要理解其工作原理，就得从keyedWeakReference说起
+
+###### WeakReference与ReferenceQueue
+
+从 watche 函数中可以看到，每次检测对象内存是否泄漏的时候，我们都会生成一个 keyReferenceQueue，这个类其实就是一个 WeakReference，只不过额外附带了一个 key  和 name 
+
+```java
+final class KeyedWeakReference extends WeakReference<Object> {
+  public final String key;
+  public final String name;
+
+  KeyedWeakReference(Object referent, String key, String name,
+      ReferenceQueue<Object> referenceQueue) {
+    super(checkNotNull(referent, "referent"), checkNotNull(referenceQueue, "referenceQueue"));
+    this.key = checkNotNull(key, "key");
+    this.name = checkNotNull(name, "name");
+  }
+}
+```
+
+在构造时，我们需要传入一个 ReferenceQueue，这个ReferenceQueue是直接传入了 WeakReference中，关于这个类，有兴趣的可以直接看 Reference 的源码，我们需要知道的是，每次 WeakReference 所指向的对象被 GC 后，这个弱引用都会被放入这个与之相关联的 ReferenceQueue 队列中。
+
+我们这里贴一下核心代码
+
+```java
+private static class ReferenceHandler extends Thread {
+
+        ReferenceHandler(ThreadGroup g, String name) {
+            super(g, name);
+        }
+
+        public void run() {
+            for (;;) {
+                Reference<Object> r;
+                synchronized (lock) {
+                    if (pending != null) {
+                        r = pending;
+                        pending = r.discovered;
+                        r.discovered = null;
+                    } else {
+                        //....
+                        try {
+                            try {
+                                lock.wait();
+                            } catch (OutOfMemoryError x) { }
+                        } catch (InterruptedException x) { }
+                        continue;
+                    }
+                }
+
+                // Fast path for cleaners
+                if (r instanceof Cleaner) {
+                    ((Cleaner)r).clean();
+                    continue;
+                }
+
+                ReferenceQueue<Object> q = r.queue;
+                if (q != ReferenceQueue.NULL) q.enqueue(r);
+            }
+        }
+    }
+
+    static {
+        ThreadGroup tg = Thread.currentThread().getThreadGroup();
+        for (ThreadGroup tgn = tg;
+             tgn != null;
+             tg = tgn, tgn = tg.getParent());
+        Thread handler = new ReferenceHandler(tg, "Reference Handler");
+        /* If there were a special system-only priority greater than
+         * MAX_PRIORITY, it would be used here
+         */
+        handler.setPriority(Thread.MAX_PRIORITY);
+        handler.setDaemon(true);
+        handler.start();
+    }
+```
+
