@@ -296,11 +296,9 @@ public class MainActivity extends AppCompatActivity {
 
 在 MVP 构架中，通常 Presenter 要同时持有 View 和 Model 的引用，如果在 Activity 退出的时候， Presenter 正在进行一个耗时操作，那么 Presenter 的生命周期比 Activity 长，导致 Activity 无法回收，造成内存泄漏
 
-### 检测工具
+### 检测工具LeakCanary使用方法
 
-#### LeakCanary使用方法
-
-##### 1、开始使用：
+#### 1、开始使用：
 
 在 build.gradle 中加入引用，不同的编译使用不同的引用
 
@@ -324,6 +322,8 @@ public class ExampleApplication extends Application {
 ```
 
 如果检测到有内存泄漏，LeakCanary 就会显示一个通知
+
+#### 源码分析
 
 ###### LeakCanary.install(this) 源码
 
@@ -356,7 +356,7 @@ public class ExampleApplication extends Application {
     return refWatcher;
   }
 /*
-因为 LeakCanary 会开启一个远程 Service 用来分析每次内存泄漏，鹅软Android的应用每次开启进程都会调用 Application 的 onCreate 方法，因此有必要先预判此次 Application 启动是不是在 analyze Service 启动时，
+因为 LeakCanary 会开启一个远程 Service 用来分析每次内存泄漏，Android的应用每次开启进程都会调用 Application 的 onCreate 方法，因此有必要先预判此次 Application 启动是不是在 analyze Service 启动时，
 */
 /*
 判断Application是否是在service进程里面启动，最直接的方法就是判断当前进程名和service所属的进程是否相同。当前进程名的获取方式是使用ActivityManager的getRunningAppProcessInfo方法，找到进程pid与当前进程pid相同的进程，然后从中拿到processName. service所属进程名。获取service应处进程的方法是用PackageManager的getPackageInfo方法。
@@ -541,3 +541,251 @@ private static class ReferenceHandler extends Thread {
     }
 ```
 
+在 Reference 类加载的时候，java虚拟机会创建一个最大优先级的后台线程，这个线程的工作原理就是不断检测 pending 是否为null，如果不为 null，就将其放入 Referencequeue 中pending 不为 null 的情况就是，引用指向的对象已被 GC，变为不可达。
+
+那么只要我们在构造弱引用的时候指定了 ReferenceQueue，每当弱引用所指向的对象被内存回收的时候，我们就可以在queue中找到这个引用。如果我们期望一个对象被回收，那如果在接下来的预期时间之后，我们发现它依然没有出现在 referenceQueue 中，就可以判断它的内存泄漏了。 LeakCanary 的核心原理就是在这里 
+
+其实 java 里面的 WeaHashMap 里也用到了这种方法 ，来判断 hash 表里的某个键值是否还有效。在构造 WeakReference 的时候给其指定的 ReferenceQueue。
+
+##### 2、监测时机
+
+什么时候监测能判定内存泄漏呢？这个可以看 AndroidWatchExecutor 的实现
+
+```java
+public final class AndroidWatchExecutor implements Executor {
+    //....    
+    private void executeDelayedAfterIdleUnsafe(final Runnable runnable) {
+        // This needs to be called from the main thread.
+        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+          @Override public boolean queueIdle() {
+            backgroundHandler.postDelayed(runnable, DELAY_MILLIS);
+            return false;
+          }
+        });
+      }
+  }
+
+```
+
+这里又看到一个比较少的用法，idleHandler，idleHandler 的原理就是在 messageQueue 因为空闲等待消息是给使用这一个 hook。那 AndroidWatchExecutor 会在主线程空闲的时候，派发一个任务，这个后台任务会在 DELAY_MILLS 时间之后执行。LeakCanary 设置是5s。
+
+##### 3、二次确认保证内存泄漏的正确性
+
+为了避免 GC 不及时带来的误判，LeakCanary 会进行二次确认加以保证
+
+```java
+void ensureGone(KeyedWeakReference reference, long watchStartNanoTime) {
+    long gcStartNanoTime = System.nanoTime();
+    //计算从调用watch到进行检测的时间段
+    long watchDurationMs = NANOSECONDS.toMillis(gcStartNanoTime - watchStartNanoTime);
+    //根据queue移除已被GC的对象的弱引用
+    removeWeaklyReachableReferences();
+    //如果内存已被回收或者处于debug模式，直接返回
+    if (gone(reference) || debuggerControl.isDebuggerAttached()) {
+      return;
+    }
+    //如果内存依旧没被释放，则再给一次gc的机会
+    gcTrigger.runGc();
+    //再次移除
+    removeWeaklyReachableReferences();
+    if (!gone(reference)) {
+      //走到这里，认为内存确实泄露了
+      long startDumpHeap = System.nanoTime();
+      long gcDurationMs = NANOSECONDS.toMillis(startDumpHeap - gcStartNanoTime);
+      //dump出heap报告
+      File heapDumpFile = heapDumper.dumpHeap();
+
+      if (heapDumpFile == HeapDumper.NO_DUMP) {
+        // Could not dump the heap, abort.
+        return;
+      }
+      long heapDumpDurationMs = NANOSECONDS.toMillis(System.nanoTime() - startDumpHeap);
+      heapdumpListener.analyze(
+          new HeapDump(heapDumpFile, reference.key, reference.name, excludedRefs, watchDurationMs,
+              gcDurationMs, heapDumpDurationMs));
+    }
+  }
+
+  private boolean gone(KeyedWeakReference reference) {
+    return !retainedKeys.contains(reference.key);
+  }
+
+  private void removeWeaklyReachableReferences() {
+    // WeakReferences are enqueued as soon as the object to which they point to becomes weakly
+    // reachable. This is before finalization or garbage collection has actually happened.
+    KeyedWeakReference ref;
+    while ((ref = (KeyedWeakReference) queue.poll()) != null) {
+      retainedKeys.remove(ref.key);
+    }
+  }
+```
+
+##### Dump Heap
+
+监测到内存泄漏后，首先做的就是 dump 出当前的 heap，默认的 AndroidHeapDumper 调用的是
+
+```java
+Debug.dumpHprofData(filePath);
+```
+
+dump当前内存的 hprof 分析文件，一般我们在 DeviceMonitor 中也可以 dump 出 hprof 文件，然后将其从 Dalvik 格式转成标准 jvm 格式，然后使用 MAT 进行分析。
+
+那么 LeakCanary 是如何分析内存泄漏的呢？
+
+##### LeakCanary -- HaHa 内存泄漏分析工具
+
+LeakCanary 分析内存泄露用到了一个和Mat类似的工具叫做[HaHa](https://link.jianshu.com/?t=https://github.com/square/haha)，使用HaHa的方法如下：
+
+```java
+public AnalysisResult checkForLeak(File heapDumpFile, String referenceKey) {
+    long analysisStartNanoTime = System.nanoTime();
+
+    if (!heapDumpFile.exists()) {
+      Exception exception = new IllegalArgumentException("File does not exist: " + heapDumpFile);
+      return failure(exception, since(analysisStartNanoTime));
+    }
+
+    try {
+      HprofBuffer buffer = new MemoryMappedFileBuffer(heapDumpFile);
+      HprofParser parser = new HprofParser(buffer);
+      Snapshot snapshot = parser.parse();
+
+      Instance leakingRef = findLeakingReference(referenceKey, snapshot);
+
+      // False alarm, weak reference was cleared in between key check and heap dump.
+      if (leakingRef == null) {
+        return noLeak(since(analysisStartNanoTime));
+      }
+
+      return findLeakTrace(analysisStartNanoTime, snapshot, leakingRef);
+    } catch (Throwable e) {
+      return failure(e, since(analysisStartNanoTime));
+    }
+  }
+```
+
+关于HaHa的原理，感兴趣的同学可以深究，这里就不深入介绍了。
+
+返回的ActivityResult对象中包含了对象到GC root的最短路径。LeakCanary在dump出hprof文件后，会启动一个IntentService进行分析：HeapAnalyzerService在分析出结果之后会启动DisplayLeakService用来发起Notification 以及将结果记录下来写在文件里面。以后每次启动LeakAnalyzerActivity就从文件里读取历史结果。
+
+##### ExcludedRef
+
+由于某些系统的bug，以及某些厂商rom的bug，Activity在finish之后仍然会被某些系统组件给hold住。LeakCanary列出了一些很常见的，比如三星的手机activity会被audioManager给hold住，试了一下huawei的系统貌似也会出现，还有比如activity中如果有会获取键盘焦点的view，在activity finish之后view会被InputMethodManager给hold住，因为view会持有activity 造成activity泄漏，除非有新的view获取键盘焦点。
+
+LeakCanary中有一个AndroidExcludedRefs枚举类，其中枚举了很多特定版本系统issue引起的内存泄漏，因为这种问题 不是开发者导致的，因此HeapAnalyzerService在分析内存泄露时，会将这些GC Root排除在外。而且每个ExcludedRef通常都跟特定厂商或者Android版本有关，这些枚举类都加了一个适用条件。
+
+```java
+AndroidExcludedRefs(boolean applies) {  this.applies = applies;}
+
+   AUDIO_MANAGER__MCONTEXT_STATIC(SAMSUNG.equals(MANUFACTURER) && SDK_INT == KITKAT) {
+    @Override void add(ExcludedRefs.Builder excluded) {
+      // Samsung added a static mContext_static field to AudioManager, holds a reference to the
+      // activity.
+      // Observed here: https://github.com/square/leakcanary/issues/32
+      excluded.staticField("android.media.AudioManager", "mContext_static");
+    }
+  },
+```
+
+比如上面这个AudioManager引起的问题，只有在Build中的MANUFACTURER表明是三星以及sdk版本是KITKAT（4.4, 19)时才适用。
+
+##### 手动释放资源
+
+然后并不是leakCanary不报错我们就不用管，activity内存泄露了，大部分情况下没多大事，但是有些占用内存很多的页面，比如图库，webview页面，因为acitivity不能回收，它所指向的view以及view下面的bitmap都不能被回收，这是会造成很不好的后果的，很可能会导致OOM，因此我们需要手动在Activity结束时回收资源。
+
+##### Under 4.0 & Fragment
+
+LeakCanary只支持4.0以上，原因是其中在watch 每个Activity时适用了Application的**registerActivityLifecycleCallback**函数，这个函数只在4.0上才支持，但是在4.0以下也是可以用的，可以在Application中将返回的RefWatcher存下来，然后在基类Activity的onDestroy函数中调用。
+
+同理，如果我们想检测Fragment的内存的话，我们也阔以在Fragment的onDestroy中watch它。
+
+#### 2、如何使用
+
+使用 RefWatcher 监控那些本该回收的对象
+
+```java
+RefWatcher refWatcher = {...};
+// 监控
+refWatcher.watch(schrodingerCat);
+```
+
+`LeakCanary.install()` 会返回一个预定义的 `RefWatcher`，同时也会启用一个 `ActivityRefWatcher`，用于自动监控调用 `Activity.onDestroy()` 之后泄露的 activity。
+
+```java
+public class ExampleApplication extends Application {
+  public static RefWatcher getRefWatcher(Context context) {
+    ExampleApplication application = (ExampleApplication) context.getApplicationContext();
+    return application.refWatcher;
+  }
+  private RefWatcher refWatcher;
+  @Override public void onCreate() {
+    super.onCreate();
+    refWatcher = LeakCanary.install(this);
+  }
+}
+```
+
+使用 `RefWatcher` 监控 Fragment：
+
+```java
+public abstract class BaseFragment extends Fragment {
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    RefWatcher refWatcher = ExampleApplication.getRefWatcher(getActivity());
+    refWatcher.watch(this);
+  }
+}
+```
+
+#### 3、工作机制
+
+1. `RefWatcher.watch()` 创建一个 [KeyedWeakReference](https://github.com/square/leakcanary/blob/master/library/leakcanary-watcher/src/main/java/com/squareup/leakcanary/KeyedWeakReference.java) 到要被监控的对象。
+2. 然后在后台线程检查引用是否被清除，如果没有，调用GC。
+3. 如果引用还是未被清除，把 heap 内存 dump 到 APP 对应的文件系统中的一个 `.hprof` 文件中。
+4. 在另外一个进程中的 `HeapAnalyzerService` 有一个 `HeapAnalyzer` 使用[HAHA](https://github.com/square/haha) 解析这个文件。
+5. 得益于唯一的 reference key, `HeapAnalyzer` 找到 `KeyedWeakReference`，定位内存泄露。
+6. `HeapAnalyzer` 计算 *到 GC roots 的最短强引用路径*，并确定是否是泄露。如果是的话，建立导致泄露的引用链。
+7. 引用链传递到 APP 进程中的 `DisplayLeakService`， 并以通知的形式展示出来。
+
+#### 4、如何复制 leak trace
+
+在 Logcat 中，你可以看到类似这样的 leak trace：
+
+```verilog
+In com.example.leakcanary:1.0:1 com.example.leakcanary.MainActivity has leaked:
+
+* GC ROOT thread java.lang.Thread.<Java Local> (named 'AsyncTask #1')
+* references com.example.leakcanary.MainActivity$3.this$0 (anonymous class extends android.os.AsyncTask)
+* leaks com.example.leakcanary.MainActivity instance
+
+* Reference Key: e71f3bf5-d786-4145-8539-584afaecad1d
+* Device: Genymotion generic Google Nexus 6 - 5.1.0 - API 22 - 1440x2560 vbox86p
+* Android Version: 5.1 API: 22
+* Durations: watch=5086ms, gc=110ms, heap dump=435ms, analysis=2086ms
+```
+
+你甚至可以通过分享按钮把这些东西分享出去。
+
+#### 5、SDK 导致的内存泄漏
+
+随着时间的推移，很多SDK 和厂商 ROM 中的内存泄露问题已经被尽快修复了。但是，当这样的问题发生时，一般的开发者能做的事情很有限。
+
+LeakCanary 有一个已知问题的忽略列表，[AndroidExcludedRefs.java](https://github.com/square/leakcanary/blob/master/library/leakcanary-android/src/main/java/com/squareup/leakcanary/AndroidExcludedRefs.java)，如果你发现了一个新的问题，[请提一个 issue](https://github.com/square/leakcanary/issues/new) 并附上 leak trace, reference key, 机器型号和 SDK 版本。如果可以附带上 dump 文件的 链接那就再好不过了。
+
+对于**最新发布的 Android**，这点尤其重要。你有机会在帮助在早期发现新的内存泄露，这对整个 Android 社区都有极大的益处。
+
+开发版本的 Snapshots 包在这里： [Sonatype's `snapshots` repository](https://oss.sonatype.org/content/repositories/snapshots/)。
+
+#### 6、leak trace 之外
+
+有时，leak trace 不够，你需要通过 [MAT](http://eclipse.org/mat/) 或者 [YourKit](https://www.yourkit.com/) 深挖 dump 文件。
+
+通过以下方法，你能找到问题所在：
+
+1. 查找所有的 `com.squareup.leakcanary.KeyedWeakReference` 实例。
+2. 检查 `key` 字段
+3. Find the `KeyedWeakReference` that has a `key` field equal to the reference key reported by LeakCanary.
+4. 找到 key 和 和 logcat 输出的 key 值一样的 `KeyedWeakReference`。
+5. `referent` 字段对应的就是泄露的对象。
+6. 剩下的，就是动手修复了。最好是检查到 GC root 的最短强引用路径开始。
