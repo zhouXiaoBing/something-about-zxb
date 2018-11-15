@@ -1,3 +1,5 @@
+https://www.jianshu.com/p/780658b79227
+
 #### MVC
 
 即 Model-View-Controller，基于页面逻辑的修改要多于业务逻辑，分离两种逻辑减少类代码的修改
