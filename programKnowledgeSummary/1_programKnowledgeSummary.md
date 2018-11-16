@@ -8339,7 +8339,8 @@ Android默认提供的 **RecycleView** 就支持 线性布局、网格布局、�
     findViewByPosition(int position);//获取指定位置的Item View
     findFirstCompletelyVisibleItemPosition();//获取第一个完全可见的Item位置
     findFirstVisibleItemPosition();//获取第一个可见Item的位置
-    findLastCompletelyVisibleItemPosition();//获取最后一个完全可见的Item位置
+    findLastCompletel 
+     yVisibleItemPosition();//获取最后一个完全可见的Item位置
     findLastVisibleItemPosition();//获取最后一个可见Item的位置
 ```
 
