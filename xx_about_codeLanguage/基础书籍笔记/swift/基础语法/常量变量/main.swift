@@ -19,7 +19,6 @@ print("Hello, World!")
 
 /*
  “使用let来声明常量，使用var来声明变量”
- 
  变量:
  OC:
  >先定义再初始化
