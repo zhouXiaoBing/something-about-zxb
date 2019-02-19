@@ -1,8 +1,8 @@
 **自我介绍**
 - 周小兵   男   1989-04-10  籍贯：湖南常德  户口：湖南长沙(定居)
-- 联系方式：15527792708(微信)  / 15399773551   
-- QQ:504952182   Email：15527792708@163.com
-- 期望职位：Android iOS开发
+- 联系方式：15527792708(微信)  
+- Email：15527792708@163.com
+- 期望职位：Android、 iOS开发
 - 期望薪资：10k左右
 
 **个人特点**
@@ -13,15 +13,13 @@
 4. 工作中有执行力，具有团队协作精神，经常作为团队中维系关系的纽带；
 5. 面对工作难题有迎难而上，不耻下问的习惯，时间观念强，不曾有过无故的迟到早退的情况。
 6. 有良好的技术积累:https://github.com/zhouXiaoBing/something-about-zxb/tree/master/programKnowledgeSummary 
-7. 可同时负责 iOS 和 Android 项目的开发和维护，熟悉 react native 混合 app 开发
+7. 可同时负责 iOS 和 Android 项目的开发和维护
 
 **技术范围**
 - Android 独立开发 ，工具使用如 Android studio ，eclipse  熟练常用第三方开源 如 EventBus 、okHttp 、imageLoader
-- iOS  独立开发 熟练使用 Xcode 等 熟练 OC 
+- iOS  独立开发 熟练使用 Xcode 等 熟练 OC 、swift
 - react native  熟悉混合 App 的开发
 - java  基础较好，基于java实现的各种数据结构及算法 有一定积累（笔记或手写伪代码实现）
-- php  能够在已有框架下 进行 App 的接口的 维护、修改和简单开发
-- sql  熟悉Android 和 iOS 下的 sqlite 的 使用 以及相关的第三方封装 如 GreenDao  FMDB等
 
 **工作经历**
 | 单位名称                     | 工作时间    | 职位        | 工作内容                   |
